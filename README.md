@@ -1,6 +1,6 @@
 # Bullet-Time Learning
 
-**Does World Motion Add Beyond Camera Motion?** — Joy Yang and Sudarshan.
+**Same Images, Different Experience: World-Time versus Viewpoint Pretraining** — Joy Yang and Sudarshan.
 
 Train models on the same rendered images, organized by world time, camera view,
 mixtures, or joint motion. Measure what those relationships add to frozen visual
@@ -14,7 +14,7 @@ training update, and a solvable visual history test—not a full-study launch.
 The [October 28 feasibility audit](reports/cvpr-feasibility-audit-20261028.md)
 supports a bounded pilot, identifies missing related work and evaluation details,
 and advises against promising the full study for the imminent CVPR 2027 deadline.
-The original specification remains unchanged; recommendations are not a protocol freeze.
+The [revised spec](SPEC.md) adopts the audit fixes and a [concrete pilot plan](docs/pilot-plan.md). The original remains in Git at `13e951d:SPEC.md`; the final study is not frozen.
 
 ## Start here
 
@@ -45,12 +45,14 @@ GitHub write permission is required to push; public clone access does not grant 
 
 | File | Purpose |
 | --- | --- |
-| [SPEC.md](SPEC.md) | Supplied scientific protocol, imported without edits |
+| [SPEC.md](SPEC.md) | Current scientific specification; original retained in Git |
 | [AGENTS.md](AGENTS.md) / [CLAUDE.md](CLAUDE.md) | Agent instructions and Claude entry point |
 | [SHARED_CONTEXT.md](SHARED_CONTEXT.md) | Current status, task registry, and cross-chat handoffs |
 | [division-of-labor.md](division-of-labor.md) | Owners, first tasks, dependencies, and acceptance gates |
 | [RUNBOOK.md](RUNBOOK.md) | Reproducible collaboration and Git workflow |
-| [docs/interfaces.md](docs/interfaces.md) | Draft data, run, prediction, and analysis contracts |
+| [docs/interfaces.md](docs/interfaces.md) | Data, run, prediction, and analysis contracts; implementation pending |
+| [docs/pilot-plan.md](docs/pilot-plan.md) | Concrete pilot data, runs, gates and parallel handoffs |
+| [configs/pilot-plan.json](configs/pilot-plan.json) | Machine-readable planning counts/seeds; not a training config |
 | [joy-devlog.md](joy-devlog.md) / [sudarshan-devlog.md](sudarshan-devlog.md) | Per-person work and environment records |
 | [meta-feedback.md](meta-feedback.md) | Dated review of risks and open choices |
 | [reports/decisions.md](reports/decisions.md) | Decision authority, protocol changes, and freeze status |
@@ -62,5 +64,4 @@ labels, checkpoints, caches, and run outputs outside Git. Version lightweight,
 release-appropriate manifests, configuration, provenance, and reports.
 
 This project reuses the collaboration structure of safety-repartitioning. It has
-its own science, resource decisions, dependencies, and evidence. The supplied
-literature assessment has not been independently refreshed during setup.
+its own science, resource decisions, dependencies, and evidence. The October 28 audit refreshed primary-source literature; no independent collaborator review or empirical validation is implied.

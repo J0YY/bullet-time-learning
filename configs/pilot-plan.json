@@ -1,0 +1,48 @@
+{
+  "schema_version": "bullet-time.pilot-plan.v1",
+  "status": "planning_only_not_a_training_configuration",
+  "family": "projectile_arena",
+  "data_seed": 20261028,
+  "physics_hz": 64,
+  "evaluation_hz": 16,
+  "observed_frames": 16,
+  "forecast_horizon_seconds": [0.25, 0.5, 1.0],
+  "primary_horizon_seconds": 0.5,
+  "grid_shape": [16, 16],
+  "rgb_shape": [224, 224, 3],
+  "grid_handoffs": [1, 8, 100, 1000],
+  "pretraining_grids": 1000,
+  "grids_per_update": 8,
+  "renderer_audit_tail_grids": 4,
+  "conditions": ["view", "time", "mix50", "joint", "shuffled_time", "regrouped"],
+  "objective": "videomae_raw_rgb",
+  "pretraining_seeds": [17, 29, 43],
+  "readout_seeds": [101, 102, 103],
+  "checkpoint_passes": [4, 20],
+  "total_passes": 20,
+  "early_screen": {"conditions": ["view", "time", "mix50"], "seed": 17, "passes": 4},
+  "evaluation_sets": {
+    "collision": {"unit": "episode", "pair_size": 2, "train": 600, "dev": 200, "assessment": 400},
+    "order": {"unit": "episode", "pair_size": 2, "train": 600, "dev": 200, "assessment": 400},
+    "tracking": {"unit": "episode", "pair_size": 1, "train": 600, "dev": 200, "assessment": 400}
+  },
+  "game_label_budgets": [100, 300, 600],
+  "pilot_game_label_budget": 300,
+  "external_dev_fraction": 0.1,
+  "external_label_fraction": 0.1,
+  "frozen_readout_tasks": ["collision", "order", "tracking", "ssv2"],
+  "support": {
+    "native_conditions": ["view", "time"],
+    "native_seeds": [17],
+    "image_mae_seeds": [17, 29, 43],
+    "untrained_seeds": [17, 29, 43],
+    "external_image_checkpoints": 1,
+    "supervised_diagnostic_fits": 7
+  },
+  "resource_policy": {
+    "host": null,
+    "approved_gpu_hours": null,
+    "approved_storage_bytes": null,
+    "launch_authorized": false
+  }
+}

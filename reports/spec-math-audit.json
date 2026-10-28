@@ -1,7 +1,7 @@
 {
   "scope": "Proposal arithmetic and index audit only; no empirical research results",
   "python_version": "3.14.3",
-  "spec_sha256": "e543446ddf6466e07cbf545a402092ebe2f5d6a6a43465472bd41c4e693fb9de",
+  "spec_sha256": "ed37f7e10d999bbdddf118455de5146fc952afac1566d15cfab1d7e8bd929c24",
   "audit_script_sha256": "27b59478cc2f3796cfaf05c886bd9ab472b423777993ef856b34202b8afd68eb",
   "grid": {
     "valid_partition_checks": 163,

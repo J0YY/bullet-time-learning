@@ -125,3 +125,18 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Publication:** GitHub CI `40758307456` passed on the substantive audit commit.
   Shared AUDIT task marked complete; final completion-record commit will receive
   exact remote/CI verification before handoff. No experimental job or new protocol.
+
+### 2026-10-28 EDT — Revise scientific specification and bound the pilot
+
+- **Authority:** User requests audit fixes, concrete pilot, minimal mutual blockers,
+  original retained in Git, incremental commits and checks. Base `6fbfec4` clean and
+  synchronized; registered REVISION before editing.
+- **Changes:** Revised SPEC title/closest work, fixed forecast/tracking/spatial input
+  details, deterministic external split/access, View-relative claims and deadline
+  scope. Added concrete pilot plan and declarative count/seed manifest, prospective
+  operational gates and full supporting-run/head accounting. Updated live pointers.
+- **Evidence:** Existing primary-source audit plus official DINOv2 release checked;
+  no data access, model download, training job, new chat or collaborator message.
+- **Provenance:** Original remains at `13e951d:SPEC.md`; revision SHA recorded in
+  decisions. Sudarshan's log remains untouched. Gates are planning choices, not
+  measurements or independent review. Next: align contracts/ownership and verify.

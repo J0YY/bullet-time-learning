@@ -39,3 +39,41 @@ draft interface checklist. The scientific specification remains byte-identical t
 its original import. Proposed title, evaluation partition/cadence, competence
 thresholds, sample size, compute, and venue decisions remain unselected. A review
 recommendation is not a user-approved protocol change or submission commitment.
+
+## 2026-10-28 — Revision 1: bounded pilot and audit resolutions
+
+**Owner:** Joy. **Authority:** user explicitly requested updating the spec to address
+found issues, a concrete Joy/Sudarshan pilot with minimal mutual bottlenecks,
+preserving the original in Git, incremental commits and checks.
+
+**Selected:** working paper title “Same Images, Different Experience: World-Time
+versus Viewpoint Pretraining”; retain repository nickname. Add BulletTime/FL4N
+comparison and bound novelty to exact-image/fixed-objective regrouping. Fix 64 Hz
+physics / 16 Hz forecast and causal tracking evaluation, current-frame/reference
+access, coordinates, visibility, small-object rule and repeated-image spatial
+adapter. Reserve SSv2 official validation for final evaluation; derive internal
+development and label subsets by deterministic hashes from official training.
+Use View-relative 30/70-component claims, never same-margin all-pairs equivalence.
+Keep joint power and episode precision separate from single-contrast seed examples.
+
+**Pilot:** one projectile family, 1,000 pretraining grids, 600/200/400 episodes per
+measurement task, six VideoMAE arms × seeds 17/29/43, twenty passes with a four-pass
+screen, 300 game labels and 10% external readout labels; readout seeds 101/102/103.
+Separate native/image/untrained/external and supervised diagnostics; numerical
+operational gates and count ledger are in [pilot plan](../docs/pilot-plan.md) and
+[planning JSON](../configs/pilot-plan.json). These are selected prospective pilot
+defaults, not measured performance, final-study margins or authorization to run.
+Runtime hyperparameters/software pins and resources must be resolved before jobs.
+
+**Affected:** SPEC §§2, 7–9, 11 and revision header; planning/interface/ownership docs.
+**Reason:** resolve the [audit](cvpr-feasibility-audit-20261028.md)'s ambiguities,
+prevent overclaiming and expose complete pilot costs/dependencies. Closest-work and
+conference findings retain primary-source citations in SPEC; DINOv2 reference is
+checked against its official model release. No credible full-study commitment to
+the imminent CVPR deadline is adopted.
+
+**Impact:** no existing research outputs to migrate. The original source metadata
+is unchanged; original blob is `13e951dcbc02d94734241034ff85bbc56d530fa6:SPEC.md`.
+Current revised SPEC SHA-256: `ed37f7e10d999bbdddf118455de5146fc952afac1566d15cfab1d7e8bd929c24`.
+The mathematical audit is regenerated against this revision. Later changes need
+new provenance; the final protocol/sample size/compute allocation remain unfrozen.
