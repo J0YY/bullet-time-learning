@@ -37,3 +37,17 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Decision:** Carry over collaboration conventions only. No previous research,
   compute-host mandate, deadline, approvals, runtime pins, or results adopted.
 - **Next:** Complete ownership, handoff contracts, startup/runbook, and setup checks.
+
+### 2026-10-28 EDT — Complete collaboration documents
+
+- **What:** Added agent startup/identity rules, working ownership and first tasks,
+  draft data/exposure/run/analysis contracts, shared context, runbook, decision log,
+  and a setup risk review. Created an empty attributed template for Sudarshan.
+- **Code:** Initial source import committed as `13e951d`; workflow documents form
+  the next cohesive commit.
+- **Checks:** Read against SPEC §§4–8 and §§10–12; staged whitespace check passed.
+  All implementations and contract validations remain explicitly pending.
+- **Access observed:** GitHub already has a pending write invitation for
+  `deephelms28`, the write collaborator on the reference repository. No invitation
+  was sent or changed; acceptance and Sudarshan's own environment are not assumed.
+- **Next:** Add automated scaffold checks and CI; audit all files and publish main.
