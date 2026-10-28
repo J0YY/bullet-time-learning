@@ -111,3 +111,17 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   learning and transfer before expansion; full unbuilt study not a credible
   imminent CVPR 2027 commitment. No protocol/venue/compute choice adopted.
 - **Next:** Validate final changes, commit/publish and check fresh checkout and CI.
+
+### 2026-10-28 EDT — Verify and publish feasibility audit
+
+- **Code:** Substantive audit committed and published as `af32b16b6f696d961707b819f24a0ecc375ab394`.
+- **Checks:** Fresh clone passes scaffold and mathematical checks; stored JSON is
+  bound to unchanged SPEC/script hashes. Original SPEC and Sudarshan's log are
+  byte-identical to their pre-audit versions. 14 Markdown files, 60 local links,
+  32 ignore cases, Python parsing, whitespace and tracked-file checks pass.
+- **Math cross-check:** Independent calculation via direct Gaussian Monte Carlo
+  (200,000 samples per SD, RNG seed 20261028) agrees with quadrature within 0.004
+  for all three five-seed planning cases. This is not measured project power.
+- **Publication:** GitHub CI `40758307456` passed on the substantive audit commit.
+  Shared AUDIT task marked complete; final completion-record commit will receive
+  exact remote/CI verification before handoff. No experimental job or new protocol.

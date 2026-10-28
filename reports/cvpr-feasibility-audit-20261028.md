@@ -272,3 +272,15 @@ run. Enumeration does not test a production loader, mask collator, renderer repl
 distributed gradients, or teacher updates. Original VideoMAE code does confirm
 two-frame target normalization; disabling it needs real learning validation.
 [Official target code](https://github.com/MCG-NJU/VideoMAE/blob/main/engine_for_pretraining.py).
+
+Completion checks at substantive audit commit `af32b16`: clean-clone scaffold
+validation passed (14 Markdown files, 60 local links, 32 ignore cases); regenerated
+standard-library calculations match the stored JSON; SPEC and Sudarshan's log
+match their pre-audit bytes. A separate direct Gaussian Monte Carlo check with
+200,000 draws per SD and RNG seed 20261028 yielded powers 0.95003, 0.29303 and
+0.01955, agreeing with quadrature within 0.004. This is mathematical simulation,
+not empirical training. Python parsing, tracked-size/credential-pattern checks and
+full-tree whitespace validation passed.
+[GitHub CI 40758307456](https://github.com/J0YY/bullet-time-learning/actions/runs/40758307456)
+passed both scaffold and arithmetic checks on Linux/Python 3.12. Final completion
+documentation receives another exact-commit CI/remote check before handoff.

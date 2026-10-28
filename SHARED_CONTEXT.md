@@ -48,7 +48,7 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | ID | Owner | Scope | Status | Base / dependency |
 | --- | --- | --- | --- | --- |
 | SETUP | Joy | Spec import, collaboration docs, checker/CI, Git publication | Complete; local/clone/CI checks passed | Import `13e951d`; workflow `8d2b61d`; verified implementation `7bfeb73`; see setup audit |
-| AUDIT | Joy | User-requested full scaffold/spec and CVPR feasibility/quality review | Review complete; publication checks pending | Base `d9ec3a8`; audit report and reproducible mathematical checks |
+| AUDIT | Joy | User-requested full scaffold/spec and CVPR feasibility/quality review | Complete; clone/math/CI checks passed | Base `d9ec3a8`; substantive audit commit `af32b16`; report and reproducible mathematical checks |
 | J1 | Joy | Sequence loader and audit foundation on fixtures | Ready, not started | Draft interfaces; coordinate schema with S1 |
 | S1 | Sudarshan | Data schema, fixtures, split validator, renderer design | Ready, not started | Draft interfaces |
 | S2 | Sudarshan | First scene and 100 rendered grids | Not started | S1; renderer/runtime/resources |
