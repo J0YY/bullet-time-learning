@@ -140,3 +140,20 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Provenance:** Original remains at `13e951d:SPEC.md`; revision SHA recorded in
   decisions. Sudarshan's log remains untouched. Gates are planning choices, not
   measurements or independent review. Next: align contracts/ownership and verify.
+
+### 2026-10-28 EDT — Decouple workstreams and check pilot accounting
+
+- **First commit:** `9adffbc` preserves the original import while revising current
+  SPEC and adding the bounded plan/count manifest. No original history rewritten.
+- **Changes:** Versioned unimplemented contracts to working v1 with concrete wire
+  formats; no shared Python import prerequisite. Assigned owned fixture/test/CI
+  areas, progressive grid drops, early overlap and independent authorized job
+  submission. Updated registry, instructions, runbook and review history.
+- **Checks added:** Standard-library pilot consistency/forecast/group/update/head
+  accounting, twelve malformed-plan rejection cases, source-hash-bound report and
+  CI freshness check. It verifies planning only, not future component fixtures.
+- **Observed arithmetic:** 18 controlled runs include the three early slots;
+  5,760,000 clips, 45,000 updates, 38.535168 GB raw pretraining RGB, 360 frozen-head
+  fits plus explicitly separate native/image/supervised work. No run was launched.
+- **Next:** Full document/semantic review, source provenance and fresh-checkout
+  verification, incremental commit/push, exact-head remote/CI confirmation.

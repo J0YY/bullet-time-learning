@@ -77,3 +77,24 @@ is unchanged; original blob is `13e951dcbc02d94734241034ff85bbc56d530fa6:SPEC.md
 Current revised SPEC SHA-256: `ed37f7e10d999bbdddf118455de5146fc952afac1566d15cfab1d7e8bd929c24`.
 The mathematical audit is regenerated against this revision. Later changes need
 new provenance; the final protocol/sample size/compute allocation remain unfrozen.
+
+### Revision 1 implementation boundary and dependency clarification
+
+Working contracts become v1; v0 had no implemented artifacts, so no deployed
+migration is required. Preserve producer/consumer validation as pending. Joy owns
+consumer fixtures/adapters; Sudarshan owns producer and analysis fixtures/adapters.
+Their JSON/CSV boundary does not require shared Python imports or Joy's package
+bootstrap. Add explicit owned test directories and a Sudarshan-owned data CI file.
+Progressive 1/8/100/1,000-grid drops unblock the first actual update at eight grids.
+The early three-slot screen can proceed after H1/H2 while H3 measurements are
+built; expanding to all eighteen still requires H3 and early stability. Either
+owner can submit their own authorized jobs; Joy coordinates the shared resource
+ledger rather than individual submissions. No access or experiment is granted by
+these assignments. This clarification changes workflow, not the SPEC bytes above.
+
+The first three screen slots require the same complete 1,000-grid pretraining
+bundle as the final pilot. Eight-grid update smoke tests and any 100-grid training
+prototypes are separately counted diagnostics, never resumed as pilot slots.
+Measurement-set work may overlap this screen. The invariant bag diagnostic must
+encode frames independently with no temporal context/positions before mean pooling;
+averaging contextual video features would leak order and invalidate the control.

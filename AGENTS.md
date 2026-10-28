@@ -14,7 +14,8 @@ Instructions for coding agents working with Joy Yang and Sudarshan in this repo.
    sections on later tasks. Check [ownership](division-of-labor.md),
    [interfaces](docs/interfaces.md), and [RUNBOOK.md](RUNBOOK.md).
    Before research implementation, also read the [feasibility audit](reports/cvpr-feasibility-audit-20261028.md)
-   for unresolved input/split details and limits of the original claims.
+   for the original findings; the [pilot plan](docs/pilot-plan.md) and revised SPEC
+   resolve input/split choices and define current pilot defaults.
 4. Inspect Git status, branch, remote, and incoming commits. Preserve other work.
    Register substantial tasks in shared context before editing shared interfaces.
 
@@ -88,7 +89,8 @@ Use SPEC §§4–8 and §§10–12 for details; these guardrails are not a subst
    identical full input multisets and side information. A visual sequence model
    must solve it; final-frame and permutation-invariant controls must fail as
    specified. State-oracle correctness alone is not visual solvability.
-8. Tracking uses only the preceding 16 frames and the query reference. Primary
+8. Tracking uses the current-inclusive 16-frame window [t−15,…,t] and a fixed
+   pre-occlusion RGB/point reference retained in all three scored windows. Primary
    reacquisition succeeds on all first three visible frames after occlusion, using
    the specified relative distance tolerance and correct visibility. Weight episodes
    equally. Frozen readout access, examples, tuning budgets, and heads match arms.
@@ -103,8 +105,9 @@ Use SPEC §§4–8 and §§10–12 for details; these guardrails are not a subst
     multiplicity separately. Provisional margins and five seeds are not a freeze
     or power calculation. Do not add seeds until a desired conclusion appears.
     These contrasts are relative to View; they do not establish all-pairs equivalence
-    at the same margin. Fix evaluation cadence and development/final dataset access
-    before using them in physical-horizon or external-transfer claims.
+    at the same margin. Evaluation cadence is 16 Hz on 64 Hz physics; SSv2 pilot
+    development comes from official training, with official validation reserved
+    for the final evaluation. Verify these choices in the actual implementations.
 11. Freeze protocol, splits, margins, readout budget, sample size/stopping rule, and
     analysis before final-test inspection. Keep test inaccessible to tuning code.
     Preserve paired episode/video groups in uncertainty estimates and report family
@@ -131,7 +134,8 @@ states distinct.
   permitted manifests, configs, and reports. No deletion of another person's outputs
   or cancellation of jobs this task did not submit.
 - Run appropriate checks and record their limits. `python3 scripts/check_scaffold.py`
-  checks this scaffold only. Add real component/integration tests as code is built.
+  checks this scaffold only. `python3 scripts/check_pilot_plan.py` checks planning
+  consistency/counts, not experiments. Add component/integration tests as code is built.
 - Commit cohesive work as you go. Publish integrated `main` with normal pushes,
   preserving incoming commits. Do not force-push or publish temporary branches.
   Follow the concurrent-work procedure in the runbook.

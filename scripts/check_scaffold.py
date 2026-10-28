@@ -17,6 +17,8 @@ REQUIRED = (
     "meta-feedback.md", "docs/interfaces.md", "reports/decisions.md",
     "reports/setup-audit.md", "reports/spec-source.json", ".gitignore",
     ".gitattributes", ".github/workflows/scaffold.yml", "scripts/check_scaffold.py",
+    "docs/pilot-plan.md", "configs/pilot-plan.json", "scripts/check_pilot_plan.py",
+    "reports/pilot-plan-audit.json",
 )
 IGNORED = (
     ".env", ".env.local", "credentials.key", "credentials.pem",

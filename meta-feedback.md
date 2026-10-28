@@ -54,3 +54,25 @@ self-review, not Sudarshan's acknowledgment or an independent reviewer verdict.
   2026 CVPR 2027 commitment from the current scaffold. No submission decision made.
 - **Preserved:** original SPEC unchanged; no new scientific freeze, numerical gate,
   resource commitment, dataset split, title, or experiment launch.
+
+## 2026-10-28 — User-requested revision and pilot dependency review
+
+The preceding entries describe earlier states. [Revision 1](SPEC.md) now addresses
+the title/closest-work gap, View-relative claim, forecast cadence, tracking input/
+coordinate/small-object rules, spatial adapter and external partition/access.
+[The pilot](docs/pilot-plan.md) selects prospective data counts, seeds, checkpoints,
+readout budget and numerical engineering gates. These are planning decisions, not
+observations; main power/margins, runtime pins, resources and final freeze remain open.
+
+Ownership now separates consumer/producer/analysis fixtures and JSON adapters,
+uses progressive data drops and lets each owner submit authorized jobs on their
+own validated resources. Only real producer/consumer integration waits for the
+other stream. The early screen can overlap measurement-model work, while full
+pilot expansion still requires visual solvability. Shared files have one default
+owner and versioned changes; this limits routine merge and review bottlenecks.
+
+The count check exposes supporting costs: 18 controlled runs, 2 native runs,
+3 same-corpus image-MAE runs, 7 supervised fits and 360 frozen-head fits before
+optional tuning/extra checks. No published throughput or acceptance threshold is
+assumed to validate this workload. Actual renderer/model/transfer feasibility and
+independent collaborator review remain outstanding research work.

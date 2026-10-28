@@ -46,6 +46,8 @@ Select and validate compute resources before research jobs; no host is inherited
 
 ```bash
 python3 scripts/check_scaffold.py
+python3 scripts/check_pilot_plan.py --self-test --check-report
+python3 scripts/audit_spec.py
 git diff --check
 git diff --stat
 ```
@@ -119,17 +121,26 @@ authorize creating or messaging chats or contacting collaborators.
 
 ## Research execution when implemented
 
-Record each person's actual environment in their devlog. Joy coordinates resource
-selection and runs for both code streams. Choose storage paths, dependency/code
+Record each person's actual environment in their devlog. Joy coordinates the resource ledger; each owner validates access and submits
+their own authorized work without a per-job handoff through Joy. Choose storage paths, dependency/code
 pins, scheduler access and runtime only after project-specific validation. Put
 outputs outside Git and keep hidden-state/test artifacts outside loader/tuning
 permissions. Log source/config/input hashes, allocation/job IDs, commands, output
 paths, throughput, memory, GPU counts and failure states for every run.
 
-Follow SPEC §11's staged gates. First validate 100 rendered grids and actual
-loader/update invariants, then visual solvability and the 1,000-grid reconstruction
-pilot. Its 18 runs are six conditions × three paired seeds. Native recipes,
-references, readouts, rendering, and failures require their own budget entries.
+Follow [pilot v1](docs/pilot-plan.md). Deliver 1 → 8 → 100 → 1,000 grids. Integrate
+one actual update at eight grids, without waiting for the full corpus. Joy builds
+consumer fixtures; Sudarshan builds producer and analysis fixtures independently
+against [working v1 interfaces](docs/interfaces.md). Send an immutable drop with
+hashes and one reproduce command as soon as it passes its producer checks.
+
+After the 100-grid audit, frozen 1,000-grid pretraining bundle and resource
+validation, the first three controlled slots
+can run to four passes while measurement diagnostics proceed. Require visual
+solvability and early stability before expanding to eighteen twenty-pass runs.
+The first three resume under their original twenty-pass schedule if hashes match.
+The pilot ledger separately includes native/image references, seven supervised
+fits and 360 frozen-head fits; no automatic V-JEPA or eighty-pass extension.
 
 Freeze the main protocol only after learning, transfer, measurement, resource and
 power evidence. Record frozen hashes/margins/endpoints/stopping rule before test
@@ -151,3 +162,15 @@ mode. Optional `--power` requires locally available SciPy and reproduces the
 Gaussian TOST planning examples; it is not a measured project power estimate.
 See the [feasibility audit](reports/cvpr-feasibility-audit-20261028.md) before
 resolving research input/partition choices or expanding the study.
+
+[scripts/check_pilot_plan.py](scripts/check_pilot_plan.py) checks the declarative
+pilot manifest, pair-preserving label budgets, checkpoint/update arithmetic,
+forecast steps, included early slots and supporting/readout counts. Its JSON output
+binds source hashes; malformed-plan rejection checks are CPU-only. Neither it nor
+CI implements the future producer/consumer fixture tests in the interface contract.
+
+After an intentional, reviewed pilot-plan/contract change, regenerate its bound
+report with `python3 scripts/check_pilot_plan.py --self-test > reports/pilot-plan-audit.json`,
+then run `python3 scripts/check_pilot_plan.py --self-test --check-report`. CI rejects
+stale source hashes/accounting. Changing SPEC also requires its new hash and reason
+in the decision record; original source provenance remains immutable.

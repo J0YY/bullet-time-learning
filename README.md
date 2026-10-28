@@ -34,11 +34,13 @@ working plan; Sudarshan's personal acknowledgment has not been recorded.
 git clone https://github.com/J0YY/bullet-time-learning.git
 cd bullet-time-learning
 python3 scripts/check_scaffold.py
+python3 scripts/check_pilot_plan.py --self-test --check-report
 ```
 
 The checker uses only Python's standard library and Git. It verifies repository
 structure, local documentation links, original-spec provenance, and artifact
-ignore rules. It does not validate a renderer, model, or scientific result.
+ignore rules. The pilot checker verifies count/seed consistency and audit hashes.
+Neither validates a renderer, model, or scientific result.
 GitHub write permission is required to push; public clone access does not grant it.
 
 ## Project map

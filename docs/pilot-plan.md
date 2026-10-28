@@ -34,7 +34,9 @@ requires the other person's personal acknowledgment to begin local authorized
 implementation. Integration requires actual evidence from both producer and
 consumer; a fixture-only check does not count as a real-data handoff.
 
-Each drop is immutable and includes manifest/config/code hashes, validation report,
+The eight-grid actual update is an integration smoke test, separately costed; it
+is not one of the eighteen training slots. The pilot never resumes a 100-grid
+prototype as a 1,000-grid run. Each drop is immutable and includes manifest/config/code hashes, validation report,
 artifact location and one reproduce command. Publish the small manifest/report to
 Git; RGB and hidden labels stay outside it. Deliver the next drop without waiting
 for a meeting. Keep the last accepted contract working while adding a new version.
@@ -131,6 +133,19 @@ independent CPU implementation or data-design work.
 | External image reference | 1 checkpoint, 0 pretraining runs here | DINOv2 ViT-S/14 without registers, frozen | Separate external-data competence reference, not a matched causal arm |
 | Supervised diagnostic models | 7 fits | Seed 101, train 600/task; select on dev | Sequence collision/order/tracking; final-frame collision/order; invariant bag order; reference+current-frame tracking |
 
+For the seven supervised diagnostic fits, use one selected image-feature backbone
+and matched-width heads across the restricted/sequence variants; select the common
+capacity/optimization on development data and record actual trainable parameters.
+The final-frame controls see only that RGB (repeated if the adapter needs 16 frames)
+and the identical query points. The invariant bag model encodes each image
+independently with a shared frame encoder, no temporal positions/context, then
+mean-pools before its query-conditioned head. Averaging contextual video tokens
+is not an invariant bag control. Verify invariance under arbitrary input
+permutations, not just the one paired trajectory. Sequence diagnostics may access
+ordered frames; the tracking control receives only fixed reference + current RGB.
+These supervised models establish measurement sensitivity, not frozen feature
+quality. Any architecture/hyperparameter search adds explicitly counted fits.
+
 The external reference is the released `dinov2_vits14` model; resolve code and
 weights to immutable revisions/checksums during environment setup. Apply it
 framewise and pass ordered spatial features to the same readout family, recording
@@ -139,7 +154,9 @@ Native validation is a small-model diagnostic, not reproduction of published
 large-scale accuracy. The two native runs do not establish seed-robust equivalence.
 
 First run View/Time/Mix50 at seed 17 only to the 4-pass checkpoint. These are three
-of the eighteen planned slots. Use the twenty-pass scheduler from step zero; do
+of the eighteen planned slots. Start this early screen after H1/H2, the complete frozen 1,000-grid
+pretraining bundle and resource validation, in parallel with measurement-model work; H3 and early stability must
+pass before expanding to all eighteen. Use the twenty-pass scheduler from step zero; do
 not restart a four-pass cosine schedule as a twenty-pass run. If hashes and recipe
 stay fixed, resume them to 20 and fill the other fifteen slots after the early
 gates. If the recipe changes, retain the failed trials and rerun affected slots

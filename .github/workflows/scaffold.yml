@@ -22,5 +22,7 @@ jobs:
       - run: python3 scripts/check_scaffold.py
       - name: Check proposal grid identities and workload arithmetic
         run: python3 scripts/audit_spec.py
+      - name: Check pilot counts, rejected malformed plans and current audit hashes
+        run: python3 scripts/check_pilot_plan.py --self-test --check-report
       - name: Check all tracked whitespace
         run: git diff --check "$(git hash-object -t tree /dev/null)" HEAD

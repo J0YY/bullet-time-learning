@@ -1,4 +1,4 @@
-# Shared interfaces — bullet-time draft v0
+# Shared interfaces — bullet-time working v1
 
 **2026-10-28 status:** written contracts only. No schema, producer, loader, trainer,
 or analysis implementation has passed integration. Use synthetic fixtures first.
@@ -7,7 +7,7 @@ document. Record actual validation separately for each side.
 
 ## 1. Grid and evaluation bundle
 
-**Producer:** Sudarshan. **Consumer:** Joy. Proposed version: `bullet-time.grid.v0`.
+**Producer:** Sudarshan. **Consumer:** Joy. Working version: `bullet-time.grid.v1`.
 
 | Record | Required fields and meaning |
 | --- | --- |
@@ -44,10 +44,10 @@ establish visual solvability without the sequence/control experiments.
 ## 2. Sequence and update audit
 
 **Producer:** Joy. **Independent checker:** Sudarshan.
-Proposed version: `bullet-time.exposure.v0`.
+Working version: `bullet-time.exposure.v1`.
 
 Scheduler input: grid manifest, condition/Time fraction, pass number, and paired
-seed. Define pass numbering explicitly (proposed zero-based). Output: 16 ordered
+seed. Define pass numbering explicitly (zero-based). Output: 16 ordered
 clips of 16 image IDs per complete grid, plus reproducible scheduling metadata.
 
 | Condition ID | Construction and invariant |
@@ -88,7 +88,7 @@ loader audit, and real optimizer validation are distinct evidence levels.
 ## 3. Run and prediction export
 
 **Producer:** Joy. **Consumer:** Sudarshan.
-Proposed versions: `bullet-time.run.v0`, `bullet-time.prediction.v0`.
+Working versions: `bullet-time.run.v1`, `bullet-time.prediction.v1`.
 
 | Record | Required fields |
 | --- | --- |
@@ -111,7 +111,7 @@ success. Preserve raw predictions so independent metrics can be recomputed.
 ## 4. Analysis and table bundle
 
 **Producer:** Sudarshan. **Reproducer:** Joy.
-Proposed version: `bullet-time.analysis.v0`.
+Working version: `bullet-time.analysis.v1`.
 
 Bind each output to the frozen analysis configuration and source-run, prediction,
 split and label hashes. Include inclusion/exclusion rules, coverage, counts, family,
@@ -144,28 +144,101 @@ Integration reproduces the actual delivered outputs, not only a producer's demo.
 
 ## Version and validation status
 
-### Choices to pin before research data or readout tuning
+### Selected protocol and independent implementation boundary
 
-The [2026-10-28 audit](../reports/cvpr-feasibility-audit-20261028.md) identified
-these unresolved details; recording them does not select a new scientific protocol:
+The [revised SPEC](../SPEC.md) §7 and [pilot plan](pilot-plan.md) now select fixed
+64 Hz physics / 16 Hz evaluation, 16 observed frames, a current-inclusive tracking
+window and fixed pre-occlusion reference, normalized coordinates, visibility ≥0.5,
+small-object stratum, repeated-image spatial adapter, and SSv2 internal development
+with reserved official validation. These replace the earlier unresolved checklist.
+Pilot seeds/budgets/gates are selected; final-study margins, power, runtime pins,
+compute and final freeze remain pending. The 30/70 claims are View-relative.
 
-- Fix evaluation cadence for physical-second forecasts, or explicitly revise
-  permitted timing inputs. Variable pretraining cadence does not define evaluation.
-- Specify whether the causal tracking window includes current-frame RGB, reference
-  access, coordinate conventions, visibility threshold, and small-object handling.
-- Pin the single-image adapter for spatial evaluation of a video backbone.
-- Hash distinct external development/final-evaluation partitions. SSv2 official
-  test labels are withheld; choose a verified service or a clearly named reserved
-  official-validation protocol, without tuning on the final evaluation partition.
-- State reference-relative equivalence, plan individual/superiority comparisons,
-  and determine joint power and test-sample precision before final testing.
+v1 supersedes the unimplemented v0 draft. There are no deployed v0 artifacts to
+migrate. Future incompatible changes need a new version. This is a working format
+commitment for independent coding, not a claim that either implementation exists.
+
+Use UTF-8 JSON for manifests and metadata. `pretrain.jsonl` has one grid per line;
+`bundle.json` declares version, producer/config hashes and the inventory. The
+allowlisted pretraining record is:
+
+```json
+{
+  "schema_version": "bullet-time.grid.v1",
+  "grid_id": "synthetic-example-only",
+  "scene_family": "projectile_arena",
+  "cells": [
+    {
+      "world_time_index": 0,
+      "camera_index": 0,
+      "image_id": "synthetic-example-only/t00/c00",
+      "rgb_path": "rgb/synthetic-example-only/t00/c00.png",
+      "file_sha256": "REPLACE_WITH_ACTUAL_FILE_SHA256",
+      "rgb_sha256": "REPLACE_WITH_ACTUAL_DECODED_RGB_SHA256",
+      "height": 224,
+      "width": 224,
+      "channels": 3
+    }
+  ]
+}
+```
+
+This abbreviated example is deliberately **not a valid grid**: producers must
+supply all 256 cells, actual 64-character lower-case SHA-256 hashes and RGB bytes.
+Decoded hashes cover contiguous uint8 H×W×3 row-major RGB bytes, with no header,
+alpha or color-conversion ambiguity; PNG is the initial lossless format. Relative
+paths resolve inside the bundle; reject absolute paths, `..` and symlink escapes.
+IDs are stable opaque strings, not model inputs. Grid/cell order in the file has
+no scientific meaning: sort by stable ID / explicit indices as required and log
+actual schedule order. Seeds/pass/condition belong to the run/schedule, not RGB.
+
+All state, timestamps, split lineage, labels and camera sidecars live in separate
+auditor files; the pretrainer reads only the allowlisted records and RGB. An
+admission validator checks private split lineage before releasing that manifest.
+Store training/dev labels separately from pilot assessment and eventual final test;
+mount only the permitted split for each job. Enforcement must be tested when built.
+
+Evaluation input JSONL contains `schema_version: bullet-time.evaluation.v1`,
+`episode_id`, `task_id`, `split`, ordered `observed_image_ids`, `query_points`,
+`reference_image_id`/`reference_point` for tracking, and `prediction_frame` or
+`horizon_seconds`. Query coordinates are normalized as SPEC §7 defines. Labels,
+pair/group IDs, continuation/cadence validation and target hashes are joined only
+by the evaluation/audit process. The model receives allowed RGB/queries only;
+metadata is never a feature. Forecast tasks are `collision` and `order`; tracking
+uses its declared current-inclusive windows. External video IDs use `ssv2` task ID.
+
+Prediction handoffs use `predictions.csv` with a header and one row per unique key
+from §3; no implicit row order. Add explicit `split`, `scene_family`, `pair_group_id`,
+`target_reference_sha256`, `status`, `error`, `contact_probability`, `x`, `y`,
+`visibility_probability`, `class_id` as appropriate. Use blank fields for
+inapplicable outputs; numeric values must be finite, probabilities in [0,1].
+`status` is `ok`, `failed` or `missing`; failures retain the key and reason, with
+blank outputs. IDs/seeds/budgets are recorded explicitly; never infer them from a
+filename. Keep raw class logits in a separately hashed array if used for calibration.
+`run.json` uses `bullet-time.run.v1`, declares `prediction_schema_version` as
+`bullet-time.prediction.v1`, records the CSV hash and references a `coverage.json`
+with all expected keys. Analysis uses only authorized label exports and verifies
+the target-reference hash before joining. Retain group fields for paired resampling.
+
+Producer and consumer each implement their own adapter and fixtures. Joy does not
+wait to import Sudarshan's `schema.py`; Sudarshan's data/analysis CLI does not wait
+for Joy's package or runner. Before real integration, validate byte hashes, allowed
+input access and the actual exported records, not only this illustrative format.
+
+Required fixture cases for future component tests: complete/missing/duplicate grid
+cells, wrong RGB hashes and escaping paths; opposite-label identical-input pairs
+at 50% BA/Brier 0.25 for p=0.5; tracking success only if all three frames satisfy
+visibility/tolerance including equality at the boundary; a failed/missing prediction
+that changes coverage; unequal family sizes (macro ≠ micro); three readout seeds
+averaged within each pretraining seed; one failed TOST component blocking the global
+conjunction. These fixtures are implementation tasks, not artifacts already built.
 
 | Contract | Producer implemented | Consumer validated | Independent review |
 | --- | --- | --- | --- |
-| Grid/evaluation v0 | No | No | Not performed |
-| Exposure/update v0 | No | No | Not performed |
-| Run/prediction v0 | No | No | Not performed |
-| Analysis v0 | No | No | Not performed |
+| Grid/evaluation v1 | No | No | Not performed |
+| Exposure/update v1 | No | No | Not performed |
+| Run/prediction v1 | No | No | Not performed |
+| Analysis v1 | No | No | Not performed |
 
 Breaking changes receive a new version and explicit migration. Compatible
 clarifications still need log and contract updates. Replace this table with actual

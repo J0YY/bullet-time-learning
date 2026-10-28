@@ -1,0 +1,60 @@
+{
+  "clips_per_controlled_run": 320000,
+  "clips_per_pass": 16000,
+  "controlled_clips_total": 5760000,
+  "controlled_gpu_hours_scenarios": {
+    "100": 16.0,
+    "20": 80.0
+  },
+  "controlled_runs": 18,
+  "controlled_updates_total": 45000,
+  "frames_per_image_mae_run": 5120000,
+  "frozen_head_fits": {
+    "controlled": 252,
+    "external_image": 12,
+    "image_mae": 36,
+    "native": 24,
+    "untrained": 36
+  },
+  "future_physics_steps": [
+    16,
+    32,
+    64
+  ],
+  "game_group_counts": {
+    "collision": {
+      "assessment": 200,
+      "dev": 100,
+      "train": 300
+    },
+    "order": {
+      "assessment": 200,
+      "dev": 100,
+      "train": 300
+    },
+    "tracking": {
+      "assessment": 400,
+      "dev": 200,
+      "train": 600
+    }
+  },
+  "image_mae_training_runs": 3,
+  "included_early_slots": 3,
+  "malformed_plan_rejection_checks": 12,
+  "native_training_runs": 2,
+  "observed_span_seconds": 0.9375,
+  "plan_sha256": "b160a832f9799f2cf049a56d2ca1002e942688702e523a5dcf0a6cd8929f89f5",
+  "pretraining_rgb_bytes": 38535168000,
+  "pretraining_rgb_images": 256000,
+  "scope": "Planning arithmetic only; no models, data or producer/consumer integration validated",
+  "source_sha256": {
+    "SPEC.md": "ed37f7e10d999bbdddf118455de5146fc952afac1566d15cfab1d7e8bd929c24",
+    "division-of-labor.md": "a584577e2c9a80955ff898f9b5acd69b63def32909c125f718c342feb9fdf493",
+    "docs/interfaces.md": "2fd15defe304d236264fcd6abf2c050f55cdb09b430b4be869311dab8251542f",
+    "docs/pilot-plan.md": "8aae9169e8a12f7820b9b3249a312f7a83261833c4a96d975fe4c092ecfc9e34",
+    "scripts/check_pilot_plan.py": "4412aa03eb1e4032be18838d04bb8279860cbd39c1db0b340965f25333bcfaa3"
+  },
+  "supervised_diagnostic_fits": 7,
+  "total_frozen_head_fits": 360,
+  "updates_per_controlled_run": 2500
+}

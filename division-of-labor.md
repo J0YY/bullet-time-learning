@@ -1,6 +1,6 @@
 # Division of labor — Joy & Sudarshan
 
-**2026-10-28:** working plan for the requested collaboration setup. No research
+**2026-10-28 revision:** working assignments for the concrete pilot. No research
 implementation or collaborator acknowledgment is implied. This keeps the previous
 project's split by layer, with new bullet-time tasks and scientific gates.
 
@@ -18,8 +18,8 @@ Paths below are planned unless listed as implemented in shared context.
 | Evaluation | Frozen readouts, causal input assembly, prediction exports, external readout adapters | Counterfactual/order/tracking datasets, split design, metric definitions and analysis |
 | Configs/build | `pyproject.toml`, dependency locks, CI, `configs/` default, models/training/readouts | `configs/generation/`, `configs/rendering/`, `configs/splits/`, `configs/analysis/` |
 | Data | Run/checkpoint/prediction provenance and external dataset consumption | Lightweight `data/manifests/`, `data/splits/`, asset/license inventory and external split provenance |
-| Scripts/tests | `scripts/` default, shared fixtures/harness, integration tests; tests for Joy-owned modules | `scripts/data/`, `scripts/analysis/`; tests for Sudarshan-owned modules |
-| Execution | Select/validate resources for the project; coordinate rendering/training/evaluation/analysis runs and resource ledger | Supply reproducible generation/rendering/analysis commands and requirements; validate own access if needed |
+| Scripts/tests | `scripts/` default, `tests/loading/`, `tests/training/`, `tests/readouts/`, `tests/integration/`, `tests/fixtures/consumer/`; common package/CI bootstrap | `scripts/data/`, `scripts/analysis/`, `tests/data/`, `tests/analysis/`, `tests/fixtures/producer/`, `tests/fixtures/analysis/`; `.github/workflows/data.yml` |
+| Execution | Coordinate resource choices/ledger; validate and launch Joy-owned work on authorized resources | Own rendering/analysis environment and commands; validate own access and launch own authorized work without routing submissions through Joy |
 | Writing | Scientific framing, training/readouts, results integration, manuscript default | Data/statistics sections, `paper/figures/`, `paper/tables/`, references and reproducibility inventory |
 
 Joy is default owner of unassigned paths; record intentional reassignment in
@@ -31,7 +31,7 @@ This plan does not grant either person access to the other's machines/accounts.
 
 | Deliverable | Owner | Required input/check |
 | --- | --- | --- |
-| SPEC, AGENTS, CLAUDE, README, RUNBOOK, this plan, interfaces, setup audit, meta-feedback | Joy | Sudarshan may propose changes; user's assignments authorize scoped edits |
+| SPEC, pilot plan/manifest, AGENTS, CLAUDE, README, RUNBOOK, this plan, interfaces, setup audit, meta-feedback | Joy | Sudarshan may propose changes; user's assignments authorize scoped edits |
 | Protocol freeze/deviations and future preregistration | Joy | Sudarshan supplies split hashes, margins/power evidence and analysis plan |
 | Godot/asset source selection, license and data card | Sudarshan | Joy checks loader needs, storage, and runtime compatibility |
 | Model/objective revisions, native-recipe validation, hardware/software pins | Joy | Sudarshan checks exposure and evidence requirements |
@@ -59,23 +59,64 @@ needed for normal authorized development, and no independent review is assumed.
 
 ## First parallel workstreams
 
-These are tasks for the collaborators' future sessions, not automatically launched
-agents or chats. Task IDs are stable handoff labels, not completion claims.
+These are assignments for future collaborator sessions, not launched agents/chats.
+The [pilot plan](docs/pilot-plan.md) defines data counts, run slots and gates.
+Contract v1 is the working wire boundary now, with implementation still pending.
+Neither side waits for the other's Python classes, package install or full corpus.
 
-| Task | Owner | Deliverable and acceptance | Depends on |
+| Task | Owner | Concrete deliverable / acceptance | True dependency; work while waiting |
 | --- | --- | --- | --- |
-| J1: loader foundation | Joy | Package/config/test harness; all eight conditions, four-pass mixtures, shared RNG and complete-grid update contract on synthetic grids; deterministic audit and malformed-input rejection | Draft grid contract; coordinate schema imports with S1 |
-| S1: data foundation | Sudarshan | Versioned grid/evaluation schema and synthetic fixtures; grouped split validation; Godot scene/state-capture design and asset provenance | Draft interfaces |
-| S2: first rendered scene | Sudarshan | 100 complete grids; replay pixel identity, frozen world state/camera independence, smooth closed camera paths; rejection/visibility/contact report | S1, pinned renderer/runtime and selected resources |
-| J2: audited real update | Joy | Real-loader exposure, augmentation, post-collator masks, raw-target and complete-update audit; controlled/native VideoMAE validation design | J1 + S2 delivered bundle |
-| S3: measurement data | Sudarshan | Valid forward paired histories, equal-image-bag diagnostic, causal tracking set, labels and split checks | S1/S2 |
-| J3: visual solvability | Joy | Supervised sequence/final-frame/bag controls; identical permitted inputs and meaningful diagnostic results | S3 + selected compute/runtime |
-| S4: analysis foundation | Sudarshan | Fixture-checked paired effects, family weighting, seed/readout hierarchy, TOST and multiplicity logic, power planning | Draft run export; integrate with J2/J3 outputs |
+| J1: consumer foundation | Joy | Deterministic RGB fixtures in own test folder; all 8 schedules, 4-pass mixtures, separate RNGs, masking and 8-grid/tail update tests; JSON adapter and run/prediction writer | No S task; use the written v1 fields; no import from S-owned `schema.py` |
+| S1: producer foundation | Sudarshan | Canonical schema/JSON validator, independent producer fixtures, group/split checks, license inventory, state/renderer design | No J task; standalone data CLI / owned environment; no dependency on Joy's package bootstrap |
+| S4: analysis foundation | Sudarshan | Independent synthetic predictions, collision/tracking metrics, paired hierarchy/coverage and analysis report; known-answer and malformed cases | No J task; use v1 prediction table and toy data; real integration waits only for first export |
+| S2: progressive rendering | Sudarshan | 1 grid preview, then 8 complete grids and validation report, then 100-grid real audit, then 1,000 admitted pretraining grids | S1 + validated renderer/runtime; each drop independently consumable, do not wait for all data |
+| J2: real-update integration | Joy | Validate first 8 real grids, actual transformed-image/mask/raw-target/update audit; later 100-grid audit including 4-grid tail | J1 + S2's 8-grid drop only; while waiting finish resumable runner, references and export tests |
+| S3: measurement sets | Sudarshan | Collision/order/tracking generators and 600/200/400 accepted episodes per task; labels, equal-image checks and split reports | S1 and working scene, not completed S2 corpus or J2; first small task drop can precede 1,000 grids |
+| J3: sensitive readouts | Joy | Causal input assembler, 7 supervised diagnostics, frozen heads and SSv2 adapter; export predictions at first small task drop | Head development uses fixtures now; H3 acceptance needs S3 full sets and resources |
+| J4: bounded pilot | Joy | Resource/runtime pins, early 3-slot screen, 18 controlled slots plus listed references, complete coverage/failed-run ledger | H1/H2 + complete 1,000-grid pretraining bundle + resources for screen; H3 + early stability before expansion; each first result unblocks S4 integration |
 
-Joy can build loader fixtures while Sudarshan builds schema/rendering. Avoid both
-editing `schema.py`; agree the import boundary through the draft contract. The first
-integration checkpoint is the spec's rendered grid + audited update + solvable
-history test. Passing synthetic checks alone does not reach it.
+J1/J3 use consumer-owned fixtures; S1 uses producer-owned fixtures; S4 uses
+analysis-owned fixtures. Each person writes their own checks against the common
+contract. This avoids one fixture generator becoming everyone's prerequisite and
+keeps an independent check from merely copying a producer's logic. Synthetic
+fixtures are clearly labeled and never appear as rendered/research evidence.
+
+### Only these integration handoffs require the other stream
+
+| Handoff | Producer → consumer | Smallest useful drop | Acceptance owner |
+| --- | --- | --- | --- |
+| H1 | S2 → J2 | 8 complete real grids, immutable RGB inventory, split/state audit; 1-grid preview earlier | Joy: actual update audit; Sudarshan: renderer evidence |
+| H2 | S2 → J2 | 100-grid bundle + tail-update/replay/loop evidence | Each validates own side; Joy records integrated evidence |
+| H3 | S3 → J3 | First 16 paired collision/order groups and 16 tracking episodes for format plumbing, then full split sets for gates | Joy: visual solvability; Sudarshan: labels/groups/allowed inputs |
+| H4a | J2/J3/J4 → S4 | First complete task export for one checkpoint and all 3 readout seeds, plus explicit planned-slot inventory | Sudarshan: schema/coverage/metrics; full paired study analysis waits for all runs |
+| H4b | S4 → Joy | Reproducible metrics/uncertainty + source hashes and failure ledger | Joy reproduces; both record limits in their own logs |
+
+The H3 tiny drop is plumbing only and must already have correct group assignments;
+it does not qualify for the numeric sensitivity gates. Sudarshan can continue
+rendering and analysis while Joy consumes a drop. Joy can continue models/readouts
+while waiting for the next data volume. Data generation and metric development
+stay on Sudarshan's side; model/input/export code stays on Joy's side.
+
+### Avoid routine coordination becoming a bottleneck
+
+- JSON/CSV files are the interoperability boundary. A canonical Python schema can
+  help but is not a required import. Each side owns its adapter and component tests.
+- Add optional fields compatibly; readers ignore documented optional additions.
+  Required-field/semantic changes get a new version and a producer compatibility
+  export until the consumer migrates. Do not silently mutate an accepted bundle.
+- Each owner can run and commit their own component checks. Joy owns aggregate CI;
+  Sudarshan may maintain the separate data job. Shared CI configuration is not a
+  prerequisite for running data/analysis checks locally.
+- Resource coordination is a shared ledger, not a requirement that Joy submit
+  Sudarshan's jobs. Each uses their own validated access within authorized limits.
+- Use separate local checkouts and explicit owned paths. Fetch/merge/push normally;
+  no shared worktree, force push, or unannounced cross-owner rewrite.
+- Record an actionable blocker after a focused session: failing artifact/hash,
+  expected contract, smallest needed fix and fallback task. Continue independent
+  work. Do not turn a task handoff into a meeting or personal-approval queue.
+- Scientific revisions that affect both streams go through the dated decision
+  record and versioned contract. Ordinary implementation does not need joint sign-off;
+  claiming real integration does need actual producer/consumer evidence.
 
 ## Later stages and gates
 
@@ -86,6 +127,6 @@ history test. Passing synthetic checks alone does not reach it.
 | 3: main freeze | Validate V-JEPA, external transfer, common recipes, readout budget, capacity/budget plan | Three families, finalized splits, margins/claim scope, power and independent-corpus plan | Dated protocol/config/manifest/analysis freeze before final test |
 | 4: conditional full study | Two objectives × eight conditions × n paired seeds; references, readouts and replications separately counted | Independent paired analysis, family effects, coverage, tables/figures | All prespecified arms reported; claims bounded by actual evidence |
 
-No calendar deadline, final sample size, compute host, or protocol freeze is set
-by this scaffold. The 16n main-run count excludes pilots and supporting work.
+The pilot has concrete stage gates and selected defaults, but no promised calendar
+completion, final-study sample size, compute host, or final protocol freeze. The 16n main-run count excludes pilots and supporting work.
 Independent-corpus replication and held-out-family evaluation are different checks.

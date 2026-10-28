@@ -51,13 +51,14 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | SETUP | Joy | Spec import, collaboration docs, checker/CI, Git publication | Complete; local/clone/CI checks passed | Import `13e951d`; workflow `8d2b61d`; verified implementation `7bfeb73`; see setup audit |
 | AUDIT | Joy | User-requested full scaffold/spec and CVPR feasibility/quality review | Complete; clone/math/CI checks passed | Base `d9ec3a8`; substantive audit commit `af32b16`; report and reproducible mathematical checks |
 | REVISION | Joy | Revise spec from audit; concrete pilot and independent workstreams; preserve original and verify | In progress | Base `6fbfec4`; user-authorized scientific/planning revision, no experiment launch |
-| J1 | Joy | Sequence loader and audit foundation on fixtures | Ready, not started | Draft interfaces; coordinate schema with S1 |
-| S1 | Sudarshan | Data schema, fixtures, split validator, renderer design | Ready, not started | Draft interfaces |
-| S2 | Sudarshan | First scene and 100 rendered grids | Not started | S1; renderer/runtime/resources |
-| J2 | Joy | Actual-loader and training-update audit | Not started | J1 + S2 |
-| S3 | Sudarshan | Paired history/order/tracking data | Not started | S1/S2 |
-| J3 | Joy | Visual-solvability controls | Not started | S3; resources/runtime |
-| S4 | Sudarshan | Independent metrics/statistics fixtures | Ready, not started | Draft run export; later J2/J3 integration |
+| J1 | Joy | Consumer fixtures, all schedules/RNG/update tests, JSON adapter and exports | Ready, not started | Working v1 contracts; no S task or schema import needed |
+| S1 | Sudarshan | Producer schema/fixtures, grouped splits, renderer design | Ready, not started | Working v1 contracts; own environment, no Joy package dependency |
+| S2 | Sudarshan | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Not started | S1 + renderer/runtime/resources; deliver each drop immediately |
+| J2 | Joy | Actual-loader/update audit; 100-grid tail check | Not started | J1 + S2 first 8 grids; runner/reference work can continue before delivery |
+| S3 | Sudarshan | Collision/order/tracking sets and oracle/input checks | Not started | S1 + working scene; does not wait for complete S2 corpus |
+| J3 | Joy | Causal heads, seven supervised controls, external adapter | Ready for fixtures; real tests pending | Working contracts now; S3 sets for H3 acceptance |
+| S4 | Sudarshan | Own synthetic prediction fixtures, independent metrics/statistics | Ready, not started | Working run/prediction v1; first real export later, no need to wait for all runs |
+| J4 | Joy | Resource/runtime ledger, early screen and bounded pilot | Not started | H1/H2 + complete 1,000-grid bundle + resources for screen; H3 + early stability for expansion |
 
 ## Immediate handoff
 
@@ -70,8 +71,8 @@ compute and submission remain unselected; no experiment has run.
 
 Joy can develop consumers on owned fixtures; Sudarshan can develop producers and
 independent analysis on owned fixtures. Deliver 1 → 8 → 100 → 1,000 grids; the first
-8 unblock actual update integration. The detailed ownership/interfaces are being
-aligned in REVISION. Scientific implementation and producer/consumer integration
+8 unblock actual update integration. The [ownership map](division-of-labor.md) and [working v1 contracts](docs/interfaces.md)
+separate adapters/fixtures, progressive drops and independent job submission. Scientific implementation and producer/consumer integration
 remain pending. No acknowledgment is recorded on Sudarshan's behalf.
 
 ## Update rules
