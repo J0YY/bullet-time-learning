@@ -1,5 +1,6 @@
 import json
-from dataclasses import asdict
+from dataclasses import asdict, replace
+import pytest
 from bullet_time.models.video import build_model
 from bullet_time.models.references import save_reference
 from bullet_time.evaluation.training import ReadoutConfig, Targets
@@ -9,7 +10,10 @@ from fixtures.consumer.evaluation import fixtures, TINY
 from test_cli import run
 
 
-def test_reference_fit_predict_cli_and_wrong_run_rejection(tmp_path):
+@pytest.mark.parametrize(
+    "kind,mode", [("frozen", "sequence"), ("diagnostic", "sequence"), ("diagnostic", "final_frame")]
+)
+def test_reference_fit_predict_cli_and_wrong_run_rejection(tmp_path, kind, mode):
     path, store, base = fixtures(tmp_path / "data")
     inputs = []
     labels = []
@@ -40,12 +44,20 @@ def test_reference_fit_predict_cli_and_wrong_run_rejection(tmp_path):
         json.dumps(dict(schema_version="bullet-time.evaluation-groups.v1", records=groups))
     )
     backbone = tmp_path / "untrained.pt"
-    save_reference(build_model(TINY, 17), backbone)
+    save_reference(
+        build_model(replace(TINY, frames=1, tubelet=1) if kind == "diagnostic" else TINY, 17),
+        backbone,
+    )
     _, source = load_backbone(backbone)
+    assert source["assessment_eligible"]
     config = tmp_path / "head.json"
     config.write_text(
         json.dumps(
-            asdict(ReadoutConfig(image_size=32, width=24, heads=3, epochs=1, label_budget=2))
+            asdict(
+                ReadoutConfig(
+                    image_size=32, width=24, heads=3, epochs=1, label_budget=2, kind=kind, mode=mode
+                )
+            )
         )
     )
     fitted = run(
@@ -75,8 +87,8 @@ def test_reference_fit_predict_cli_and_wrong_run_rejection(tmp_path):
             continue
         expected.append(
             dict(
-                run_id=source["run_id"],
-                checkpoint_id=source["checkpoint_sha256"],
+                run_id=fitted["prediction_identity"]["run_id"],
+                checkpoint_id=fitted["prediction_identity"]["checkpoint_id"],
                 task_id="collision",
                 label_budget=2,
                 readout_seed=101,

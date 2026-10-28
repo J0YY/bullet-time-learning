@@ -99,6 +99,8 @@ def admit(corpus, model, config, scope, *, receipt_path=None, stop_after_updates
         or model.decoder_heads != 3
     ):
         raise ValueError("not the declared pilot backbone/decoder")
+    if any(grid.scene_family != "projectile_arena" for grid in corpus.grids):
+        raise ValueError("pilot corpus must contain only the declared projectile arena family")
     if config.crop_fraction != 1 or config.color_jitter != 0:
         raise ValueError("initial pilot controlled grid transform is identity")
     if scope == "reference":

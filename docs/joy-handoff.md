@@ -151,12 +151,18 @@ null. Do not quietly replace it with an oracle.
 For DINO, add `--external-cache .cache/dinov2` to both commands. Fit uses only train/
 dev, freezes the backbone for `kind: "frozen"`, and selects by development loss.
 `kind: "diagnostic"` fine-tunes the common image backbone. Inputs, labels, selection,
-config, source checkpoint and fit are hash-bound. The output inventory's `run_id`
-is the actual backbone binding hash, `checkpoint_id` its file SHA-256, and
-`label_budget` the actual number of training episodes/videos. Human slot names are
+config, source checkpoint and fit are hash-bound. For frozen heads, the output inventory's `run_id` is the backbone binding hash and
+`checkpoint_id` its file SHA-256. For supervised diagnostics, the run ID binds the
+parent plus the full diagnostic configuration/mode, and checkpoint ID is the fitted
+diagnostic file SHA-256. Use the explicit `prediction_identity` in the fit output/
+checkpoint sidecar. `label_budget` is the actual training episode/video count. Human slot names are
 planning aliases; map them explicitly to these hashes. The CLI rejects a misnamed
 run/checkpoint/budget. Readout seeds are 101/102/103; primary horizon is 0.5 seconds.
-Fitting never reads assessment labels. The final official SSv2 validation split is
+Fitting never reads assessment labels. Prediction also checks stored split eligibility
+before loading inputs: early/incomplete learned checkpoints and every SSv2 head are
+development-only; game assessment requires a completed 20-pass learned checkpoint
+or an untrained/external reference. Older synthetic readouts lacking this policy
+must be regenerated. The final official SSv2 validation split is
 not accepted by this pilot CLI.
 
 ## SSv2 preparation

@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import sys
 import torch
-from bullet_time.provenance import strict_json, atomic_json, digest, identity
+from bullet_time.provenance import strict_json, atomic_json, digest, identity, integer
 from bullet_time.loading.manifest import Corpus
 from bullet_time.models.video import ModelConfig, build_model, model_identity
 from bullet_time.training.runner import Runner, TrainConfig
@@ -51,7 +51,32 @@ def load_backbone(checkpoint, external_cache=None):
     model.load_state_dict(payload["model"], strict=True)
     if model_identity(model) != meta["model_sha256"]:
         raise ValueError("backbone parameter hash mismatch")
+    binding = payload["binding"]
+    if identity(binding) != meta["binding_sha256"]:
+        raise ValueError("backbone binding hash mismatch")
+    integer(payload["global_step"], "global_step")
+    if payload["schema_version"] == "bullet-time.reference.v1":
+        if payload["global_step"] != 0 or binding["reference_status"] != (
+            "external_pretrained" if kind == "dinov2" else "untrained"
+        ):
+            raise ValueError("invalid reference progress/status")
+        assessment_eligible = True
+    else:
+        grids = binding.get("corpus_grids")
+        assessment_eligible = False  # Old/unknown progress fails closed.
+        if grids is not None:
+            integer(grids, "corpus_grids", 1)
+            config = TrainConfig(**binding["training"])
+            config.validate()
+            steps_per_pass = (grids + config.grids_per_update - 1) // config.grids_per_update
+            total_steps = steps_per_pass * config.total_passes
+            if payload["global_step"] > total_steps:
+                raise ValueError("checkpoint exceeds fixed budget")
+            assessment_eligible = (
+                payload["global_step"] == total_steps and config.total_passes == 20
+            )
     return model, {
+        "assessment_eligible": assessment_eligible,
         "run_id": identity(payload["binding"]),
         "backbone_kind": kind,
         "checkpoint_sha256": meta["sha256"],
@@ -184,6 +209,8 @@ def command_fit(args):
     if config.image_size != backbone.bt_config.image_size:
         raise ValueError("readout/backbone geometry mismatch")
     model = build_readout(backbone, config)
+    from bullet_time.evaluation.access import prediction_access, prediction_ids
+
     output = new_output(args.output)
     try:
         report = fit(model, inputs, targets, config)
@@ -199,16 +226,26 @@ def command_fit(args):
             "model": model.state_dict(),
             "fit_sha256": digest((output / "fit.json").read_bytes()),
             "actual_label_budget": report["train_episodes"],
+            "allowed_prediction_splits": prediction_access(config, source),
         }
         path = output / "readout.pt"
         with path.open("xb") as file:
             torch.save(state, file)
+        readout_sha256 = digest(path.read_bytes())
+        identifiers = prediction_ids(config, source, readout_sha256)
         atomic_json(
             str(path) + ".json",
-            {"sha256": digest(path.read_bytes()), "model_sha256": model_identity(model)},
+            {
+                "sha256": readout_sha256,
+                "model_sha256": model_identity(model),
+                "prediction_identity": identifiers,
+                "allowed_prediction_splits": state["allowed_prediction_splits"],
+            },
         )
         return {
             "status": "fitted_development_only",
+            "prediction_identity": identifiers,
+            "allowed_prediction_splits": state["allowed_prediction_splits"],
             "report": str((output / "fit.json").resolve()),
             "checkpoint": str(path.resolve()),
         }
@@ -232,7 +269,17 @@ def command_predict(args):
     state = torch.load(path, map_location="cpu", weights_only=True)
     if state["schema_version"] != "bullet-time.readout.v1":
         raise ValueError("unknown readout checkpoint")
-    config = replace(ReadoutConfig(**state["readout_config"]), device=args.device)
+    from bullet_time.evaluation.access import prediction_access, prediction_ids
+
+    saved_config = ReadoutConfig(**state["readout_config"])
+    saved_config.validate()
+    allowed = prediction_access(saved_config, state["backbone_source"])
+    if state.get("allowed_prediction_splits") != allowed or args.split not in allowed:
+        raise ValueError("checkpoint is not eligible for the requested prediction split")
+    identifiers = prediction_ids(saved_config, state["backbone_source"], meta["sha256"])
+    if meta.get("prediction_identity") != identifiers:
+        raise ValueError("prediction identity differs from fitted checkpoint")
+    config = replace(saved_config, device=args.device)
     from bullet_time.models.references import rebuild_backbone
 
     backbone = rebuild_backbone(
@@ -257,8 +304,8 @@ def command_predict(args):
     for e in selected:
         row = by_key[e.key]
         if (
-            row["run_id"] != state["backbone_source"]["run_id"]
-            or row["checkpoint_id"] != state["backbone_source"]["checkpoint_sha256"]
+            row["run_id"] != identifiers["run_id"]
+            or row["checkpoint_id"] != identifiers["checkpoint_id"]
             or (row["label_budget"] != state["actual_label_budget"])
         ):
             raise ValueError(
@@ -292,6 +339,9 @@ def command_predict(args):
             "image_manifest_sha256": inputs.store.manifest_sha256,
             "fit_sha256": state["fit_sha256"],
             "backbone_source": state["backbone_source"],
+            "prediction_identity": identifiers,
+            "readout_config": state["readout_config"],
+            "allowed_prediction_splits": allowed,
             "classes": config.classes,
             "split": args.split,
         },

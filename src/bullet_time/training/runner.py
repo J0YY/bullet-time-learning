@@ -147,6 +147,7 @@ class Runner:
             "model": asdict(model_config),
             "training": asdict(train_config),
             "corpus_sha256": corpus.manifest_sha256,
+            "corpus_grids": len(corpus.grids),
             "source_sha256": code_identity(),
             "torch_version": str(torch.__version__),
             "numpy_version": __import__("numpy").__version__,

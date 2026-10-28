@@ -22,7 +22,11 @@ def test_all_eight_actual_updates_have_equal_pixels_targets_masks_and_budgets(tm
 
 
 def test_admission_rejects_wrong_scope_hash_corpus_and_caps(tmp_path):
-    corpus = SimpleNamespace(manifest_sha256="a" * 64, grids=range(1000), image_size=224)
+    corpus = SimpleNamespace(
+        manifest_sha256="a" * 64,
+        grids=[SimpleNamespace(scene_family="projectile_arena") for _ in range(1000)],
+        image_size=224,
+    )
     model = ModelConfig()
     config = TrainConfig()
     evidence = []

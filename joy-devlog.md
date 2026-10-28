@@ -259,3 +259,22 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   checks pass. Original/current SPEC and Sudarshan log are unchanged from baseline.
   Independent cumulative review starts next against `c10b678`; no collaborator
   acceptance or empirical gate claimed.
+
+### 2026-10-28 EDT — Independent review round 1 and corrections
+
+- **Review:** Separate `codex review --base _review-loop-baseline` against cumulative
+  baseline `c10b678`, head `1e5fa94`; reviewer independently ran all 34 tests. Two
+  correctness findings: supervised modes shared prediction IDs, and the prediction
+  CLI did not enforce the plan's development-only checkpoint restrictions.
+- **Fixes:** Diagnostic run IDs bind full mode/config and checkpoint IDs bind fitted
+  weights. Readout checkpoints preserve split eligibility, checked before input
+  access. Backbone grid count/progress establishes completed versus early training;
+  unknown progress fails closed. Added explicit fit-side identity mappings and
+  pipeline tests. Also require the selected arena family for real pilot admission.
+- **Verification:** 40 tests pass (43.74 s), including actual sequence/final diagnostic
+  fit/export, distinct IDs for all seven modes, and SSv2/early assessment rejection
+  before any model/input load. Static checks, interface hash freshness and scaffold
+  pass. Next: cumulative re-review, publication and final clean-checkout/CI checks.
+- **Earlier publication:** `1e5fa94` and its two preceding implementation commits
+  pushed normally; Linux CI `40775503217` passed and a fresh GitHub clone matched
+  all 83 tracked files and passed all 34 pre-fix tests. Original SPEC/log unchanged.

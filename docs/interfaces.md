@@ -308,9 +308,21 @@ The consumer verifies the partition hash, disjoint/nested inventories and relate
 group integrity. Source partition metadata and official-training-only access remain
 S-owned validation responsibilities.
 
-For CLI prediction inventories, `run_id` is the actual backbone binding SHA-256 and
-`checkpoint_id` is the backbone checkpoint file SHA-256. Human plan slot names need
+For frozen-readout prediction inventories, `run_id` is the actual backbone binding
+SHA-256 and `checkpoint_id` is its checkpoint file SHA-256. Supervised diagnostics
+use a distinct `run_id` hashing the parent backbone and full diagnostic configuration
+(including mode), and `checkpoint_id` is the **fitted diagnostic** file SHA-256.
+Read the explicit `prediction_identity` returned by fit and saved in its sidecar;
+never substitute the common DINO initialization IDs. Human plan slot names need
 an explicit mapping to these hashes. `label_budget` is the actual training episode/
 video count and `readout_seed` must match the fitted head. The checkpoint carries
 its source and fit hash. Inference rejects conflicting metadata; S4 independently
 checks the label/group joins. See [operator guide](joy-handoff.md) for examples.
+
+Readout checkpoints preserve `allowed_prediction_splits`. Every SSv2 pilot head
+and every incomplete/early learned checkpoint is development-only. A completed
+20-pass learned backbone or an untrained/external reference can support game
+assessment. The predictor checks eligibility before loading any requested input;
+unknown/missing progress fails closed. This is additional to S-owned split/lineage
+admission and the inaccessible final-test mount. Old synthetic readout checkpoints
+without this policy must be regenerated.

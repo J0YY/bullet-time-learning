@@ -147,3 +147,19 @@ S2/S3/S4 artifacts and appropriate resources. See the implementation checklist.
 - **External/runtime:** DINO source/weight hashes are committed in models/pins; PyAV
   16.1.0 decodes ordered RGB with recorded FFmpeg versions. CPU source/model/decoder
   tests do not validate selected CUDA hardware or any real data gate.
+
+### 2026-10-28 EDT — Preserve diagnostic identity and assessment eligibility
+
+- **Authority:** independent implementation review under the requested check/fix
+  workflow. SPEC science and original import remain unchanged.
+- **Correction:** supervised sequence/final/bag/current diagnostics share a parent
+  initialization but must not share prediction keys. Their run IDs now bind the
+  full diagnostic configuration/mode; checkpoint IDs identify fitted weights.
+  Frozen-readout identity keeps its parent/checkpoint convention. Explicit mapping
+  is exported for S4; no real producer/analysis artifacts require migration.
+- **Access:** readout checkpoints preserve allowed prediction splits. All SSv2 and
+  early/incomplete learned models are dev-only; game assessment permits completed
+  20-pass learned backbones and declared untrained/external references. Enforcement
+  runs before input loading. Unknown progress or missing policy fails closed.
+- **Additional guard:** real pilot admission rejects non-arena/mixed-family corpora.
+  Receipt provenance still cannot substitute for a substantive scientific audit.
