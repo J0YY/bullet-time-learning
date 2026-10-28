@@ -80,6 +80,7 @@ class Batch:
     patch_size: int
     tubelet: int
     normalized_targets: bool
+    native_crops: dict | None = None
 
     @property
     def labels(self):
@@ -93,10 +94,19 @@ def collate(grid, transformed, schedule, clip_indices, *, patch_size, mask_ratio
         raise ValueError('unknown recipe')
     if not clip_indices or any(type(i) is not int or not 0<=i<16 for i in clip_indices):
         raise ValueError('invalid clip indices')
-    clips=[];ids=[];masks=[]
+    clips=[];ids=[];masks=[];native_crops={}
     for i in clip_indices:
         cells=schedule.clips[i]
-        clips.append(torch.stack([transformed[t,c] for t,c in cells],1))
+        clip=torch.stack([transformed[t,c] for t,c in cells],1)
+        if recipe=='native':
+            from PIL import Image
+            from bullet_time.models.videomae_upstream.native_crop import GroupMultiScaleCrop
+            cropper=GroupMultiScaleCrop(transformed.shape[-1],rng=random.Random(seed_for(seed,'native-crop',grid.grid_id,schedule.pass_index,i)))
+            images=[Image.fromarray((clip[:,f].permute(1,2,0)*255).round().to(torch.uint8).numpy()) for f in range(16)]
+            images,_=cropper((images,None))
+            clip=torch.from_numpy(np.stack([np.array(image) for image in images])).permute(3,0,1,2).float()/255
+            native_crops[i]=list(cropper.last_crop)
+        clips.append(clip)
         ids.append(tuple(grid.cell(t,c).image_id for t,c in cells))
         mask=spatial_mask(transformed.shape[-1],patch_size,mask_ratio,seed,grid.grid_id,
                           schedule.pass_index,i if recipe=='native' else None)
@@ -105,7 +115,7 @@ def collate(grid, transformed, schedule, clip_indices, *, patch_size, mask_ratio
     mean=raw.new_tensor(MEAN)[None,:,None,None,None]
     std=raw.new_tensor(STD)[None,:,None,None,None]
     return Batch((raw-mean)/std,torch.stack(masks),patchify(raw,patch_size,tubelet,recipe=='native'),
-                 tuple(ids),raw,patch_size,tubelet,recipe=='native')
+                 tuple(ids),raw,patch_size,tubelet,recipe=='native',native_crops)
 
 
 def tensor_hash(tensor):
@@ -138,3 +148,13 @@ def audit_batch(batch):
                 'target_components_sha256':tensor_hash(targets[clip,frame//u,:,frame%u][mask]),
             }
     return records
+
+
+def collate_images(grid,transformed,indices,*,patch_size,mask_ratio,seed,pass_index):
+    if not indices or any(type(i) is not int or not 0<=i<256 for i in indices):
+        raise ValueError('invalid image indices')
+    raw=torch.stack([transformed[i//16,i%16][:,None] for i in indices])
+    ids=tuple((grid.cells[i].image_id,) for i in indices)
+    masks=torch.stack([spatial_mask(raw.shape[-1],patch_size,mask_ratio,seed,grid.cells[i].image_id,pass_index) for i in indices])
+    mean=raw.new_tensor(MEAN)[None,:,None,None,None];std=raw.new_tensor(STD)[None,:,None,None,None]
+    return Batch((raw-mean)/std,masks,patchify(raw,patch_size,tubelet=1),ids,raw,patch_size,1,False)

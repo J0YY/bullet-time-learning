@@ -201,3 +201,28 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   mixture prefixes. No game data, research result or independent review claimed.
 - **Next:** Complete-grid runner/resume, executable model configs, readout/input/
   export paths, then cumulative independent review under the review-loop skill.
+
+### 2026-10-28 EDT — Implement model updates, resume and readout boundaries
+
+- **Work:** Released small VideoMAE wrapper; controlled/native crop-mask-target
+  paths, framewise image-MAE reference, weighted complete-grid/tail updates, CPU/
+  CUDA deterministic settings, hash-bound checkpoints and strict resume. Added
+  evaluation v2 input/reference access, frozen attention heads, seven diagnostic
+  modes, train/dev-only fitting, explicit prediction coverage, SSv2 deterministic
+  split/frame adapters, pilot inventory/resource extrapolation and executable CLI.
+- **Research checks:** Native targets remain deliberately contextual across paired
+  frames; controlled target audit compares actual per-source-image components.
+  Bag controls encode images independently before mean pooling; final-frame controls
+  enforce access at assembler and model. Tracking auxiliary occluded targets avoid
+  all-positive visibility training; primary scoring remains three reappearances.
+- **Validation:** 21 tests passed (20.85 s), including full 224 small-model forward,
+  gradient/microbatch invariance, retained tail, exact dropout resume, changed-input
+  rejection, framewise exposure, frozen-state preservation, withheld-split rejection,
+  incomplete prediction coverage, SSv2 partition isolation and an 8-grid CLI update/
+  checkpoint/resume. An initial hidden-temp-filename torch.save failure was fixed
+  using a file handle and verified by the resume tests.
+- **Limits / next:** No real renderer or pilot experiment. Finish strict label-
+  budget/horizon selection, external model/decoder path, CLI readout integration,
+  handoff/CI and cumulative independent review before declaring Joy unblocked work
+  exhausted. Data/runtime receipts bind evidence but are not scientific proof by
+  themselves; source reports need actual H1–H4 validation.

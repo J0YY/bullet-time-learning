@@ -1,0 +1,1 @@
+{"image_size":224,"patch_size":16,"encoder_width":384,"encoder_depth":12,"encoder_heads":6,"decoder_width":192,"decoder_depth":4,"decoder_heads":3,"tubelet":2,"frames":16,"dropout":0.0,"drop_path":0.0}

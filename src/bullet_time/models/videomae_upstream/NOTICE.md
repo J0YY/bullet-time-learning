@@ -11,3 +11,7 @@ trailing whitespace. Model computation is unchanged. The surrounding controlled
 runner, validation and readouts are separate project code. These files and their
 adaptations retain the upstream noncommercial restrictions; no blanket repository
 license supersedes them. Source SHA-256 identities are recorded in upstream.json.
+
+Also includes GroupMultiScaleCrop extracted from transforms.py at the same revision.
+Changes: inject an isolated RNG and record the sampled crop; image computation is
+unchanged. The same attribution and license apply.

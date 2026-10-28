@@ -98,3 +98,36 @@ prototypes are separately counted diagnostics, never resumed as pilot slots.
 Measurement-set work may overlap this screen. The invariant bag diagnostic must
 encode frames independently with no temporal context/positions before mean pooling;
 averaging contextual video features would leak order and invalidate the control.
+
+## 2026-10-28 — Joy implementation controls and evaluation v2
+
+**Authority:** active user request to implement Joy's part, rigorously check research
+and implementation, and continue until genuinely dependent on Sudarshan. Base
+`c10b678`; original SPEC unchanged. Work remains in Joy-owned paths.
+
+- Use isolated Python 3.11 / torch 2.9.1 and pinned VideoMAE source
+  `14ef8d856287c94ef1f985fe30f958eb4ec2c55d`, retaining attribution/noncommercial
+  license. The wrapper uses the released small encoder/192-wide four-layer decoder.
+- Keep grid order fixed inside each four-pass cycle, shuffle between cycles, and
+  assign mixture phases by each family's rank. This gives exact four-pass per-grid
+  counts and balanced prefixes throughout training, with common update membership.
+- Initial controlled pilot has no crop/color jitter. Native diagnostic uses the
+  released per-clip multiscale crop, independent tube masks and normalized targets.
+  Both keep the explicit pilot optimizer; this is a small-model recipe diagnostic,
+  not a reproduction of published large-scale accuracy. Initial development LR
+  7.5e-5, warmup 2 passes, AdamW betas .9/.95, decay .05, float32 are candidate
+  runtime choices to test on real development data, not a main-study freeze.
+- Evaluation input v2 adds explicit frame indices, fixed reference index/identity
+  and query ID so consumer causality is checkable. No existing producer artifacts
+  migrate silently. Tracking auxiliary occluded train/dev queries prevent training
+  visibility only on reappearance positives; the primary three-frame endpoint and
+  episode/fit budgets stay unchanged. The first occluded frame is the minimal
+  recommended auxiliary query; S3 validates actual visibility and simulator time.
+- Actual labels, pair/physics provenance and expected prediction keys stay separate
+  from model features. Per-episode readout weighting avoids giving longer tracking
+  episodes extra loss weight. Frozen backbone hashes and explicit missing outputs
+  are checked. Final-test or official-validation data cannot enter pilot fitting.
+
+**Evidence limits:** synthetic byte/tensor/model tests, not real rendered-data,
+learning, transfer or statistical-power evidence. Empirical H1–H4 still require
+S2/S3/S4 artifacts and appropriate resources. See the implementation checklist.

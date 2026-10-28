@@ -1,0 +1,1 @@
+{"condition":"view","seed":17,"recipe":"controlled","total_passes":20,"grids_per_update":8,"microbatch_clips":2,"mask_ratio":0.9,"learning_rate":0.000075,"warmup_learning_rate":0.0000005,"minimum_learning_rate":0.000005,"warmup_passes":2,"weight_decay":0.05,"beta1":0.9,"beta2":0.95,"epsilon":1e-8,"grad_clip":0.0,"crop_fraction":1.0,"color_jitter":0.0,"device":"cpu"}

@@ -1,7 +1,8 @@
-# Shared interfaces — bullet-time working v1
+# Shared interfaces — versioned pilot contracts
 
-**2026-10-28 status:** written contracts only. No schema, producer, loader, trainer,
-or analysis implementation has passed integration. Use synthetic fixtures first.
+**2026-10-28 status:** Joy's consumer, runner and readouts are implemented and
+tested on synthetic fixtures. No real producer/consumer integration or independent
+analysis validation has passed. Producer-side schema/data remain pending.
 Sudarshan owns canonical data schema; Joy owns run/prediction exports and this
 document. Record actual validation separately for each side.
 
@@ -198,14 +199,9 @@ admission validator checks private split lineage before releasing that manifest.
 Store training/dev labels separately from pilot assessment and eventual final test;
 mount only the permitted split for each job. Enforcement must be tested when built.
 
-Evaluation input JSONL contains `schema_version: bullet-time.evaluation.v1`,
-`episode_id`, `task_id`, `split`, ordered `observed_image_ids`, `query_points`,
-`reference_image_id`/`reference_point` for tracking, and `prediction_frame` or
-`horizon_seconds`. Query coordinates are normalized as SPEC §7 defines. Labels,
-pair/group IDs, continuation/cadence validation and target hashes are joined only
-by the evaluation/audit process. The model receives allowed RGB/queries only;
-metadata is never a feature. Forecast tasks are `collision` and `order`; tracking
-uses its declared current-inclusive windows. External video IDs use `ssv2` task ID.
+Evaluation now uses `bullet-time.evaluation.v2`, detailed in the clarification
+below. The earlier unimplemented v1 outline is superseded because IDs alone cannot
+verify causal windows. Labels and hidden state remain separate from inputs.
 
 Prediction handoffs use `predictions.csv` with a header and one row per unique key
 from §3; no implicit row order. Add explicit `split`, `scene_family`, `pair_group_id`,
@@ -235,11 +231,63 @@ conjunction. These fixtures are implementation tasks, not artifacts already buil
 
 | Contract | Producer implemented | Consumer validated | Independent review |
 | --- | --- | --- | --- |
-| Grid/evaluation v1 | No | No | Not performed |
-| Exposure/update v1 | No | No | Not performed |
-| Run/prediction v1 | No | No | Not performed |
+| Grid v1 / evaluation v2 | No (Sudarshan) | Joy fixtures only; real data pending | Not performed |
+| Exposure/update v1 | Joy fixtures/model updates | Independent S checker pending | Not performed |
+| Run/prediction v1 | Joy fixture exports | S consumer pending | Not performed |
 | Analysis v1 | No | No | Not performed |
 
 Breaking changes receive a new version and explicit migration. Compatible
 clarifications still need log and contract updates. Replace this table with actual
 commit/hash-bound evidence as implementation progresses.
+
+## Evaluation v2 consumer clarification — 2026-10-28
+
+Joy's implementation found that v1's ordered image IDs alone cannot verify a causal
+window. The implemented consumer therefore uses `bullet-time.evaluation.v2` for
+evaluation inputs. Grid, exposure and run/prediction versions remain v1. No S3/v1
+data producer existed at this change; migrate by adding the explicit fields below,
+not by assuming time from filenames. No producer validation is claimed.
+
+- Common required fields: `schema_version`, `episode_id`, `query_id`, `task_id`,
+  `split` (`train`, `dev`, `assessment`), `observed_image_ids` (16),
+  `observed_frame_indices` (16), `query_points`.
+- Collision/order: two query points and `horizon_seconds` (0.25/0.5/1.0). Game frame
+  indices must be consecutive at the selected 16 Hz cadence. No timing metadata
+  is passed as a feature. SSv2 uses zero query points and ordered sampled indices.
+- Tracking: no generic query points; add `prediction_frame`, `reference_frame`,
+  `reference_image_id`, `reference_point`. The reference must match the declared
+  past observation, remain in every window, and be fixed across the event's three
+  primary predictions. Current frame equals the final observed index.
+- Tracking may add `prediction_role` (`primary` by default, or `auxiliary`). Exactly
+  three primary reappearance predictions are required. Include occluded auxiliary
+  training/development queries with the same permitted reference/window so visibility
+  does not train on positive examples alone. The recommended minimal addition is
+  the first occluded frame per episode; this does not add episodes or change the
+  primary three-frame score. Report auxiliary results separately. Fitting rejects
+  a tracking split with only one visibility class. S3 owns physical visibility and
+  first-reappearance correctness; metadata checks alone cannot establish those.
+
+`images.jsonl` is a separate RGB catalog: `image_id`, `rgb_path`, `file_sha256`,
+`rgb_sha256`, `height`, `width`, `channels`. Same lossless RGB/hash/path conventions
+as grids. Evaluation pixels are letterboxed deterministically; queries use the
+exact transformed coordinate map. Game labels must use those resulting coordinates
+and the declared 224-pixel bounding-box diagonal convention.
+
+The consumer's private label format is `bullet-time.labels.v1`: `schema_version`,
+`task_id`, `episode_id`, `query_id`, `horizon_or_frame` (canonical string), `split`,
+`target`. Targets are `{contact: 0|1}`, `{class_id: integer}`, or for tracking
+`{x, y, visible: 0|1, bbox_diagonal_pixels, prediction_role}`. These labels are never
+forwarded as model inputs. Source/pair/physics annotations remain a separate S3
+admission/analysis export. `horizon_or_frame` is `"0.5"` etc., tracking frame string,
+or `"clip"` for SSv2. Hash the canonical full label record for prediction provenance.
+
+Prediction CSV adds the compatible `prediction_role` column, allowing S4 to keep
+auxiliary visibility queries out of the three-frame primary score. An independent
+expected-key inventory is mandatory; missing predictions become explicit missing
+rows and cannot produce a complete gate. Assessment inference uses a label-free
+expected inventory whose target hashes were prepared by the authorized auditor.
+
+Consumer implementations: [inputs](../src/bullet_time/evaluation/inputs.py),
+[targets/fitting](../src/bullet_time/evaluation/training.py),
+[exports](../src/bullet_time/evaluation/export.py). Their synthetic tests do not
+constitute producer integration, a benchmark, or independent scientific review.

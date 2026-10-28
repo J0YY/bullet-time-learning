@@ -9,6 +9,12 @@
     "modeling_finetune.py": {
       "upstream_sha256": "ce9a11ff05c7a1b5085addf6c73b71ffb68933564164f7b250dedad91f6e29b8",
       "vendored_sha256": "09e2545ff1a6a685893df1c91dab768fc55c927105957881b97ea0cc1bbb94b7"
+    },
+    "native_crop.py": {
+      "upstream_path": "transforms.py",
+      "extracted_class": "GroupMultiScaleCrop",
+      "upstream_sha256": "f7f37f8e628bb65c08d9c6bf1f9f88dcc4c13557613895cb2db401a51fae5d54",
+      "vendored_sha256": "3e71b06c2c1a22b06a7288a69f8eeed332bcb9e1aaaec49448cbc0e93cf3db4c"
     }
   }
 }

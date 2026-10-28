@@ -11,8 +11,11 @@ request controls scope. Historical log entries do not override newer decisions.
 
 **Stage:** Joy implementation started; producer/data and research validation pending.
 The original import remains unchanged in Git at `13e951d:SPEC.md`; current SPEC
-adopts the user-requested audit fixes and pilot defaults. No renderer, grids, loader, training, evaluation,
-research analysis pipeline, resource allocation, empirical results, or protocol freeze exist yet.
+adopts the user-requested audit fixes and pilot defaults. Joy's RGB consumer,
+scheduler/collator audit, VideoMAE/image-MAE runner, resumable checkpoints and
+readout/input/export components now run on synthetic fixtures. Renderer/game grids,
+real producer integration, independent analysis, resource allocation, empirical
+research results and final protocol freeze remain pending.
 
 Joy owns training/loading/readouts and integration; Sudarshan owns game/data,
 rendering, splits, and independent analysis. The detailed path map is the working
@@ -54,11 +57,11 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | J1 | Joy | Consumer fixtures, all schedules/RNG/update tests, JSON adapter and exports | In progress | Working v1 contracts; no S task or schema import needed |
 | S1 | Sudarshan | Producer schema/fixtures, grouped splits, renderer design | Ready, not started | Working v1 contracts; own environment, no Joy package dependency |
 | S2 | Sudarshan | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Not started | S1 + renderer/runtime/resources; deliver each drop immediately |
-| J2 | Joy | Actual-loader/update audit; 100-grid tail check | Not started | J1 + S2 first 8 grids; runner/reference work can continue before delivery |
+| J2 | Joy | Actual-loader/update audit; 100-grid tail check | Fixture/model-update path tested; real data pending | J1 + S2 first 8 grids; runner/reference work can continue before delivery |
 | S3 | Sudarshan | Collision/order/tracking sets and oracle/input checks | Not started | S1 + working scene; does not wait for complete S2 corpus |
-| J3 | Joy | Causal heads, seven supervised controls, external adapter | Ready for fixtures; real tests pending | Working contracts now; S3 sets for H3 acceptance |
+| J3 | Joy | Causal heads, seven supervised controls, external adapter | Consumer/readout tests passing; integration work ongoing | Working contracts now; S3 sets for H3 acceptance |
 | S4 | Sudarshan | Own synthetic prediction fixtures, independent metrics/statistics | Ready, not started | Working run/prediction v1; first real export later, no need to wait for all runs |
-| J4 | Joy | Resource/runtime ledger, early screen and bounded pilot | Not started | H1/H2 + complete 1,000-grid bundle + resources for screen; H3 + early stability for expansion |
+| J4 | Joy | Resource/runtime ledger, early screen and bounded pilot | Runner, candidate configs and slot enumeration implemented; execution not admitted | H1/H2 + complete 1,000-grid bundle + resources for screen; H3 + early stability for expansion |
 
 ## Immediate handoff
 
