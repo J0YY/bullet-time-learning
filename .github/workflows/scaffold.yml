@@ -20,5 +20,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: python3 scripts/check_scaffold.py
+      - name: Check proposal grid identities and workload arithmetic
+        run: python3 scripts/audit_spec.py
       - name: Check all tracked whitespace
         run: git diff --check "$(git hash-object -t tree /dev/null)" HEAD

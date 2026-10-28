@@ -29,3 +29,28 @@ reviews when requested; keep actual evidence and open choices distinct.
 
 Validation commands, results, source identity, and review limits belong in the
 [setup audit](reports/setup-audit.md).
+
+## 2026-10-28 — User-requested CVPR feasibility and idea-quality audit
+
+See the [full audit](reports/cvpr-feasibility-audit-20261028.md) for sources,
+reasoning, verified arithmetic, and recommended work order. This is Joy's agent's
+self-review, not Sudarshan's acknowledgment or an independent reviewer verdict.
+
+- **Checked:** original SPEC byte identity; collaboration ownership/instructions;
+  cited closest-work distinctions; 163 index partitions; full-run/storage/compute
+  arithmetic; exact single-contrast Gaussian TOST power. No empirical validation.
+- **New gap:** BulletTime (CVPR 2026) is missing from related work and overlaps in
+  naming; FL4N adds closely adjacent 4D representation/probe work. The exact-image
+  intervention still appears distinct within the papers inspected.
+- **Clarify:** 30/70 components support equivalence to View, not all-pairs
+  interchangeability at the same margin. Draft interfaces now make that explicit.
+- **Resolve before execution:** fixed forecast cadence/allowed inputs, causal
+  tracking window semantics, spatial input adapter, and SSv2 development/final
+  partition or verified evaluation service. Official test labels are withheld.
+- **Recommendation:** pilot first; prove controlled learning, visual solvability,
+  grouping sensitivity and useful frozen transfer before expanding or making a
+  broad null claim. Measure joint power and test-sample precision, not just seed SD.
+- **Calendar assessment:** full proposed study is not a credible November 16,
+  2026 CVPR 2027 commitment from the current scaffold. No submission decision made.
+- **Preserved:** original SPEC unchanged; no new scientific freeze, numerical gate,
+  resource commitment, dataset split, title, or experiment launch.

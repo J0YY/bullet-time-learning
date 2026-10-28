@@ -144,3 +144,10 @@ spec bytes in Git, current spec drift provenance, and artifact ignore behavior.
 It uses no model/network calls. [.github/workflows/scaffold.yml](.github/workflows/scaffold.yml)
 runs it and whitespace checks on pushes to main and pull requests. This is repository
 maintenance CI, not a renderer, GPU, statistical, or independent scientific review.
+
+[scripts/audit_spec.py](scripts/audit_spec.py) additionally enumerates proposed grid
+partitions and calculates workload/contrast counts. CI runs its standard-library
+mode. Optional `--power` requires locally available SciPy and reproduces the
+Gaussian TOST planning examples; it is not a measured project power estimate.
+See the [feasibility audit](reports/cvpr-feasibility-audit-20261028.md) before
+resolving research input/partition choices or expanding the study.

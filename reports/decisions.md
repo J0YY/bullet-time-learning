@@ -27,3 +27,15 @@ affected SPEC sections/contracts/configs, supporting evidence, and implications
 for existing outputs. Freeze records bind exact source/config/split/analysis hashes,
 endpoints, margins, sample size/stopping rule, and test-access timing. Deviations
 after freeze identify affected claims and any need for fresh confirmation data.
+
+## 2026-10-28 — Record requested feasibility review without freezing new choices
+
+**Authority:** user requested double-checking the full setup and original spec for
+CVPR feasibility and idea quality. [Audit](cvpr-feasibility-audit-20261028.md).
+
+Recorded primary-source findings and reproducible arithmetic; clarified that the
+existing 30/70 contrasts are View-relative and added implementation choices to the
+draft interface checklist. The scientific specification remains byte-identical to
+its original import. Proposed title, evaluation partition/cadence, competence
+thresholds, sample size, compute, and venue decisions remain unselected. A review
+recommendation is not a user-approved protocol change or submission commitment.

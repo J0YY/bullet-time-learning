@@ -11,7 +11,7 @@ request controls scope. Historical log entries do not override newer decisions.
 
 **Stage:** collaboration scaffold. The complete research specification has been
 read and imported unchanged. No renderer, grids, loader, training, evaluation,
-analysis, resource allocation, results, or protocol freeze exist yet.
+research analysis pipeline, resource allocation, empirical results, or protocol freeze exist yet.
 
 Joy owns training/loading/readouts and integration; Sudarshan owns game/data,
 rendering, splits, and independent analysis. The detailed path map is the working
@@ -48,6 +48,7 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | ID | Owner | Scope | Status | Base / dependency |
 | --- | --- | --- | --- | --- |
 | SETUP | Joy | Spec import, collaboration docs, checker/CI, Git publication | Complete; local/clone/CI checks passed | Import `13e951d`; workflow `8d2b61d`; verified implementation `7bfeb73`; see setup audit |
+| AUDIT | Joy | User-requested full scaffold/spec and CVPR feasibility/quality review | Review complete; publication checks pending | Base `d9ec3a8`; audit report and reproducible mathematical checks |
 | J1 | Joy | Sequence loader and audit foundation on fixtures | Ready, not started | Draft interfaces; coordinate schema with S1 |
 | S1 | Sudarshan | Data schema, fixtures, split validator, renderer design | Ready, not started | Draft interfaces |
 | S2 | Sudarshan | First scene and 100 rendered grids | Not started | S1; renderer/runtime/resources |
@@ -58,9 +59,17 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 
 ## Immediate handoff
 
+Read the [CVPR feasibility audit](reports/cvpr-feasibility-audit-20261028.md).
+The recommendation is a bounded validity pilot; the full study is not a credible
+CVPR 2027 commitment from today's scaffold. Newly flagged: BulletTime/FL4N related
+work, View-relative versus all-pairs equivalence, SSv2 evaluation access/partition,
+and forecast/tracking input details. Arithmetic and TOST planning examples check
+out. Original SPEC, assigned owners, and experiment status are unchanged. No
+title, split, compute budget, or submission decision has been adopted.
+
 Collaboration scaffold is published on GitHub `main`. A fresh remote clone matched
 all 18 tracked file bytes and passed the checker; GitHub CI passed for `7bfeb73`.
-Final documentation updates are validated again before the setup handoff. See the
+Final setup commit `d9ec3a8` also passed CI and all remote blob checks. See the
 [setup audit](reports/setup-audit.md) for evidence and limits.
 
 Joy can start J1; Sudarshan can start S1 and record his own environment. The

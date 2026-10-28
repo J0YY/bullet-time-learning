@@ -84,3 +84,30 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   Research implementation/compute and Sudarshan's invitation acceptance remain
   unverified. Final evidence/status documentation will be committed and its exact
   remote/CI state checked before responding to the user.
+
+### 2026-10-28 EDT — Audit original specification and CVPR feasibility
+
+- **Authority:** User requested a full double-check of setup and original spec for
+  CVPR feasibility/idea quality; existing incremental commit/publication instruction
+  remains in effect. Registered AUDIT against `d9ec3a8`; fetched with zero divergence.
+- **Work:** Re-read all scaffold files and SPEC; checked primary papers, official
+  conference/dataset pages, VideoMAE target code and renderer documentation. Found
+  missing BulletTime/FL4N comparisons, reference-relative claim wording, SSv2
+  partition/access and evaluation timing/input gaps. Report separates new findings
+  from already acknowledged learning/transfer/power risks.
+- **Commands:** `python3 scripts/check_scaffold.py`; `python3 scripts/audit_spec.py
+  --power > reports/spec-math-audit.json`. Local Python 3.14.3 / SciPy 1.17.1 were
+  already available; no install or research compute.
+- **Result:** 163 partition checks and 16 four-pass assignments passed; storage,
+  run/compute counts and approximate single-contrast power examples verified.
+  This is mathematical checking, not rendered-data or model evidence.
+- **Source-access limits:** 2027 reviewer-guideline URL inaccessible; use official
+  2027 CFP/dates and label 2026 guidance as precedent. Publisher TOST URL timed out;
+  checked the same primary article via PMC. Search is bounded, not proof of novelty.
+- **Artifacts:** Feasibility report, numerical JSON and audit script; source/contract
+  clarifications and review pointers in shared docs. Original SPEC unchanged;
+  Sudarshan's log untouched. No independent reviewer acknowledgment claimed.
+- **Recommendation:** bounded pilot, with sensitive measurements/useful frozen
+  learning and transfer before expansion; full unbuilt study not a credible
+  imminent CVPR 2027 commitment. No protocol/venue/compute choice adopted.
+- **Next:** Validate final changes, commit/publish and check fresh checkout and CI.

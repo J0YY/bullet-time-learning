@@ -11,6 +11,11 @@ training runner, experimental results, validated compute environment, or frozen
 protocol exist yet. The first research deliverable is a rendered grid, an audited
 training update, and a solvable visual history test—not a full-study launch.
 
+The [October 28 feasibility audit](reports/cvpr-feasibility-audit-20261028.md)
+supports a bounded pilot, identifies missing related work and evaluation details,
+and advises against promising the full study for the imminent CVPR 2027 deadline.
+The original specification remains unchanged; recommendations are not a protocol freeze.
+
 ## Start here
 
 1. Read [AGENTS.md](AGENTS.md) and [SHARED_CONTEXT.md](SHARED_CONTEXT.md).

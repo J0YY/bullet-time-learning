@@ -13,6 +13,8 @@ Instructions for coding agents working with Joy Yang and Sudarshan in this repo.
 3. Read the full [SPEC.md](SPEC.md) before first substantive work, then the relevant
    sections on later tasks. Check [ownership](division-of-labor.md),
    [interfaces](docs/interfaces.md), and [RUNBOOK.md](RUNBOOK.md).
+   Before research implementation, also read the [feasibility audit](reports/cvpr-feasibility-audit-20261028.md)
+   for unresolved input/split details and limits of the original claims.
 4. Inspect Git status, branch, remote, and incoming commits. Preserve other work.
    Register substantial tasks in shared context before editing shared interfaces.
 
@@ -100,6 +102,9 @@ Use SPEC §§4–8 and §§10–12 for details; these guardrails are not a subst
     component intervals are 90%, not simultaneous 95%. Handle individual/superiority
     multiplicity separately. Provisional margins and five seeds are not a freeze
     or power calculation. Do not add seeds until a desired conclusion appears.
+    These contrasts are relative to View; they do not establish all-pairs equivalence
+    at the same margin. Fix evaluation cadence and development/final dataset access
+    before using them in physical-horizon or external-transfer claims.
 11. Freeze protocol, splits, margins, readout budget, sample size/stopping rule, and
     analysis before final-test inspection. Keep test inaccessible to tuning code.
     Preserve paired episode/video groups in uncertainty estimates and report family

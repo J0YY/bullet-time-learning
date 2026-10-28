@@ -69,6 +69,11 @@ crop/color parameters, actual post-collator visible/target patch indices, raw pi
 target values for VideoMAE, and separate student/teacher exposure for V-JEPA.
 V-JEPA targets are contextual and do not receive an equality assertion.
 
+Compare exposure/masks in canonical `(image_id, spatial_patch)` coordinates after
+mapping clip/token positions back to source cells. Equal local token indices alone
+do not establish equal source-image masking after regrouping. For raw RGB targets,
+compare per-image components, not entire differently paired tubelet tensors.
+
 Update records bind the exact ordered grid set, microbatch contributions and loss
 denominators, optimizer/schedule/teacher step counters, and masks to one update ID.
 Initially eight complete grids yield 128 clips. Compare actual update boundaries,
@@ -124,6 +129,9 @@ objective, condition, pretraining seed, readout seed, corpus, and label budget.
   components pass; stronger all-family claim: all 70 pass. Component 90% intervals
   are not simultaneous 95% intervals. Individual/superiority claims use their
   prespecified correction. Failed validity gates constrain interpretation.
+- These 30/70 contrasts establish equivalence **to View**, not equivalence of
+  every pair of arms at the same margin. Keep claim text reference-relative.
+  An all-pairs design would require a separately declared analysis/power plan.
 - Power planning uses conservative pilot variability/correlation assumptions.
   Sample size or valid sequential stopping is fixed before test outcomes, never
   increased until equivalence passes. Keep planning simulations separate from data.
@@ -135,6 +143,22 @@ data, metric boundary cases, interval/margin boundaries, and conjunction failure
 Integration reproduces the actual delivered outputs, not only a producer's demo.
 
 ## Version and validation status
+
+### Choices to pin before research data or readout tuning
+
+The [2026-10-28 audit](../reports/cvpr-feasibility-audit-20261028.md) identified
+these unresolved details; recording them does not select a new scientific protocol:
+
+- Fix evaluation cadence for physical-second forecasts, or explicitly revise
+  permitted timing inputs. Variable pretraining cadence does not define evaluation.
+- Specify whether the causal tracking window includes current-frame RGB, reference
+  access, coordinate conventions, visibility threshold, and small-object handling.
+- Pin the single-image adapter for spatial evaluation of a video backbone.
+- Hash distinct external development/final-evaluation partitions. SSv2 official
+  test labels are withheld; choose a verified service or a clearly named reserved
+  official-validation protocol, without tuning on the final evaluation partition.
+- State reference-relative equivalence, plan individual/superiority comparisons,
+  and determine joint power and test-sample precision before final testing.
 
 | Contract | Producer implemented | Consumer validated | Independent review |
 | --- | --- | --- | --- |

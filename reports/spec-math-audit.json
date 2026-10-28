@@ -1,0 +1,67 @@
+{
+  "scope": "Proposal arithmetic and index audit only; no empirical research results",
+  "python_version": "3.14.3",
+  "spec_sha256": "e543446ddf6466e07cbf545a402092ebe2f5d6a6a43465472bd41c4e693fb9de",
+  "audit_script_sha256": "27b59478cc2f3796cfaf05c886bd9ab472b423777993ef856b34202b8afd68eb",
+  "grid": {
+    "valid_partition_checks": 163,
+    "four_pass_orientation_assignments": 16,
+    "scope": "Index identities only; no renderer/loader/masks/optimizer validation"
+  },
+  "workload": {
+    "full_images": 3072000,
+    "full_raw_rgb_decimal_GB": 462.422016,
+    "pilot_raw_rgb_decimal_GB": 38.535168,
+    "clips_per_full_pass": 192000,
+    "clips_per_run_20_passes": 3840000,
+    "main_runs_at_n5_n11_n36": [
+      80,
+      176,
+      576
+    ],
+    "main80_gpu_hours_at_100_clips_per_second": 853.3333333333334,
+    "main80_gpu_hours_at_20_clips_per_second": 4266.666666666667,
+    "render_hours_at_10_images_per_second": 85.33333333333333,
+    "render_hours_at_1_image_per_second": 853.3333333333334
+  },
+  "contrast_scope": {
+    "view_relative_primary": 30,
+    "view_relative_family_specific": 70,
+    "all_pairs_primary_if_requested": 90,
+    "all_pairs_family_specific_if_requested": 210,
+    "counterexample_pp": {
+      "view": 0,
+      "arm_a": -0.9,
+      "arm_b": 0.9,
+      "each_within_1_of_view": true,
+      "a_b_difference": 1.8
+    }
+  },
+  "tost_power": {
+    "scipy_version": "1.17.1",
+    "assumptions": "iid Gaussian paired run differences, true mean 0, margin +/-1 pp, alpha .05; one contrast only",
+    "single_contrast": [
+      {
+        "paired_sd_pp": 0.5,
+        "n5_power": 0.9499568524008981,
+        "first_n_at_least_80_percent": 4,
+        "power_at_that_n": 0.8277675700598068
+      },
+      {
+        "paired_sd_pp": 1,
+        "n5_power": 0.29385307227544644,
+        "first_n_at_least_80_percent": 11,
+        "power_at_that_n": 0.8489996576731001
+      },
+      {
+        "paired_sd_pp": 2,
+        "n5_power": 0.020276173634705952,
+        "first_n_at_least_80_percent": 36,
+        "power_at_that_n": 0.8051491016577426
+      }
+    ],
+    "hypothetical_independent_95_percent_components_all30": 0.21463876394293727,
+    "hypothetical_independent_95_percent_components_all70": 0.027583690436774964,
+    "note": "Actual contrasts share View and endpoints; independence powers are illustrations, not project forecasts"
+  }
+}
