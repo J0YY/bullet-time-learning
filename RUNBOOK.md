@@ -1,8 +1,8 @@
 # Runbook — bullet-time-learning
 
-**Current capability:** documentation/workflow scaffold and its checker. Renderer,
-training, readouts, statistics, compute access, and scientific audits are future
-work. The [spec](SPEC.md), [ownership map](division-of-labor.md), and
+**Current capability:** Joy's training/consumer/readout pipeline, synthetic tests,
+reference setup and collaboration checks are implemented. Real rendering, independent
+metrics/statistics, compute access and empirical scientific gates remain pending. The [spec](SPEC.md), [ownership map](division-of-labor.md), and
 [interfaces](docs/interfaces.md) govern those tasks.
 
 ## Start or join
@@ -153,8 +153,9 @@ work. Neither that arithmetic nor this setup authorizes a full launch.
 relative Markdown file targets outside fenced code, CLAUDE's AGENTS import, original
 spec bytes in Git, current spec drift provenance, and artifact ignore behavior.
 It uses no model/network calls. [.github/workflows/scaffold.yml](.github/workflows/scaffold.yml)
-runs it and whitespace checks on pushes to main and pull requests. This is repository
-maintenance CI, not a renderer, GPU, statistical, or independent scientific review.
+runs it and whitespace checks on pushes to main and pull requests. A separate implementation job also runs the pinned CPU package and its synthetic
+model/update/readout tests. Neither job validates a real renderer, intended GPU,
+independent statistics or empirical scientific claims.
 
 [scripts/audit_spec.py](scripts/audit_spec.py) additionally enumerates proposed grid
 partitions and calculates workload/contrast counts. CI runs its standard-library
@@ -166,8 +167,9 @@ resolving research input/partition choices or expanding the study.
 [scripts/check_pilot_plan.py](scripts/check_pilot_plan.py) checks the declarative
 pilot manifest, pair-preserving label budgets, checkpoint/update arithmetic,
 forecast steps, included early slots and supporting/readout counts. Its JSON output
-binds source hashes; malformed-plan rejection checks are CPU-only. Neither it nor
-CI implements the future producer/consumer fixture tests in the interface contract.
+binds source hashes; malformed-plan rejection checks are CPU-only. This checker
+validates planning. CI separately runs Joy's implemented consumer fixtures; S-owned
+producer and independent-analysis acceptance tests remain pending.
 
 After an intentional, reviewed pilot-plan/contract change, regenerate its bound
 report with `python3 scripts/check_pilot_plan.py --self-test > reports/pilot-plan-audit.json`,

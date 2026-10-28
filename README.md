@@ -6,10 +6,12 @@ Train models on the same rendered images, organized by world time, camera view,
 mixtures, or joint motion. Measure what those relationships add to frozen visual
 representations. The [research specification](SPEC.md) defines the study.
 
-**Current state:** collaboration scaffold only. No game scenes, rendered grids,
-training runner, experimental results, validated compute environment, or frozen
-protocol exist yet. The first research deliverable is a rendered grid, an audited
-training update, and a solvable visual history test—not a full-study launch.
+**Current state:** Joy's pilot consumer is implemented and checked: training,
+resume, controlled exposure audits, references, readouts and exports. The
+[implementation audit](reports/joy-implementation-audit-20261028.md) records 45
+passing tests, Linux CI and a clean third independent review. Real game grids,
+visual solvability, independent metrics, compute allocation and empirical results
+are still needed; the full study is not frozen.
 
 The [October 28 feasibility audit](reports/cvpr-feasibility-audit-20261028.md)
 supports a bounded pilot, identifies missing related work and evaluation details,
@@ -52,7 +54,7 @@ GitHub write permission is required to push; public clone access does not grant 
 | [SHARED_CONTEXT.md](SHARED_CONTEXT.md) | Current status, task registry, and cross-chat handoffs |
 | [division-of-labor.md](division-of-labor.md) | Owners, first tasks, dependencies, and acceptance gates |
 | [RUNBOOK.md](RUNBOOK.md) | Reproducible collaboration and Git workflow |
-| [docs/interfaces.md](docs/interfaces.md) | Data, run, prediction, and analysis contracts; implementation pending |
+| [docs/interfaces.md](docs/interfaces.md) | Versioned data/run/prediction contracts; Joy consumer tested, S producer/analysis pending |
 | [docs/pilot-plan.md](docs/pilot-plan.md) | Concrete pilot data, runs, gates and parallel handoffs |
 | [configs/pilot-plan.json](configs/pilot-plan.json) | Machine-readable planning counts/seeds; not a training config |
 | [joy-devlog.md](joy-devlog.md) / [sudarshan-devlog.md](sudarshan-devlog.md) | Per-person work and environment records |
@@ -60,8 +62,8 @@ GitHub write permission is required to push; public clone access does not grant 
 | [reports/decisions.md](reports/decisions.md) | Decision authority, protocol changes, and freeze status |
 | [reports/setup-audit.md](reports/setup-audit.md) | Setup provenance, validation evidence, and limits |
 
-The future source layout is defined in the ownership map; paths are not marked
-implemented merely because they are assigned. Keep generated RGB, hidden-state
+The ownership map separates implemented Joy consumers from pending S-owned
+producer/analysis paths. Keep generated RGB, hidden-state
 labels, checkpoints, caches, and run outputs outside Git. Version lightweight,
 release-appropriate manifests, configuration, provenance, and reports.
 

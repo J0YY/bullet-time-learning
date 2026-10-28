@@ -9,7 +9,7 @@ This is the common handoff record for Joy's and Sudarshan's project chats. Read
 [division-of-labor.md](division-of-labor.md) governs ownership. The user's current
 request controls scope. Historical log entries do not override newer decisions.
 
-**Stage:** Joy consumer implemented; final review underway; producer/data and research validation pending.
+**Stage:** Joy consumer complete and independently reviewed; real producer/data and research gates pending.
 The original import remains unchanged in Git at `13e951d:SPEC.md`; current SPEC
 adopts the user-requested audit fixes and pilot defaults. Joy's RGB consumer,
 scheduler/collator audit, VideoMAE/image-MAE runner, resumable checkpoints and
@@ -54,10 +54,10 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | SETUP | Joy | Spec import, collaboration docs, checker/CI, Git publication | Complete; local/clone/CI checks passed | Import `13e951d`; workflow `8d2b61d`; verified implementation `7bfeb73`; see setup audit |
 | AUDIT | Joy | User-requested full scaffold/spec and CVPR feasibility/quality review | Complete; clone/math/CI checks passed | Base `d9ec3a8`; substantive audit commit `af32b16`; report and reproducible mathematical checks |
 | REVISION | Joy | Revise spec from audit; concrete pilot and independent workstreams; preserve original and verify | Complete; local/fresh-clone/CI checks passed | Spec `9adffbc`; workflow/checks `7e5a6e1`; CI `40765480976` passed; final handoff record follows |
-| J1 | Joy | Consumer fixtures, all schedules/RNG/update tests, JSON adapter and exports | Implemented; 34-test suite passing; independent review underway | Working v1 contracts; no S task or schema import needed |
+| J1 | Joy | Consumer fixtures, all schedules/RNG/update tests, JSON adapter and exports | Complete; 45 tests and Linux CI pass; cumulative review clean in round 3 | Working v1 contracts; no S task or schema import needed |
 | S1 | Sudarshan | Producer schema/fixtures, grouped splits, renderer design | Ready, not started | Working v1 contracts; own environment, no Joy package dependency |
 | S2 | Sudarshan | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Not started | S1 + renderer/runtime/resources; deliver each drop immediately |
-| J2 | Joy | Actual-loader/update audit; 100-grid tail check | Fixture/model-update path tested; real data pending | J1 + S2 first 8 grids; runner/reference work can continue before delivery |
+| J2 | Joy | Actual-loader/update audit; 100-grid tail check | Fixture/model-update path tested; real data pending | J1 complete; next dependency is S2 first 8 grids |
 | S3 | Sudarshan | Collision/order/tracking sets and oracle/input checks | Not started | S1 + working scene; does not wait for complete S2 corpus |
 | J3 | Joy | Causal heads, seven supervised controls, external adapter | All seven control modes, CLI readouts, DINO/SSv2 adapters implemented; S3 data pending | Working contracts now; S3 sets for H3 acceptance |
 | S4 | Sudarshan | Own synthetic prediction fixtures, independent metrics/statistics | Ready, not started | Working run/prediction v1; first real export later, no need to wait for all runs |
@@ -72,14 +72,14 @@ pilot is one family, 1,000 grids, six VideoMAE conditions × seeds 17/29/43,
 reserved-official-validation access are now specified. Main margins, sample size,
 compute and submission remain unselected; no experiment has run.
 
-Joy can develop consumers on owned fixtures; Sudarshan can develop producers and
-independent analysis on owned fixtures. Deliver 1 → 8 → 100 → 1,000 grids; the first
-8 unblock actual update integration. The [ownership map](division-of-labor.md) and [working v1 contracts](docs/interfaces.md)
-separate adapters/fixtures, progressive drops and independent job submission. Scientific implementation and producer/consumer integration
-remain pending. Joy has completed consumer work against fixtures; S1/S3/S4 can proceed independently.
-Use the [Joy handoff guide](docs/joy-handoff.md) for actual commands and smallest deliveries. All 25 files in the substantive revision were verified
-byte-for-byte from a fresh GitHub clone; the final completion record is checked
-and published before handoff. No acknowledgment is recorded on Sudarshan's behalf.
+Joy's independent consumer work is complete for this pilot. Sudarshan can develop
+S1/S3/S4 in parallel without importing Joy's package. Deliver 1 → 8 → 100 → 1,000
+grids; the first 8 unblock actual update integration. S3 evaluation bundles unblock
+the visual controls separately, and S4 can build independent analysis on its own
+fixtures now. Use the [handoff guide](docs/joy-handoff.md) for exact commands/contracts
+and the [completion audit](reports/joy-implementation-audit-20261028.md) for review,
+source/CI evidence and remaining scientific/resource limits. No acknowledgment is
+recorded on Sudarshan's behalf. No real research experiment has run.
 
 ## Update rules
 

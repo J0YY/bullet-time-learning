@@ -17,9 +17,11 @@ baseline stays fixed across cumulative reviews; only the reviewer is delegated.
 | Frozen attention heads, readout training and prediction exports | Fit/predict/export tests; backbone unchanged; explicit missing rows | CLI, whole-pair budget/horizon and wrong-run checks pass; real S3 sets pending |
 | SSv2 internal partitions and frame/image adapters | Deterministic partitions/group check and frame assembly tests | PyAV decode roundtrip and official DINO full model forward pass; real S split agreement pending |
 | Pilot slots/coverage/admission guards and handoff commands | Exact 360-head/23-training/7-diagnostic inventory and bounded admission | Negative receipt/cap tests and producer-facing guide complete; actual H1–H4 pending |
-| Independent implementation/research review and CI | Pending | Cumulative baseline review/fix loop, final local/remote checks |
+| Independent implementation review and CI | 3-round cumulative review clean; 3 findings fixed; 45 tests pass locally/clean clone and Linux CI | Real producer acceptance and scientific gate validation |
 
 V-JEPA, extra families, independent corpus and capacity replication are main-stage
 work after the pilot, not silently counted as implemented by the VideoMAE path.
 A passing fixture pipeline cannot establish visual solvability, useful transfer,
 renderer fidelity, or statistical power. Those need the real H1–H4 evidence.
+
+Completed evidence and remaining dependencies: [implementation audit](../reports/joy-implementation-audit-20261028.md).

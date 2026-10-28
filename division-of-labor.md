@@ -61,7 +61,8 @@ needed for normal authorized development, and no independent review is assumed.
 
 These are assignments for future collaborator sessions, not launched agents/chats.
 The [pilot plan](docs/pilot-plan.md) defines data counts, run slots and gates.
-Contract v1 is the working wire boundary now, with implementation still pending.
+Grid/exposure/run v1 and evaluation v2 are the working wire boundaries. Joy's
+consumer is implemented; producer/analysis integration remains pending.
 Neither side waits for the other's Python classes, package install or full corpus.
 
 | Task | Owner | Concrete deliverable / acceptance | True dependency; work while waiting |

@@ -157,7 +157,7 @@ compute and final freeze remain pending. The 30/70 claims are View-relative.
 
 v1 supersedes the unimplemented v0 draft. There are no deployed v0 artifacts to
 migrate. Future incompatible changes need a new version. This is a working format
-commitment for independent coding, not a claim that either implementation exists.
+commitment for independent coding, not a claim of real producer/consumer integration.
 
 Use UTF-8 JSON for manifests and metadata. `pretrain.jsonl` has one grid per line;
 `bundle.json` declares version, producer/config hashes and the inventory. The
@@ -221,15 +221,15 @@ wait to import Sudarshan's `schema.py`; Sudarshan's data/analysis CLI does not w
 for Joy's package or runner. Before real integration, validate byte hashes, allowed
 input access and the actual exported records, not only this illustrative format.
 
-Required fixture cases for future component tests: complete/missing/duplicate grid
+Required fixture cases across consumer and independent analysis tests: complete/missing/duplicate grid
 cells, wrong RGB hashes and escaping paths; opposite-label identical-input pairs
 at 50% BA/Brier 0.25 for p=0.5; tracking success only if all three frames satisfy
 visibility/tolerance including equality at the boundary; a failed/missing prediction
 that changes coverage; unequal family sizes (macro ≠ micro); three readout seeds
 averaged within each pretraining seed; one failed TOST component blocking the global
-conjunction. These fixtures are implementation tasks, not artifacts already built.
+conjunction. Joy consumer cases are implemented; independent analysis/producer cases remain S-owned work.
 
-| Contract | Producer implemented | Consumer validated | Independent review |
+| Contract | Producer implemented | Consumer validated | Independent producer/analysis acceptance |
 | --- | --- | --- | --- |
 | Grid v1 / evaluation v2 | No (Sudarshan) | Joy fixtures only; real data pending | Not performed |
 | Exposure/update v1 | Joy fixtures/model updates | Independent S checker pending | Not performed |
