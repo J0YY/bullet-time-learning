@@ -157,3 +157,26 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   fits plus explicitly separate native/image/supervised work. No run was launched.
 - **Next:** Full document/semantic review, source provenance and fresh-checkout
   verification, incremental commit/push, exact-head remote/CI confirmation.
+
+### 2026-10-28 EDT — Verify revised spec, pilot and parallel handoff
+
+- **Commits:** `9adffbc` scientific revision/plan; `7e5a6e1` decoupled workflow,
+  concrete interfaces and planning checks, both published normally to main.
+- **Verification:** Local and fresh local/remote clones pass scaffold, all 163 grid
+  partition checks and pilot accounting/freshness checks. Twelve malformed-plan
+  cases are rejected. Python parsing and whole-tree whitespace checks pass;
+  mathematical audit including optional SciPy TOST calculations reproduces.
+- **Provenance:** Original import SHA/62,247 bytes verified in Git. Current SPEC
+  hash matches decisions and audits. Sudarshan's devlog is byte-identical to base.
+  All 25 tracked files matched the remote clone; it was clean after checks.
+- **CI:** `40765480976` succeeded on exact commit
+  `7e5a6e152b72dc6a6eaec043f211ebefa713faec`. Final completion-record commit is
+  verified/published and its own CI checked before the user handoff.
+- **Final review clarification:** Pilot gates require complete applicable slots
+  and prediction coverage; missing failures cannot be silently excluded. One-family
+  pilot reports arena scores directly, not a fictitious three-family mean.
+- **Result / next owner:** REVISION complete. Joy starts J1/J3 on consumer fixtures;
+  Sudarshan starts S1/S4 on producer/analysis fixtures independently. First real
+  update waits only for eight grids; actual pilot screen needs frozen 1,000 grids.
+  No rendered-data, training, empirical feasibility, final freeze, collaborator
+  acknowledgment or submission commitment is claimed. No research jobs launched.

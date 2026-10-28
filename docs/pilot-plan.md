@@ -192,8 +192,11 @@ resources; Joy coordinates the ledger rather than serving as a job-submission ga
 ## Acceptance, repair and exit rules
 
 These numerical thresholds are **chosen pilot engineering gates**, not empirical
-facts, final equivalence margins, p-values or guarantees of paper quality. Lock
-them before examining this pilot version's assessment data; retain failures.
+facts, final equivalence margins, p-values or guarantees of paper quality. A gate
+cannot pass on a favorable subset: require all planned slots and expected
+predictions for that stage, or mark it incomplete and retain failures. The pilot
+has one family, so report arena scores directly; never fill absent families with
+zero or call them a three-family average. Lock them before examining this pilot version's assessment data; retain failures.
 
 | Gate | Evidence required | If it fails |
 | --- | --- | --- |

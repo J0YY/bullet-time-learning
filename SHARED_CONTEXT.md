@@ -50,7 +50,7 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | --- | --- | --- | --- | --- |
 | SETUP | Joy | Spec import, collaboration docs, checker/CI, Git publication | Complete; local/clone/CI checks passed | Import `13e951d`; workflow `8d2b61d`; verified implementation `7bfeb73`; see setup audit |
 | AUDIT | Joy | User-requested full scaffold/spec and CVPR feasibility/quality review | Complete; clone/math/CI checks passed | Base `d9ec3a8`; substantive audit commit `af32b16`; report and reproducible mathematical checks |
-| REVISION | Joy | Revise spec from audit; concrete pilot and independent workstreams; preserve original and verify | In progress | Base `6fbfec4`; user-authorized scientific/planning revision, no experiment launch |
+| REVISION | Joy | Revise spec from audit; concrete pilot and independent workstreams; preserve original and verify | Complete; local/fresh-clone/CI checks passed | Spec `9adffbc`; workflow/checks `7e5a6e1`; CI `40765480976` passed; final handoff record follows |
 | J1 | Joy | Consumer fixtures, all schedules/RNG/update tests, JSON adapter and exports | Ready, not started | Working v1 contracts; no S task or schema import needed |
 | S1 | Sudarshan | Producer schema/fixtures, grouped splits, renderer design | Ready, not started | Working v1 contracts; own environment, no Joy package dependency |
 | S2 | Sudarshan | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Not started | S1 + renderer/runtime/resources; deliver each drop immediately |
@@ -73,7 +73,10 @@ Joy can develop consumers on owned fixtures; Sudarshan can develop producers and
 independent analysis on owned fixtures. Deliver 1 → 8 → 100 → 1,000 grids; the first
 8 unblock actual update integration. The [ownership map](division-of-labor.md) and [working v1 contracts](docs/interfaces.md)
 separate adapters/fixtures, progressive drops and independent job submission. Scientific implementation and producer/consumer integration
-remain pending. No acknowledgment is recorded on Sudarshan's behalf.
+remain pending. Start J1 (Joy) and S1/S4 (Sudarshan) independently; J3 can also
+begin against fixtures. All 25 files in the substantive revision were verified
+byte-for-byte from a fresh GitHub clone; the final completion record is checked
+and published before handoff. No acknowledgment is recorded on Sudarshan's behalf.
 
 ## Update rules
 
