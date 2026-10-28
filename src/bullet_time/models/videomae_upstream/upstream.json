@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/MCG-NJU/VideoMAE",
+  "revision": "14ef8d856287c94ef1f985fe30f958eb4ec2c55d",
+  "files": {
+    "modeling_pretrain.py": {
+      "upstream_sha256": "5689f93f72d7764d13e27f17ca3a6a096c89e7ee0e3fd8e63dffde6ab11ad593",
+      "vendored_sha256": "936df0475464288fd58d937c53efc272931b5b5447281b936da8e524fbaf8274"
+    },
+    "modeling_finetune.py": {
+      "upstream_sha256": "ce9a11ff05c7a1b5085addf6c73b71ffb68933564164f7b250dedad91f6e29b8",
+      "vendored_sha256": "09e2545ff1a6a685893df1c91dab768fc55c927105957881b97ea0cc1bbb94b7"
+    }
+  }
+}

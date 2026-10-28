@@ -180,3 +180,24 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   update waits only for eight grids; actual pilot screen needs frozen 1,000 grids.
   No rendered-data, training, empirical feasibility, final freeze, collaborator
   acknowledgment or submission commitment is claimed. No research jobs launched.
+
+### 2026-10-28 EDT — Begin Joy implementation against fixed pilot contracts
+
+- **Authority / baseline:** Active user goal requests implementing Joy's part,
+  rigorous research/implementation checks, and continuing until Sudarshan blocks
+  remaining work. Clean synchronized baseline `c10b678`; J1 marked in progress.
+- **Runtime:** Isolated `.venv` with Python 3.11, torch 2.9.1, torchvision 0.24.1,
+  timm 1.0.22, NumPy 2.3.5, Pillow 12.0.0 and pytest 8.4.2. CPU tests are local
+  implementation validation, not research training or a compute allocation.
+- **Implementation:** Allowlisted immutable RGB consumer with byte/hash/path checks;
+  eight deterministic schedules, four-pass family/prefix balance and retained tail;
+  shared grid transforms/tube masks, raw/native targets and source-image-coordinate
+  audit derived from actual collator tensors. Separate consumer fixtures.
+- **Source:** Released VideoMAE commit `14ef8d856287c94ef1f985fe30f958eb4ec2c55d`
+  vendored with attribution/noncommercial license and explicit import/registration/
+  whitespace changes. Model wrapper and empirical native comparison still pending.
+- **Checks:** Six loading/partition/target tests passed, including malformed data,
+  symlink escape, actual target corruption, all eight arm comparisons and balanced
+  mixture prefixes. No game data, research result or independent review claimed.
+- **Next:** Complete-grid runner/resume, executable model configs, readout/input/
+  export paths, then cumulative independent review under the review-loop skill.

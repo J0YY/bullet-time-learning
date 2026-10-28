@@ -9,7 +9,7 @@ This is the common handoff record for Joy's and Sudarshan's project chats. Read
 [division-of-labor.md](division-of-labor.md) governs ownership. The user's current
 request controls scope. Historical log entries do not override newer decisions.
 
-**Stage:** revised specification and bounded pilot plan; implementation pending.
+**Stage:** Joy implementation started; producer/data and research validation pending.
 The original import remains unchanged in Git at `13e951d:SPEC.md`; current SPEC
 adopts the user-requested audit fixes and pilot defaults. No renderer, grids, loader, training, evaluation,
 research analysis pipeline, resource allocation, empirical results, or protocol freeze exist yet.
@@ -51,7 +51,7 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | SETUP | Joy | Spec import, collaboration docs, checker/CI, Git publication | Complete; local/clone/CI checks passed | Import `13e951d`; workflow `8d2b61d`; verified implementation `7bfeb73`; see setup audit |
 | AUDIT | Joy | User-requested full scaffold/spec and CVPR feasibility/quality review | Complete; clone/math/CI checks passed | Base `d9ec3a8`; substantive audit commit `af32b16`; report and reproducible mathematical checks |
 | REVISION | Joy | Revise spec from audit; concrete pilot and independent workstreams; preserve original and verify | Complete; local/fresh-clone/CI checks passed | Spec `9adffbc`; workflow/checks `7e5a6e1`; CI `40765480976` passed; final handoff record follows |
-| J1 | Joy | Consumer fixtures, all schedules/RNG/update tests, JSON adapter and exports | Ready, not started | Working v1 contracts; no S task or schema import needed |
+| J1 | Joy | Consumer fixtures, all schedules/RNG/update tests, JSON adapter and exports | In progress | Working v1 contracts; no S task or schema import needed |
 | S1 | Sudarshan | Producer schema/fixtures, grouped splits, renderer design | Ready, not started | Working v1 contracts; own environment, no Joy package dependency |
 | S2 | Sudarshan | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Not started | S1 + renderer/runtime/resources; deliver each drop immediately |
 | J2 | Joy | Actual-loader/update audit; 100-grid tail check | Not started | J1 + S2 first 8 grids; runner/reference work can continue before delivery |
