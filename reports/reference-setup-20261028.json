@@ -1,0 +1,62 @@
+{
+  "external_source": {
+    "backbone_kind": "dinov2",
+    "binding": {
+      "external_lock": {
+        "archive_sha256": "04276715cddb29d45d05bff3a6fc132224dc27749b279ac98ad2ce4620e20d48",
+        "archive_url": "https://codeload.github.com/facebookresearch/dinov2/zip/7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+        "features": "x_norm_patchtokens; CLS excluded; no register tokens",
+        "input": "224 square letterbox, ImageNet mean/std, one image per encoder invocation",
+        "name": "dinov2_vits14",
+        "pretraining": "External LVD-142M pretrained reference; not part of the causal random-initialization comparison",
+        "repository": "https://github.com/facebookresearch/dinov2",
+        "revision": "7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+        "schema_version": "bullet-time.external-model.v1",
+        "source_license": "Apache-2.0; retained inside the verified source archive",
+        "verification_date": "2026-10-28",
+        "weights_sha256": "b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9",
+        "weights_url": "https://dl.fbaipublicfiles.com/dinov2/dinov2_vits14/dinov2_vits14_pretrain.pth"
+      },
+      "model": {
+        "encoder_width": 384,
+        "frames": 1,
+        "image_size": 224,
+        "patch_size": 14,
+        "tubelet": 1
+      },
+      "reference_kind": "dinov2",
+      "reference_status": "external_pretrained",
+      "training": {
+        "seed": 0
+      }
+    },
+    "checkpoint_sha256": "8fbacf210aae8396a5f5715a61548c331ce56d5868878cd8fdfde11a95380e77",
+    "global_step": 0,
+    "run_id": "e41666fb4fb9296fa25be1d7963373594406a0fb272a32c8ff23a03856a17889"
+  },
+  "finite": true,
+  "model_sha256": "34d5da3c040970517f5f101164489cfa8c2ea77ef15413b34e5254ff7f2b3b27",
+  "scope": "dependency/model validation only; no task training or research result",
+  "shape": [
+    1,
+    256,
+    384
+  ],
+  "untrained_references": [
+    {
+      "binding_sha256": "e7c0dcbef26e2b98a0bc437191b73945cbdeee1135058787baaaeb436965731c",
+      "checkpoint": "/Users/joyyang/Projects/bullet-time-learning/checkpoints/references/untrained-s17.pt",
+      "reference_kind": "videomae"
+    },
+    {
+      "binding_sha256": "145a48fc44f032014604a9ed2ac2e601112fe79edaf70a0d4a4363f364f15ad2",
+      "checkpoint": "/Users/joyyang/Projects/bullet-time-learning/checkpoints/references/untrained-s29.pt",
+      "reference_kind": "videomae"
+    },
+    {
+      "binding_sha256": "6fda4cfdd2ca982e486d09a28e2d3c96f4c822b95175bbfed5dea5dc482a56da",
+      "checkpoint": "/Users/joyyang/Projects/bullet-time-learning/checkpoints/references/untrained-s43.pt",
+      "reference_kind": "videomae"
+    }
+  ]
+}

@@ -15,9 +15,9 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 | Compute host / scheduler | Not selected or validated for this project |
 | Remote work root / storage / quota | Not configured |
 | Godot / renderer / GPU runtime | Not installed or validated by this setup |
-| Model / dependency revisions | Not selected; pin during implementation and native-recipe validation |
-| Data / caches / checkpoints | No research artifacts created |
-| Launch / monitoring commands | None validated; add exact commands and job IDs after actual use |
+| Model / dependency revisions | Python 3.11.15 `.venv`; torch 2.9.1 / torchvision 0.24.1 / timm 1.0.22; VideoMAE `14ef8d8`; DINOv2 source/weight pins in models/pins; full requirements lock |
+| Data / caches / checkpoints | Synthetic local fixtures; official DINO cache `.cache/dinov2`; DINO + 3 untrained references in ignored `checkpoints/references`; no game experiment |
+| Launch / monitoring commands | Local consumer CLI/test commands in docs/joy-handoff.md; no scheduler/job or CUDA validation |
 | Collaborator access | Check current GitHub access before relying on shared push; see setup audit |
 
 ## Log
@@ -226,3 +226,36 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   handoff/CI and cumulative independent review before declaring Joy unblocked work
   exhausted. Data/runtime receipts bind evidence but are not scientific proof by
   themselves; source reports need actual H1–H4 validation.
+
+### 2026-10-28 EDT — Finish Joy consumer paths and external setup
+
+- **Work:** Nested whole-pair budgets, horizon-specific heads, hash-bound prediction
+  identities, eight-arm actual optimizer audit, strict admission evidence/caps,
+  official pinned DINOv2 reference, untrained reference materialization and PyAV
+  selected-frame decoding. Added producer-facing operator guide and CPU CI.
+- **Checks:** 26 implementation tests passed before final deterministic-runtime and
+  direct-PNG coordinate tests. These include CLI fit/predict and wrong-run rejection,
+  all eight actual updates, source hashes, decoder roundtrip and admission negatives.
+  Formatting initially removed a fixture re-export and exposed a cross-directory
+  test import; explicit re-export/shared fixture module corrected both, suite passed.
+- **External setup:** Downloaded only official model source/weights, pinned SHA-256
+  before loading; DINO produced finite `[1,256,384]` patch features at 224. Three
+  seeded untrained VideoMAE references also materialized; report records source/
+  parameter hashes. No gameplay data, SSv2 acquisition or research training.
+- **Remaining:** Finish exact documented-command smoke and cumulative independent
+  review, then publish/verify the final checkout and CI. Real data/physics, visual
+  solvability, intended hardware, resource admission and independent S4 metrics
+  remain separate unmeasured gates. Sudarshan's files/log are unchanged.
+
+### 2026-10-28 EDT — Pre-review implementation verification
+
+- **Result:** 34 tests pass (32.19 s): all seven supervised paths, direct PNG-to-
+  schedule coordinates, eight actual controlled updates, CLI readout fit/predict,
+  source identities, frozen state, strict label subsets and incomplete coverage.
+- **Runtime:** Training and readout processes share deterministic FP32 policy.
+  Checkpoints default to each pass/segment boundary, avoiding per-update storage
+  explosion; configurable recovery interval remains explicit.
+- **Checks:** Ruff/static import checks and formatting pass; scaffold/spec/pilot
+  checks pass. Original/current SPEC and Sudarshan log are unchanged from baseline.
+  Independent cumulative review starts next against `c10b678`; no collaborator
+  acceptance or empirical gate claimed.

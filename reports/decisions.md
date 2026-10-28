@@ -131,3 +131,19 @@ and implementation, and continue until genuinely dependent on Sudarshan. Base
 **Evidence limits:** synthetic byte/tensor/model tests, not real rendered-data,
 learning, transfer or statistical-power evidence. Empirical H1–H4 still require
 S2/S3/S4 artifacts and appropriate resources. See the implementation checklist.
+
+### 2026-10-28 EDT — Concrete Joy consumer choices
+
+- **Authority:** implement Joy's work and rigorously check research controls. SPEC
+  remains unchanged. Interfaces clarify consumer-only v2/groups/label formats; S
+  producer validation is still pending.
+- **Controls:** whole-pair nested label budgets; separate heads per forecast horizon;
+  consecutive tracking primary frames and occluded auxiliary visibility queries.
+  Actual run/checkpoint/label-budget hashes bind exported predictions.
+- **Supervised measurement:** all seven diagnostic fits use the same pinned external
+  DINOv2 ViT-S/14 initialization and common development recipe, fine-tuned end to end.
+  This strengthens visual solvability checks while remaining separate from the random-
+  initialization causal pretraining arms. A failed diagnostic cannot justify a null.
+- **External/runtime:** DINO source/weight hashes are committed in models/pins; PyAV
+  16.1.0 decodes ordered RGB with recorded FFmpeg versions. CPU source/model/decoder
+  tests do not validate selected CUDA hardware or any real data gate.

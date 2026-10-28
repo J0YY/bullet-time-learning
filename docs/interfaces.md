@@ -291,3 +291,26 @@ Consumer implementations: [inputs](../src/bullet_time/evaluation/inputs.py),
 [targets/fitting](../src/bullet_time/evaluation/training.py),
 [exports](../src/bullet_time/evaluation/export.py). Their synthetic tests do not
 constitute producer integration, a benchmark, or independent scientific review.
+
+## Consumer grouping and run binding clarification — 2026-10-28
+
+Game `groups.json` is `{schema_version: "bullet-time.evaluation-groups.v1", records: [...]}`.
+Each record has exactly `episode_id`, `task_id`, `group_id`, `split`. Group IDs and
+episode IDs cannot cross splits. Collision/order groups contain exactly two episodes;
+tracking groups contain one in the current pilot. If a producer needs larger related
+groups, version/reconcile the contract rather than breaking those units. The input
+must cover every declared episode in its included task/splits. Label subsets select
+whole groups with the SPEC hash ordering; train budgets are explicit episode counts.
+Collision/order heads are fitted separately at each horizon; primary is 0.5 seconds.
+
+SSv2 groups use a JSON object mapping every partition video ID to a related-group ID.
+The consumer verifies the partition hash, disjoint/nested inventories and related
+group integrity. Source partition metadata and official-training-only access remain
+S-owned validation responsibilities.
+
+For CLI prediction inventories, `run_id` is the actual backbone binding SHA-256 and
+`checkpoint_id` is the backbone checkpoint file SHA-256. Human plan slot names need
+an explicit mapping to these hashes. `label_budget` is the actual training episode/
+video count and `readout_seed` must match the fitted head. The checkpoint carries
+its source and fit hash. Inference rejects conflicting metadata; S4 independently
+checks the label/group joins. See [operator guide](joy-handoff.md) for examples.

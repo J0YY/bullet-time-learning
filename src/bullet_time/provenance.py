@@ -1,4 +1,5 @@
 """Stable identities and strict file boundaries shared by consumer components."""
+
 import hashlib
 import json
 import math
@@ -33,13 +34,19 @@ def strict_json(data):
                 raise ValueError(f"duplicate JSON key: {key}")
             result[key] = value
         return result
+
     def constant(value):
         raise ValueError(f"nonfinite JSON constant: {value}")
+
     return json.loads(data, object_pairs_hook=pairs, parse_constant=constant)
 
 
 def fields(record, required, optional=()):
-    if not isinstance(record, dict) or not set(required) <= record.keys() or record.keys() - set(required) - set(optional):
+    if (
+        not isinstance(record, dict)
+        or not set(required) <= record.keys()
+        or record.keys() - set(required) - set(optional)
+    ):
         raise ValueError(f"unexpected or missing fields; required {sorted(required)}")
 
 
@@ -64,17 +71,21 @@ def text_id(value, name):
 
 
 def sha256(value):
-    if not isinstance(value, str) or len(value) != 64 or any(c not in '0123456789abcdef' for c in value):
+    if (
+        not isinstance(value, str)
+        or len(value) != 64
+        or any(c not in "0123456789abcdef" for c in value)
+    ):
         raise ValueError("expected lowercase SHA-256")
     return value
 
 
 def inside(root, relative):
     root = Path(root).resolve()
-    if not isinstance(relative, str) or not relative or '\\' in relative:
+    if not isinstance(relative, str) or not relative or "\\" in relative:
         raise ValueError("invalid relative path")
     path = Path(relative)
-    if path.is_absolute() or '..' in path.parts:
+    if path.is_absolute() or ".." in path.parts:
         raise ValueError("path escapes bundle")
     result = (root / path).resolve(strict=True)
     if not result.is_relative_to(root) or not result.is_file():
@@ -85,10 +96,10 @@ def inside(root, relative):
 def atomic_json(path, value):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    data = json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + '\n'
-    fd, tmp = tempfile.mkstemp(prefix='.' + path.name, dir=path.parent)
+    data = json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n"
+    fd, tmp = tempfile.mkstemp(prefix="." + path.name, dir=path.parent)
     try:
-        with os.fdopen(fd, 'w') as file:
+        with os.fdopen(fd, "w") as file:
             file.write(data)
             file.flush()
             os.fsync(file.fileno())

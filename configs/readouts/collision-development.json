@@ -1,1 +1,1 @@
-{"task":"collision","seed":101,"epochs":20,"batch_size":8,"learning_rate":0.001,"weight_decay":0.01,"image_size":224,"mode":"sequence","device":"cpu","kind":"frozen","width":256,"depth":2,"heads":4,"classes":174}
+{"batch_size": 8, "classes": 174, "depth": 2, "device": "cpu", "epochs": 20, "heads": 4, "horizon_seconds": 0.5, "image_size": 224, "kind": "frozen", "label_budget": 300, "learning_rate": 0.001, "mode": "sequence", "seed": 101, "task": "collision", "weight_decay": 0.01, "width": 256}

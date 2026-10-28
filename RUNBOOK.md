@@ -174,3 +174,9 @@ report with `python3 scripts/check_pilot_plan.py --self-test > reports/pilot-pla
 then run `python3 scripts/check_pilot_plan.py --self-test --check-report`. CI rejects
 stale source hashes/accounting. Changing SPEC also requires its new hash and reason
 in the decision record; original source provenance remains immutable.
+
+## Joy implementation commands
+
+The [Joy handoff guide](docs/joy-handoff.md) documents the implemented CLI, reference
+setup, source/data bindings, bounded real-data integration and producer deliveries.
+Use it alongside the pilot and interfaces. Synthetic checks are not H1–H4 evidence.

@@ -67,3 +67,9 @@ release-appropriate manifests, configuration, provenance, and reports.
 
 This project reuses the collaboration structure of safety-repartitioning. It has
 its own science, resource decisions, dependencies, and evidence. The October 28 audit refreshed primary-source literature; no independent collaborator review or empirical validation is implied.
+
+## Implemented Joy consumer and handoff
+
+See [the operator guide](docs/joy-handoff.md) for setup, synthetic checks, actual-update
+integration, model references, readout commands and the smallest S1–S4 deliveries.
+Implementation passes fixture checks; real research gates remain unmeasured.
