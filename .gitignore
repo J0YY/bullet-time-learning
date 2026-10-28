@@ -1,0 +1,44 @@
+# Local environments, caches, builds, and editor state
+.DS_Store
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+.idea/
+.vscode/
+.godot/
+
+# Credentials and machine-specific settings
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Generated / large / restricted artifacts; version small public manifests instead
+.cache/
+.hf/
+/artifacts/
+/runs/
+/results/
+/logs/
+/checkpoints/
+/data/raw/
+/data/rendered/
+/data/processed/
+/data/cache/
+/data/private/
+/data/heldout/
+/private/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
