@@ -47,7 +47,7 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 
 | ID | Owner | Scope | Status | Base / dependency |
 | --- | --- | --- | --- | --- |
-| SETUP | Joy | Spec import, collaboration docs, checker/CI, Git publication | In progress; final audit pending | Empty repository; initial import `13e951d` |
+| SETUP | Joy | Spec import, collaboration docs, checker/CI, Git publication | Complete; local/clone/CI checks passed | Import `13e951d`; workflow `8d2b61d`; verified implementation `7bfeb73`; see setup audit |
 | J1 | Joy | Sequence loader and audit foundation on fixtures | Ready, not started | Draft interfaces; coordinate schema with S1 |
 | S1 | Sudarshan | Data schema, fixtures, split validator, renderer design | Ready, not started | Draft interfaces |
 | S2 | Sudarshan | First scene and 100 rendered grids | Not started | S1; renderer/runtime/resources |
@@ -57,6 +57,11 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | S4 | Sudarshan | Independent metrics/statistics fixtures | Ready, not started | Draft run export; later J2/J3 integration |
 
 ## Immediate handoff
+
+Collaboration scaffold is published on GitHub `main`. A fresh remote clone matched
+all 18 tracked file bytes and passed the checker; GitHub CI passed for `7bfeb73`.
+Final documentation updates are validated again before the setup handoff. See the
+[setup audit](reports/setup-audit.md) for evidence and limits.
 
 Joy can start J1; Sudarshan can start S1 and record his own environment. The
 [draft interfaces](docs/interfaces.md) specify the shared boundary. Next joint

@@ -65,3 +65,22 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   reviewer or experimental validation claimed.
 - **Next:** Verify rejection paths and a fresh clone, publish main, inspect exact
   remote commit/tree and CI outcome, and finish the handoff record.
+
+### 2026-10-28 EDT — Verify clone, rejection behavior, and GitHub publication
+
+- **What:** Published the first three commits to `main`. Verified fresh local and
+  GitHub clones, all tracked bytes, source identity, negative checks, and hosted CI.
+- **Code:** `7bfeb7316b1cad8380f64bcdb4eb46ef74e253e7`; import `13e951d`,
+  workflow `8d2b61d`. All 18 remote file bytes and tree/HEAD matched local.
+- **Result:** Checker passes from both clones and from outside the repository.
+  Five temporary-clone regressions rejected; restored clone passes. GitHub run
+  `40754638085` completed successfully on Linux/Python 3.12.
+- **Audit attempts:** First ignore-regression fixture was ineffective because Git
+  retains an ignored parent; removed the rule instead and verified rejection.
+  First remote byte comparison included an empty trailing NUL field and raised
+  IsADirectoryError; filtered empty fields and reran successfully. No project file
+  corruption or experimental impact; details in the setup audit.
+- **Handoff:** SETUP complete; J1 and S1 ready for the respective collaborators.
+  Research implementation/compute and Sudarshan's invitation acceptance remain
+  unverified. Final evidence/status documentation will be committed and its exact
+  remote/CI state checked before responding to the user.

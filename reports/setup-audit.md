@@ -59,8 +59,23 @@ The old checkout was read only and was not edited.
   Python dependencies or experimental execution.
 - Self-reviewed ownership, interface status, scientific guardrails and stage
   arithmetic against the supplied spec. No independent review was performed.
-- Clean-checkout reproduction, rejection-path checks and remote CI/publication
-  verification are pending and will be recorded after execution.
+- Fresh local clone and invocation from outside the repository: passed.
+- Five temporary-clone fault cases correctly rejected: missing required file,
+  broken local link, unrecorded SPEC edit, removed private-data ignore rule, and
+  incorrect CLAUDE import. Restored clone passed afterward. These temporary
+  mutations never touched the working project.
+- Two audit-harness attempts needed corrections: a negation under an ignored
+  parent did not actually unignore the test path, so the fixture was changed to
+  remove the parent rule; remote comparison initially included the trailing empty
+  NUL-separated filename, then filtered it out. Corrected checks passed. Neither
+  required changing project behavior or research artifacts.
+- Published commits `13e951d`, `8d2b61d`, and `7bfeb73` to normal GitHub `main`.
+  A fresh GitHub clone at `7bfeb7316b1cad8380f64bcdb4eb46ef74e253e7` matched local
+  HEAD/tree and all 18 tracked file bytes, including original SPEC; checker passed.
+- [GitHub CI run 40754638085](https://github.com/J0YY/bullet-time-learning/actions/runs/40754638085)
+  completed successfully on that implementation commit (Python 3.12 / Linux).
+  Final documentation-only updates are checked and their exact remote commit/CI
+  outcome is verified again before reporting completion to the user.
 
 ## Remaining research work
 
