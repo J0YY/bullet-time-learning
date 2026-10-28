@@ -226,6 +226,7 @@ def command_fit(args):
             "model": model.state_dict(),
             "fit_sha256": digest((output / "fit.json").read_bytes()),
             "actual_label_budget": report["train_episodes"],
+            "fit_execution": report["execution"],
             "allowed_prediction_splits": prediction_access(config, source),
         }
         path = output / "readout.pt"
@@ -280,6 +281,12 @@ def command_predict(args):
     if meta.get("prediction_identity") != identifiers:
         raise ValueError("prediction identity differs from fitted checkpoint")
     config = replace(saved_config, device=args.device)
+    from bullet_time.models.runtime import configure_runtime, runtime_provenance
+
+    configure_runtime(config.device)
+    execution = runtime_provenance(config.device)
+    if state.get("fit_execution", {}).get("source_sha256") != execution["source_sha256"]:
+        raise ValueError("prediction consumer source differs from the fitted checkpoint")
     from bullet_time.models.references import rebuild_backbone
 
     backbone = rebuild_backbone(
@@ -329,6 +336,8 @@ def command_predict(args):
         else:
             row["class_id"] = max(range(len(values)), key=values.__getitem__)
         observed.append(row)
+    if runtime_provenance(config.device) != execution:
+        raise ValueError("prediction code/runtime changed during inference")
     return write_predictions(
         args.output,
         expected,
@@ -341,6 +350,8 @@ def command_predict(args):
             "backbone_source": state["backbone_source"],
             "prediction_identity": identifiers,
             "readout_config": state["readout_config"],
+            "fit_execution": state["fit_execution"],
+            "inference_execution": execution,
             "allowed_prediction_splits": allowed,
             "classes": config.classes,
             "split": args.split,

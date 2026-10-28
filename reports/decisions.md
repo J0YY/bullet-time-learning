@@ -163,3 +163,16 @@ S2/S3/S4 artifacts and appropriate resources. See the implementation checklist.
   runs before input loading. Unknown progress or missing policy fails closed.
 - **Additional guard:** real pilot admission rejects non-arena/mixed-family corpora.
   Receipt provenance still cannot substitute for a substantive scientific audit.
+
+### 2026-10-28 EDT — Align query geometry and executing-source provenance
+
+- **Review correction:** PIL bilinear resizing uses a half-pixel-center affine;
+  endpoint-aligned query mapping displaced points on resized inputs. Corrected the
+  affine, documented its convention and added interior impulse-image tests in both
+  orientations, at identity size and when downsampling. Native 224-square inputs
+  remain identity. Edge-center coordinates clip only outside the canvas center range.
+- **Completeness check:** fit/inference now record the executing consumer source/pins
+  and actual runtime, distinct from the pretrained checkpoint's older source. Reject
+  inference under changed consumer code. Exclude independent S-owned code from this
+  fingerprint because it is not imported; bind its delivered data/report bytes at the
+  interface instead. This preserves parallel collaborator work and reproducibility.

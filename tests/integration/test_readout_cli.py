@@ -122,3 +122,20 @@ def test_reference_fit_predict_cli_and_wrong_run_rejection(tmp_path, kind, mode)
     inventory.write_text(json.dumps(expected))
     assert "actual run/checkpoint" in run(*common, "--output", tmp_path / "wrong-run", ok=False)
     assert not (tmp_path / "wrong-run").exists()
+
+    if kind == "frozen":
+        import torch
+        from bullet_time.provenance import digest
+
+        altered = tmp_path / "wrong-source.pt"
+        state = torch.load(fitted["checkpoint"], map_location="cpu", weights_only=True)
+        state["fit_execution"]["source_sha256"] = "f" * 64
+        torch.save(state, altered)
+        metadata = json.loads((tmp_path / "fit/readout.pt.json").read_text())
+        metadata["sha256"] = digest(altered.read_bytes())
+        altered.with_suffix(".pt.json").write_text(json.dumps(metadata))
+        wrong_source = common.copy()
+        wrong_source[wrong_source.index("--checkpoint") + 1] = altered
+        assert "source differs" in run(
+            *wrong_source, "--output", tmp_path / "wrong-source", ok=False
+        )

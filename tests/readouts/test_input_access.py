@@ -38,8 +38,8 @@ def test_coordinate_letterbox_and_uniform_sampling():
     rgb = np.zeros((20, 40, 3), dtype=np.uint8)
     result, mapping = letterbox(rgb, 224)
     assert result.shape == (3, 224, 224)
-    assert mapping((0, 0)) == (0, 56 / 223)
-    assert mapping((1, 1)) == (1, 167 / 223)
+    assert mapping((0, 0)) == pytest.approx((2.3 / 223, 58.3 / 223))
+    assert mapping((1, 1)) == pytest.approx((220.7 / 223, 164.7 / 223))
     assert uniform_frame_indices(1) == (0,) * 16
     assert uniform_frame_indices(16) == tuple(range(16))
     for n in (2, 3, 5, 17, 100):
@@ -104,3 +104,20 @@ def test_all_seven_supervised_modes_backpropagate_through_image_encoder(task, mo
     assert any(p.grad is not None and p.grad.abs().sum() > 0 for p in backbone.encoder.parameters())
     if mode in ("final_frame", "current_frame"):
         assert torch.count_nonzero(video.grad[:, :, :15]) == 0
+
+
+@pytest.mark.parametrize(
+    "height,width,size,xy",
+    [(20, 40, 224, (10, 7)), (40, 20, 224, (7, 10)), (32, 32, 32, (9, 14)), (45, 75, 29, (30, 20))],
+)
+def test_query_map_tracks_actual_resampled_interior_marked_pixel(height, width, size, xy):
+    # A feature-space/metadata-only assertion would miss a mismatch with the RGB
+    # resampler. Compare the mapped point to the actual bilinear impulse centroid.
+    rgb = np.zeros((height, width, 3), dtype=np.uint8)
+    rgb[xy[1], xy[0], 0] = 255
+    frame, mapping = letterbox(rgb, size)
+    mass = frame[0].double()
+    yy, xx = torch.meshgrid(torch.arange(size), torch.arange(size), indexing="ij")
+    actual = torch.stack(((mass * xx).sum() / mass.sum(), (mass * yy).sum() / mass.sum()))
+    expected = torch.tensor(mapping((xy[0] / (width - 1), xy[1] / (height - 1)))) * (size - 1)
+    torch.testing.assert_close(actual, expected.double(), atol=0.22, rtol=0)

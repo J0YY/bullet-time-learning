@@ -148,6 +148,9 @@ def fit(model, inputs, targets, config):
     from bullet_time.models.runtime import configure_runtime
 
     configure_runtime(config.device)
+    from bullet_time.models.runtime import runtime_provenance
+
+    execution = runtime_provenance(config.device)
     selected = task_examples(inputs, config)
     if any(e.split not in ("train", "dev") for e in selected):
         raise ValueError("assessment/final input is inaccessible to fitting")
@@ -243,7 +246,10 @@ def fit(model, inputs, targets, config):
     model.load_state_dict(best_state)
     if frozen_before is not None and model_identity(frozen_module) != frozen_before:
         raise ValueError("frozen backbone changed during readout fit")
+    if runtime_provenance(config.device) != execution:
+        raise ValueError("readout code/runtime changed during fitting")
     return {
+        "execution": execution,
         "config": asdict(config),
         "history": history,
         "selected_dev_loss": best,

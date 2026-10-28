@@ -192,3 +192,11 @@ CVPR acceptance/novelty conclusion follows from this implementation. A credible
 result still needs sensitive controls, useful learned/transfer performance, complete
 paired coverage and prospective precision/scale evidence. Sudarshan's real bundles
 and independent analysis are the next required project inputs.
+
+For long runs, use an immutable checkout of the recorded commit and develop in a
+separate checkout. Pretraining/resume and readout inference bind the executing
+consumer source plus model pins; inference also records its actual runtime. S-owned
+producer/analysis changes do not affect this consumer fingerprint. Fit/infer use
+the same consumer revision; a source change requires running the original revision
+or refitting explicitly. See the interface's pixel-center formula when preparing
+tracking labels or query points for any resized input.

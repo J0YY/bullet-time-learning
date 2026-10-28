@@ -99,3 +99,23 @@ def test_framewise_reference_consumes_every_frame_and_advances_once(tmp_path):
     assert record["images"] == 256 and record["sequences"] == 256 and record["clips"] == 0
     assert record["optimizer_steps"] == 1
     assert len(record["detailed_exposure"][corpus.grids[0].grid_id]) == 256
+
+
+def test_consumer_hash_tracks_used_code_and_pins_without_blocking_producer_work(tmp_path):
+    from bullet_time.training.runner import code_identity
+
+    (tmp_path / "loading").mkdir()
+    (tmp_path / "loading/consumer.py").write_text("version = 1")
+    original = code_identity(tmp_path)
+    (tmp_path / "schema.py").write_text("producer version = 1")
+    (tmp_path / "generation").mkdir()
+    (tmp_path / "generation/generator.py").write_text("producer version = 2")
+    (tmp_path / "evaluation").mkdir()
+    (tmp_path / "evaluation/metrics.py").write_text("independent analysis version = 3")
+    assert code_identity(tmp_path) == original
+    (tmp_path / "loading/consumer.py").write_text("version = 2")
+    changed = code_identity(tmp_path)
+    assert changed != original
+    (tmp_path / "models/pins").mkdir(parents=True)
+    (tmp_path / "models/pins/source.json").write_text('{"source":"changed"}')
+    assert code_identity(tmp_path) != changed

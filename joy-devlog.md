@@ -278,3 +278,18 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Earlier publication:** `1e5fa94` and its two preceding implementation commits
   pushed normally; Linux CI `40775503217` passed and a fresh GitHub clone matched
   all 83 tracked files and passed all 34 pre-fix tests. Original SPEC/log unchanged.
+
+### 2026-10-28 EDT — Independent review round 2 and geometry correction
+
+- **Review:** Cumulative `codex review` at `b1b711e` found one correctness issue:
+  endpoint-aligned point mapping disagreed with PIL's actual resize. Reviewer
+  reproduced the displacement with an impulse image. Its read-only sandbox blocked
+  selected pytest collection/temp creation; it did not independently rerun the full
+  corrected suite. Root and clean clone had 40 passing tests; Linux CI `40776729223`
+  also passed on `b1b711e`.
+- **Fix:** Use the actual pixel-center affine, checked against interior marked RGB
+  pixels at multiple shapes/scales, not just metadata endpoints. Native 224 geometry
+  remains identity. Added executing-source/runtime provenance for fit/inference and
+  changed-source rejection. Consumer fingerprint excludes unimported S-owned code,
+  preventing independent producer work from invalidating Joy's runs.
+- **Next:** Run full tests, cumulative review round 3, and final publication checks.

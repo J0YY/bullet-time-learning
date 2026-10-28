@@ -72,11 +72,20 @@ class TrainConfig:
             raise ValueError("device must be CPU or explicit CUDA")
 
 
-def code_identity():
-    root = Path(__file__).resolve().parents[1]
-    return identity(
-        {str(p.relative_to(root)): digest(p.read_bytes()) for p in sorted(root.rglob("*.py"))}
-    )
+def code_identity(root=None):
+    root = Path(root) if root is not None else Path(__file__).resolve().parents[1]
+    # Producer/independent-analysis code is not imported by this consumer. Its
+    # parallel development must not invalidate Joy's in-flight runs or checkpoints.
+    independent_roots = {"generation", "rendering", "splits", "analysis"}
+    independent_files = {"schema.py", "evaluation/metrics.py"}
+    records = {}
+    for path in sorted(root.rglob("*")):
+        relative = path.relative_to(root)
+        if relative.parts[0] in independent_roots or relative.as_posix() in independent_files:
+            continue
+        if path.suffix == ".py" or path.suffix == ".json" and relative.parts[0] == "models":
+            records[relative.as_posix()] = digest(path.read_bytes())
+    return identity(records)
 
 
 def learning_rate(config, step, steps_per_pass):

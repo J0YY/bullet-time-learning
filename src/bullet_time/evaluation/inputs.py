@@ -88,9 +88,14 @@ def letterbox(rgb, size=224):
         Image.fromarray(rgb).resize((nw, nh), Image.Resampling.BILINEAR)
     )
 
-    # Coordinates use pixel centers and endpoints, not an approximate scale ratio.
+    # Input normalized coordinates denote centers of source pixels (x/(w-1)).
+    # PIL bilinear resize samples with a half-pixel affine, not align_corners=True.
     def map_point(xy):
-        return ((left + xy[0] * (nw - 1)) / (size - 1), (top + xy[1] * (nh - 1)) / (size - 1))
+        x = left + (xy[0] * (w - 1) + 0.5) * nw / w - 0.5
+        y = top + (xy[1] * (h - 1) + 0.5) * nh / h - 0.5
+        # Downsampled edge centers can lie <0.5 pixel outside the destination
+        # center range. Clip only those to the nearest representable canvas center.
+        return (min(1.0, max(0.0, x / (size - 1))), min(1.0, max(0.0, y / (size - 1))))
 
     return torch.from_numpy(pixels.copy()).permute(2, 0, 1).float() / 255, map_point
 

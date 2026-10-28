@@ -38,6 +38,10 @@ def test_fit_frozen_head_predict_and_complete_failure_export(tmp_path):
     twin = build_readout(build_model(TINY, 17), cfg)
     assert model_identity(model.head) == model_identity(twin.head)
     report = fit(model, inputs, targets, cfg)
+    from bullet_time.training.runner import code_identity
+
+    assert report["execution"]["source_sha256"] == code_identity()
+    assert report["execution"]["deterministic_algorithms"]
     assert model_identity(backbone) == initial and len(report["history"]) == 2
     predictions = predict(model, inputs, cfg)
     expected = []

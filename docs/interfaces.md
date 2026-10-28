@@ -326,3 +326,20 @@ assessment. The predictor checks eligibility before loading any requested input;
 unknown/missing progress fails closed. This is additional to S-owned split/lineage
 admission and the inaccessible final-test mount. Old synthetic readout checkpoints
 without this policy must be regenerated.
+
+Evaluation points follow the **actual PIL bilinear pixel-center affine**. With
+source width/height `w,h`, resized dimensions `nw,nh`, padding `left,top`, and
+canvas `size`, map source normalized point `(u,v)` to
+`(left + (u*(w-1)+0.5)*nw/w - 0.5)/(size-1)` and the analogous y expression.
+Clip only values outside [0,1] to the nearest representable canvas pixel center.
+An interior marked-pixel regression checks this against RGB resampling; aligning
+only the first/last centers would be wrong for PIL resize. S3's transformed labels
+must use the same declared geometry. For native 224-square game frames it is identity.
+
+Fit and prediction reports record their executing consumer source/pin hash and
+runtime, separately from the older backbone source. Inference requires the same
+consumer source as the fit; execute from that recorded revision or refit after a
+code change. S-owned generation/schema/splits/analysis/metrics are not imported by
+the consumer and are excluded from its source fingerprint, so parallel producer
+work cannot invalidate Joy's checkpoints. Their delivered data/report hashes are
+validated at the artifact boundary instead.
