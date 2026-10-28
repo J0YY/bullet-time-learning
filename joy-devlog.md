@@ -51,3 +51,17 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   `deephelms28`, the write collaborator on the reference repository. No invitation
   was sent or changed; acceptance and Sudarshan's own environment are not assumed.
 - **Next:** Add automated scaffold checks and CI; audit all files and publish main.
+
+### 2026-10-28 EDT — Add scaffold validation and CI
+
+- **What:** Added standard-library structure/link/provenance/ignore checker, source
+  provenance JSON, setup report and read-only GitHub Actions workflow with pinned
+  action revisions. The checker's scope is explicitly repository maintenance.
+- **Command:** `python3 scripts/check_scaffold.py`; `git diff --check`; complete
+  committed-tree whitespace check against the empty Git tree.
+- **Result:** Passed: 18 required files, 13 Markdown files, 49 local links and 32
+  ignore-rule cases. Original and current SPEC bytes match the source hash.
+- **Review:** Self-review against the specification and ownership map; no independent
+  reviewer or experimental validation claimed.
+- **Next:** Verify rejection paths and a fresh clone, publish main, inspect exact
+  remote commit/tree and CI outcome, and finish the handoff record.
