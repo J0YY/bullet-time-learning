@@ -336,3 +336,25 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   cases, current pilot source hashes, spec/math arithmetic and whitespace pass.
   Numerical reports match the prior scientific arithmetic; gate table/wire JSON
   examples and runtime/config bytes are unchanged. Existing regression run pending.
+
+### 2026-10-30 EDT — Verify redistribution and prepare publication
+
+- **Commit:** `2ff0980` records the complete owner/path/task migration and standalone
+  verification brief. This entry completes the shared status without claiming the
+  newly assigned research implementation is done.
+- **Checks:** all 45 existing regression tests pass (71.02 s). Scaffold passes 113
+  local links and 32 ignore cases; original spec provenance, pilot report freshness,
+  twelve malformed-plan rejections and whitespace pass. Spec math including SciPy
+  power examples reproduces; all scientific arithmetic matches the previous report.
+- **Preserved:** runtime source, tests, scripts, planning/runtime configurations,
+  original-source metadata and Sudarshan's log are byte-identical to `7d305e0`.
+  Self-review checked live owner references, explicit disjoint paths, unchanged gate
+  table/JSON examples and assessment isolation. No independent review of this
+  documentation change is claimed.
+- **Publication:** normal main push and exact-commit remote/CI checks follow this
+  record; their final outcome is reported in chat. No outstanding incoming main
+  commits or open pull requests were observed before publication.
+- **Next:** Joy J5/J6 one arena/grid preview → eight real grids through J2; J7/J8
+  provide measurement/scoring work between runs. Sudarshan S4a can start on fixtures
+  without any Joy run; all personal acknowledgments and independent results remain
+  pending. No game implementation, training job or collaborator message was created.
