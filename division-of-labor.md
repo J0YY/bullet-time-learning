@@ -1,133 +1,111 @@
 # Division of labor — Joy & Sudarshan
 
-**2026-10-28 revision:** working assignments for the concrete pilot. No research
-implementation or collaborator acknowledgment is implied. This keeps the previous
-project's split by layer, with new bullet-time tasks and scientific gates.
+**2026-10-30 reassignment, authorized by Joy:** Joy owns the complete required
+pilot pipeline. Sudarshan owns a separate verification package and research review.
+This replaces the October 28 split by layer. It removes personal handoffs from
+the pilot's critical path; it does not remove scientific gates or create results.
+Sudarshan's acknowledgment and any unpublished work remain unverified.
 
 ## Ownership map
 
-Joy owns training, readouts, integration, and resource planning. Sudarshan owns
-game/data generation, rendering, splits, and independent metrics/statistics.
-Paths below are planned unless listed as implemented in shared context.
+Joy is the default owner of all required implementation, data, analysis and shared
+documents. Sudarshan's reserved paths below are an independent implementation,
+never an import or required service for Joy's pipeline. Planned paths do not imply
+implemented code. Each person owns only their own devlog.
 
-| Area | Joy | Sudarshan |
+| Area | Joy: complete operational pipeline | Sudarshan: independent verification |
 | --- | --- | --- |
-| Source | `src/bullet_time/` default/package root; `loading/`, `training/`, `models/`, `evaluation/` except metrics; CLI/common config/provenance | `src/bullet_time/schema.py`, `generation/`, `rendering/`, `splits/`, `analysis/`, `evaluation/metrics.py`; `game/` |
-| Scheduling | View/Time/Joint/mixture/control loaders, RNG streams, grid batching, exposure/update audit | Independent schedule/exposure checker and renderer invariants |
-| Models | VideoMAE and V-JEPA adaptations/native checks; image-only and untrained references; supervised diagnostic models | Label/oracle validation and independent outcome calculations |
-| Evaluation | Frozen readouts, causal input assembly, prediction exports, external readout adapters | Counterfactual/order/tracking datasets, split design, metric definitions and analysis |
-| Configs/build | `pyproject.toml`, dependency locks, CI, `configs/` default, models/training/readouts | `configs/generation/`, `configs/rendering/`, `configs/splits/`, `configs/analysis/` |
-| Data | Run/checkpoint/prediction provenance and external dataset consumption | Lightweight `data/manifests/`, `data/splits/`, asset/license inventory and external split provenance |
-| Scripts/tests | `scripts/` default, `tests/loading/`, `tests/training/`, `tests/readouts/`, `tests/integration/`, `tests/fixtures/consumer/`; common package/CI bootstrap | `scripts/data/`, `scripts/analysis/`, `tests/data/`, `tests/analysis/`, `tests/fixtures/producer/`, `tests/fixtures/analysis/`; `.github/workflows/data.yml` |
-| Execution | Coordinate resource choices/ledger; validate and launch Joy-owned work on authorized resources | Own rendering/analysis environment and commands; validate own access and launch own authorized work without routing submissions through Joy |
-| Writing | Scientific framing, training/readouts, results integration, manuscript default | Data/statistics sections, `paper/figures/`, `paper/tables/`, references and reproducibility inventory |
+| Source | `src/bullet_time/` except `analysis/`; includes `schema.py`, `generation/`, `rendering/`, `splits/`, all `evaluation/` including `metrics.py`; `game/` | `src/bullet_time/analysis/` only; self-contained checker/scorer, no imports from Joy's implementation |
+| Configs/build | `configs/` except `analysis/`; package/dependency locks, aggregate CI, `.github/workflows/data.yml` | `configs/analysis/`; optional standalone `.github/workflows/analysis.yml`; no shared package-bootstrap prerequisite |
+| Scripts/tests | `scripts/` except `analysis/`; `tests/` except `analysis/` and `fixtures/analysis/`; includes data/producer tests and new `scripts/scoring/`, `tests/scoring/`, `tests/fixtures/scoring/` | `scripts/analysis/`, `tests/analysis/`, `tests/fixtures/analysis/`; own known-answer fixtures |
+| Data and resources | All required game/renderer/assets, provenance, manifests, split/duplicate checks, restricted labels, SSv2 preparation, storage/runtime ledger | Read-only immutable snapshots; independent hash, lineage, exposure and coverage checks; own authorized audit environment |
+| Reports and writing | `reports/data/`, `reports/analysis/`, manuscript/figures/tables, `docs/novelty-ledger.md`, protocol/power/claims and release | `reports/independent/` for reproducible discrepancies, independent results and literature notes |
+| Shared workflow | SPEC, AGENTS, README, RUNBOOK, interfaces, pilot plan, ownership and shared context | Propose changes with concrete evidence; maintain own task rows/log |
 
-Joy is default owner of unassigned paths; record intentional reassignment in
-[decisions](reports/decisions.md) and shared context. Each person owns their own
-devlog. Shared context is updated by the active task owner with narrow patches.
-This plan does not grant either person access to the other's machines/accounts.
+Godot/asset selection, licenses, external data access, closest-work refresh,
+operational statistics, power planning and final release are explicitly Joy-owned.
+They cannot become hidden prerequisites owned only by Sudarshan. Submission,
+spending and new compute commitments remain user decisions. Neither assignment
+grants access to the other person's machines or credentials.
 
-## Shared documents and research operations
+## Joy's execution queue
 
-| Deliverable | Owner | Required input/check |
+Existing J1/J3 consumer code remains implemented; renderer, real data and scoring
+are still unimplemented. This reassignment makes Joy responsible for building them.
+
+| Task | Deliverable and acceptance | Dependency / priority |
 | --- | --- | --- |
-| SPEC, pilot plan/manifest, AGENTS, CLAUDE, README, RUNBOOK, this plan, interfaces, setup audit, meta-feedback | Joy | Sudarshan may propose changes; user's assignments authorize scoped edits |
-| Protocol freeze/deviations and future preregistration | Joy | Sudarshan supplies split hashes, margins/power evidence and analysis plan |
-| Godot/asset source selection, license and data card | Sudarshan | Joy checks loader needs, storage, and runtime compatibility |
-| Model/objective revisions, native-recipe validation, hardware/software pins | Joy | Sudarshan checks exposure and evidence requirements |
-| Closest-work refresh and future `docs/novelty-ledger.md` | Sudarshan | Joy checks overlap with actual implementation and claims |
-| External dataset licensing/splits | Sudarshan | Joy validates fixed frozen-readout pipeline and development competence |
-| Future `reports/data/` and `reports/analysis/` | Sudarshan | Joy reproduces interfaces and analysis outputs |
-| Learning/transfer/resource reports and pilot gate summary | Joy | Sudarshan supplies construction, metric, and power checks |
-| Release | Sudarshan: data/asset provenance and analysis reproduction | Joy: runnable pipeline, pins, commands, integration and final claims audit |
-| Submission, external spending, new compute commitments | User | Concrete proposal and measured feasibility when needed |
+| J5: producer foundation (formerly S1) | Pin Godot/assets; one scripted projectile arena; saved-state replay and smooth camera loop; schema/producer fixtures; group/split rules and license inventory | Start here; written contracts and local runtime validation, no Sudarshan prerequisite |
+| J6: progressive grids (formerly S2) | One real 256-cell preview, then 8 complete grids with PNGs, `pretrain.jsonl`, `bundle.json`, hashes and state/camera/split reports; later 100 and frozen 1,000 grids | J5; hand each immutable drop to Joy's own consumer as soon as ready |
+| J2: real-update integration | All eight schedules through actual optimizer/exposure audit on 8 grids; 100-grid tail check (12 full updates + 4-grid tail); measured resource costs | J6 first 8, then 100; no need to finish 1,000 first |
+| J7: measurement sets (formerly S3) | Collision/order/tracking input, separate label/group and physics evidence; first 16 complete paired groups per collision/order task and 16 tracking episodes, then 600/200/400 accepted episodes per task | Working J5 scene; can start before J6 reaches 1,000; tiny slice is plumbing only |
+| J8: operational scoring/statistics | Separate label joins, expected-key inventory, collision/tracking/SSv2 metrics, coverage/failure ledger, paired seed/group analysis and prospective power scenarios | Implement against own known-answer fixtures immediately; consumes J3 exports later; never imports S4 scorer |
+| J3: sensitive readouts and external data | Existing seven controls/heads plus real J7 integration; Joy acquires permitted SSv2 training data and validates deterministic grouped split/duplicate rules | Fixtures now, J7 for game sensitivity; licensed metadata/resources for external checks |
+| J4: bounded pilot and report | Resource validation; H1/H2; frozen 1,000 grids; three-slot four-pass screen; H3 + early stability before expansion; complete H4 operational report via J8 | Evidence and authorized resources, never S4/S5 completion |
 
-## Handoffs
+Next implementation milestone: **J5/J6 one-grid preview, then eight-grid bundle
+through J2**. Use the [operator guide](docs/joy-handoff.md) for existing consumer
+commands. Work on J7 and J8 between renderer/resource runs rather than waiting for
+another person. The existing [pilot plan](docs/pilot-plan.md) still controls counts,
+seeds, budgets and launch gates. This queue does not launch jobs automatically.
 
-Detailed draft contracts live in [docs/interfaces.md](docs/interfaces.md).
+## Sudarshan's independent workstream
 
-1. **Grid and evaluation bundle:** Sudarshan produces; Joy validates delivered bytes,
-   loader restrictions, and split admission. RGB is separated from hidden state.
-2. **Run, audit, and prediction export:** Joy produces; Sudarshan validates keys,
-   coverage, paired seeds, budgets, and per-episode metrics. Include failed slots.
-3. **Independent analysis:** Sudarshan produces; Joy reproduces from hashed inputs.
-   Keep conventional uncertainty, equivalence decisions, and exploratory results apart.
+| Task | Concrete deliverable | Dependency |
+| --- | --- | --- |
+| S4a: independent scorer foundation | Standalone CLI, own known-answer fixtures/tests, collision BA, three-frame tracking reacquisition, SSv2 top-1 and strict missing/duplicate/hash/label-join checks; reproducible report | Versioned CSV/JSON contracts only; no renderer, model checkpoint, Joy scorer or actual run needed |
+| S4b: evidence audit | Recompute metrics from a pinned export; compare with Joy's J8 report; check exposure/splits, paired hierarchy/uncertainty and failure coverage; provide minimal reproductions for discrepancies | First eligible immutable snapshot, not all runs; until available, extend synthetic boundary/statistical tests |
+| S5: literature/claim review | Cited closest-work comparison and concrete claim/measurement risks in `reports/independent/`; distinguish implemented, measured and proposed work | Public primary sources and current spec; no Joy output required |
 
-Start against explicit synthetic fixtures. Implemented producer validation and
-consumer validation are separate status fields. No new human sign-off gate is
-needed for normal authorized development, and no independent review is assumed.
+First delivery is S4a, with a commit, command, fixture hashes, observed results and
+limits. Exact acceptance and snapshot contents are in
+[the independent-review brief](docs/independent-review.md). S4/S5 strengthen the
+project but are not pilot-development prerequisites. Required novelty/analysis
+work still has a Joy-owned implementation if these deliveries never arrive.
 
-## First parallel workstreams
+## Integration without a personal approval queue
 
-These are assignments for future collaborator sessions, not launched agents/chats.
-The [pilot plan](docs/pilot-plan.md) defines data counts, run slots and gates.
-Grid/exposure/run v1 and evaluation v2 are the working wire boundaries. Joy's
-consumer is implemented; producer/analysis integration remains pending.
-Neither side waits for the other's Python classes, package install or full corpus.
+1. Joy validates producer and consumer components separately against unchanged
+   JSON/CSV contracts and records actual evidence for each. Same-person checks are
+   self-validation, not independent collaborator review.
+2. Joy publishes immutable manifests/reports and eligible prediction snapshots
+   as milestones finish. Sudarshan pulls a pinned snapshot and works on his own
+   schedule; neither pipeline waits for the other's acknowledgment or shared class.
+3. Sudarshan returns a discrepancy report keyed by commit, artifact hash, expected
+   result and reproduction command. Joy triages it in the next integration pass.
+   A confirmed invariant violation blocks affected evidence until fixed; silence
+   is neither acceptance nor a reason to halt unrelated valid work.
+4. Use disjoint paths and separate checkouts; normal fetch/merge/push only. A new
+   task claims explicit files in shared context before editing. In-progress work
+   discovered later is preserved and integrated deliberately, never overwritten.
+5. Keep the last accepted artifact/version usable. Required-field/semantic changes
+   need a new contract version and compatibility export/migration; ownership alone
+   changes no wire version. A malformed artifact fails locally with a concrete
+   diagnosis, without stopping work on fixtures or another valid artifact.
 
-| Task | Owner | Concrete deliverable / acceptance | True dependency; work while waiting |
-| --- | --- | --- | --- |
-| J1: consumer foundation | Joy | Deterministic RGB fixtures in own test folder; all 8 schedules, 4-pass mixtures, separate RNGs, masking and 8-grid/tail update tests; JSON adapter and run/prediction writer | No S task; use the written v1 fields; no import from S-owned `schema.py` |
-| S1: producer foundation | Sudarshan | Canonical schema/JSON validator, independent producer fixtures, group/split checks, license inventory, state/renderer design | No J task; standalone data CLI / owned environment; no dependency on Joy's package bootstrap |
-| S4: analysis foundation | Sudarshan | Independent synthetic predictions, collision/tracking metrics, paired hierarchy/coverage and analysis report; known-answer and malformed cases | No J task; use v1 prediction table and toy data; real integration waits only for first export |
-| S2: progressive rendering | Sudarshan | 1 grid preview, then 8 complete grids and validation report, then 100-grid real audit, then 1,000 admitted pretraining grids | S1 + validated renderer/runtime; each drop independently consumable, do not wait for all data |
-| J2: real-update integration | Joy | Validate first 8 real grids, actual transformed-image/mask/raw-target/update audit; later 100-grid audit including 4-grid tail | J1 + S2's 8-grid drop only; while waiting finish resumable runner, references and export tests |
-| S3: measurement sets | Sudarshan | Collision/order/tracking generators and 600/200/400 accepted episodes per task; labels, equal-image checks and split reports | S1 and working scene, not completed S2 corpus or J2; first small task drop can precede 1,000 grids |
-| J3: sensitive readouts | Joy | Causal input assembler, 7 supervised diagnostics, frozen heads and SSv2 adapter; export predictions at first small task drop | Head development uses fixtures now; H3 acceptance needs S3 full sets and resources |
-| J4: bounded pilot | Joy | Resource/runtime pins, early 3-slot screen, 18 controlled slots plus listed references, complete coverage/failed-run ledger | H1/H2 + complete 1,000-grid pretraining bundle + resources for screen; H3 + early stability before expansion; each first result unblocks S4 integration |
+S1 → J5, S2 → J6, S3 → J7 are historical task aliases, not active assignments to
+Sudarshan. Required scoring previously in S4 moves to J8; S4 now names independent
+verification only. Earlier logs/reports preserve the old assignments as history.
 
-J1/J3 use consumer-owned fixtures; S1 uses producer-owned fixtures; S4 uses
-analysis-owned fixtures. Each person writes their own checks against the common
-contract. This avoids one fixture generator becoming everyone's prerequisite and
-keeps an independent check from merely copying a producer's logic. Synthetic
-fixtures are clearly labeled and never appear as rendered/research evidence.
+## Data isolation and honest evidence
 
-### Only these integration handoffs require the other stream
+Joy prepares assessment data through a separate generation/admission process that
+emits hashed, label-free expected inventories. Training/tuning and inference jobs
+receive only allowed inputs; the scoring process alone receives assessment labels
+after the declared pilot-version lock. Verify the mounts/permissions and access
+tests before real assessment. A hash allowlist or same-person workflow is not
+proof of human blinding or independent review. Do not use assessment outcomes for
+tuning; a repaired pilot version needs a fresh assessment group pool.
 
-| Handoff | Producer → consumer | Smallest useful drop | Acceptance owner |
-| --- | --- | --- | --- |
-| H1 | S2 → J2 | 8 complete real grids, immutable RGB inventory, split/state audit; 1-grid preview earlier | Joy: actual update audit; Sudarshan: renderer evidence |
-| H2 | S2 → J2 | 100-grid bundle + tail-update/replay/loop evidence | Each validates own side; Joy records integrated evidence |
-| H3 | S3 → J3 | First 16 paired collision/order groups and 16 tracking episodes for format plumbing, then full split sets for gates | Joy: visual solvability; Sudarshan: labels/groups/allowed inputs |
-| H4a | J2/J3/J4 → S4 | First complete task export for one checkpoint and all 3 readout seeds, plus explicit planned-slot inventory | Sudarshan: schema/coverage/metrics; full paired study analysis waits for all runs |
-| H4b | S4 → Joy | Reproducible metrics/uncertainty + source hashes and failure ledger | Joy reproduces; both record limits in their own logs |
+Sudarshan initially receives synthetic or train/dev audit snapshots only. Assessment
+access, for either person, follows the same locked-version evaluation policy.
+SSv2 official validation and eventual final tests remain unavailable to tuning.
+Final confirmatory freezes/access rules remain required and unimplemented.
 
-The H3 tiny drop is plumbing only and must already have correct group assignments;
-it does not qualify for the numeric sensitivity gates. Sudarshan can continue
-rendering and analysis while Joy consumes a drop. Joy can continue models/readouts
-while waiting for the next data volume. Data generation and metric development
-stay on Sudarshan's side; model/input/export code stays on Joy's side.
-
-### Avoid routine coordination becoming a bottleneck
-
-- JSON/CSV files are the interoperability boundary. A canonical Python schema can
-  help but is not a required import. Each side owns its adapter and component tests.
-- Add optional fields compatibly; readers ignore documented optional additions.
-  Required-field/semantic changes get a new version and a producer compatibility
-  export until the consumer migrates. Do not silently mutate an accepted bundle.
-- Each owner can run and commit their own component checks. Joy owns aggregate CI;
-  Sudarshan may maintain the separate data job. Shared CI configuration is not a
-  prerequisite for running data/analysis checks locally.
-- Resource coordination is a shared ledger, not a requirement that Joy submit
-  Sudarshan's jobs. Each uses their own validated access within authorized limits.
-- Use separate local checkouts and explicit owned paths. Fetch/merge/push normally;
-  no shared worktree, force push, or unannounced cross-owner rewrite.
-- Record an actionable blocker after a focused session: failing artifact/hash,
-  expected contract, smallest needed fix and fallback task. Continue independent
-  work. Do not turn a task handoff into a meeting or personal-approval queue.
-- Scientific revisions that affect both streams go through the dated decision
-  record and versioned contract. Ordinary implementation does not need joint sign-off;
-  claiming real integration does need actual producer/consumer evidence.
-
-## Later stages and gates
-
-| SPEC stage | Joy | Sudarshan | Gate |
-| --- | --- | --- | --- |
-| 1: controlled images | Actual loader/update audit | Rendering/state/splits and independent audit | Same immutable image exposure, all conditions, valid replay and visibility |
-| 2: measurement and pilot | 18 reconstruction pilot runs on 1,000 grids: six conditions × three paired seeds; native/reference/readout work budgeted separately | Solvable paired tasks, metric validation, exclusion/leakage review, conservative variance/power estimates | Sensitive measurements and useful learning; measured compute/storage |
-| 3: main freeze | Validate V-JEPA, external transfer, common recipes, readout budget, capacity/budget plan | Three families, finalized splits, margins/claim scope, power and independent-corpus plan | Dated protocol/config/manifest/analysis freeze before final test |
-| 4: conditional full study | Two objectives × eight conditions × n paired seeds; references, readouts and replications separately counted | Independent paired analysis, family effects, coverage, tables/figures | All prespecified arms reported; claims bounded by actual evidence |
-
-The pilot has concrete stage gates and selected defaults, but no promised calendar
-completion, final-study sample size, compute host, or final protocol freeze. The 16n main-run count excludes pilots and supporting work.
-Independent-corpus replication and held-out-family evaluation are different checks.
+H1–H4 evidence, complete coverage, sensitive visual controls, prospective precision
+and cost checks remain mandatory. Missing independent verification is recorded as
+pending; neither Joy's implementation nor another agent on Joy's work is Sudarshan's
+review. Independent-corpus and held-out-family replications stay required for the
+claims that use them. There is no promise of a bottleneck-free study: data validity,
+resources and scientific feasibility still limit progress, but no required pilot
+component has an unavailable collaborator as its sole owner.

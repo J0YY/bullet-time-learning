@@ -10,8 +10,8 @@ representations. The [research specification](SPEC.md) defines the study.
 resume, controlled exposure audits, references, readouts and exports. The
 [implementation audit](reports/joy-implementation-audit-20261028.md) records 45
 passing tests, Linux CI and a clean third independent review. Real game grids,
-visual solvability, independent metrics, compute allocation and empirical results
-are still needed; the full study is not frozen.
+visual solvability, operational scoring, independent verification, compute allocation
+and empirical results are still needed; the full study is not frozen.
 
 The [October 28 feasibility audit](reports/cvpr-feasibility-audit-20261028.md)
 supports a bounded pilot, identifies missing related work and evaluation details,
@@ -27,10 +27,13 @@ The [revised spec](SPEC.md) adopts the audit fixes and a [concrete pilot plan](d
 4. Follow [RUNBOOK.md](RUNBOOK.md) for session startup, validation, handoffs, and
    publishing to `main`.
 
-Joy owns training, sequence loading, readouts, integration, and execution planning.
-Sudarshan owns game/data generation, rendering, splits, and independent analysis.
-Both meet at [draft versioned interfaces](docs/interfaces.md). Assignments are a
-working plan; Sudarshan's personal acknowledgment has not been recorded.
+As of October 30, Joy owns the complete required pilot pipeline, including game
+rendering, data/splits, training, evaluation and operational scoring. Sudarshan owns
+[independent verification and research review](docs/independent-review.md), which
+can start on fixtures and does not block Joy's development. They exchange immutable
+snapshots through [versioned interfaces](docs/interfaces.md), with disjoint code
+paths. Sudarshan's acknowledgment has not been recorded. Next: Joy builds the
+one-grid preview, then eight real grids for actual-update integration.
 
 ```bash
 git clone https://github.com/J0YY/bullet-time-learning.git
@@ -54,16 +57,17 @@ GitHub write permission is required to push; public clone access does not grant 
 | [SHARED_CONTEXT.md](SHARED_CONTEXT.md) | Current status, task registry, and cross-chat handoffs |
 | [division-of-labor.md](division-of-labor.md) | Owners, first tasks, dependencies, and acceptance gates |
 | [RUNBOOK.md](RUNBOOK.md) | Reproducible collaboration and Git workflow |
-| [docs/interfaces.md](docs/interfaces.md) | Versioned data/run/prediction contracts; Joy consumer tested, S producer/analysis pending |
+| [docs/interfaces.md](docs/interfaces.md) | Versioned data/run/prediction contracts; consumer tested; Joy producer/scoring and independent verification pending |
 | [docs/pilot-plan.md](docs/pilot-plan.md) | Concrete pilot data, runs, gates and parallel handoffs |
+| [docs/independent-review.md](docs/independent-review.md) | Sudarshan’s first standalone deliverable and snapshot audit |
 | [configs/pilot-plan.json](configs/pilot-plan.json) | Machine-readable planning counts/seeds; not a training config |
 | [joy-devlog.md](joy-devlog.md) / [sudarshan-devlog.md](sudarshan-devlog.md) | Per-person work and environment records |
 | [meta-feedback.md](meta-feedback.md) | Dated review of risks and open choices |
 | [reports/decisions.md](reports/decisions.md) | Decision authority, protocol changes, and freeze status |
 | [reports/setup-audit.md](reports/setup-audit.md) | Setup provenance, validation evidence, and limits |
 
-The ownership map separates implemented Joy consumers from pending S-owned
-producer/analysis paths. Keep generated RGB, hidden-state
+The ownership map gives Joy all required producer/consumer/scoring paths and
+reserves separate audit paths for Sudarshan. Keep generated RGB, hidden-state
 labels, checkpoints, caches, and run outputs outside Git. Version lightweight,
 release-appropriate manifests, configuration, provenance, and reports.
 
@@ -73,5 +77,5 @@ its own science, resource decisions, dependencies, and evidence. The October 28 
 ## Implemented Joy consumer and handoff
 
 See [the operator guide](docs/joy-handoff.md) for setup, synthetic checks, actual-update
-integration, model references, readout commands and the smallest S1–S4 deliveries.
+integration, model references, readout commands and Joy’s next J5–J8 deliveries.
 Implementation passes fixture checks; real research gates remain unmeasured.

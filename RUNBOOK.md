@@ -1,8 +1,10 @@
 # Runbook — bullet-time-learning
 
 **Current capability:** Joy's training/consumer/readout pipeline, synthetic tests,
-reference setup and collaboration checks are implemented. Real rendering, independent
-metrics/statistics, compute access and empirical scientific gates remain pending. The [spec](SPEC.md), [ownership map](division-of-labor.md), and
+reference setup and collaboration checks are implemented. Joy now also owns the
+required rendering/data and operational scoring work, which remains unimplemented.
+Independent verification, compute access and empirical scientific gates remain
+pending. The [spec](SPEC.md), [ownership map](division-of-labor.md), and
 [interfaces](docs/interfaces.md) govern those tasks.
 
 ## Start or join
@@ -35,7 +37,11 @@ clean, auto-stash someone else's files, or overwrite the other devlog.
 
 Use the first tasks in the ownership map. Re-read shared context, add a registry
 row with task ID, person, scope, base commit, dependencies and status. Keep changes
-within the assigned paths. Name any proposed cross-owner change in a handoff.
+within the assigned paths. The October 30 reassignment authorizes Joy's J5–J8
+producer/scoring work; it no longer requires a handoff from Sudarshan. His S4/S5
+verification stays in separate paths and is not a development prerequisite. Name
+any other proposed cross-owner change in a handoff. Preserve discovered unpublished
+work; claim a disjoint task instead of overwriting it.
 
 Develop against draft fixtures without waiting for personal acknowledgment. Record
 producer and consumer checks honestly. A mock grid or passing combinatorics check
@@ -130,9 +136,11 @@ paths, throughput, memory, GPU counts and failure states for every run.
 
 Follow [pilot v1](docs/pilot-plan.md). Deliver 1 → 8 → 100 → 1,000 grids. Integrate
 one actual update at eight grids, without waiting for the full corpus. Joy builds
-consumer fixtures; Sudarshan builds producer and analysis fixtures independently
-against [working v1 interfaces](docs/interfaces.md). Send an immutable drop with
-hashes and one reproduce command as soon as it passes its producer checks.
+producer and consumer components with separate fixtures; J8 supplies operational
+scoring. Sudarshan builds a separate S4 verifier against [the contracts](docs/interfaces.md),
+using his own fixtures and eligible immutable snapshots. Publish each Joy-owned
+drop with hashes and one reproduce command as soon as it passes producer checks;
+Joy's consumer uses it immediately without waiting for S4.
 
 After the 100-grid audit, frozen 1,000-grid pretraining bundle and resource
 validation, the first three controlled slots
@@ -168,8 +176,8 @@ resolving research input/partition choices or expanding the study.
 pilot manifest, pair-preserving label budgets, checkpoint/update arithmetic,
 forecast steps, included early slots and supporting/readout counts. Its JSON output
 binds source hashes; malformed-plan rejection checks are CPU-only. This checker
-validates planning. CI separately runs Joy's implemented consumer fixtures; S-owned
-producer and independent-analysis acceptance tests remain pending.
+validates planning. CI separately runs Joy's implemented consumer fixtures; Joy-owned
+producer/scoring and Sudarshan-owned independent verification tests remain pending.
 
 After an intentional, reviewed pilot-plan/contract change, regenerate its bound
 report with `python3 scripts/check_pilot_plan.py --self-test > reports/pilot-plan-audit.json`,
@@ -182,3 +190,8 @@ in the decision record; original source provenance remains immutable.
 The [Joy handoff guide](docs/joy-handoff.md) documents the implemented CLI, reference
 setup, source/data bindings, bounded real-data integration and producer deliveries.
 Use it alongside the pilot and interfaces. Synthetic checks are not H1–H4 evidence.
+The [independent-review brief](docs/independent-review.md) defines Sudarshan's first
+standalone delivery. Required science/access checks remain mandatory when one person
+owns both producer and consumer; these are self-checks, not independent review.
+Assessment labels stay outside fitting/inference mounts and are opened only by
+scoring after the declared version lock. Log missing external verification honestly.

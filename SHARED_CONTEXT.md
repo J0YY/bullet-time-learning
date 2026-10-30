@@ -1,6 +1,6 @@
 # Shared context — bullet-time-learning
 
-Last updated: 2026-10-28 EDT. Read the live files and Git state before acting.
+Last updated: 2026-10-30 EDT. Read the live files and Git state before acting.
 
 ## Authority and status
 
@@ -9,17 +9,19 @@ This is the common handoff record for Joy's and Sudarshan's project chats. Read
 [division-of-labor.md](division-of-labor.md) governs ownership. The user's current
 request controls scope. Historical log entries do not override newer decisions.
 
-**Stage:** Joy consumer complete and independently reviewed; real producer/data and research gates pending.
+**Stage:** Joy consumer complete; required producer/data/scoring reassigned to Joy; research gates pending.
 The original import remains unchanged in Git at `13e951d:SPEC.md`; current SPEC
 adopts the user-requested audit fixes and pilot defaults. Joy's RGB consumer,
 scheduler/collator audit, VideoMAE/image-MAE runner, resumable checkpoints and
 readout/input/export components now run on synthetic fixtures. Renderer/game grids,
-real producer integration, independent analysis, resource allocation, empirical
-research results and final protocol freeze remain pending.
+real producer integration, operational scoring, independent verification, resource
+allocation, empirical research results and final protocol freeze remain pending.
 
-Joy owns training/loading/readouts and integration; Sudarshan owns game/data,
-rendering, splits, and independent analysis. The detailed path map is the working
-assignment. Sudarshan's personal acknowledgment and local environment are unrecorded.
+Effective 2026-10-30 at Joy's request, Joy owns the complete required pilot pipeline,
+including game/data/rendering/splits, training/readouts and operational analysis.
+Sudarshan owns separate independent verification and research review; his completion
+is not a pilot-development prerequisite. See the exact path map and first tasks in
+[ownership](division-of-labor.md). His acknowledgment/environment remain unrecorded.
 GitHub had a pending write invitation for `deephelms28` at setup; acceptance is not
 assumed. Compute resources are unselected for this project.
 
@@ -54,13 +56,16 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | SETUP | Joy | Spec import, collaboration docs, checker/CI, Git publication | Complete; local/clone/CI checks passed | Import `13e951d`; workflow `8d2b61d`; verified implementation `7bfeb73`; see setup audit |
 | AUDIT | Joy | User-requested full scaffold/spec and CVPR feasibility/quality review | Complete; clone/math/CI checks passed | Base `d9ec3a8`; substantive audit commit `af32b16`; report and reproducible mathematical checks |
 | REVISION | Joy | Revise spec from audit; concrete pilot and independent workstreams; preserve original and verify | Complete; local/fresh-clone/CI checks passed | Spec `9adffbc`; workflow/checks `7e5a6e1`; CI `40765480976` passed; final handoff record follows |
+| REDISTRIBUTE | Joy | User-requested end-to-end pilot ownership and separate nonblocking verification track | In progress; reconcile all live instructions and verify before publication | Base `7d305e0`; remote unchanged; no Sudarshan work entries recorded |
 | J1 | Joy | Consumer fixtures, all schedules/RNG/update tests, JSON adapter and exports | Complete; 45 tests and Linux CI pass; cumulative review clean in round 3 | Working v1 contracts; no S task or schema import needed |
-| S1 | Sudarshan | Producer schema/fixtures, grouped splits, renderer design | Ready, not started | Working v1 contracts; own environment, no Joy package dependency |
-| S2 | Sudarshan | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Not started | S1 + renderer/runtime/resources; deliver each drop immediately |
-| J2 | Joy | Actual-loader/update audit; 100-grid tail check | Fixture/model-update path tested; real data pending | J1 complete; next dependency is S2 first 8 grids |
-| S3 | Sudarshan | Collision/order/tracking sets and oracle/input checks | Not started | S1 + working scene; does not wait for complete S2 corpus |
-| J3 | Joy | Causal heads, seven supervised controls, external adapter | All seven control modes, CLI readouts, DINO/SSv2 adapters implemented; S3 data pending | Working contracts now; S3 sets for H3 acceptance |
-| S4 | Sudarshan | Own synthetic prediction fixtures, independent metrics/statistics | Ready, not started | Working run/prediction v1; first real export later, no need to wait for all runs |
+| J5 (was S1) | Joy | Producer schema/fixtures, Godot/asset pins, grouped splits, scripted arena and replay | Ready; next implementation task | Existing contracts; validate local renderer/runtime; no S prerequisite |
+| J6 (was S2) | Joy | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Pending J5 | Publish immutable RGB and state/camera/lineage evidence at each drop |
+| J2 | Joy | Actual-loader/update audit; 100-grid tail check | Fixture/model-update path tested; real data pending | J1 + Joy J6 first 8 grids |
+| J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | Pending working J5 scene | Tiny train/dev slices before full corpus; same H3 counts/access rules |
+| J8 | Joy | Operational metrics, coverage/failed slots, paired analysis and power scenarios | Ready; unimplemented | Own known-answer fixtures now; eligible J3 exports later; no S4 import |
+| J3 | Joy | Causal heads, seven controls, external adapter plus SSv2 acquisition/split audit | Consumer implemented; real J7/external data pending | J7 sets for H3; licensed official-training metadata/videos for external checks |
+| S4a/S4b | Sudarshan | Standalone independent verifier, then snapshot metrics/exposure/lineage/statistics audits | Assigned; acknowledgment/work unrecorded | Own fixtures now; eligible immutable snapshots later; not a prerequisite for Joy |
+| S5 | Sudarshan | Primary-source literature and claim review in separate reports | Assigned; acknowledgment/work unrecorded | Spec/public sources; no Joy output prerequisite |
 | J4 | Joy | Resource/runtime ledger, early screen and bounded pilot | Runner, candidate configs and slot enumeration implemented; execution not admitted | H1/H2 + complete 1,000-grid bundle + resources for screen; H3 + early stability for expansion |
 
 ## Immediate handoff
@@ -72,14 +77,20 @@ pilot is one family, 1,000 grids, six VideoMAE conditions × seeds 17/29/43,
 reserved-official-validation access are now specified. Main margins, sample size,
 compute and submission remain unselected; no experiment has run.
 
-Joy's independent consumer work is complete for this pilot. Sudarshan can develop
-S1/S3/S4 in parallel without importing Joy's package. Deliver 1 → 8 → 100 → 1,000
-grids; the first 8 unblock actual update integration. S3 evaluation bundles unblock
-the visual controls separately, and S4 can build independent analysis on its own
-fixtures now. Use the [handoff guide](docs/joy-handoff.md) for exact commands/contracts
-and the [completion audit](reports/joy-implementation-audit-20261028.md) for review,
-source/CI evidence and remaining scientific/resource limits. No acknowledgment is
-recorded on Sudarshan's behalf. No real research experiment has run.
+Joy starts J5/J6: one scripted projectile arena and a complete 256-cell preview,
+then eight real grids through the existing J2 actual-update audit. J7 measurement
+generation and J8 operational scoring are independent follow-on queues owned by
+Joy, not collaborator handoffs. All H1–H4 evidence and resource/access gates remain.
+Sudarshan starts S4a using [the independent-review brief](docs/independent-review.md);
+he can finish fixtures and S5 before any real run exists. Publish eligible snapshots
+without waiting for review; fix confirmed correctness findings before using affected
+evidence. Missing independent verification stays explicitly pending.
+
+The [operator guide](docs/joy-handoff.md) contains current commands/contracts. The
+[October 28 completion audit](reports/joy-implementation-audit-20261028.md) remains
+historical evidence for the consumer only; its S-task ownership is superseded here.
+No real producer/data/scoring implementation or research experiment is claimed by
+this reassignment. Sudarshan's log and all prior history are preserved.
 
 ## Update rules
 

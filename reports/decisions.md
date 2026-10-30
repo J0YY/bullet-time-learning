@@ -176,3 +176,45 @@ S2/S3/S4 artifacts and appropriate resources. See the implementation checklist.
   inference under changed consumer code. Exclude independent S-owned code from this
   fingerprint because it is not imported; bind its delivered data/report bytes at the
   interface instead. This preserves parallel collaborator work and reproducibility.
+
+## 2026-10-30 EDT — End-to-end pilot ownership and independent verification
+
+**Owner/authority:** Joy explicitly requested redistributing responsibilities so
+progress almost never depends on the other collaborator. Baseline `7d305e0` was
+clean and equal to freshly fetched `origin/main`; Sudarshan's devlog had no work
+entries. This is evidence of published state only, not a claim about private work.
+
+**Decision:** transfer producer foundation S1 → Joy J5, rendering S2 → J6 and
+measurement generation S3 → J7. Joy J8 owns required operational metrics, coverage,
+paired statistics and power planning. Joy also owns SSv2 access/split audit, asset
+licenses, novelty refresh, resource ledger and release. All required pilot tasks
+now have one end-to-end owner; no S4/S5 completion or acknowledgment gates them.
+Sudarshan retains separate S4a fixture-based verification, S4b snapshot audits and
+S5 literature/claim review, with exact disjoint paths and first-delivery acceptance.
+No messages, acknowledgment, execution or verification are attributed to him.
+
+**Reason:** the original layer split left every real-data input and operational
+score dependent on a separate person. Keep independent review useful without making
+it the only available implementation. Required validity/coverage/access gates stay
+unchanged; confirmed correctness findings still block affected evidence.
+
+**Affected:** SPEC §11's owner sentence only; AGENTS, shared context, ownership,
+README, RUNBOOK, pilot/interface/operator docs, historical checklist pointer and a
+new independent-review brief. Existing task aliases remain in historical records.
+No schema fields, versions, seeds, counts, thresholds, objectives or endpoints change.
+Planning JSON and all runtime code/configs remain byte-identical to baseline.
+Assessment generation/admission emits label-free inventories for fitting/inference;
+restricted scoring follows the same declared version lock. These access boundaries
+must be implemented/validated before use; same-person operation is not human
+blinding or independent collaborator review. Independent-corpus replication and
+future final-test freeze requirements are retained.
+
+**Provenance/impact:** original source remains unchanged at `13e951d:SPEC.md`.
+Current SPEC SHA-256: `bff787e8650f543b47e2f12bafb1081d62f80c377936a12762693da30ef85112`.
+Regenerate spec/pilot arithmetic reports for the documentation hashes; scientific
+arithmetic must match the prior report. No existing research output needs migration.
+Unimported source exclusions describe execution dependencies, not who owns files;
+future runtime imports require source-binding coverage, and scoring binds its own
+code/config. No game data, new scientific result, full-study or paid run is created
+by this change. Independent verification remains pending rather than waived or
+claimed complete.

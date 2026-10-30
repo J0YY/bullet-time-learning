@@ -22,17 +22,24 @@ replication and capacity sensitivity belong to the later main-protocol stage.
 
 ## Start independently, integrate in small drops
 
-| Work package | Joy can start now | Sudarshan can start now | First shared acceptance |
-| --- | --- | --- | --- |
-| Contract/CPU foundation | J1: own deterministic RGB fixtures, loader, eight schedules, RNG/update audit; JSON adapter without importing `schema.py` | S1: JSON producer/schema, group splitting, renderer/state design; S4: own prediction fixtures and metrics | Same versioned JSON boundaries; each validates local fixtures without waiting |
-| First vertical slice | J2: CPU update instrumentation and head/export plumbing; consume first actual eight-grid drop when available | S2: 1-grid preview → 8-grid bundle → 100-grid validation; S3: paired-history and tracking generator in the same scene | H1: 8 real grids through one actual complete update; H2: 100-grid audit |
-| Measurements | J3: seven supervised diagnostics and fixed frozen heads; external adapter/reference on training/development data | S3: 600/200/400 episode sets per task, pair/state/visibility checks; S4: metrics and coverage review | H3: sensitive visual tasks and valid input access |
-| Bounded learning | J4: resource ledger, native/controlled checks, early screen then 18 controlled slots | S4: consume first prediction export, check accounting and uncertainty; refresh related work | H4: pilot validity/learning/transfer/precision report, including failed slots |
+**October 30 ownership update:** Joy owns every required pilot component end to
+end. Sudarshan owns independent verification and research review, with no required
+S-task dependency for pilot development. This changes responsibility, not the
+scientific defaults, counts, gate thresholds or launch authority below.
 
-These are assignments for future work, not automatically launched agents. No task
-requires the other person's personal acknowledgment to begin local authorized
-implementation. Integration requires actual evidence from both producer and
-consumer; a fixture-only check does not count as a real-data handoff.
+| Work package | Joy's required pipeline | Sudarshan's independent track | Acceptance |
+| --- | --- | --- | --- |
+| Foundation | J5: Godot/assets, producer/schema, grouped splits and replay; J8: operational scorer fixtures; J1 consumer already implemented | S4a: standalone metrics/coverage verifier on own known-answer predictions | Separate component checks against existing wire contracts |
+| First real slice | J6 → J2: one-grid preview, then 8-grid actual update, then 100-grid tail/replay audit | Extend boundary fixtures, exposure checks and S5 literature/claim review | H1/H2 from actual producer and consumer evidence, both Joy-owned |
+| Measurements | J7 → J3/J8: collision/order/tracking data, physics checks, visual controls and scoring; Joy also prepares/audits SSv2 | S4b: audit eligible immutable train/dev snapshots when available | H3 sensitive visual tasks, valid input access and complete scoring |
+| Bounded learning | J4/J8: resources, native/controlled checks, early screen then gated expansion and full operational report | Recompute eligible metrics, check hierarchy/coverage and report discrepancies | H4 validity/learning/transfer/precision, including failures |
+
+These assignments launch no agents or jobs. Separate producer/consumer validation
+remains required even under one owner; it is not independent collaborator review.
+S4/S5 may remain pending while Joy progresses through substantiated gates. A
+confirmed invariant violation must still be fixed before affected evidence is used.
+See the [ownership map](../division-of-labor.md) for disjoint paths, task migration
+and the [verification brief](independent-review.md) for the first S4 delivery.
 
 The eight-grid actual update is an integration smoke test, separately costed; it
 is not one of the eighteen training slots. The pilot never resumes a 100-grid
@@ -67,7 +74,7 @@ splits. Use independent group pools for pretraining/train/dev/assessment, and fa
 closed on shared groups. Asset groups mean content/appearance variants that could
 leak identity, not common engine code or the primitive mesh library. Audit exact
 and near-duplicate renders across splits. Fix grouping definitions and hashes in
-S1 before building the sets; naming different files is not independence.
+J5 before building the sets; naming different files is not independence.
 
 The first 100 accepted grids can become a subset of the 1,000 only if producer,
 config and image hashes remain unchanged and all are in the pretraining group
@@ -89,16 +96,21 @@ Pilot assessment is a development-stage check, not final-test evidence. Tune on
 the 200 development episodes; inspect assessment once per declared pilot version.
 A failed version stays in the ledger. After outcome-driven repairs, generate a
 fresh assessment group pool, retain the old results and label all as pilot work.
-No pilot group may enter a later confirmatory test. Final-test data do not exist
-yet; later freezes must bind their hashes and access controls before opening them.
+Joy's generation/admission process emits a label-free expected-key inventory and
+keeps assessment labels out of fitting and inference mounts. A separate scoring
+process receives them only after the declared pilot-version lock; verify access
+boundaries before use. Same-person operation does not establish human blinding or
+independent review. Sudarshan receives only synthetic/train/dev snapshots before
+that release. No pilot group may enter a later confirmatory test. Final-test data
+do not exist yet; later freezes must bind their hashes and access controls before opening them.
 
 SSv2: use SPEC §7's class-stratified, hashed internal development split from official
 training and 10% of the remaining training partition for labels. Reserve official
-validation unopened for final evaluation. Sudarshan owns the split/duplicate audit;
-Joy implements the published deterministic split rule locally and can prototype
-against a synthetic class manifest immediately. Both must get the same hashes on
-real metadata before learning. Use 16 uniformly spaced frames, one clip/video and
-deterministic letterbox as specified. Do not report a guessed global 10% count:
+validation unopened for final evaluation. Joy owns licensed access, the split/
+duplicate audit and the implemented deterministic partitioner. Validate the actual
+metadata, group integrity and reproducible hashes before learning; S4 can recompute
+these later without becoming a personal sign-off gate. Use 16 uniformly spaced
+frames, one clip/video and deterministic letterbox as specified. Do not report a guessed global 10% count:
 class rounding and any grouped duplicate exclusions determine the actual manifest.
 
 Tracking uses [t−15,…,t], current RGB included, one fixed pre-occlusion reference
@@ -182,8 +194,9 @@ Native/image/supervised models, the 360 heads, rendering, features, checkpoints,
 failed/tuning runs and data beyond pretraining all cost extra.
 
 Joy records measured throughput, peak memory, storage expansion and a complete
-GPU-hour estimate after the eight-grid smoke update; Sudarshan records rendering,
-annotation and data-storage costs. Before launch, fill a resource ledger with
+GPU-hour estimate after the eight-grid smoke update, plus rendering, annotation
+and data-storage costs. Sudarshan records costs of his separate verification work.
+Before launch, fill a resource ledger with
 actual host/access, available storage, maximum authorized GPU-hours and per-stage
 stop limits. There is no selected host, financial commitment or approved quota
 in this plan. Either person may run their own authorized commands on validated
@@ -215,8 +228,11 @@ practical margins and global power must be frozen later; neither a three-seed
 pilot nor screening a best endpoint licenses confirmation. Always report all four
 tasks and individual coherent arms, including failures hidden by pooled scores.
 
-For H4, Sudarshan computes metrics from Joy's hashed predictions, first averages
-readout seeds within checkpoint, then forms paired pretraining-seed differences.
+For H4, Joy's J8 operational scorer computes metrics from hashed predictions;
+Sudarshan's S4 implementation independently checks eligible snapshots when available.
+Each first averages readout seeds within checkpoint, then forms paired differences
+between pretraining seeds matched across conditions. Pending S4 verification is recorded explicitly, never inferred
+from agreement between Joy's own components.
 Report per-episode/pair coverage and paired resampling sensitivity. Do not treat
 three readout seeds or hundreds of frames as extra pretraining seeds. Include
 uncertainty in pilot variance and insufficient episode precision when projecting

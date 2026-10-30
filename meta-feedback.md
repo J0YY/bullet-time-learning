@@ -76,3 +76,14 @@ The count check exposes supporting costs: 18 controlled runs, 2 native runs,
 optional tuning/extra checks. No published throughput or acceptance threshold is
 assumed to validate this workload. Actual renderer/model/transfer feasibility and
 independent collaborator review remain outstanding research work.
+
+## 2026-10-30 — Remove required cross-person dependencies
+
+The October 28 layer split still left Joy waiting for every real grid, evaluation
+bundle and operational score. At Joy's request, the [current ownership map](division-of-labor.md)
+now assigns all required pipeline work to Joy and reserves separate independent
+verification/research-review paths for Sudarshan. Both can start without the other's
+code or availability. This increases Joy's workload; it removes a personal queue,
+not renderer, compute or scientific risks. Same-person checks do not establish
+independent review or human blinding. Assessment isolation, substantive H1–H4 gates,
+complete coverage, independent-corpus requirements and future freeze remain intact.

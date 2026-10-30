@@ -1,28 +1,34 @@
-# Joy implementation and first producer handoff
+# Joy end-to-end pilot operator guide
 
 Joy's consumer, schedules, actual-update audit, training/resume, reference models,
 readout/diagnostic fitting, video decoder and prediction export are implemented.
 They have synthetic tests; they have **not** established game fidelity, visual
 solvability, useful representation learning, transfer or CVPR readiness. Keep the
 original SPEC at `13e951d:SPEC.md`; the current scientific scope remains the bounded
-[pilot](pilot-plan.md), with independent [ownership](../division-of-labor.md).
+[pilot](pilot-plan.md), with the October 30 [ownership](../division-of-labor.md) reassignment.
 
 ## Work in parallel
 
-| Person | Work now | Smallest delivery / next dependency |
-| --- | --- | --- |
-| Sudarshan, S1/S2 | Renderer, camera loop, immutable RGB, lineage/split validation | Deliver 1 grid immediately, then 8, 100 and the frozen 1,000; no Joy package import needed |
-| Sudarshan, S3 | Forward-valid collision pairs, same-bag order pairs, tracking windows/reference/occluded queries | Deliver train/dev inputs, separate labels/groups and physics evidence; independent of finishing all pretraining grids |
-| Sudarshan, S4 | Independent metrics, paired inference and full coverage checks | Implement on own prediction fixtures from the CSV contract; do not wait for training |
-| Joy | On first 8 grids run actual-update integration; on S3 data fit seven visual controls | These are separate queues; either can start when its own bundle arrives |
-| Joy | Admit a 4-pass screen, then expand only after the pilot gates pass | Requires all 1,000 frozen grids, actual H1/H2/resource evidence, then H3 and early stability |
+Joy owns all required pilot code/data and operational analysis. Sudarshan's
+separate verifier can start on its own fixtures and later audit eligible snapshots;
+it is not a prerequisite for Joy's progress. Historical S1/S2/S3 deliveries below
+are now Joy's J5/J6/J7; operational scoring is J8. No producer/scorer is implemented
+by this reassignment alone.
 
-Neither person waits for a shared Python schema, for the other's entire workstream,
-or for all training runs before validating the first artifact. No acknowledgment or
-completed work is recorded on Sudarshan's behalf. Real S1–S4 artifacts are currently
-absent. Compute allocation, intended CUDA hardware, SSv2 access and empirical
-hyperparameter calibration are also unverified; source code readiness cannot
-substitute for them.
+| Owner / task | Work now | Smallest delivery / next dependency |
+| --- | --- | --- |
+| Joy, J5/J6 | Pin Godot/assets, scripted arena, state replay, closed camera loop, immutable RGB and lineage/splits | One 256-cell grid preview; then 8, 100 and frozen 1,000; own producer and consumer checks |
+| Joy, J2 | Run existing all-eight-schedule actual-update integration on first 8 grids | J6; no collaborator handoff |
+| Joy, J7/J3 | Forward-valid collision/order pairs, tracking data and physics checks; fit seven visual controls | Tiny train/dev drops first, full sensitivity sets later; no need to finish all grids first |
+| Joy, J8 | Operational metrics, expected keys, coverage/failure ledger and paired analysis | Own known-answer fixtures now; eligible J3 predictions later |
+| Sudarshan, S4/S5 | Standalone independent verifier, then snapshot audits; literature/claim review | Own fixtures and documented formats now; see [first deliverable](independent-review.md) |
+| Joy, J4 | Resource admission, four-pass screen, then gated expansion | Frozen 1,000 grids + actual H1/H2/resources; H3 and early stability for expansion |
+
+No acknowledgment or completed work is recorded on Sudarshan's behalf. Real grids,
+evaluation bundles, operational scoring and independent verification remain absent.
+Compute allocation, intended CUDA hardware, SSv2 access and empirical calibration
+remain unverified. Scientific evidence still gates experiments; the other person's
+availability does not gate implementation.
 
 ## Local setup and synthetic smoke
 
@@ -58,7 +64,7 @@ losses are synthetic plumbing checks. The native diagnostic deliberately uses
 independent clip crops/tube masks and normalized tubelet targets; its targets are
 not required to match the controlled arms.
 
-## What Sudarshan delivers
+## Bundles Joy now produces and validates
 
 Use [interfaces](interfaces.md) for exact fields, versions and allowed access.
 
@@ -69,7 +75,7 @@ Use [interfaces](interfaces.md) for exact fields, versions and allowed access.
    data outside its mounted input root; the allowlist is not an operating-system sandbox.
 2. Game evaluation: `images.jsonl`, `inputs-train-dev.jsonl` (evaluation v2), private
    `labels-train-dev.jsonl` (labels v1), `groups.json` (evaluation-groups v1), and
-   separate S3 physics/visibility evidence. Group whole pairs and related episodes.
+   separate J7 physics/visibility evidence. Group whole pairs and related episodes.
    Train/dev counts are 600/200 episodes per task; primary readouts select 300 train
    episodes (150 pairs), diagnostics use all 600. Assessment has 400 and is separate.
 3. Tracking: three **consecutive** primary first-reappearance frames and a fixed
@@ -77,22 +83,25 @@ Use [interfaces](interfaces.md) for exact fields, versions and allowed access.
    one valid occluded auxiliary query per train/dev episode for visibility training.
    Primary scoring ignores auxiliary queries. Use normalized coordinates after the
    declared letterbox and bounding-box full diagonals on the 224-pixel canvas.
-4. S4: independent expected prediction inventory containing every planned key,
-   target-record hash and group. For inference, supply no assessment labels to Joy.
-   Verify CSV hashes, coverage, target joins, unit weighting, margins and gates
-   independently. Missing/failed slots must not disappear from analysis.
+4. J8: expected prediction inventory constructed from planned slots/examples,
+   independently of observed predictions, with every key, target-record hash and
+   group. Generate assessment inventory in a separate admission process; provide
+   only the label-free inventory to fitting/inference. Mount assessment labels
+   solely in scoring after the declared version lock. Verify CSV hashes, coverage,
+   joins, weighting and gates. S4 may independently reproduce eligible snapshots;
+   missing/failed slots must never disappear from either analysis.
 
 The consumer validates identical final RGB and query points across pairs, opposite
 primary 0.5-second labels and identical image multisets for the order diagnostic.
 These checks cannot prove valid forward dynamics, common continuation rules or
-visual solvability. S3 physics evidence plus the seven trained controls are required.
+visual solvability. J7 physics evidence plus the seven trained controls are required.
 Each horizon has its own head; 0.25/1.0-second secondary heads are additional costs,
 not silently included in the 360 primary-horizon fit inventory.
 
 ## First real integration and resource measurement
 
-After S2 delivers eight grids, change `--manifest` to that bundle and use
-`configs/models/videomae-small.json`. `audit-update` requires exactly eight grids;
+After Joy's J6 produces and validates eight grids, change `--manifest` to that
+bundle and use `configs/models/videomae-small.json`. `audit-update` requires exactly eight grids;
 `train --scope integration --stop-after-updates 1` bounds a single-arm update.
 Do not use a synthetic fixture marker for real data. A 100-grid drop additionally
 checks the shared four-grid tail through the runner API/tests before freezing the
@@ -167,18 +176,20 @@ not accepted by this pilot CLI.
 
 ## SSv2 preparation
 
-S supplies licensed official-training videos/labels and related-video group IDs.
+Joy obtains permitted official-training videos/labels and related-video group IDs.
+Sudarshan may independently audit the snapshot; access is not delegated to him
+as a prerequisite.
 `ssv2-partitions --metadata FILE --output FILE` takes a JSON array of
 `{video_id: "canonical decimal", class_id: 0..173, official_split: "train"}` and
 implements the frozen class-stratified internal dev / remaining-train 10% subset.
 This is a deterministic proposal; the complete group audit must agree before use.
-If a related group crosses a boundary, fail and version the split with S; do not
-silently reassign individual videos. Official validation is reserved for final work.
+If a related group crosses a boundary, fail, version the split and record the
+deviation; do not silently reassign individual videos. Official validation is reserved for final work.
 
 `extract-video --video FILE --video-id ID --output NEW_DIRECTORY` decodes the single
 video stream in presentation order, with one decoder thread, chooses the fixed 16
 uniform indices, and writes hashed RGB PNGs, `images.jsonl` and `decode.json` with
-PyAV/FFmpeg/source provenance. Short videos repeat selected IDs. S's aggregate
+PyAV/FFmpeg/source provenance. Short videos repeat selected IDs. Joy's aggregate
 manifest must preserve hashes and relative paths. SSv2 fitting additionally requires
 `--partitions PARTITIONS.json --groups VIDEO_GROUP_MAP.json` and exact selected
 train/dev inventories. The group map covers every video in the partition proposal.
@@ -190,13 +201,17 @@ both. An independent implementation review is recorded separately from collabora
 acceptance. No toy score is entered into H1–H4, no full study is launched, and no
 CVPR acceptance/novelty conclusion follows from this implementation. A credible
 result still needs sensitive controls, useful learned/transfer performance, complete
-paired coverage and prospective precision/scale evidence. Sudarshan's real bundles
-and independent analysis are the next required project inputs.
+paired coverage and prospective precision/scale evidence. Joy's next required
+inputs are J5/J6 real grids, J7 evaluation bundles and J8 operational scoring.
+Independent S4 verification is a separate pending evidence status. Preserve the
+assessment isolation and version-lock rules in the ownership map; never call
+same-person producer/consumer checks independent collaborator validation.
 
 For long runs, use an immutable checkout of the recorded commit and develop in a
 separate checkout. Pretraining/resume and readout inference bind the executing
-consumer source plus model pins; inference also records its actual runtime. S-owned
-producer/analysis changes do not affect this consumer fingerprint. Fit/infer use
-the same consumer revision; a source change requires running the original revision
+consumer source plus model pins; inference also records its actual runtime.
+Unimported producer/analysis changes do not affect this consumer fingerprint.
+Extend it if adding a runtime import, and bind scoring's own code/config separately.
+Fit/infer use the same consumer revision; a source change requires running the original revision
 or refitting explicitly. See the interface's pixel-center formula when preparing
 tracking labels or query points for any resized input.

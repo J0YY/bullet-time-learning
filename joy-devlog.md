@@ -313,3 +313,26 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   Intended hardware/resources, SSv2 access and actual H1–H4 remain unvalidated.
   No main-stage V-JEPA/full study, paid job, collaborator message or personal
   acknowledgment is claimed. Joy's unblocked pilot implementation is complete.
+
+### 2026-10-30 EDT — Redistribute required pilot work and preserve independent checks
+
+- **Authority/base:** Joy requested minimal mutual bottlenecks; clean local and
+  fetched remote `main` matched `7d305e0`. No published Sudarshan work was present;
+  private/unpublished progress is unknown. Acting as Joy's agent.
+- **Changes:** J5/J6/J7 take producer/rendering/evaluation generation from S1/S2/S3;
+  J8 supplies operational scoring/statistics. Joy retains all other required
+  dependencies, including external data, novelty refresh and resources. S4a/S4b/S5
+  become separate verifier/snapshot/research-review deliverables with reserved paths.
+- **Controls:** updated live instructions, ownership, spec owner sentence, interfaces,
+  pilot and operator guide. Scientific protocol/configs and contracts unchanged.
+  Retained real H1–H4 gates, sealed assessment job boundaries and honest independent-
+  review status. Sudarshan's devlog/history and all runtime code remain untouched.
+- **Next:** regenerate provenance-bound arithmetic, review dependency/path consistency,
+  run scaffold/pilot and existing regression checks, commit and verify normal main
+  publication. Actual rendering, data/scoring implementation and experiments remain
+  separate future work; no message or collaborator acknowledgment is recorded.
+
+- **Precommit checks:** scaffold/local links/original provenance, twelve malformed-plan
+  cases, current pilot source hashes, spec/math arithmetic and whitespace pass.
+  Numerical reports match the prior scientific arithmetic; gate table/wire JSON
+  examples and runtime/config bytes are unchanged. Existing regression run pending.

@@ -1,5 +1,10 @@
 # Joy implementation completion audit
 
+**Historical completion snapshot: 2026-10-28.** The October 30
+[ownership map](../division-of-labor.md) supersedes the task-owner references below:
+S1/S2/S3 are now Joy J5/J6/J7, and required scoring is Joy J8. The completed consumer
+scope and test evidence remain unchanged; the newly assigned work is not complete.
+
 Scope: implement Joy's pilot work until real producer data/validation is the
 remaining dependency. Base `c10b678`; original SPEC and Sudarshan-owned code/log
 remain intact. Fixtures are synthetic, not game/research evidence. The review-loop

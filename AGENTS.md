@@ -43,11 +43,16 @@ repository starts with a proposal and workflow scaffold, not validated experimen
 
 ## Ownership and integration
 
-Joy owns training and integration; Sudarshan owns data and independent analysis.
-Follow the exact path map in [division-of-labor.md](division-of-labor.md). Read any
-area freely. Coordinate cross-owner implementation changes through a concrete
-handoff unless the user's assignment already authorizes them. Ordinary development
-against draft fixtures does not require a new bilateral approval gate.
+Effective 2026-10-30, Joy owns the complete required pilot pipeline: game/data,
+rendering/splits, training/readouts, operational scoring/statistics and integration.
+Sudarshan owns a separate independent verification/research-review workstream in
+its reserved paths. Follow [division-of-labor.md](division-of-labor.md); historical
+S1/S2/S3 assignments have moved to J5/J6/J7, and required scoring to J8. No required
+pilot component waits for S4/S5 or Sudarshan's acknowledgment. Preserve scientific
+acceptance gates and record independent review as pending until it actually occurs.
+Read any area freely. Coordinate cross-owner implementation changes through a
+concrete handoff unless the user's assignment already authorizes them. Ordinary
+development against draft fixtures does not require a bilateral approval gate.
 
 Joy maintains the spec and shared workflow documents. Record scientific changes
 with date, reason, authority, affected sections, and downstream impact in

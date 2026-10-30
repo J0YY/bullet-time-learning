@@ -1,14 +1,15 @@
 # Shared interfaces — versioned pilot contracts
 
-**2026-10-28 status:** Joy's consumer, runner and readouts are implemented and
-tested on synthetic fixtures. No real producer/consumer integration or independent
-analysis validation has passed. Producer-side schema/data remain pending.
-Sudarshan owns canonical data schema; Joy owns run/prediction exports and this
-document. Record actual validation separately for each side.
+**2026-10-30 status:** Joy's consumer, runner and readouts are implemented and
+tested on synthetic fixtures. Joy now also owns producer/schema/data and operational
+scoring; these remain pending. Sudarshan owns the separate independent verifier.
+No real producer/consumer integration or independent analysis validation has passed.
+Record component evidence separately even when one person implements both sides.
+Ownership changed; record fields, semantics and wire versions did not.
 
 ## 1. Grid and evaluation bundle
 
-**Producer:** Sudarshan. **Consumer:** Joy. Working version: `bullet-time.grid.v1`.
+**Producer and consumer components:** Joy. **Independent verifier:** Sudarshan (nonblocking). Working version: `bullet-time.grid.v1`.
 
 | Record | Required fields and meaning |
 | --- | --- |
@@ -44,7 +45,7 @@ establish visual solvability without the sequence/control experiments.
 
 ## 2. Sequence and update audit
 
-**Producer:** Joy. **Independent checker:** Sudarshan.
+**Producer and operational checker:** Joy. **Independent checker:** Sudarshan (pending; nonblocking).
 Working version: `bullet-time.exposure.v1`.
 
 Scheduler input: grid manifest, condition/Time fraction, pass number, and paired
@@ -88,7 +89,7 @@ loader audit, and real optimizer validation are distinct evidence levels.
 
 ## 3. Run and prediction export
 
-**Producer:** Joy. **Consumer:** Sudarshan.
+**Producer:** Joy. **Operational consumer:** Joy J8. **Independent consumer:** Sudarshan S4.
 Working versions: `bullet-time.run.v1`, `bullet-time.prediction.v1`.
 
 | Record | Required fields |
@@ -111,7 +112,8 @@ success. Preserve raw predictions so independent metrics can be recomputed.
 
 ## 4. Analysis and table bundle
 
-**Producer:** Sudarshan. **Reproducer:** Joy.
+**Operational producer:** Joy J8. **Independent implementation/reproducer:** Sudarshan S4.
+Independent results remain pending until delivered; J8 supports pilot decisions without S4.
 Working version: `bullet-time.analysis.v1`.
 
 Bind each output to the frozen analysis configuration and source-run, prediction,
@@ -216,10 +218,11 @@ filename. Keep raw class logits in a separately hashed array if used for calibra
 with all expected keys. Analysis uses only authorized label exports and verifies
 the target-reference hash before joining. Retain group fields for paired resampling.
 
-Producer and consumer each implement their own adapter and fixtures. Joy does not
-wait to import Sudarshan's `schema.py`; Sudarshan's data/analysis CLI does not wait
-for Joy's package or runner. Before real integration, validate byte hashes, allowed
-input access and the actual exported records, not only this illustrative format.
+Joy's producer and consumer keep separate adapters/fixtures at the artifact boundary.
+Joy's operational scorer does not import Sudarshan's analysis code. Sudarshan's
+standalone verifier uses its own fixtures and reads wire records without importing
+Joy's package, metric logic or fixture generator. Before real integration, validate
+byte hashes, allowed input access and the actual exported records, not only this illustrative format.
 
 Required fixture cases across consumer and independent analysis tests: complete/missing/duplicate grid
 cells, wrong RGB hashes and escaping paths; opposite-label identical-input pairs
@@ -227,14 +230,15 @@ at 50% BA/Brier 0.25 for p=0.5; tracking success only if all three frames satisf
 visibility/tolerance including equality at the boundary; a failed/missing prediction
 that changes coverage; unequal family sizes (macro ≠ micro); three readout seeds
 averaged within each pretraining seed; one failed TOST component blocking the global
-conjunction. Joy consumer cases are implemented; independent analysis/producer cases remain S-owned work.
+conjunction. Joy consumer cases are implemented; Joy producer/scoring and Sudarshan
+independent-verifier cases remain pending work.
 
 | Contract | Producer implemented | Consumer validated | Independent producer/analysis acceptance |
 | --- | --- | --- | --- |
-| Grid v1 / evaluation v2 | No (Sudarshan) | Joy fixtures only; real data pending | Not performed |
+| Grid v1 / evaluation v2 | No (Joy J5/J7) | Joy fixtures only; real data pending | Not performed (S4) |
 | Exposure/update v1 | Joy fixtures/model updates | Independent S checker pending | Not performed |
-| Run/prediction v1 | Joy fixture exports | S consumer pending | Not performed |
-| Analysis v1 | No | No | Not performed |
+| Run/prediction v1 | Joy fixture exports | Joy J8 operational scorer and S4 verifier pending | Not performed |
+| Analysis v1 | No (Joy J8) | No | Not performed (S4) |
 
 Breaking changes receive a new version and explicit migration. Compatible
 clarifications still need log and contract updates. Replace this table with actual
@@ -264,7 +268,7 @@ not by assuming time from filenames. No producer validation is claimed.
   does not train on positive examples alone. The recommended minimal addition is
   the first occluded frame per episode; this does not add episodes or change the
   primary three-frame score. Report auxiliary results separately. Fitting rejects
-  a tracking split with only one visibility class. S3 owns physical visibility and
+  a tracking split with only one visibility class. J7 owns physical visibility and
   first-reappearance correctness; metadata checks alone cannot establish those.
 
 `images.jsonl` is a separate RGB catalog: `image_id`, `rgb_path`, `file_sha256`,
@@ -277,11 +281,11 @@ The consumer's private label format is `bullet-time.labels.v1`: `schema_version`
 `task_id`, `episode_id`, `query_id`, `horizon_or_frame` (canonical string), `split`,
 `target`. Targets are `{contact: 0|1}`, `{class_id: integer}`, or for tracking
 `{x, y, visible: 0|1, bbox_diagonal_pixels, prediction_role}`. These labels are never
-forwarded as model inputs. Source/pair/physics annotations remain a separate S3
+forwarded as model inputs. Source/pair/physics annotations remain a separate J7
 admission/analysis export. `horizon_or_frame` is `"0.5"` etc., tracking frame string,
 or `"clip"` for SSv2. Hash the canonical full label record for prediction provenance.
 
-Prediction CSV adds the compatible `prediction_role` column, allowing S4 to keep
+Prediction CSV adds the compatible `prediction_role` column, allowing J8 and S4 to keep
 auxiliary visibility queries out of the three-frame primary score. An independent
 expected-key inventory is mandatory; missing predictions become explicit missing
 rows and cannot produce a complete gate. Assessment inference uses a label-free
@@ -306,7 +310,7 @@ Collision/order heads are fitted separately at each horizon; primary is 0.5 seco
 SSv2 groups use a JSON object mapping every partition video ID to a related-group ID.
 The consumer verifies the partition hash, disjoint/nested inventories and related
 group integrity. Source partition metadata and official-training-only access remain
-S-owned validation responsibilities.
+Joy-owned validation responsibilities, with separate optional S4 reproduction.
 
 For frozen-readout prediction inventories, `run_id` is the actual backbone binding
 SHA-256 and `checkpoint_id` is its checkpoint file SHA-256. Supervised diagnostics
@@ -316,14 +320,15 @@ Read the explicit `prediction_identity` returned by fit and saved in its sidecar
 never substitute the common DINO initialization IDs. Human plan slot names need
 an explicit mapping to these hashes. `label_budget` is the actual training episode/
 video count and `readout_seed` must match the fitted head. The checkpoint carries
-its source and fit hash. Inference rejects conflicting metadata; S4 independently
-checks the label/group joins. See [operator guide](joy-handoff.md) for examples.
+its source and fit hash. Inference rejects conflicting metadata; J8 checks label/
+group joins operationally and S4 independently verifies eligible snapshots.
+See [operator guide](joy-handoff.md) for examples.
 
 Readout checkpoints preserve `allowed_prediction_splits`. Every SSv2 pilot head
 and every incomplete/early learned checkpoint is development-only. A completed
 20-pass learned backbone or an untrained/external reference can support game
 assessment. The predictor checks eligibility before loading any requested input;
-unknown/missing progress fails closed. This is additional to S-owned split/lineage
+unknown/missing progress fails closed. This is additional to Joy-owned split/lineage
 admission and the inaccessible final-test mount. Old synthetic readout checkpoints
 without this policy must be regenerated.
 
@@ -333,13 +338,15 @@ canvas `size`, map source normalized point `(u,v)` to
 `(left + (u*(w-1)+0.5)*nw/w - 0.5)/(size-1)` and the analogous y expression.
 Clip only values outside [0,1] to the nearest representable canvas pixel center.
 An interior marked-pixel regression checks this against RGB resampling; aligning
-only the first/last centers would be wrong for PIL resize. S3's transformed labels
+only the first/last centers would be wrong for PIL resize. J7's transformed labels
 must use the same declared geometry. For native 224-square game frames it is identity.
 
 Fit and prediction reports record their executing consumer source/pin hash and
 runtime, separately from the older backbone source. Inference requires the same
 consumer source as the fit; execute from that recorded revision or refit after a
-code change. S-owned generation/schema/splits/analysis/metrics are not imported by
-the consumer and are excluded from its source fingerprint, so parallel producer
-work cannot invalidate Joy's checkpoints. Their delivered data/report hashes are
-validated at the artifact boundary instead.
+code change. Generation/schema/splits/analysis/metrics are currently not imported
+by the consumer and are excluded from its source fingerprint; this is an execution
+boundary, not an ownership rule. Their data/report hashes are validated at the
+artifact boundary instead. Any future import into fitting/inference must extend
+that source binding and its tests. Scoring separately binds its executing source,
+config, labels and predictions; do not treat the consumer hash as its code identity.
