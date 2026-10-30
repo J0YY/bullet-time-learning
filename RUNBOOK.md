@@ -1,8 +1,10 @@
 # Runbook — bullet-time-learning
 
 **Current capability:** Joy's training/consumer/readout pipeline, synthetic tests,
-reference setup and collaboration checks are implemented. Joy now also owns the
-required rendering/data and operational scoring work, which remains unimplemented.
+reference setup and collaboration checks are implemented. The first scripted Godot
+arena and eight real grids are available; see the [producer guide](docs/arena-producer.md)
+and [integration report](reports/arena-integration-20261030.json). Grouped evaluation
+generation, larger drops and operational scoring remain pending.
 Independent verification, compute access and empirical scientific gates remain
 pending. The [spec](SPEC.md), [ownership map](division-of-labor.md), and
 [interfaces](docs/interfaces.md) govern those tasks.
@@ -176,8 +178,9 @@ resolving research input/partition choices or expanding the study.
 pilot manifest, pair-preserving label budgets, checkpoint/update arithmetic,
 forecast steps, included early slots and supporting/readout counts. Its JSON output
 binds source hashes; malformed-plan rejection checks are CPU-only. This checker
-validates planning. CI separately runs Joy's implemented consumer fixtures; Joy-owned
-producer/scoring and Sudarshan-owned independent verification tests remain pending.
+validates planning. CI separately runs consumer and synthetic producer-admission
+fixtures. Native macOS rendering is checked locally and recorded separately;
+operational scoring and Sudarshan's independent verification remain pending.
 
 After an intentional, reviewed pilot-plan/contract change, regenerate its bound
 report with `python3 scripts/check_pilot_plan.py --self-test > reports/pilot-plan-audit.json`,

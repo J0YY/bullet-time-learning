@@ -30,8 +30,9 @@ grants access to the other person's machines or credentials.
 
 ## Joy's execution queue
 
-Existing J1/J3 consumer code remains implemented; renderer, real data and scoring
-are still unimplemented. This reassignment makes Joy responsible for building them.
+J1/J3 consumers and the first arena producer are implemented. The one-grid preview
+and eight real grids are recorded in the [integration report](reports/arena-integration-20261030.json).
+Grouped evaluation generation, larger drops and operational scoring remain pending.
 
 | Task | Deliverable and acceptance | Dependency / priority |
 | --- | --- | --- |
@@ -43,10 +44,10 @@ are still unimplemented. This reassignment makes Joy responsible for building th
 | J3: sensitive readouts and external data | Existing seven controls/heads plus real J7 integration; Joy acquires permitted SSv2 training data and validates deterministic grouped split/duplicate rules | Fixtures now, J7 for game sensitivity; licensed metadata/resources for external checks |
 | J4: bounded pilot and report | Resource validation; H1/H2; frozen 1,000 grids; three-slot four-pass screen; H3 + early stability before expansion; complete H4 operational report via J8 | Evidence and authorized resources, never S4/S5 completion |
 
-Next implementation milestone: **J5/J6 one-grid preview, then eight-grid bundle
-through J2**. Use the [operator guide](docs/joy-handoff.md) for existing consumer
-commands. Work on J7 and J8 between renderer/resource runs rather than waiting for
-another person. The existing [pilot plan](docs/pilot-plan.md) still controls counts,
+The current J5/J6/J2 milestone and measured audit status are in
+[shared context](SHARED_CONTEXT.md). Next independent queues: **J7 tiny measurement
+sets and J8 operational scoring**, alongside planning the 100-grid tail check.
+Use the [operator guide](docs/joy-handoff.md) and [producer guide](docs/arena-producer.md). The existing [pilot plan](docs/pilot-plan.md) still controls counts,
 seeds, budgets and launch gates. This queue does not launch jobs automatically.
 
 ## Sudarshan's independent workstream

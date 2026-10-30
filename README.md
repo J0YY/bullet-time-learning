@@ -6,12 +6,14 @@ Train models on the same rendered images, organized by world time, camera view,
 mixtures, or joint motion. Measure what those relationships add to frozen visual
 representations. The [research specification](SPEC.md) defines the study.
 
-**Current state:** Joy's pilot consumer is implemented and checked: training,
-resume, controlled exposure audits, references, readouts and exports. The
-[implementation audit](reports/joy-implementation-audit-20261028.md) records 45
-passing tests, Linux CI and a clean third independent review. Real game grids,
-visual solvability, operational scoring, independent verification, compute allocation
-and empirical results are still needed; the full study is not frozen.
+**Current state:** Joy's training/consumer/readout pipeline and first Godot arena
+are implemented. The [October 30 integration report](reports/arena-integration-20261030.json)
+records an immutable eight-grid bundle (2,048 real RGBs), replay/camera/pixel checks,
+57 passing tests and a clean separate code review. All eight schedules passed the
+actual full VideoMAE-S optimizer/exposure audit. [Producer commands](docs/arena-producer.md) reproduce the drop.
+Visual solvability, grouped evaluation sets, operational scoring, independent
+collaborator verification, compute allocation and empirical learning results are
+still needed; the full study is not frozen.
 
 The [October 28 feasibility audit](reports/cvpr-feasibility-audit-20261028.md)
 supports a bounded pilot, identifies missing related work and evaluation details,
@@ -32,8 +34,9 @@ rendering, data/splits, training, evaluation and operational scoring. Sudarshan 
 [independent verification and research review](docs/independent-review.md), which
 can start on fixtures and does not block Joy's development. They exchange immutable
 snapshots through [versioned interfaces](docs/interfaces.md), with disjoint code
-paths. Sudarshan's acknowledgment has not been recorded. Next: Joy builds the
-one-grid preview, then eight real grids for actual-update integration.
+paths. Sudarshan's acknowledgment has not been recorded. Joy's next independent
+queues are tiny J7 measurement sets and the J8 operational scorer; larger data
+drops follow the checks in the pilot plan.
 
 ```bash
 git clone https://github.com/J0YY/bullet-time-learning.git
@@ -57,7 +60,7 @@ GitHub write permission is required to push; public clone access does not grant 
 | [SHARED_CONTEXT.md](SHARED_CONTEXT.md) | Current status, task registry, and cross-chat handoffs |
 | [division-of-labor.md](division-of-labor.md) | Owners, first tasks, dependencies, and acceptance gates |
 | [RUNBOOK.md](RUNBOOK.md) | Reproducible collaboration and Git workflow |
-| [docs/interfaces.md](docs/interfaces.md) | Versioned data/run/prediction contracts; consumer tested; Joy producer/scoring and independent verification pending |
+| [docs/interfaces.md](docs/interfaces.md) | Versioned data/run/prediction contracts; consumer and first producer tested; grouped evaluation/scoring and independent verification pending |
 | [docs/pilot-plan.md](docs/pilot-plan.md) | Concrete pilot data, runs, gates and parallel handoffs |
 | [docs/independent-review.md](docs/independent-review.md) | Sudarshan’s first standalone deliverable and snapshot audit |
 | [configs/pilot-plan.json](configs/pilot-plan.json) | Machine-readable planning counts/seeds; not a training config |

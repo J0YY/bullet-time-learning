@@ -12,20 +12,21 @@ original SPEC at `13e951d:SPEC.md`; the current scientific scope remains the bou
 Joy owns all required pilot code/data and operational analysis. Sudarshan's
 separate verifier can start on its own fixtures and later audit eligible snapshots;
 it is not a prerequisite for Joy's progress. Historical S1/S2/S3 deliveries below
-are now Joy's J5/J6/J7; operational scoring is J8. No producer/scorer is implemented
-by this reassignment alone.
+are now Joy's J5/J6/J7; operational scoring is J8. The [arena producer](arena-producer.md)
+now supplies the first eight real grids; operational scoring is still pending.
 
 | Owner / task | Work now | Smallest delivery / next dependency |
 | --- | --- | --- |
-| Joy, J5/J6 | Pin Godot/assets, scripted arena, state replay, closed camera loop, immutable RGB and lineage/splits | One 256-cell grid preview; then 8, 100 and frozen 1,000; own producer and consumer checks |
-| Joy, J2 | Run existing all-eight-schedule actual-update integration on first 8 grids | J6; no collaborator handoff |
+| Joy, J5/J6 | Arena/preview/eight grids complete; group/split validation and larger drops next | 100-grid tail check before frozen 1,000; own producer and consumer checks |
+| Joy, J2 | All eight schedules pass actual full-model update on eight real grids | Next: J6 100-grid tail; no collaborator handoff |
 | Joy, J7/J3 | Forward-valid collision/order pairs, tracking data and physics checks; fit seven visual controls | Tiny train/dev drops first, full sensitivity sets later; no need to finish all grids first |
 | Joy, J8 | Operational metrics, expected keys, coverage/failure ledger and paired analysis | Own known-answer fixtures now; eligible J3 predictions later |
 | Sudarshan, S4/S5 | Standalone independent verifier, then snapshot audits; literature/claim review | Own fixtures and documented formats now; see [first deliverable](independent-review.md) |
 | Joy, J4 | Resource admission, four-pass screen, then gated expansion | Frozen 1,000 grids + actual H1/H2/resources; H3 and early stability for expansion |
 
-No acknowledgment or completed work is recorded on Sudarshan's behalf. Real grids,
-evaluation bundles, operational scoring and independent verification remain absent.
+No acknowledgment or completed work is recorded on Sudarshan's behalf. The first
+eight real grids are available; evaluation bundles, operational scoring and
+independent collaborator verification remain absent.
 Compute allocation, intended CUDA hardware, SSv2 access and empirical calibration
 remain unverified. Scientific evidence still gates experiments; the other person's
 availability does not gate implementation.
@@ -100,8 +101,19 @@ not silently included in the 360 primary-horizon fit inventory.
 
 ## First real integration and resource measurement
 
-After Joy's J6 produces and validates eight grids, change `--manifest` to that
-bundle and use `configs/models/videomae-small.json`. `audit-update` requires exactly eight grids;
+The first eight-grid drop and its measured audit status are in the
+[integration report](../reports/arena-integration-20261030.json). Reproduce the
+[producer](arena-producer.md), then use the existing full-model consumer audit:
+
+```sh
+.venv/bin/bullet-time --threads 4 audit-update \
+  --manifest artifacts/arena-eight-v1/rgb-only/pretrain.jsonl \
+  --model-config configs/models/videomae-small.json \
+  --training-config configs/training/pilot-development.json \
+  --output runs/NEW-audit.json
+```
+
+`audit-update` requires exactly eight grids;
 `train --scope integration --stop-after-updates 1` bounds a single-arm update.
 Do not use a synthetic fixture marker for real data. A 100-grid drop additionally
 checks the shared four-grid tail through the runner API/tests before freezing the
@@ -202,7 +214,8 @@ acceptance. No toy score is entered into H1–H4, no full study is launched, and
 CVPR acceptance/novelty conclusion follows from this implementation. A credible
 result still needs sensitive controls, useful learned/transfer performance, complete
 paired coverage and prospective precision/scale evidence. Joy's next required
-inputs are J5/J6 real grids, J7 evaluation bundles and J8 operational scoring.
+inputs are J7 evaluation bundles, J8 operational scoring and larger J6 drops with
+group/split and 100-grid tail validation.
 Independent S4 verification is a separate pending evidence status. Preserve the
 assessment isolation and version-lock rules in the ownership map; never call
 same-person producer/consumer checks independent collaborator validation.

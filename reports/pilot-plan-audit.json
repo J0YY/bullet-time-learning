@@ -49,8 +49,8 @@
   "scope": "Planning arithmetic only; no models, data or producer/consumer integration validated",
   "source_sha256": {
     "SPEC.md": "bff787e8650f543b47e2f12bafb1081d62f80c377936a12762693da30ef85112",
-    "division-of-labor.md": "f9bc77afa96f932eb449167f719f21b7d2c5f4e91b776fc3144169cb68e2a9cb",
-    "docs/interfaces.md": "0c836a9598ea3ed96819e0ec21792520bb380b56af0e49262b2e60427627aac8",
+    "division-of-labor.md": "bc967747b0080479fa44f18be478113718d4f572d907d87eabf2c4058bb15988",
+    "docs/interfaces.md": "827485b047be8cb41a98a7631024d20a6284b943e2e49495cddb15508483e4ac",
     "docs/pilot-plan.md": "cb8e6b4bb5e720da90c16af54223a7e4dab503ecb7e9175705ab8fd54f25dd3a",
     "scripts/check_pilot_plan.py": "4412aa03eb1e4032be18838d04bb8279860cbd39c1db0b340965f25333bcfaa3"
   },

@@ -93,3 +93,5 @@ works; it does not establish equivalence, learning, solvability or CVPR feasibil
 Local rendering is checked separately from CI. CI exercises synthetic admission
 fixtures and invalid transforms, cameras, cadence, repeated cells, visibility,
 headless claims, traces and artifact paths; it does not claim to run macOS Godot.
+
+Measured local evidence is recorded in the [October 30 integration report](../reports/arena-integration-20261030.json). Raw bundles and audit outputs stay outside Git.

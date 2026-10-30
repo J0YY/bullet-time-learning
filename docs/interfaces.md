@@ -1,11 +1,13 @@
 # Shared interfaces — versioned pilot contracts
 
-**2026-10-30 status:** Joy's consumer, runner and readouts are implemented and
-tested on synthetic fixtures. Joy now also owns producer/schema/data and operational
-scoring; these remain pending. Sudarshan owns the separate independent verifier.
-No real producer/consumer integration or independent analysis validation has passed.
+**2026-10-30 status:** Joy's consumer, runner and readouts are implemented. The
+first arena producer now supplies eight complete real grids through the existing
+RGB grid-v1 contract; all eight schedules pass the full-model actual-update audit.
+[Measured evidence](../reports/arena-integration-20261030.json) binds the source,
+configs and bundle bytes. Grouped evaluation production and operational scoring
+remain pending. Sudarshan's independent verifier/acceptance remains pending.
 Record component evidence separately even when one person implements both sides.
-Ownership changed; record fields, semantics and wire versions did not.
+This status update does not change record fields, semantics or wire versions.
 
 ## 1. Grid and evaluation bundle
 
@@ -230,13 +232,14 @@ at 50% BA/Brier 0.25 for p=0.5; tracking success only if all three frames satisf
 visibility/tolerance including equality at the boundary; a failed/missing prediction
 that changes coverage; unequal family sizes (macro ≠ micro); three readout seeds
 averaged within each pretraining seed; one failed TOST component blocking the global
-conjunction. Joy consumer cases are implemented; Joy producer/scoring and Sudarshan
-independent-verifier cases remain pending work.
+conjunction. Joy consumer and first arena-admission cases are implemented; grouped
+evaluation/scoring and Sudarshan independent-verifier cases remain pending work.
 
 | Contract | Producer implemented | Consumer validated | Independent producer/analysis acceptance |
 | --- | --- | --- | --- |
-| Grid v1 / evaluation v2 | No (Joy J5/J7) | Joy fixtures only; real data pending | Not performed (S4) |
-| Exposure/update v1 | Joy fixtures/model updates | Independent S checker pending | Not performed |
+| Grid v1 | Joy arena `0693adf`; larger/grouped datasets pending | Eight real grids, manifest `8fd92aa7…`; existing RGB adapter; see bound report | Not performed (S4) |
+| Evaluation v2 | No (Joy J7) | Joy fixtures only; real evaluation data pending | Not performed (S4) |
+| Exposure/update v1 | Joy actual full-model updates, all eight schedules | Joy comparison passes on 2,048 real images; report binds complete audit | Not performed (S4) |
 | Run/prediction v1 | Joy fixture exports | Joy J8 operational scorer and S4 verifier pending | Not performed |
 | Analysis v1 | No (Joy J8) | No | Not performed (S4) |
 

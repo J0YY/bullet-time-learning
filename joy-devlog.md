@@ -16,7 +16,7 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 | Remote work root / storage / quota | Not configured |
 | Godot / renderer / GPU runtime | Local Godot 4.5.1 `f62fdbde1`, pinned archive/binary in configs/rendering; Apple M3 Compatibility/OpenGL native display validated 2026-10-30; no CUDA/cluster validation |
 | Model / dependency revisions | Python 3.11.15 `.venv`; torch 2.9.1 / torchvision 0.24.1 / timm 1.0.22; VideoMAE `14ef8d8`; DINOv2 source/weight pins in models/pins; full requirements lock |
-| Data / caches / checkpoints | Synthetic local fixtures; official DINO cache `.cache/dinov2`; DINO + 3 untrained references in ignored `checkpoints/references`; no game experiment |
+| Data / caches / checkpoints | Real arena preview/eight-grid bundles in ignored artifacts/arena-*-v1; full-model one-update audit in runs/arena-update-v1; DINO cache/references retained; no learning experiment |
 | Launch / monitoring commands | Local consumer CLI/test commands in docs/joy-handoff.md; no scheduler/job or CUDA validation |
 | Collaborator access | Check current GitHub access before relying on shared push; see setup audit |
 
@@ -379,3 +379,56 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   and eight-grid bundle, actual update audit, separate code review and publication.
   Scientific gates, cross-split leakage checks and independent collaborator review
   remain pending.
+
+### 2026-10-30 16:27 EDT — Admit eight real grids; begin full-model audit
+
+- **Code/input:** committed producer `0693adf`; generation seed 20261028, pretrain
+  integration pool, plan/pin/source hashes in each immutable bundle. Accepted preview
+  at `artifacts/arena-preview-v1`; eight-grid bundle at `artifacts/arena-eight-v1`
+  reuses preview RGB unchanged. Commands are recorded in each `generation.json`.
+- **Measured:** eight complete grids / 2,048 RGBs; all eight fresh-process simulation
+  replays exact; all 2,048 frozen-state checks and 32 repeated-pixel captures pass.
+  Every state retains ≥12 visible cameras (prospective threshold 8). Both curve
+  classes and all three strides are represented; no complete-grid rejection.
+  Visual inspection covered 16 preview cells and two cells per grid.
+- **Hashes:** preview manifest `787645ed9799216dcd564ea7bc36f6aeac394a5b20dff189cfe43eb7b217328f`;
+  eight-grid manifest `8fd92aa73e4a349b849c0453368a2773046a42e8843851b41e8883208337a065`;
+  eight-grid bundle `028ce46cb033b9b239ceb630a8d49833a0b64e30fa12e9cca919ad43868e2a72`.
+- **Checks:** all 57 tests pass in 104.32 s. New rejection tests, Ruff/format, scaffold,
+  pilot freshness/malformed-plan checks and whitespace pass. Cumulative separate
+  read-only code review (one round) found no actionable issues; it ran two focused
+  tests and independently verified the preview, not the full render/suite.
+- **Run begun:** existing `bullet-time --threads 4 audit-update` with full
+  `configs/models/videomae-small.json`, `configs/training/pilot-development.json`
+  (seed 17, controlled raw RGB, FP32 CPU), eight-grid RGB manifest; one actual update
+  per all eight schedules. Local run/no scheduler ID; exact command/input hashes in
+  `runs/arena-update-v1/started.json`. Result pending at this entry. A two-clip
+  forward/backward timing check took 0.671 s; it justified using the full model.
+- **Limits:** instance fingerprints are not validated train/dev/test groups; same
+  arena/assets require future grouping. One grid has no target contact within its
+  shorter window, retained normally; contact flags are not a benchmark success rate.
+  No H1–H4, learning, external transfer or collaborator verification claimed.
+
+### 2026-10-30 16:34 EDT — Full-model real-data integration passed
+
+- **Run complete:** all eight conditions passed in 403.81 s wall time. Each used
+  128 clips, 2,048 images and 276,824,064 scalar RGB targets with the same init,
+  exact actual exposure/patch/target evidence, learning rate and update counts.
+  Each optimizer/scheduler advanced once; all gradients were finite and nonzero.
+  Per-arm compute time ranged 39.05–54.48 s on this local CPU; not a GPU estimate.
+- **Artifacts:** full audit at `runs/arena-update-v1/update-audit.json`, SHA-256
+  `8322b1140f7c1c853fe5daa2c04679634c5b9b48c5753566abc24e962daceb9e`. Execution receipt
+  binds actual source `0693adf`, configs/input hashes, command, timestamps/runtime.
+  Small public evidence is in `reports/arena-integration-20261030.json` and its
+  human-readable report. Full events/RGB/private evidence stay outside Git.
+- **Scope/checks:** no scientific gate passed; losses after one update are not a
+  learning or equivalence comparison. Review remained clean in one round. Runtime
+  code is unchanged since full tests/review; only results and workflow docs changed.
+  Grid/exposure contract status now records measured producer/consumer validation;
+  evaluation/scoring and independent acceptance remain pending, wire versions unchanged.
+  Refreshed pilot audit provenance after status edits; arithmetic unchanged.
+  Current/original SPEC, consumer/model configs/code and Sudarshan log are preserved.
+- **Next/publication:** J7 tiny measurement sets and J8 scorer are independent Joy
+  queues; J5 grouping and J6/J2 100-grid tail remain before larger drops. Final
+  links/provenance/whitespace, normal main push and exact-commit CI are checked
+  before chat handoff. No paid run, full pilot or collaborator message was sent.
