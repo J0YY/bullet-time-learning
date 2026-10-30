@@ -1,0 +1,16 @@
+{
+  "schema_version": "bullet-time.arena-plan.v1",
+  "seed": 20261028,
+  "family": "projectile_arena",
+  "split": "pretrain",
+  "physics_hz": 64,
+  "stride_ticks": [16, 8, 4],
+  "states": 16,
+  "cameras": 16,
+  "image_size": 224,
+  "maximum_grids": 8,
+  "minimum_projectile_pixels": 4,
+  "minimum_target_pixels": 12,
+  "minimum_visible_cameras_per_state": 8,
+  "scope": "real-render integration only; no pilot learning or H1/H2 acceptance"
+}

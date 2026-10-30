@@ -1,0 +1,14 @@
+{
+  "schema_version": "bullet-time.engine-pin.v1",
+  "version": "4.5.1.stable.official.f62fdbde1",
+  "platform": "macos.universal",
+  "url": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_macos.universal.zip",
+  "archive_sha256": "65c27959d02aaacfc131ec7ecb90179ba8045200cb02982bf2be96d117010b8a",
+  "binary_sha256": "0d214c6c85e47e7060ac13b035b404ce4dda653992503914963e149a45cd0dca",
+  "release_metadata": "https://api.github.com/repos/godotengine/godot-builds/releases/tags/4.5.1-stable",
+  "renderer": "gl_compatibility",
+  "physics": "GodotPhysics3D",
+  "physics_hz": 64,
+  "license": "MIT",
+  "license_url": "https://github.com/godotengine/godot/blob/4.5.1-stable/LICENSE.txt"
+}

@@ -218,3 +218,31 @@ future runtime imports require source-binding coverage, and scoring binds its ow
 code/config. No game data, new scientific result, full-study or paid run is created
 by this change. Independent verification remains pending rather than waived or
 claimed complete.
+
+## 2026-10-30 EDT — Bounded local arena integration implementation
+
+**Authority:** Joy requested the next one-arena, preview, eight-grid consumer-audit
+step. Joy's agent selects implementation details within SPEC §§4–5/12; this does
+not authorize the larger pilot or alter scientific endpoints/margins.
+
+**Decision:** pin Godot 4.5.1 macOS Compatibility/OpenGL and original procedural
+assets. Use 64 Hz Godot rigid-body physics, separate mesh-only rendering, 224 RGB,
+16 × 16 grids and strides 16/8/4. Use seeded closed orbits and local ovals. Admit a
+whole grid only when every state has at least eight views with ≥4 projectile and
+≥12 target class-mask pixels, with exact replay/repeat-pixel checks. These are
+prospective engineering defaults, not a visual-solvability threshold or final
+freeze. An eight-grid pool cycles the three strides; larger-pilot balancing remains
+separate. Preserve failures rather than silently dropping cells or changing arms.
+
+**Scope/limits:** one scripted launch/target-contact mechanic establishes an actual
+physics/rendering integration path. It does not establish gameplay breadth, visual
+reasoning, sensitive tests or novelty. Instance fingerprints and exact cross-grid
+RGB checks do not validate grouped splits or near-duplicate leakage. All grids stay
+in a pretraining-only integration pool; the same procedural asset family must stay
+together when future splits are designed. Private evidence is outside the consumer
+root but not protected by a local OS access sandbox. J7 owns future isolation/tests.
+
+**Affected:** new game, generation/rendering configs, producer code/data scripts,
+tests and producer guide. Existing SPEC, pilot science, RGB wire contract and
+consumer runtime remain unchanged. Original SPEC remains in Git. No prior research
+outputs migrate; accepted bundle bytes bind the source/config/runtime that made them.

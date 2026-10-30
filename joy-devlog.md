@@ -14,7 +14,7 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 | Local checks | Python 3.14.3, Git, and authenticated GitHub CLI available |
 | Compute host / scheduler | Not selected or validated for this project |
 | Remote work root / storage / quota | Not configured |
-| Godot / renderer / GPU runtime | Not installed or validated by this setup |
+| Godot / renderer / GPU runtime | Local Godot 4.5.1 `f62fdbde1`, pinned archive/binary in configs/rendering; Apple M3 Compatibility/OpenGL native display validated 2026-10-30; no CUDA/cluster validation |
 | Model / dependency revisions | Python 3.11.15 `.venv`; torch 2.9.1 / torchvision 0.24.1 / timm 1.0.22; VideoMAE `14ef8d8`; DINOv2 source/weight pins in models/pins; full requirements lock |
 | Data / caches / checkpoints | Synthetic local fixtures; official DINO cache `.cache/dinov2`; DINO + 3 untrained references in ignored `checkpoints/references`; no game experiment |
 | Launch / monitoring commands | Local consumer CLI/test commands in docs/joy-handoff.md; no scheduler/job or CUDA validation |
@@ -358,3 +358,24 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   provide measurement/scoring work between runs. Sudarshan S4a can start on fixtures
   without any Joy run; all personal acknowledgments and independent results remain
   pending. No game implementation, training job or collaborator message was created.
+
+### 2026-10-30 EDT — Implement the bounded arena producer
+
+- **Authority/base:** Joy requested the next arena → one-grid → eight-grid actual
+  update milestone, with efficient checking. Base `30750b1` matched fetched main;
+  work is scoped to J5/J6/J2, not J7/J8 or the full pilot.
+- **Implementation:** pinned and checksum-verified official Godot 4.5.1 macOS
+  binary; original scripted projectile/target arena, separate fixed-step simulation
+  and mesh-only replay, periodic camera curves, immutable RGB-only manifest and
+  private evidence, strict admission and preview reuse. Procedural assets have an
+  explicit license. No external artwork, paid compute or collaborator action.
+- **Debug evidence:** `artifacts/arena-debug-01` produced 256 RGB/mask cells and four
+  identical repeat captures; inspected its contact sheet. `arena-debug-02` repeated
+  simulation exactly but admission caught one-ULP JSON request rounding. Corrected
+  only the request-echo tolerance (1e-12); exact state/pixel checks remain. Rechecking
+  that attempt passes transforms, cadence, masks, cameras and replay. Both are
+  development attempts, not accepted data.
+- **Next:** focused rejection tests, commit producer, capture the accepted preview
+  and eight-grid bundle, actual update audit, separate code review and publication.
+  Scientific gates, cross-split leakage checks and independent collaborator review
+  remain pending.

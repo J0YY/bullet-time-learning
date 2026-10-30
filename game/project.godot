@@ -1,0 +1,26 @@
+; Bullet-time instrumented projectile arena. No external assets.
+config_version=5
+
+[application]
+config/name="Bullet-Time Arena Capture"
+
+[display]
+window/size/viewport_width=224
+window/size/viewport_height=224
+window/size/window_width_override=224
+window/size/window_height_override=224
+window/vsync/vsync_mode=0
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+anti_aliasing/quality/msaa_3d=0
+anti_aliasing/quality/screen_space_aa=0
+anti_aliasing/quality/use_taa=false
+
+[physics]
+common/physics_ticks_per_second=64
+common/physics_interpolation=false
+3d/physics_engine="GodotPhysics3D"
+3d/default_gravity=9.8
