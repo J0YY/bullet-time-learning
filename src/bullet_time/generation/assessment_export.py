@@ -131,6 +131,11 @@ def validate_export(root):
 def verify_preparation(root):
     root = Path(root).resolve(strict=True)
     public, private = root / "public", root / "private"
+    # rglob does not descend directory symlinks. Reject them explicitly so an
+    # extra link to private material cannot be invisible to the file inventory.
+    for folder in (public, private):
+        if folder.is_symlink() or any(p.is_symlink() for p in folder.rglob("*")):
+            raise ValueError("preparation cannot contain symlinks")
     receipt = strict_json((public / "preparation.json").read_bytes())
     if receipt["schema_version"] != "bullet-time.opaque-assessment-preparation.v1":
         raise ValueError("unsupported assessment preparation")

@@ -273,3 +273,12 @@ def test_cli_verification_detects_public_and_private_mutation(tmp_path):
     (output / "public/unexpected-state.json").write_text("{}")
     with pytest.raises(ValueError, match="inventory differs"):
         verify_preparation(output)
+
+
+def test_unlisted_directory_link_cannot_expose_private_material(tmp_path):
+    source, output = tmp_path / "source", tmp_path / "prepared"
+    source_fixture(source)
+    prepare_assessment(source, output)
+    (output / "public/hidden-alias").symlink_to(output / "private", target_is_directory=True)
+    with pytest.raises(ValueError, match="symlinks"):
+        verify_preparation(output)
