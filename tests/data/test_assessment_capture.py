@@ -18,8 +18,8 @@ def test_prefix_counts_and_order_never_split_selected_groups(tmp_path):
     assert all(r in eight for r in one)
     assert [r["group_id"] for r in one] == [f"{task}-0" for task in capture.TASKS]
     assert "seed" not in capture._plan(1)
-    for count in (0, 2, True, 400):
-        with pytest.raises(ValueError, match="only one or eight"):
+    for count in (0, 2, True, 401):
+        with pytest.raises(ValueError, match="one, eight"):
             capture.prefix(tmp_path, count)
     rows.pop()
     rows = [r for r in rows if r["task"] != "tracking"]

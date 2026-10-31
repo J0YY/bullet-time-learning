@@ -307,7 +307,7 @@ expensive dynamics construction. Failure never reduces the required counts.
 
 ### Bounded native assessment prefix
 
-`build_assessment.py` currently permits one or eight complete groups per task.
+`build_assessment.py` permits one/eight groups per task or the full 200/200/400 groups with `--per-task 400`.
 The five-episode first prefix comes from the verified private selection, keeps all
 raw states/RNG/labels inside a private source directory and uses the existing native
 geometry, forward-dynamics, repeat-render and pixel-label checks. Its raw labels
@@ -331,3 +331,21 @@ Only after native source checks pass, run `prepare_assessment.py` on that privat
 source and compile its public inventory with `--allow-partial`. These commands are
 producer/consumer integration, not a scoring release. Full capture, common lineage,
 cross-pool pixel admission, actual model/job receipts and H3/H4 remain separate.
+
+### Resume interrupted private capture
+
+The producer writes `capture.json` before launching capture and an atomic receipt
+under `captures/` only after each group passes validation and its raw files are in
+place. A new output may use `--reuse-captures` with either a completed source or
+an interrupted journal. Only completed group receipts are eligible; an unfinished
+group and temporary receipt files are ignored and preserved. Every reused group
+still needs exact current request, native engine/code/runtime and actual byte checks,
+then current native validation. The producer reconstructs aggregate exports from
+these raw groups. A partial journal never becomes a complete-source admission.
+
+`--per-task 400` selects all 200 collision pairs, 200 order pairs and 400 tracking
+episodes. `complete_capture_counts=true` means only that all native source groups
+were captured. Cross-pool/common lineage, opaque consumer, model/job, locked stage
+and scientific admission remain separate. Recovery supports process interruption;
+this is not a claim that every native image has been durably flushed against power
+loss. Preserve the old attempt and write the resumed source into a new directory.

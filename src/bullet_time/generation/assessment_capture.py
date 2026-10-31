@@ -11,7 +11,8 @@ import subprocess
 
 from bullet_time.provenance import atomic_json, canonical_bytes, digest, strict_json
 from . import evaluation_bundle as measurement
-from .assessment_selection import verify_selection, TASKS
+from .assessment_selection import verify_selection, pilot_counts, TASKS
+from . import assessment_recovery as recovery
 from .bundle import ROOT, read, sha, verify_engine, invoke
 from .progressive_arena import inventory, generation_runtime
 
@@ -23,6 +24,7 @@ def source_files():
     for name in (
         "src/bullet_time/generation/assessment_capture.py",
         "src/bullet_time/generation/assessment_selection.py",
+        "src/bullet_time/generation/assessment_recovery.py",
         "src/bullet_time/generation/progressive_arena.py",
         "scripts/data/build_assessment.py",
     ):
@@ -31,19 +33,20 @@ def source_files():
 
 
 def prefix(selection, per_task):
-    if type(per_task) is not int or per_task not in (1, 8):
-        raise ValueError("this integration accepts only one or eight complete groups per task")
+    if type(per_task) is not int or per_task not in (1, 8, 400):
+        raise ValueError("capture requires one, eight or full (400) groups per task")
     rows = [
         strict_json(line) for line in (Path(selection) / "requests.jsonl").read_bytes().splitlines()
     ]
+    expected = {task: min(count, per_task) for task, count in pilot_counts()[1].items()}
     counts, selected = Counter(), []
     for row in rows:
         if row["task"] not in TASKS or row["split"] != "assessment":
             raise ValueError("private selection contains another task/split")
-        if counts[row["task"]] < per_task:
+        if counts[row["task"]] < expected[row["task"]]:
             selected.append(row)
             counts[row["task"]] += 1
-    if counts != dict.fromkeys(TASKS, per_task):
+    if counts != expected:
         raise ValueError("incomplete private selection prefix")
     return selected
 
@@ -63,42 +66,16 @@ def _plan(per_task):
     plan.pop("seed")  # Actual reconstruction stream is bound privately by selection.
     plan.update(
         schema_version="bullet-time.private-assessment-prefix.v1",
-        groups_per_task={task: {"assessment": per_task} for task in TASKS},
+        groups_per_task={
+            task: {"assessment": min(count, per_task)} for task, count in pilot_counts()[1].items()
+        },
         scope="private native prefix only; cross-pool/complete assessment admission pending",
     )
     return plan
 
 
-def _native(sources):
-    names = (
-        "game/project.godot",
-        "game/arena_driver.gd",
-        "game/evaluation_driver.gd",
-        "game/LICENSE",
-        "configs/rendering/godot-macos.json",
-    )
-    return {name: sources[name] for name in names}
-
-
 def reuse_source(root, pin, sources):
-    root = Path(root)
-    if root.is_symlink():
-        raise ValueError("raw capture root cannot be a symlink")
-    root = root.resolve(strict=True)
-    raw = (root / "source.json").read_bytes()
-    report = strict_json(raw)
-    if (
-        report["schema_version"] != SCHEMA
-        or report["engine_pin"] != pin
-        or _native(report["source_files"]) != _native(sources)
-        or report["runtime"] != generation_runtime()
-    ):
-        raise ValueError("native assessment capture source/runtime differs")
-    if root.is_symlink() or inventory(root, exclude=("source.json",)) != report["inventory"]:
-        raise ValueError("raw assessment capture bytes differ")
-    if sha(root / "source.json") != digest(raw):
-        raise ValueError("capture receipt changed during reuse verification")
-    return root, digest(raw)
+    return recovery.load_reusable(root, pin, sources)
 
 
 def build_prefix(output, binary, selection, *, per_task=1, reuse=None):
@@ -128,11 +105,22 @@ def build_prefix(output, binary, selection, *, per_task=1, reuse=None):
     shutil.copytree(selection, output / "selection")
     if read(output / "selection/selection.json") != verified:
         raise ValueError("selection copy changed")
+    source_commit = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
+    ).strip()
+    recovery.begin(
+        output,
+        source_files=sources,
+        engine_pin=pin,
+        selection_sha256=sha(output / "selection/selection.json"),
+        per_task=per_task,
+        source_commit=source_commit,
+    )
     inputs, labels, groups, images, summaries, commands = [], [], [], [], [], []
     for request in selected:
         gid = request["group_id"]
         private = output / "private" / gid
-        if old and measurement.reusable_request(old[0], request):
+        if old and gid in old[2] and measurement.reusable_request(old[0], request):
             shutil.copytree(old[0] / "private" / gid, private)
             shutil.copytree(old[0] / "inputs/rgb" / gid, private / "rgb")
             commands.append({"reused_group": gid, "source_sha256": old[1]})
@@ -169,6 +157,7 @@ def build_prefix(output, binary, selection, *, per_task=1, reuse=None):
         shutil.move(str(private / "rgb"), rgb_root)
         images.extend(measurement.image_catalog(output / "inputs", request))
         summaries.append({"group_id": gid, "task": request["task"], **evidence})
+        recovery.record_group(output, request, commands[-1])
         print(
             f"Validated private {request['task']} group ({len(summaries)}/{len(selected)})",
             flush=True,
@@ -189,9 +178,7 @@ def build_prefix(output, binary, selection, *, per_task=1, reuse=None):
         output / "generation.json",
         {
             "commands": commands,
-            "source_commit": subprocess.check_output(
-                ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
-            ).strip(),
+            "source_commit": source_commit,
         },
     )
     if source_files() != sources or read(output / "selection/selection.json") != verified:
@@ -247,6 +234,12 @@ def verify_source(output, *, _verified_selection=None):
         if digest((selection / name).read_bytes()) != checksum:
             raise ValueError("private selection copy bytes changed")
     selected = prefix(selection, report["per_task"])
+    header, completed = recovery.validate_records(output)
+    if completed != {r["group_id"] for r in selected} or any(
+        header[k] != report[k]
+        for k in ("source_files", "engine_pin", "runtime", "selection_sha256", "per_task")
+    ):
+        raise ValueError("complete source differs from per-group capture journal")
     if report["plan"] != _plan(report["per_task"]) or report["engine_pin"] != read(
         ROOT / "configs/rendering/godot-macos.json"
     ):
@@ -301,9 +294,10 @@ def verify_source(output, *, _verified_selection=None):
         "queries": len(inputs),
         "per_task": report["per_task"],
         "native_source_validated": True,
+        "complete_capture_counts": report["per_task"] == 400,
         "assessment_authorized": False,
         "scientific_gate_pass": False,
         "limits": [
-            "Prefix only; no complete pool, cross-pool RGB/common lineage, opaque consumer or job/release admission"
+            "Native capture only; no cross-pool RGB/common lineage, opaque consumer or job/release admission"
         ],
     }

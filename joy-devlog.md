@@ -1407,3 +1407,17 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   source, model jobs, stage scorer and H3/H4 remain pending.
 - Next: per-group capture recovery plus full-count capture support, preserving
   completed raw groups after interruption before attempting the full private set.
+
+### 2026-10-31 04:31 EDT — Add raw-group recovery and full source count support
+
+- Producer now writes an initial private capture header and one completed raw-
+  group receipt after validation. Interrupted roots expose only recorded groups
+  for reuse; changed bytes/requests/header/receipts or linked files fail. Complete
+  aggregates must match every per-group receipt and are revalidated.
+- Full selection support preserves 200/200/400 groups and adds only a native
+  count-completeness flag, never assessment/scientific permission.
+- Sixteen focused capture/recovery cases pass in 0.87 s, including incomplete
+  groups, interrupted temporary writes, data/header/request corruption and full
+  prefix accounting. Separate review and actual native recovery integration follow.
+- Latest published ed9e98a passes CI 41184402688. Full capture remains pending
+  while recovery and common semantic lineage are resolved.
