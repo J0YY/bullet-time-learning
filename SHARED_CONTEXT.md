@@ -266,6 +266,14 @@ not an assessment outcome, complete H4 or launch permission. The asset-policy
 choice remains pending; full source capture/common lineage and actual stage
 execution/scoring remain the next dependent work. GPU details remain pending.
 
+Joy is connecting actual fit/inference evidence to predictor contracts in a
+separate `evaluation/readout_execution.py` verifier and focused/integration tests.
+Expose the existing consumer source inventory from the training fingerprint so
+receipt checks can require the actual imported-source files without importing
+producer/independent-analysis changes into model identity. This consumer utility
+change needs a fresh tiny integration fit; preserve historical checkpoints.
+No real assessment release, scientific-policy change or full capture is implied.
+
 ## Update rules
 
 Re-read before each edit. Patch your task/status only, retaining others' concurrent

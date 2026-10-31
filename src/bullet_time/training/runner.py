@@ -72,7 +72,8 @@ class TrainConfig:
         validate_device(self.device)
 
 
-def code_identity(root=None):
+def code_files(root=None):
+    """Actual consumer source inventory, shared by fingerprints and job receipts."""
     root = Path(root) if root is not None else Path(__file__).resolve().parents[1]
     # Producer/independent-analysis code is not imported by this consumer. Its
     # parallel development must not invalidate Joy's in-flight runs or checkpoints.
@@ -88,6 +89,7 @@ def code_identity(root=None):
         "evaluation/assessment_contract.py",
         "evaluation/assessment_inputs.py",
         "evaluation/job_evidence.py",
+        "evaluation/readout_execution.py",
     }
     records = {}
     for path in sorted(root.rglob("*")):
@@ -96,7 +98,11 @@ def code_identity(root=None):
             continue
         if path.suffix == ".py" or path.suffix == ".json" and relative.parts[0] == "models":
             records[relative.as_posix()] = digest(path.read_bytes())
-    return identity(records)
+    return records
+
+
+def code_identity(root=None):
+    return identity(code_files(root))
 
 
 def learning_rate(config, step, steps_per_pass):

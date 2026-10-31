@@ -1481,3 +1481,24 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   No new model fit, assessment score, data-policy amendment or collaborator action.
   Next data step needs the pending asset-group choice; GPU details remain pending
   by Joy's explicit instruction. Finish normal publication and exact-commit CI.
+
+### 2026-10-31 05:04 EDT — Connect actual readout jobs to fitted predictor contracts
+
+- Added a separate execution verifier and CLI. Prelaunch collection requires
+  fixed readout commands, actual RGB/model/config/data files and the shared
+  consumer-source inventory. Verification binds the fit output to the inference
+  checkpoint, exact data/runtime, locked recipe/expected keys and supplied denied
+  roots. DINO source is checked without extracting or repairing it.
+- Exposed the source inventory used by the existing consumer fingerprint; exclude
+  this separate verifier. This utility edit changes model identity once. Preserve
+  old fitted snapshots; no research fit exists to migrate. Producer work remains
+  outside consumer identity.
+- Twenty-nine focused collector/contract checks pass in 6.21 s. An actual tiny
+  native fit/predict plus fingerprint regression passes (2 cases, 16.21 s); after
+  adding the CLI, the complete native fit/predict/verification CLI passes again
+  in 19.33 s. Undeclared private-root and wrong expected-inventory cases reject.
+- Synthetic 32px/two-episode integration only. No native assessment model fit,
+  score, pool/registry admission, scientific gate, Linux/CUDA boundary or release.
+  The caller must supply the complete private/source/prior-score inventory; this
+  component verifies the supplied list, not its completeness. Separate review next.
+- Previous H4 publication 0dfe239 passed exact-commit CI 41186249823.

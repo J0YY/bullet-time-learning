@@ -349,3 +349,45 @@ were captured. Cross-pool/common lineage, opaque consumer, model/job, locked sta
 and scientific admission remain separate. Recovery supports process interruption;
 this is not a claim that every native image has been durably flushed against power
 loss. Preserve the old attempt and write the resumed source into a new directory.
+
+### Verify actual readout jobs
+
+`evaluation/readout_execution.py` connects the existing predictor contract to the
+actual byte-bound fit and inference receipts. `readout_job_inputs(command, cwd)`
+collects required RGBs, model/sidecar/config/data files, consumer sources and runtime
+lock files before launch. It accepts only the fixed `python -m bullet_time.cli`
+fit/predict operations, explicit unambiguous options, canonical absolute data paths
+and this repository cwd. Use its map as `run_bound(inputs=...)`; keep the returned
+request and evidence hashes outside each job directory. DINO's pinned archive and
+all extracted source files must already exist; collection never extracts or repairs
+them. Producer/independent-analysis files are excluded from consumer identity.
+
+`verify_readout_execution` verifies both receipts, required input coverage, exact
+commands/output inventories, the actual fitted checkpoint consumed by inference,
+fit/inference data and runtime identities, and the locked recipe/expected keys.
+It verifies the supplied private roots were denied to both jobs and every supplied
+assessment root was denied during fitting. Assessment inference inputs must belong
+to a declared assessment root. Run verification on the execution host and source
+snapshot. Linux/CUDA execution still needs its own admitted boundary.
+
+```bash
+.venv/bin/python scripts/scoring/verify_readout_jobs.py \
+  --plan /absolute/private/readout-execution-plan.json \
+  --output /absolute/private/new-readout-execution-report.json
+```
+
+The plan schema is `bullet-time.readout-execution-plan.v1`. Its fields are
+`fit_job`, `prediction_job`, `expected_path`, `design`, `recipe_sha256`,
+`private_roots`, `assessment_roots` and `split`. Each job record has its absolute
+receipt `path`, pinned `request_sha256` and pinned `evidence_sha256`; `design` is
+the predeclared scoring-slot descriptor accepted by the predictor contract. Roots
+are nonempty lists of canonical directories. The CLI binds the plan's actual bytes
+and requires a new output; the report remains private when it contains real paths.
+
+This proves execution against the **supplied** root inventory, not that the
+inventory includes every source/copy/prior score. The staged admission adapter must
+supply it from the complete registry and validate pool, fixed slot and release
+identity. No actual assessment set is released by this verifier. Both authority
+flags remain false. Historical jobs lacking required declared files cannot be
+retroactively upgraded. The shared consumer-inventory utility changes the consumer
+fingerprint once; preserve older fitted snapshots and use fresh fits on this code.
