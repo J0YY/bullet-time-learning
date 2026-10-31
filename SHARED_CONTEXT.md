@@ -70,7 +70,7 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | J6 (was S2) | Joy | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Preview + 8 complete; v2 progressive producer and native migration verified; 100/1,000 pending | Immutable bundles, 32 repeat captures, state/camera/hash evidence; see integration report |
 | J2 | Joy | Actual-loader/update audit; 100-grid tail check | All eight schedules pass actual full VideoMAE-S update on 8 real grids on CPU and MPS; complete-pass/tail code verified on fixtures; native 100-grid tail pending | FP32 seed 17; shared exposure/targets/init/budget; one update each, no learning claim |
 | J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | Full train/dev drop admitted; native assessment prefix/public boundary verified; full assessment pending | `artifacts/full-development-v4`: 1,600 groups, 2,400 episodes, 41,200 RGBs; zero cross-split raster conflicts; joint pretraining admission and visual sensitivity pending |
-| J8 | Joy | Operational metrics, coverage/failed slots, paired analysis and power scenarios | Train/dev scorer, paired-analysis foundation and 54 prospective power scenarios verified; full gate/assessment integration pending | Through `75c22ac`; 87-test full regression plus 33 final focused/CLI checks; separate review clean in round 4; no S4 import |
+| J8 | Joy | Operational metrics, coverage/failed slots, paired analysis and power scenarios | Train/dev scoring, paired analysis/power, H3/H4 numerical screens and staged contract foundations verified; actual locked scoring pending | H4 implementation `05898a0`: all 324 final/reference heads; separate review clean in round 1; no assessment outcome or S4 import |
 | J3 | Joy | Causal heads, seven controls, external adapter plus SSv2 acquisition/split audit | Consumer and real J7 fit/predict/score integration complete; full H3/SSv2 pending | `0edab89` one-epoch DINOv2: 95.74 s CPU, 16/16 dev predictions, BA 50%; no H3 pass |
 | S4a/S4b | Sudarshan | Standalone independent verifier, then snapshot metrics/exposure/lineage/statistics audits | Assigned; acknowledgment/work unrecorded; first real dev snapshot ready | Own fixtures plus `reports/data/audit-snapshots/diagnostic-dev-v1`; not a prerequisite for Joy |
 | S5 | Sudarshan | Primary-source literature and claim review in separate reports | Assigned; acknowledgment/work unrecorded | Spec/public sources; no Joy output prerequisite |
@@ -256,6 +256,15 @@ shared target/roof fixtures: the [asset-policy proposal](docs/pilot-asset-policy
 is pending Joy's choice, and full capture/common lineage remain unadmitted. Joy
 continues independent H4 numerical aggregation in `evaluation/assessment_policy.py`,
 its focused tests and scoring CLI. No new scientific policy or collaborator gate.
+
+Fixed H4 numerical screens now cover all 243 game plus 81 SSv2 final/reference
+heads, preserving failures and averaging readout seeds/checkpoints/conditions as
+planned. Code review clean in round 1; 30 H3/H4 automated cases pass across the
+initial/corrected targeted runs, plus two transfer-boundary calculations. See
+[operational scoring](docs/operational-scoring.md). This is arithmetic validation,
+not an assessment outcome, complete H4 or launch permission. The asset-policy
+choice remains pending; full source capture/common lineage and actual stage
+execution/scoring remain the next dependent work. GPU details remain pending.
 
 ## Update rules
 

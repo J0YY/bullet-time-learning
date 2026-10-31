@@ -1467,3 +1467,17 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - Recovery publication 3acc30c is remote-equal and passes CI 41185725984. The
   GitHub connector lists only PR-triggered runs, so push CI was checked with gh.
   Next: separate cumulative code review of the H4 calculation implementation.
+
+### 2026-10-31 04:50 EDT — Complete separate H4 review and boundary checks
+
+- Separate H4 code review clean in round 1 on 05898a0. Reviewer runtime collection
+  was blocked by read-only dependency temp directories; runtime checks ran here.
+  Across the initial and corrected targeted runs, all 30 H3/H4 automated cases
+  pass, including the real CLI failure-ledger/hash-drift check.
+- Two additional synthetic calculations verify the 5-point minimum transfer
+  threshold when the external gap is small, and rejection when that reference
+  falls one video below its own threshold. Neither uses real assessment data.
+- Numerical H4 remains separate from full precision/resources and stage admission.
+  No new model fit, assessment score, data-policy amendment or collaborator action.
+  Next data step needs the pending asset-group choice; GPU details remain pending
+  by Joy's explicit instruction. Finish normal publication and exact-commit CI.
