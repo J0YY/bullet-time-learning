@@ -1,6 +1,7 @@
 """Immutable train/dev measurement drops and producer/consumer admission."""
 
 from collections import Counter
+from functools import lru_cache
 from pathlib import Path
 import math
 import platform
@@ -9,7 +10,7 @@ import subprocess
 
 import numpy as np
 
-from bullet_time.provenance import atomic_json, canonical_bytes, digest, identity, inside
+from bullet_time.provenance import atomic_json, canonical_bytes, digest, identity, inside, number
 from .bundle import ROOT, read, rgb, sha, same_request, verify_engine, invoke
 from .evaluation_motion import select_groups
 
@@ -191,7 +192,10 @@ def validate_capture(root, request, plan, pin, *, rgb_root=None):
 def exports(request, records, evidence):
     gid, task, split = request["group_id"], request["task"], request["split"]
     inputs, labels, groups = [], [], []
-    image_id = lambda key: f"{gid}/{key}"
+
+    def image_id(key):
+        return f"{gid}/{key}"
+
     if task in ("collision", "order"):
         for branch in request["branches"]:
             eid = f"{gid}-b{branch['branch']}"
@@ -589,60 +593,111 @@ def check_duplicates(root, requests, plan):
     difference over their union. Empty foreground uses full RGB. This is a specific
     raster test, not a claim that semantic/perceptual redundancy is eliminated.
     """
-    rows, hashes = [], {}
+    threshold = number(plan["near_duplicate_foreground_iou"], "foreground IoU", 1e-12, 1)
+    max_difference = number(plan["near_duplicate_rgb_mae"], "RGB MAE", 0, 1)
+    rows, hashes, unique = [], {}, set()
+    image_counts = Counter()
     for request in requests:
         gid = request["group_id"]
+        if request["split"] not in ("train", "dev"):
+            raise ValueError("raster duplicate check is train/dev only")
         for key in request["frames"]:
-            pixels = rgb(root / "inputs/rgb" / gid / (key + ".png"))
+            path = root / "inputs/rgb" / gid / (key + ".png")
+            pixels = rgb(path)
             checksum = digest(pixels.tobytes())
             if checksum in hashes and hashes[checksum][0] != request["split"]:
                 raise ValueError("exact duplicate RGB across train/dev")
             hashes[checksum] = (request["split"], gid)
             mask = rgb(root / "private" / gid / "masks" / (key + ".png"))
             fg = foreground(mask) | foreground(mask, 1) | foreground(mask, 2)
-            indices = set(np.flatnonzero(fg).tolist())
-            yy, xx = np.nonzero(fg)
-            bbox = (int(xx.min()), int(yy.min()), int(xx.max()), int(yy.max())) if indices else None
-            rows.append((request["split"], gid, key, pixels, indices, bbox))
-    left = [r for r in rows if r[0] == "train"]
-    right = [r for r in rows if r[0] == "dev"]
-    comparisons = 0
-    for a in left:
-        for b in right:
-            ia, ib = a[4], b[4]
-            if not ia and not ib:
-                difference = float(np.abs(a[3].astype(float) - b[3]).mean() / 255)
-            elif not ia or not ib:
+            packed = np.packbits(fg)
+            image_counts[request["split"]] += 1
+            signature = (request["split"], checksum, digest(packed.tobytes()))
+            if signature in unique:
                 continue
-            else:
-                # Upper bound on possible intersection avoids allocating pixel arrays
-                # for clearly disjoint masks; the remaining test is exact.
-                ax, ay, az, aw = a[5]
-                bx, by, bz, bw = b[5]
-                overlap = max(0, min(az, bz) - max(ax, bx) + 1) * max(
-                    0, min(aw, bw) - max(ay, by) + 1
+            unique.add(signature)
+            yy, xx = np.nonzero(fg)
+            bbox = (
+                (int(xx.min()), int(yy.min()), int(xx.max()), int(yy.max()))
+                if len(xx)
+                else (0, 0, -1, -1)
+            )
+            rows.append(
+                dict(
+                    split=request["split"],
+                    gid=gid,
+                    key=key,
+                    path=path,
+                    checksum=checksum,
+                    mask=packed,
+                    area=len(xx),
+                    bbox=bbox,
+                    sums=pixels.sum(axis=(0, 1), dtype=np.int64),
                 )
-                cap = min(len(ia), len(ib), overlap)
-                if cap / (len(ia) + len(ib) - cap) < plan["near_duplicate_foreground_iou"]:
+            )
+    left = [r for r in rows if r["split"] == "train"]
+    right = [r for r in rows if r["split"] == "dev"]
+    areas = np.array([r["area"] for r in right], dtype=np.int64)
+    boxes = np.array([r["bbox"] for r in right], dtype=np.int64).reshape(-1, 4)
+    empty = np.flatnonzero(areas == 0)
+    popcount = np.unpackbits(np.arange(256, dtype=np.uint8)[:, None], axis=1).sum(axis=1)
+
+    @lru_cache(maxsize=64)
+    def pixels_for(path, checksum):
+        pixels = rgb(path)
+        if digest(pixels.tobytes()) != checksum:
+            raise ValueError("RGB changed during duplicate check")
+        return pixels
+
+    comparisons = mask_candidates = mean_bound_skips = 0
+    for a in left:
+        if not a["area"]:
+            candidates = empty
+        else:
+            ax, ay, az, aw = a["bbox"]
+            overlap = np.maximum(
+                0, np.minimum(az, boxes[:, 2]) - np.maximum(ax, boxes[:, 0]) + 1
+            ) * np.maximum(0, np.minimum(aw, boxes[:, 3]) - np.maximum(ay, boxes[:, 1]) + 1)
+            cap = np.minimum(np.minimum(a["area"], areas), overlap)
+            candidates = np.flatnonzero(cap / (a["area"] + areas - cap) >= threshold)
+        mask_candidates += len(candidates)
+        for index in candidates:
+            b = right[index]
+            if not a["area"]:
+                # Triangle inequality: channel-mean distance lower-bounds full RGB MAE.
+                lower_bound = np.abs(a["sums"] - b["sums"]).sum() / (224 * 224 * 3 * 255)
+                if lower_bound > max_difference + 1e-12:
+                    mean_bound_skips += 1
                     continue
-                intersection = len(ia & ib)
-                union = ia | ib
-                if intersection / len(union) < plan["near_duplicate_foreground_iou"]:
+                pa, pb = pixels_for(a["path"], a["checksum"]), pixels_for(b["path"], b["checksum"])
+                difference = float(np.abs(pa.astype(float) - pb).mean() / 255)
+            else:
+                intersection = int(popcount[a["mask"] & b["mask"]].sum())
+                if intersection / (a["area"] + b["area"] - intersection) < threshold:
                     continue
-                indices = np.fromiter(union, dtype=np.int64)
+                indices = np.flatnonzero(np.unpackbits(a["mask"] | b["mask"]))
+                pa, pb = pixels_for(a["path"], a["checksum"]), pixels_for(b["path"], b["checksum"])
                 difference = float(
                     np.abs(
-                        a[3].reshape(-1, 3)[indices].astype(float) - b[3].reshape(-1, 3)[indices]
+                        pa.reshape(-1, 3)[indices].astype(float) - pb.reshape(-1, 3)[indices]
                     ).mean()
                     / 255
                 )
             comparisons += 1
-            if difference <= plan["near_duplicate_rgb_mae"]:
-                raise ValueError(f"near duplicate RGB across splits: {a[1:3]} / {b[1:3]}")
+            if difference <= max_difference:
+                raise ValueError(
+                    f"near duplicate RGB across splits: {(a['gid'], a['key'])} / {(b['gid'], b['key'])}"
+                )
     return dict(
-        images=len(rows),
-        cross_split_image_pairs=len(left) * len(right),
+        images=sum(image_counts.values()),
+        cross_split_image_pairs=image_counts["train"] * image_counts["dev"],
+        unique_raster_mask_pairs=len(rows),
+        unique_cross_split_comparisons=len(left) * len(right),
+        mask_candidates=mask_candidates,
+        mean_bound_skips=mean_bound_skips,
         candidate_rgb_comparisons=comparisons,
+        rgb_cache_capacity=64,
+        retained_mask_bytes=sum(r["mask"].nbytes for r in rows),
         exact_cross_split_duplicates=0,
         near_duplicates=0,
         foreground_iou=plan["near_duplicate_foreground_iou"],

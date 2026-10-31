@@ -127,7 +127,9 @@ prototype groups / 2,400 prospective episodes / 41,200 planned RGBs, using pilot
 This fixes cross-task appearance reuse found by the earlier development-seed stress
 check. Nothing in this full set is rendered or admitted yet.
 Next: progressive chunk capture and combined pixel/joint-pretraining admission. Joy
-owns the generation/config/test changes; no collaborator input is required.
+owns the generation/config/test changes; no collaborator input is required. Current
+substep: bound duplicate-check memory and vectorize conservative candidate pruning
+without changing the raster rule, before the larger capture.
 
 ## Update rules
 

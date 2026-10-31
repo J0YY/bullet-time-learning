@@ -144,3 +144,19 @@ The [October 30 selection report](../reports/data/full-development-selection-202
 binds the actual 1,600-group inventory and its successful reconstruction. Separate
 review reproduced the complete selection and found no actionable regressions. It
 remains prospective; the public report contains no rendered-data acceptance claim.
+
+## Duplicate-check scaling
+
+The checker retains packed foreground masks and a bounded 64-image RGB cache. It
+reuses comparisons only for identical RGB-and-mask pairs within a split; every
+original image remains counted and present in the data. Vectorized bounding-box/
+area bounds prune impossible mask matches. For two empty masks, channel-mean
+distance supplies a conservative lower bound before the exact full-image MAE.
+Every surviving pair still uses the same exact foreground IoU and union-RGB MAE
+rule. Cross-split exact RGB matches remain failures regardless of their masks.
+
+These changes do not loosen thresholds or replace pixel admission with an approximate
+search. Reports distinguish original image-pair counts, unique comparison units,
+mask candidates, mean-bound skips and actual RGB comparisons. Memory scales with
+packed masks and small metadata, plus the fixed cache, rather than retaining every
+RGB image. Actual full-set time/memory still require measurement after capture.

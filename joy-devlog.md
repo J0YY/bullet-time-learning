@@ -714,3 +714,20 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Next:** progressive full-selection capture, combined pixel duplicate checks,
   joint pretraining lineage and locked assessment workflow. Research CUDA/storage
   and licensed SSv2 access remain unselected, not assigned to Sudarshan.
+
+### 2026-10-31 00:02 EDT — Bound the full-set duplicate check
+
+- **Reason:** retaining 41,200 full RGB arrays alone would require 6,201,753,600
+  bytes, before Python mask sets. Before larger native capture, replace those
+  buffers with packed foreground masks and a 64-image LRU cache.
+- **Same criterion:** exact RGB duplicate rejection remains independent of masks.
+  Reuse identical RGB/mask comparison units only within split; preserve every
+  original image/count. Vectorize conservative bbox/area bounds; apply channel-mean
+  lower bounds only to empty-mask full-image comparisons. Surviving candidates
+  retain exact IoU and union-pixel MAE with unchanged thresholds.
+- **Checks:** 22 producer/raster cases passed in 5.98 s. Added a direct exhaustive
+  oracle, inclusive 0.98 IoU and 1/255 MAE boundaries, empty/one-empty masks, equal
+  means with different textures, exact RGB with different masks and repeated
+  comparison reuse. Scoped Ruff passes; replaced the previously reported lambda
+  style issue in the already edited exporter. Separate review and native-data
+  comparison follow, with no rerendering or model execution needed.
