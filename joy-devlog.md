@@ -940,3 +940,15 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   approximately 23.4 GiB free. No second renderer or learning job launched.
 - **Next:** separate cumulative review; migrate the eight real grids without
   rendering, record evidence and publish. Larger drops and joint admission remain pending.
+
+### 2026-10-31 01:37 EDT — Fix native progressive-report serialization
+
+- **Native attempt:** `75c4d99` reused all eight actual grids without rendering,
+  then correctly stopped on the final report comparison: native mask-count tuples
+  become lists after JSON serialization. Retain `artifacts/arena-progressive-eight-v1`
+  as a failed attempt; no acceptance claimed.
+- **Fix/check:** compare canonical JSON values, and include the native tuple shape
+  in the transport fixture. All 11 progressive tests pass in 1.98 s; Ruff/diff pass.
+  Separate review round 1 independently reported the same P1 defect, now addressed.
+- **Next:** cumulative round 2 and a fresh eight-grid export reusing these captured
+  bytes, with no native rerender.

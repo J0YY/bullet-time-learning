@@ -41,6 +41,8 @@ def transport(monkeypatch):
                 "groups": request["groups"],
                 "stride_ticks": request["stride_ticks"],
                 "repeated_cells": 4,
+                # Native validator stores mask counts as tuples; JSON reads lists.
+                "projectile_mask_pixels": [(0, 0, 8)],
             },
         )
 

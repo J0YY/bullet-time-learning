@@ -321,7 +321,9 @@ def verify_progressive(root):
     if actual != allowed:
         raise ValueError("RGB-only tree contains unlisted files")
     result = summarize(records, summaries)
-    if read(root / "validation/grids.json") != {"summaries": summaries, "result": result}:
+    if canonical_bytes(read(root / "validation/grids.json")) != canonical_bytes(
+        {"summaries": summaries, "result": result}
+    ):
         raise ValueError("grid validation report differs")
     if header["producer_sources"] != source_files():
         raise ValueError("producer changed during verification")
