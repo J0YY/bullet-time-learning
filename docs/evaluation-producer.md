@@ -107,3 +107,35 @@ Run the pure-component checks with:
 Tests cover forward/refined contacts, directed rail histories, constant tracking
 motion, prototype separation, point/box raster boundaries and duplicate rejection.
 Native rendering and model sensitivity require their own recorded executions.
+
+## Prospective full training/development selection
+
+The full-count planner reserves appearance, trajectory and configuration prototypes
+**across all tasks**. It reads the checked-in pilot's data seed (`20261028`) and
+episode counts, converts complete pairs to group units, and selects in fixed task/
+split order. JSON key order cannot change the selection. The tiny integration
+uses its separately documented seed `20261030`; it is not silently enlarged.
+
+```sh
+.venv/bin/python scripts/data/plan_evaluation.py --output artifacts/full-development-selection-v1
+.venv/bin/python scripts/data/plan_evaluation.py --output artifacts/full-development-selection-v1 --verify-only
+```
+
+This writes an immutable **prospective** inventory, with private request records and
+a public selection receipt. Source/config/runtime, every selected request byte and
+actual attempted/selected counts are bound. Verification reconstructs selection
+from the pinned code and pilot counts. Requests include physics/labels and never
+belong in a training input mount. Assessment is not selected by this command.
+
+The target is 1,600 groups: 300 train + 100 dev collision pairs, the same order
+pairs, and 600 train + 200 dev tracking episodes. That represents 2,400 episodes
+and 41,200 prospective RGB images. They become accepted episodes only after
+rendering, physical/mask/input validation, pixel duplicate checks and joint
+pretraining/evaluation lineage admission. Selection alone does not meet J7 or H3.
+
+An earlier full-count preflight using the development seed found 58 shared
+appearance prototypes across independently selected tasks. Global reservation
+prevents that conflict without outcome-based selection. The existing tiny renderer
+remains bounded to its checked-in 16/8 group plan; it does not yet consume the
+full-count selection. Chunked rendering and final cross-split admission are the
+next implementation step. No expensive full render is launched by planning.

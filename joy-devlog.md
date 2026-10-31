@@ -676,3 +676,22 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   seeds/requests and opaque, label-independent IDs; nonces cannot conceal targets
   encoded by deterministic public branch IDs. Current development IDs are not an
   assessment ID scheme. No new scientific gate or collaborator approval dependency.
+
+### 2026-10-30 23:51 EDT — Select full development groups without cross-task reuse
+
+- **Change:** optional reserved prototypes in the selector, plus a canonical
+  whole-collection selection and immutable prospective inventory CLI. It consumes
+  the authoritative pilot seed 20261028 and train/dev counts; the previous seed
+  20261030 preflight was a development-scale stress check, not a protocol freeze.
+- **Counts:** targets 1,600 groups / 2,400 episodes / 41,200 RGBs before rendering.
+  Actual bytes, code/config/runtime and selection attempts are recorded. Verification
+  reconstructs the selection; assessment and model outcomes are unavailable.
+- **Checks:** 17 producer/selection tests passed (5.73 s), including forced
+  cross-task appearance collisions, real reserved-candidate exclusion, canonical
+  JSON ordering, complete pair units, snapshot corruption and rewritten counts.
+  Runtime/source binding received an additional focused check before commit.
+- **Limits:** this is a prospective selection, not an admitted rendered dataset.
+  The tiny renderer remains bounded; chunked native capture and complete pixel/
+  joint-pretraining admission remain next. Existing small artifacts retain their
+  original source revisions. Current native rate extrapolates roughly 96 minutes
+  for the full train/dev capture set; planning spends no such rendering resources.

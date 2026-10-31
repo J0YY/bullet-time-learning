@@ -237,11 +237,15 @@ def forecast_candidate(seed, index, task):
     )
 
 
-def select_groups(seed, split, count, task, *, limit=100000):
+def select_groups(seed, split, count, task, *, limit=100000, reserved=None):
     if split not in ("train", "dev"):
         raise ValueError("initial generator is train/dev only")
     integer(count, "count", 1)
-    selected, seen, considered = [], {k: set() for k in ("trajectory", "asset", "configuration")}, 0
+    kinds = ("trajectory", "asset", "configuration")
+    if reserved is not None and set(reserved) != set(kinds):
+        raise ValueError("reserved prototypes must cover every lineage kind")
+    seen = {k: set() if reserved is None else set(reserved[k]) for k in kinds}
+    selected, considered = [], 0
     # No scene, trajectory or appearance prototype recurs within a task drop.
     # The pool map also prevents sharing any prototype across splits.
     for index in range(limit):
@@ -269,6 +273,29 @@ def select_groups(seed, split, count, task, *, limit=100000):
     raise ValueError(
         "insufficient disjoint prototypes; change the development version, never silently shrink"
     )
+
+
+def select_collection(seed, counts):
+    """Reserve prototypes across tasks; canonical order is independent of JSON key order."""
+    tasks, splits = ("collision", "order", "tracking"), ("train", "dev")
+    if not isinstance(counts, dict) or set(counts) != set(tasks):
+        raise ValueError("collection requires all three tasks")
+    for task in tasks:
+        if not isinstance(counts[task], dict) or set(counts[task]) != set(splits):
+            raise ValueError("collection is train/dev only")
+        for count in counts[task].values():
+            integer(count, "group count", 1)
+    reserved = {k: set() for k in ("trajectory", "asset", "configuration")}
+    requests, evidence = [], {}
+    for task in tasks:
+        for split in splits:
+            rows, stats = select_groups(seed, split, counts[task][split], task, reserved=reserved)
+            for row in rows:
+                for kind in reserved:
+                    reserved[kind].add(row["groups"][kind])
+            requests.extend(rows)
+            evidence[f"{task}/{split}"] = stats
+    return requests, evidence
 
 
 def tracking_candidate(seed, index):
