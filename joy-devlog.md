@@ -1283,3 +1283,17 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   Verification binds the reservation to the exact request/receipt directory.
 - Concurrent regression holds the first job before output creation and confirms
   the second is rejected before execution. Focused runtime results follow.
+
+### 2026-10-31 03:47 EDT — Verify bound jobs with the actual model consumer
+
+- Cumulative code review clean in round 2 after fixing one concurrent-destination
+  P2. Twelve focused job cases pass in 2.19 s after the fix; reviewer runtime
+  tests were blocked by read-only temporary directories, so runtime checks ran here.
+- A new actual tiny-model integration passed in 13.78 s: one-epoch frozen readout
+  fit and dev prediction both run under native private-read denial, with source/
+  config/RGB/checkpoint files pinned and outputs verified. Existing scoring, wrong
+  predictor and changed consumer-source checks also pass. Synthetic 32px/two-episode
+  data only, not H3, useful learning, full private-root admission or GPU validation.
+- Next local prerequisite: an explicit private assessment source-selection/capture
+  path. The existing measurement producer only accepts train/dev. Keep its admitted
+  bundles unchanged; new assessment data needs source, cross-pool and job admission.

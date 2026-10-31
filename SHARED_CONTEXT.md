@@ -231,3 +231,10 @@ and whether work is published. Move detailed history to your own devlog or repor
 Do not infer acceptance from silence, assign work retrospectively, or record an
 independent review that did not occur. Protocol changes belong in the dated
 [decision record](reports/decisions.md), with actual authority.
+
+Bound execution evidence now passes native fault/concurrency checks and an actual
+tiny fit/predict CLI integration; code review clean in two rounds. Assessment remains
+unreleased. Joy is developing an explicit private assessment source-selection path
+in `generation/assessment_selection.py`, its separate CLI/tests, before native capture.
+It must reserve actual content prototypes against existing data and retain private
+reconstruction material; no change to admitted train/dev exports or pilot counts.
