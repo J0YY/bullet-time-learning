@@ -169,6 +169,16 @@ def paired_reports(left, right, training_seeds, readout_seeds, margin):
             raise ValueError("unpaired evaluation inventory/labels/groups/families")
         if r.get("readout_training") != reference.get("readout_training"):
             raise ValueError("unpaired fitted readout training inventories/bindings")
+        if r.get("pretraining_recipe") != reference.get("pretraining_recipe"):
+            raise ValueError("unpaired pretraining model/recipe/runtime bindings")
+    for seed in training_seeds:
+        initializations = {
+            side[seed, readout].get("initialization_sha256")
+            for side in (left, right)
+            for readout in readout_seeds
+        }
+        if len(initializations) != 1:
+            raise ValueError("paired arms differ in pretraining initialization")
     for side in (left, right):
         seen_checkpoints = set()
         for seed in training_seeds:

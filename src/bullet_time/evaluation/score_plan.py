@@ -15,7 +15,7 @@ from bullet_time.provenance import (
     inside,
     atomic_json,
 )
-from .scoring import file_json, score_directory, load_expected
+from .scoring import file_json, score_directory, load_expected, read_predictions
 from .statistics import paired_reports, paired_group_bootstrap, holm
 
 FACETS = (
@@ -171,6 +171,15 @@ def validate_fit(slot, expected, fit, metadata, fit_sha256):
     for key in ("input_sha256", "image_manifest_sha256", "label_sha256"):
         sha256(fit[key])
     return {
+        "pretraining_recipe": {
+            **{k: v for k, v in binding.items() if k not in ("training", "initialization_sha256")},
+            "training": {
+                k: v
+                for k, v in binding["training"].items()
+                if k not in ("condition", "seed", "microbatch_clips")
+            },
+        },
+        "initialization_sha256": binding.get("initialization_sha256"),
         "backbone_identity": {
             "run_id": sha256(source["run_id"]),
             "checkpoint_id": sha256(source["checkpoint_sha256"]),
@@ -272,11 +281,18 @@ def run_plan(plan_path, output):
             pending = destination(root, slot["predictions"])
             if (pending / "run.json").exists():
                 raise ValueError("delivered predictions lack their declared expected inventory")
+            _, pending_provenance = read_predictions(pending, {}, plan["classes"])
+            failure_reason = (
+                file_json(pending / "failure.json")["error"]
+                if pending_provenance["state"] == "failed_run"
+                else None
+            )
             reports[sid] = {
                 "complete": False,
                 "primary": None,
                 "slot": slot,
-                "reason": "fit/predictor inventory not delivered",
+                "reason": failure_reason or "fit/predictor inventory not delivered",
+                "provenance": pending_provenance,
                 "rows": [],
                 "task_id": slot["task_id"],
                 "horizon": slot["horizon"],

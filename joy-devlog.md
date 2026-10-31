@@ -494,3 +494,16 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Next:** cumulative read-only review round 2; publish the checked increment.
   J7 forward simulation/rendering remains separate ongoing work, with no new gate
   on Sudarshan and no empirical scientific result claimed.
+
+### 2026-10-30 22:52 EDT — Preserve failed fits and match pretraining recipes
+
+- **Review fixes:** compare actual model/training/runtime bindings across paired
+  slots (excluding intended condition/seed and allowed microbatch differences),
+  and match initialization within each paired pretraining seed. Failed unfitted
+  slots retain their failure reason and receipt hash without fake prediction keys.
+- **Checks:** 30 scoring tests pass (4.30 s), including adversarial recipe/init and
+  failure-receipt cases; Ruff passes. Only operational analysis changed since the
+  87-test full run, so used targeted tests and regenerated the synthetic integration
+  at `artifacts/scoring-foundation-v3` (18 complete slots). No empirical scores.
+- **Next:** cumulative review round 3. Untracked J7 motion/renderer files are active
+  separate work and are excluded from this cohesive scoring commit.

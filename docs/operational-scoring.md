@@ -52,7 +52,11 @@ queries and family inventories must match. Three readouts within a condition/see
 must share the actual backbone run/checkpoint; different pretraining seeds cannot
 reuse that same backbone. Delivered development fits must also agree on training
 episode IDs, input/image/label hashes, selection and development inventory binding.
-Matching counts alone do not establish matching examples. The configuration is trusted as the
+Matching counts alone do not establish matching examples. Actual model, training
+and runtime bindings must agree except for condition, seed, permitted microbatch
+size and seed-specific initialization; initialization must match within each paired
+pretraining seed. Failures before a fit exists retain their receipt hash and reason.
+The configuration is trusted as the
 predeclared analysis inventory; it is not proof of a prospective final freeze.
 Full pilot gate admission and its required run matrix remain separate work.
 

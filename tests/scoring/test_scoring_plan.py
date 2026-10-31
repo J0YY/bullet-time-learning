@@ -69,6 +69,20 @@ def test_unfitted_slot_is_retained_without_inventing_predictor_keys(tmp_path):
     result = run_plan(path, tmp_path / "incomplete.json")
     assert result["planned_slots"] == 18 and result["complete_slots"] == 17
     assert result["slots"]["view-17-101"]["reason"] == "fit/predictor inventory not delivered"
+    from bullet_time.provenance import digest
+
+    receipt = path.parent / "not-fitted-yet/failure.json"
+    atomic_json(receipt, {"status": "failed", "error": "OOM during fit"})
+    result = run_plan(path, tmp_path / "failed.json")
+    failed = result["slots"]["view-17-101"]
+    assert failed["reason"] == "OOM during fit" and not failed["rows"]
+    assert failed["provenance"] == {
+        "state": "failed_run",
+        "failure_sha256": digest(receipt.read_bytes()),
+    }
+    atomic_json(receipt, {"status": "failed"})
+    with pytest.raises(ValueError, match="malformed failure"):
+        run_plan(path, tmp_path / "malformed.json")
 
 
 def test_real_fit_metadata_controls_pairing_and_recipe_claims():
@@ -123,6 +137,7 @@ def test_real_fit_metadata_controls_pairing_and_recipe_claims():
     assert result["backbone_identity"] == ids
     assert result["readout_training"]["training_episode_ids"] == sorted(fit["training_episode_ids"])
     assert result["readout_training"]["label_sha256"] == fit["label_sha256"]
+    assert result["pretraining_recipe"]["training"] == {}
     for key, value, match in [
         ("pretraining_seed", 29, "paired seed"),
         ("label_budget", 100, "budget"),

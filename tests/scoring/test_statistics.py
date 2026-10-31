@@ -128,6 +128,14 @@ def test_pairing_rejects_checkpoint_mix_and_different_fitted_examples(tmp_path):
         bad[17, 101]["readout_training"] = binding
         with pytest.raises(ValueError, match="training inventories"):
             paired_reports(bad, right, seeds, readouts, 0.02)
+    for key, value, match in [
+        ("pretraining_recipe", {"training": {"mask_ratio": 0.5}}, "model/recipe"),
+        ("initialization_sha256", "f" * 64, "initialization"),
+    ]:
+        bad = deepcopy(left)
+        bad[17, 101][key] = value
+        with pytest.raises(ValueError, match=match):
+            paired_reports(bad, right, seeds, readouts, 0.02)
 
 
 def test_joint_power_is_seeded_prospective_and_conjunction_is_harder():
