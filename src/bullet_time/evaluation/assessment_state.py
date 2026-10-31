@@ -41,6 +41,10 @@ def _exclusive(registry):
         raise ValueError("registry cannot be a symlink")
     registry.mkdir(parents=True, exist_ok=True, mode=0o700)
     registry = registry.resolve(strict=True)
+    # Persist each ancestor's directory entry as well as descendants. Repeat on
+    # retries: an existing ancestor may come from an interrupted initialization.
+    for directory in (registry, *registry.parents):
+        _sync(directory)
     mutex = registry / ".mutex"
     if mutex.is_symlink():
         raise ValueError("registry mutex cannot be a symlink")

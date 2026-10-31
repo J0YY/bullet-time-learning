@@ -248,3 +248,32 @@ def test_creation_recovers_interrupted_reservation_writes(tmp_path, monkeypatch,
         with pytest.raises(ValueError, match="replace"):
             state.create_version(tmp_path, wrong)
     assert state.create_version(tmp_path, lock)["state"] == "locked"
+
+
+def test_new_registry_ancestors_are_durable_before_any_claim_and_on_retry(tmp_path, monkeypatch):
+    registry = tmp_path / "new-parent" / "nested" / "registry"
+    original_sync = state._sync
+    original_write = state.atomic_json
+    synced = []
+    fail_once = True
+
+    def sync(directory):
+        nonlocal fail_once
+        if directory == registry.parent and fail_once:
+            fail_once = False
+            raise OSError("simulated interruption during ancestor sync")
+        original_sync(directory)
+        synced.append(directory)
+
+    def write(path, value):
+        if path.name.startswith(".pilot-fixture-v1.reservation"):
+            assert set((registry.resolve(), *registry.resolve().parents)) <= set(synced)
+        original_write(path, value)
+
+    monkeypatch.setattr(state, "_sync", sync)
+    monkeypatch.setattr(state, "atomic_json", write)
+    with pytest.raises(OSError, match="ancestor sync"):
+        state.create_version(registry, payload())
+    assert not (registry / ".pilot-fixture-v1.reservation.json").exists()
+    synced.clear()
+    assert state.create_version(registry, payload())["state"] == "locked"

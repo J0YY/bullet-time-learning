@@ -1143,3 +1143,32 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - Twelve focused state tests pass in 4.06 s, including injected failures before
   both reservation publications, report publication, and concurrent alternate
   releases. Scientific/admission/scoring integration remains pending.
+
+### 2026-10-31 02:58 EDT — Admit repaired full native train/dev measurement drop
+
+- **Run:** code 4675aef + documentation b5f97d2, native Godot 4.5.1/M3; command and
+  all source/config/manifest hashes in `reports/data/full-development-integration-20261031.json`.
+  `artifacts/full-development-v4` retains 1,598 exact captures and adds two complete
+  groups; `artifacts/full-development-v3` remains the rejected predecessor.
+- **Result:** 1,600 groups, 2,400 episodes, 41,200 RGBs, 8,000 input records. Exactly
+  600/200 episodes per task; complete collision/order pairs. All native geometry,
+  split/prototype, export and actual consumer checks pass. Zero exact or near
+  conflicts across 318,270,000 train/dev image pairs at unchanged thresholds.
+  Bundle SHA-256 `e078cdba884adbde8f98cfe5184845171cb6fd7f46fffbb7a8c20b3fe136a442`.
+- **Efficiency/limits:** report asserts the successful builder's result and bound
+  files; no second expensive full verification. This is train/dev data validity,
+  not independent review, learned sensitivity, assessment, joint pretraining
+  admission or H1–H4. Source/runtime-specific failures remain in the ledger.
+- **Next:** cross-pool raster audit of existing eight pretraining grids vs all
+  measurement RGBs, plus shared lineage and actual staged assessment adapter.
+  No research training while GPU/storage details and other admission gates remain.
+
+### 2026-10-31 03:00 EDT — Persist registry ancestry before acknowledging commitments
+
+- Cumulative review round 2 found one P2: newly created registry ancestors were
+  not fsynced, leaving a power-loss durability gap. Fsync the resolved directory
+  ancestry before reserving a pool, including retries after partial initialization.
+- Thirteen focused state cases pass in 4.32 s with injected ancestor-sync failure
+  and ordering assertions. All returned authorization/scientific flags remain false;
+  separate scoring/admission integration is still required. Cumulative review
+  continues; there is no independent collaborator acknowledgment.
