@@ -33,6 +33,18 @@ def test_actual_consumer_fit_and_prediction_have_bound_execution_evidence(tmp_pa
         artifact = Path(args[args.index("--output") + 1])
         operation = args[0]
         assert operation in ("fit-readout", "predict-readout")
+        if operation == "fit-readout":
+            from dataclasses import asdict
+            from bullet_time.evaluation.training import ReadoutConfig
+
+            index = args.index("--readout-config") + 1
+            full = json.loads(Path(args[index]).read_bytes())
+            defaults = asdict(ReadoutConfig())
+            sparse = {k: v for k, v in full.items() if v != defaults[k]}
+            assert len(sparse) < len(full)
+            path = tmp_path / "sparse-config.json"
+            path.write_text(json.dumps(sparse))
+            args[index] = str(path)
         command = [sys.executable, "-m", "bullet_time.cli", *args]
         job = tmp_path / (operation + "-evidence")
         expected_outputs = (

@@ -1502,3 +1502,15 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   The caller must supply the complete private/source/prior-score inventory; this
   component verifies the supplied list, not its completeness. Separate review next.
 - Previous H4 publication 0dfe239 passed exact-commit CI 41186249823.
+
+### 2026-10-31 05:08 EDT — Accept valid configurations with implicit defaults
+
+- Separate execution-verifier review found one P2: raw sparse configuration JSON
+  was compared with the fit's fully expanded dataclass. Normalize/validate through
+  ReadoutConfig before comparing the recipe, preserving the original config-byte
+  binding. The actual native fit/CLI regression now deliberately omits defaults.
+- Fifteen collector/native integration cases pass in 23.30 s after the fix; no
+  threshold, model recipe or access rule changed. Cumulative review follows.
+- Next bounded check: two actual native train/dev collision pairs with a tiny
+  32px model/head and all currently named local assessment roots denied. This
+  verifies execution integration without opening assessment labels or scoring it.

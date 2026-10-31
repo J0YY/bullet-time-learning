@@ -4,6 +4,7 @@ Run on the execution host/source snapshot. This verifies declared boundaries and
 execution, not a complete inventory of private copies, pool admission or release.
 """
 
+from dataclasses import asdict
 from pathlib import Path
 import sys
 import zipfile
@@ -12,6 +13,7 @@ from bullet_time.provenance import digest, fields, inside, integer, strict_json
 from bullet_time.training.runner import code_files
 from .assessment_contract import verify_predictor, verifier_binding
 from .job_evidence import file_hash, verify_bound
+from .training import ReadoutConfig
 
 FIT_OUTPUTS = {"fit.json", "readout.pt", "readout.pt.json"}
 PREDICT_OUTPUTS = {"run.json", "coverage.json", "predictions.csv"}
@@ -193,7 +195,9 @@ def verify_readout_execution(
         for key in ("images", "inputs")
     ):
         raise ValueError("assessment inference inputs must belong to a declared assessment root")
-    if strict_json(Path(fit_options["readout-config"]).read_bytes()) != fit["config"]:
+    supplied_config = ReadoutConfig(**strict_json(Path(fit_options["readout-config"]).read_bytes()))
+    supplied_config.validate()
+    if asdict(supplied_config) != fit["config"]:
         raise ValueError("fit command config differs from the recorded recipe")
     for key, option in (
         ("input_sha256", "inputs"),
