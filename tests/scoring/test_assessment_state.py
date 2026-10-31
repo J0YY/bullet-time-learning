@@ -222,3 +222,29 @@ def test_concurrent_alternate_releases_commit_exactly_one(tmp_path):
         answers = list(executor.map(attempt, (first, second)))
     assert sorted(answers) == ["committed", "rejected"]
     assert state.status(tmp_path, lock["version"])["state"] == "H3_released"
+
+
+@pytest.mark.parametrize("point", ["claim", "inner_reservation"])
+def test_creation_recovers_interrupted_reservation_writes(tmp_path, monkeypatch, point):
+    lock = payload()
+    original = state.atomic_json
+
+    def fail_reservation(path, value):
+        if (point == "claim" and path.name.startswith(".pilot-fixture-v1.reservation")) or (
+            point == "inner_reservation" and path.name == "reservation.json"
+        ):
+            raise OSError("simulated disk full before reservation publication")
+        return original(path, value)
+
+    monkeypatch.setattr(state, "atomic_json", fail_reservation)
+    with pytest.raises(OSError, match="disk full"):
+        state.create_version(tmp_path, lock)
+    monkeypatch.setattr(state, "atomic_json", original)
+    if point == "inner_reservation":
+        with pytest.raises(ValueError, match="fresh assessment pool"):
+            state.create_version(tmp_path, payload("another-version"))
+        wrong = deepcopy(lock)
+        wrong["pipeline_sha256"] = "0" * 64
+        with pytest.raises(ValueError, match="replace"):
+            state.create_version(tmp_path, wrong)
+    assert state.create_version(tmp_path, lock)["state"] == "locked"

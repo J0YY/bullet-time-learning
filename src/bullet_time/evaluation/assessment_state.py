@@ -116,20 +116,33 @@ def create_version(registry, payload):
                     prior = _read(reservation)
                     if prior["pool_sha256"] == payload["pool_sha256"] and other != folder:
                         raise ValueError("new version requires a fresh assessment pool")
-        if folder.exists():
-            reservation = _read(folder / "reservation.json")
-            if reservation["lock_sha256"] != identity(payload):
+        claim_path = root / f".{payload['version']}.reservation.json"
+        claim = {"lock_sha256": identity(payload), "pool_sha256": payload["pool_sha256"]}
+        for path in root.glob(".*.reservation.json"):
+            if path.is_symlink():
+                raise ValueError("registry claim cannot be a symlink")
+            prior = _read(path)
+            if path == claim_path and prior != claim:
+                raise ValueError("cannot replace an existing version lock")
+            if path != claim_path and prior["pool_sha256"] == payload["pool_sha256"]:
+                raise ValueError("new version requires a fresh assessment pool")
+        # Commit the claim before mkdir. Even a failure during directory/inner
+        # reservation creation can resume identically without releasing the pool.
+        if not claim_path.exists():
+            atomic_json(claim_path, claim)
+            _sync(root)
+        folder.mkdir(mode=0o700, exist_ok=True)
+        reservation_path = folder / "reservation.json"
+        if reservation_path.exists():
+            if _read(reservation_path) != claim:
                 raise ValueError("cannot replace an existing version lock")
         else:
-            folder.mkdir(mode=0o700)
-            # Reserve before writing the lock; an interrupted version never frees its pool.
-            atomic_json(
-                folder / "reservation.json",
-                {
-                    "lock_sha256": identity(payload),
-                    "pool_sha256": payload["pool_sha256"],
-                },
-            )
+            if any(
+                not p.is_file() or p.is_symlink() or not p.name.startswith(".reservation.json")
+                for p in folder.iterdir()
+            ):
+                raise ValueError("unreserved version directory contains unexpected artifacts")
+            atomic_json(reservation_path, claim)
             _sync(folder)
             _sync(root)
         if (folder / "lock.json").exists():

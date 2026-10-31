@@ -1133,3 +1133,13 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   status marks authorization/scientific passage false. No real locks were created.
 - **Native/CI:** replacement full-data drop has all 1,600 per-group validations
   complete and combined admission running. Push b5f97d2 CI 41177843899 successful.
+
+### 2026-10-31 02:56 EDT — Close assessment-journal initialization interruption window
+
+- Separate review found one P2: a failure after creating the version directory
+  but before publishing its inner reservation made identical retries unrecoverable.
+  Reserve version/pool atomically at registry level before directory creation;
+  resume an empty/partial owned reservation without permitting another lock or pool.
+- Twelve focused state tests pass in 4.06 s, including injected failures before
+  both reservation publications, report publication, and concurrent alternate
+  releases. Scientific/admission/scoring integration remains pending.
