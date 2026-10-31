@@ -1,12 +1,12 @@
-# Proposed pilot assessment release policy — decision pending
+# Selected pilot assessment release policy
 
 This resolves a timing conflict in [pilot v1](pilot-plan.md): H3 must pass before
 expansion, while H4 measures later pass-20/fixed-reference outputs, and the current
-text permits only one assessment inspection per version. This document is a
-proposal, not a protocol amendment, lock, data-release receipt or authorization.
+text permits only one assessment inspection per version. Joy selected the two-stage option on October 31, 2026. This policy is a
+protocol amendment, not an actual version lock or data-release receipt.
 No assessment data or scores have been produced or opened.
 
-## Recommended: two locked stages using the existing pilot pool
+## Selected: two locked stages using the existing pilot pool
 
 Keep the current 400 assessment episodes per game task: 200 complete collision
 pairs, 200 complete order pairs and 400 tracking episodes. Both stages use this
@@ -46,15 +46,15 @@ H4 game slots are a subset of the existing 360 fits: the remaining fits are 36
 early-screen heads plus 81 pass-20/fixed-reference SSv2 heads. Reusing a fitted
 reference by exact hash does not create another fit.
 
-The implementation would enforce monotonic states: development → locked → H3
+The implementation must enforce monotonic states: development → locked → H3
 released → H3 passed → H4 released → closed. A failed H3 closes the version without
 H4. Each stage needs its own immutable expected-key inventory, frozen prediction
 bytes, score receipt and one-time release record; repeat commands may retrieve an
 identical receipt but cannot reveal another set of predictions. Interrupted jobs
 do not reset release state. The assessment scorer remains disabled until this
-policy is selected, implemented and tested with synthetic fixtures.
+policy is implemented and tested, with real data/execution prerequisites admitted.
 
-## Alternative: separate H3 and H4 pools
+## Unselected alternative: separate H3 and H4 pools
 
 Use 400 episodes/task for H3 and a separate 400/task for H4, with disjoint lineage,
 assets/trajectories and actual pixel admission across both pools and every other

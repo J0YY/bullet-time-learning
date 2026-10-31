@@ -93,8 +93,8 @@ the admitted `artifacts/evaluation-development-v2` train/dev drop and its limits
 The [real readout report](reports/data/readout-integration-20261030.md) records the
 completed bounded integration and measured resource estimates.
 Next: full J7 sets/release and J5 grouped-split / J6/J2 100-grid tail work. These queues have no
-collaborator handoff dependency. H1–H4 and research resource/access gates remain. An existing CUDA host and storage
-path have been requested; local data/validation work continues meanwhile.
+collaborator handoff dependency. H1–H4 and research resource/access gates remain. Joy will supply the existing GPU host/storage details and explicitly requested
+continued local development; data/validation work continues meanwhile.
 Sudarshan starts S4a using [the independent-review brief](docs/independent-review.md);
 he can finish fixtures and S5 without accessing Joy's artifacts. Publish eligible snapshots
 without waiting for review; fix confirmed correctness findings before using affected
@@ -179,8 +179,10 @@ injection and CLI checks. Separate code review is clean in round 1; eight focuse
 cases pass. The native pilot layout and all scientific gates remain unclaimed.
 A [concrete assessment release proposal](docs/assessment-release-proposal.md)
 resolves the current one-inspection versus H3-before/H4-after timing conflict.
-Joy has been asked to choose two prelocked stages on the existing pool or separate
-pools. This is pending, not a protocol amendment; assessment scoring stays disabled.
+Joy selected two prelocked stages on the existing pool on October 31; counts stay
+unchanged. Joy is implementing the protocol amendment and staged lock/release
+module, CLI, synthetic tests and shared contracts. Real scoring remains disabled
+until data, full-version locks and execution boundaries are admitted.
 Joy is reconciling the live contract-status ledger in `docs/interfaces.md` with
 the measured native train/dev and exporter evidence; only status/provenance text
 and its bound planning-audit hash change, not wire formats or scientific policy.

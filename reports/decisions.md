@@ -344,3 +344,19 @@ outputs migrate; accepted bundle bytes bind the source/config/runtime that made 
   required before pilot use. CPU/MPS results are not assumed numerically identical;
   runtime/source bindings prohibit silent checkpoint reuse or cross-backend pairing.
   This changes no scientific count, endpoint, threshold or original SPEC bytes.
+
+## 2026-10-31 02:33 EDT — Select two locked pilot assessment stages
+
+- **Owner/authority:** Joy explicitly selected “Two locked stages on the existing
+  pool” in the policy question, and requested continued local development while
+  supplying GPU details later. No resource allocation or assessment opening follows.
+- **Decision/reason:** resolve H3-before-expansion and H4-after-training timing with
+  one complete pilot-version lock, then one H3 and one H4 release. Reuse the same
+  400 episodes/task. This is an exploratory pilot reuse, not independent confirmation.
+- **Affected:** SPEC §11 stage two, pilot access policy, release-policy document and
+  new staged workflow. Seven H3 diagnostics and 243 H4 game heads; 360 total frozen
+  fits, seeds, budgets, thresholds and exposure unchanged. Future hashes append to
+  fixed slots; outcome-driven repairs require a fresh version and assessment pool.
+- **Provenance:** current SPEC SHA-256 `5218bc6ff5a67df2b21072371e0ed18254ee89eb07c738d83bfcff51ce6a6012`.
+  Original remains unchanged at `13e951d:SPEC.md`. Existing train/dev evidence is
+  unaffected; no real assessment exists, version lock is recorded, or gate passed.

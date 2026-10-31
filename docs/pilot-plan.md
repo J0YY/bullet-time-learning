@@ -93,7 +93,16 @@ supervised solvability diagnostics on all 600. Optional 100/600 frozen learning
 curves require additional ledger entries; they are not in the base run count.
 
 Pilot assessment is a development-stage check, not final-test evidence. Tune on
-the 200 development episodes; inspect assessment once per declared pilot version.
+the 200 development episodes. Under the [selected two-stage policy](assessment-release-proposal.md),
+lock the entire version before scoring assessment: one H3 release for all seven
+supervised diagnostics, then one H4 release for the 243 pass-20/fixed-reference
+game heads after H3 and early stability pass. Both stages reuse the same 400
+episodes/task; this is exploratory reuse, not independent replication. Lock all
+recipes, seeds, budgets, sources, expected slots and failure/retry rules before H3;
+append future checkpoint hashes only to their already-declared identities. No H3-
+driven tuning or slot substitution is allowed. Early-screen and SSv2 heads remain
+development-only. An interrupted release retains its immutable inputs and may
+resume only those bytes; it never resets the stage or opens another inspection.
 A failed version stays in the ledger. After outcome-driven repairs, generate a
 fresh assessment group pool, retain the old results and label all as pilot work.
 Joy's generation/admission process emits a label-free expected-key inventory and

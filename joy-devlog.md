@@ -1054,3 +1054,14 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   eight condition hashes and reconstruction-script hash to the public MPS report.
 - Full native measurement capture continues; no assessment-policy answer or
   selected research compute allocation inferred.
+
+### 2026-10-31 02:33 EDT — Implement selected assessment timing policy
+
+- **Authority:** Joy selected two locked stages on the existing pool and requested
+  continued local development pending GPU details. Updated SPEC/pilot policy and
+  decision provenance; counts and scientific thresholds remain unchanged.
+- **Scope:** staged lock/release module, CLI, synthetic lifecycle/failure checks,
+  shared contract and access documentation. Real assessment remains unavailable;
+  full-version evidence and verified isolation are separate prerequisites.
+- **Native progress:** all 1,600 train/dev groups captured; complete combined
+  raster/consumer admission is still running. No success claim before it finishes.
