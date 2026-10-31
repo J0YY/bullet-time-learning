@@ -1,0 +1,53 @@
+{
+  "artifact_root": "artifacts/tail-cli-v1",
+  "command": ".venv/bin/python scripts/audit_tail.py --manifest artifacts/tail-cli-v1/data/pretrain.jsonl --model-config configs/models/videomae-test.json --training-config artifacts/tail-cli-v1/config.json --output artifacts/tail-cli-v1/audit --threads 1",
+  "execution": {
+    "actual_pass_updates": 16,
+    "actual_replay_updates": 8,
+    "device": "cpu",
+    "precision": "float32",
+    "seed": 17,
+    "tail_replay_exact_in_all_eight_arms": true,
+    "threads": 1
+  },
+  "files": {
+    "cli_log_sha256": "d993fc200ad69f773805c70b5662a1338d66a50bfc57234a2fbc7c8e138b52fe",
+    "config_sha256": "13f56afc4f8b24ba15433ab0df566691e6e22744e6fb8b366174db16dd0bb64a",
+    "model_config_sha256": "6ecf93b6c147db415b9986868823424c0615e6b11d2399d8da08fe66d9efd461",
+    "report_sha256": "412a685e3e5c24aa43d084a818d30ab3a3cb073ccdd1c0b03121895618166c79",
+    "run_sha256": "cd40b845b8c86198ae801bf9024c47c89e564f7094889f3f4d165b823b5b429f"
+  },
+  "limits": [
+    "Native 100-grid audit not executed",
+    "No native data, H1/H2 pass, learning, resource admission or protocol freeze"
+  ],
+  "recorded_at": "2026-10-31T01:45:50.315156-04:00",
+  "result": {
+    "actual_updates_per_condition": 2,
+    "all_conditions_pass": true,
+    "corpus_sha256": "1128199331f28836d27f68f917c846903aa21878ecbad243b6edfcac9b4ce96d",
+    "full_updates_per_condition": 1,
+    "grids": 3,
+    "pilot_100_grid_layout": false,
+    "replay_updates_per_condition": 1,
+    "schema_version": "bullet-time.tail-audit.v1",
+    "scientific_gate_pass": false,
+    "scope": "actual single pass and exact tail replay; no joint split, learning or solvability gate",
+    "shared_updates_sha256": "cb08b7bf9e0fddd90a3afed92b47b59076a97285587ac896d61bbf90625f7bb5",
+    "source_sha256": "d9570e02662f4c560273ff293f637ce128b5941ff682c6b905ec1990f272a942",
+    "tail_grids": 1
+  },
+  "review": {
+    "independent_collaborator_review": false,
+    "result": "clean",
+    "rounds": 1,
+    "runtime_tests": "executed by Joy agent; read-only reviewer could perform syntax/static checks only"
+  },
+  "schema_version": "bullet-time.tail-audit-integration.v1",
+  "source_commit": "f69e2ff",
+  "synthetic_only": true,
+  "tests": {
+    "focused_cases": 8,
+    "seconds": 23.04
+  }
+}

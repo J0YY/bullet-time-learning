@@ -983,3 +983,16 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   native measurement job has 1,079/1,600 groups at 01:43 EDT, with no capture error.
 - **Next:** separate cumulative code review, then publish; full-size MPS measurement
   waits for native capture to release the GPU.
+
+### 2026-10-31 01:45 EDT — Verify and publish complete-pass audit CLI
+
+- **Evidence:** `f69e2ff`, `artifacts/tail-cli-v1`; three explicit synthetic grids,
+  CPU FP32 seed 17, one thread, all eight arms. Sixteen actual pass updates plus
+  eight actual tail replays; every tail matches loss/exposure/model/optimizer state.
+  Consumer source SHA-256 `d9570e02662f4c560273ff293f637ce128b5941ff682c6b905ec1990f272a942`.
+- **Review:** cumulative round 1 clean; read-only reviewer performed syntax/static
+  checks, runtime tests ran here. Public evidence in
+  `reports/data/tail-audit-integration-20261031.json`. Native 100-grid audit remains
+  pending; fixtures do not satisfy scientific or resource admission.
+- **Next:** continue full native measurement admission; then bounded full-model MPS
+  measurement when the renderer is no longer sharing the GPU.
