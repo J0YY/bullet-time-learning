@@ -1232,3 +1232,12 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Limits:** metadata checks are not actual model/job/isolation or scientific
   admission. The real staged scoring adapter remains pending; all authorization
   and scientific-passage flags are false. c8ef82d CI 41179649872 is successful.
+
+### 2026-10-31 03:25 EDT — Publish verified pre-H3 recipe bindings
+
+- Separate cumulative review clean in round 1; read-only reviewer could not run
+  dependency-created temporary-file tests. Sixteen focused runtime contract/source
+  cases passed here, including historical actual dev artifact joins with no labels.
+- Next: compile complete public expected-input inventories from opaque assessment
+  exports, then connect the locked stage scorer and actual execution receipts.
+  No real assessment lock/release, scientific gate or GPU execution is inferred.
