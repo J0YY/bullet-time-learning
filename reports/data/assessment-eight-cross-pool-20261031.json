@@ -1,0 +1,59 @@
+{
+  "assessment_authorized": false,
+  "audit_output_sha256": "5fc748248bbaa5a9715f7633aac6309cab5a8125a544ef7c99487b53e8416aff",
+  "bindings": {
+    "assessment_prefix": {
+      "receipt_sha256": "4ad4f82a8ad9e8d31aa6fa3101d3696a4ac93d7e3579c48e61a8a1e88f86c200",
+      "root": "/Users/joyyang/Projects/bullet-time-learning/artifacts/assessment-native-eight-v1"
+    },
+    "development": {
+      "receipt_sha256": "e078cdba884adbde8f98cfe5184845171cb6fd7f46fffbb7a8c20b3fe136a442",
+      "root": "/Users/joyyang/Projects/bullet-time-learning/artifacts/full-development-v4"
+    },
+    "pretraining": {
+      "receipt_sha256": "49cb481ff6af45cbc7d480e1bc4fcff2d1b6a9a349716a16a320ef0775bd23c1",
+      "root": "/Users/joyyang/Projects/bullet-time-learning/artifacts/arena-progressive-eight-v2"
+    }
+  },
+  "checker_sha256": "05e2f3a0efad677a9be1d4bfceb707536cd890999d6a259ed4889e2b37bf9eca",
+  "cohorts": {
+    "left": {
+      "measurement_train_dev_rgb": 41200,
+      "pretraining_rgb": 2048
+    },
+    "right": {
+      "assessment_prefix_rgb": 600
+    }
+  },
+  "helper_sha256": "b24323f820a3cd19d5461712ad4ddb235596e8b7751294b616bbe0c93b971e97",
+  "joint_lineage_admitted": false,
+  "legacy_checker_scope_note": "Nested validation.scope retains the checker's original train/dev wording; this execution compares only the explicitly mapped cross-pool image pairs and grants no prototype/common-lineage admission.",
+  "limits": [
+    "Eight assessment groups/task only, not the full 800-group source",
+    "Shared semantic pretraining/measurement lineage still pending",
+    "No repeated comparisons within the existing corpus, learned predictor, score, H3/H4 or release",
+    "Masks cover visible task objects, excluding fixed floor/roof/background; raster test is not semantic independence"
+  ],
+  "mapping": "Private audit-only view maps existing RGB to train and new prefix to dev for the unchanged checker; actual dataset splits are untouched",
+  "recorded_at": "2026-10-31T04:19:31-04:00",
+  "schema_version": "bullet-time.assessment-prefix-cross-pool-raster.v1",
+  "scientific_gate_pass": false,
+  "scope": "new 24-group assessment prefix vs existing eight pretraining grids and full train/dev measurements only",
+  "seconds": 83.56107470899587,
+  "validation": {
+    "candidate_rgb_comparisons": 97,
+    "cross_split_image_pairs": 25948800,
+    "exact_cross_split_duplicates": 0,
+    "foreground_iou": 0.98,
+    "images": 43848,
+    "mask_candidates": 804598,
+    "mean_bound_skips": 6399,
+    "near_duplicates": 0,
+    "retained_mask_bytes": 224399616,
+    "rgb_cache_capacity": 64,
+    "rgb_mae": 0.00392156862745098,
+    "scope": "train/dev raster and prototype checks; old pretraining integration pool and future final test not admitted",
+    "unique_cross_split_comparisons": 17221520,
+    "unique_raster_mask_pairs": 35778
+  }
+}

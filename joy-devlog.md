@@ -1390,3 +1390,20 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   lineage, learned predictor, assessment scores, H3/H4 or collaborator review.
 - Next: bounded eight-group-per-task native stress prefix, then full source
   journaling/cross-pool admission and the actual stage scorer integration.
+
+### 2026-10-31 04:23 EDT — Admit bounded eight-group assessment source and new raster pairs
+
+- `artifacts/assessment-native-eight-v1`: 24 groups / 40 episodes / 600 native
+  RGBs / 128 input records. Three raw groups reused, 21 newly captured. Opaque
+  preparation passes with 584 permitted images; public templates cover all primary
+  and auxiliary queries. Source SHA 4ad4f82a…6c200; producer commit d45f1d7.
+- New cross-pool audit compares these 600 images against 2,048 existing pretraining
+  and 41,200 train/dev images: 25,948,800 pairs, zero exact/near conflicts, unchanged
+  IoU/MAE rules. Actual source bytes checked before/after; 83.56 s, 97 candidate
+  RGB comparisons. Existing within-corpus checks were not repeated. Audit-only
+  cohort mappings never alter dataset splits; original private witnesses stay local.
+- CI 41183837328 succeeds on d45f1d7, including the corrected portable assertion.
+  These are source/raster checks only: common semantic lineage, complete assessment
+  source, model jobs, stage scorer and H3/H4 remain pending.
+- Next: per-group capture recovery plus full-count capture support, preserving
+  completed raw groups after interruption before attempting the full private set.

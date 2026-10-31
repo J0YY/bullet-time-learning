@@ -237,9 +237,16 @@ without new renders; opaque export keeps 73 permitted images. A bound native job
 passes 38 actual input assemblies with seven private/reconstruction roots denied.
 Code review is clean in two rounds. Full pool, cross-pool/common lineage, actual
 locked model jobs and stage scoring remain pending. Next: bounded eight-group/task
-prefix; no full experiment or collaborator gate is inferred. The prior Linux CI
-assertion failure was fixed with a portable same-runtime comparison; check the
-newly published commit’s CI before claiming the remote suite passes.
+prefix; no full experiment or collaborator gate is inferred. The portable same-runtime assertion fix passes Linux CI 41183837328 on d45f1d7.
+
+The [eight-group/task assessment source](reports/data/native-assessment-eight-integration-20261031.json)
+passes at 24 groups / 40 episodes / 600 RGBs, with 584 permitted opaque public
+images. Its [new cross-pool raster audit](reports/data/assessment-eight-cross-pool-20261031.json)
+finds zero conflicts across 25,948,800 pairs against existing pretraining/train/dev.
+Common semantic lineage and full assessment admission remain pending. Joy next
+implements per-group capture recovery and full-count capture support in the
+assessment capture module plus a separate recovery helper/CLI tests. No full
+research training or release is authorized by these source checks.
 
 ## Update rules
 
