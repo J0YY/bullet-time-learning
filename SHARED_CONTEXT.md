@@ -69,7 +69,7 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | J5 (was S1) | Joy | Producer schema/fixtures, Godot/asset pins, grouped splits, scripted arena and replay | Arena/replay/pins/admission implemented; group/split validation remains | Producer `0693adf`; 57 local tests, separate code review clean; native macOS validated |
 | J6 (was S2) | Joy | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Preview + 8 complete; v2 progressive producer and native migration verified; 100/1,000 pending | Immutable bundles, 32 repeat captures, state/camera/hash evidence; see integration report |
 | J2 | Joy | Actual-loader/update audit; 100-grid tail check | All eight schedules pass actual full VideoMAE-S update on 8 real grids on CPU and MPS; complete-pass/tail code verified on fixtures; native 100-grid tail pending | FP32 seed 17; shared exposure/targets/init/budget; one update each, no learning claim |
-| J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | Full train/dev producer/consumer drop admitted; assessment/privacy/release work continues | `artifacts/full-development-v4`: 1,600 groups, 2,400 episodes, 41,200 RGBs; zero cross-split raster conflicts; joint pretraining admission and visual sensitivity pending |
+| J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | Full train/dev drop admitted; native assessment prefix/public boundary verified; full assessment pending | `artifacts/full-development-v4`: 1,600 groups, 2,400 episodes, 41,200 RGBs; zero cross-split raster conflicts; joint pretraining admission and visual sensitivity pending |
 | J8 | Joy | Operational metrics, coverage/failed slots, paired analysis and power scenarios | Train/dev scorer, paired-analysis foundation and 54 prospective power scenarios verified; full gate/assessment integration pending | Through `75c22ac`; 87-test full regression plus 33 final focused/CLI checks; separate review clean in round 4; no S4 import |
 | J3 | Joy | Causal heads, seven controls, external adapter plus SSv2 acquisition/split audit | Consumer and real J7 fit/predict/score integration complete; full H3/SSv2 pending | `0edab89` one-epoch DINOv2: 95.74 s CPU, 16/16 dev predictions, BA 50%; no H3 pass |
 | S4a/S4b | Sudarshan | Standalone independent verifier, then snapshot metrics/exposure/lineage/statistics audits | Assigned; acknowledgment/work unrecorded; first real dev snapshot ready | Own fixtures plus `reports/data/audit-snapshots/diagnostic-dev-v1`; not a prerequisite for Joy |
@@ -231,6 +231,16 @@ clean in two rounds. Native capture and all actual assessment admission remain
 pending. Joy next owns a bounded native prefix in a separate assessment capture
 module/CLI, then opaque-export and cross-pool checks. No S-task dependency.
 
+The [native assessment prefix](reports/data/native-assessment-prefix-integration-20261031.json)
+passes at three groups / five episodes / 75 RGBs. Current v2 reuses all raw captures
+without new renders; opaque export keeps 73 permitted images. A bound native job
+passes 38 actual input assemblies with seven private/reconstruction roots denied.
+Code review is clean in two rounds. Full pool, cross-pool/common lineage, actual
+locked model jobs and stage scoring remain pending. Next: bounded eight-group/task
+prefix; no full experiment or collaborator gate is inferred. The prior Linux CI
+assertion failure was fixed with a portable same-runtime comparison; check the
+newly published commit’s CI before claiming the remote suite passes.
+
 ## Update rules
 
 Re-read before each edit. Patch your task/status only, retaining others' concurrent
@@ -239,10 +249,3 @@ and whether work is published. Move detailed history to your own devlog or repor
 Do not infer acceptance from silence, assign work retrospectively, or record an
 independent review that did not occur. Protocol changes belong in the dated
 [decision record](reports/decisions.md), with actual authority.
-
-Bound execution evidence now passes native fault/concurrency checks and an actual
-tiny fit/predict CLI integration; code review clean in two rounds. Assessment remains
-unreleased. Joy is developing an explicit private assessment source-selection path
-in `generation/assessment_selection.py`, its separate CLI/tests, before native capture.
-It must reserve actual content prototypes against existing data and retain private
-reconstruction material; no change to admitted train/dev exports or pilot counts.

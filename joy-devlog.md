@@ -1373,3 +1373,20 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   current-source prefix, with zero new renders, before the final integration report.
 - Native v1 opaque export and public compiler passed: two collision/two order/one
   tracking episodes, with complete primary/auxiliary queries and no release.
+
+### 2026-10-31 04:15 EDT — Verify native assessment prefix through restricted public consumption
+
+- Current source `artifacts/assessment-native-prefix-v2`, SHA 9778fe4c…c3a2,
+  reuses all three raw groups from v1 with zero new renders. Inputs/labels/groups
+  remain byte-identical after the containment fix. Native checks pass at five
+  episodes / 75 RGBs / 16 input records.
+- Opaque v2 export preserves 73 permitted RGBs. A byte-bound real consumer job
+  assembles all 38 task/mode combinations and compiles primary inventories while
+  seven private/reconstruction roots are inaccessible. Probes, command/files and
+  output hashes verify; sanitized evidence is in the native-prefix report.
+- Separate cumulative code review clean in round 2 after one P2; eight final
+  capture checks and seven portable selection checks pass here. Linux CI for the
+  corrected assertion is pending publication. No full pool, cross-pool/common
+  lineage, learned predictor, assessment scores, H3/H4 or collaborator review.
+- Next: bounded eight-group-per-task native stress prefix, then full source
+  journaling/cross-pool admission and the actual stage scorer integration.
