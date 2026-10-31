@@ -220,3 +220,44 @@ validity, correct private labels, checkpoint execution or release authorization.
 All outputs keep authorization/scientific passage false. Source admission must
 verify the declared projectile-arena family. No actual assessment pool is admitted
 by these synthetic tests; staged scorer/job integration remains pending.
+
+### Bind a job to declared artifact bytes
+
+`scripts/bound_job.py` wraps the verified local boundary with a prelaunch request
+and a completed/failed evidence record. Supply a JSON object mapping canonical
+absolute input-file paths to their actual SHA-256 values. Include every relevant
+script/source/dependency/config/model/data file; the wrapper cannot infer those
+from arbitrary commands. It adds the actual executable automatically. Declare
+all expected output filenames relative to a new artifact directory.
+
+```bash
+.venv/bin/python scripts/bound_job.py run \
+  --inputs /absolute/input-hashes.json \
+  --artifact-output /absolute/new-predictions \
+  --expected-output run.json --expected-output coverage.json \
+  --expected-output predictions.csv \
+  --deny-root /absolute/prepared/private \
+  --probe-file /absolute/prepared/private/labels.jsonl \
+  --output /absolute/new-job-evidence --cwd /absolute/project \
+  --timeout-seconds 600 -- /absolute/python /absolute/predict-command.py
+```
+
+The command shown is a structural example; the real consumer adapter must provide
+its fixed complete command and every required denied root, including reconstruction
+copies/prior scores. Fitting also denies public assessment inputs. A single private
+root does not prove those broader boundaries. The wrapper rechecks declared input
+bytes and code after execution, rejects extra/missing/linked outputs, and records
+actual output hashes. Existing artifact/receipt folders cannot be reused. Preserve
+failed directories and receipts. The CLI prints request and evidence identities;
+retain both outside the mutable job folder for subsequent verification:
+
+```bash
+.venv/bin/python scripts/bound_job.py verify \
+  --output /absolute/new-job-evidence \
+  --request-sha256 REQUEST_SHA256 --evidence-sha256 EVIDENCE_SHA256
+```
+
+Verification checks the actual input/output bytes and command/boundary/probe/log
+bindings against those pinned identities. This is a trusted-command evidence
+component, not a hostile-code sandbox, complete model/data admission, release
+permission or scientific gate. Linux/CUDA still requires a validated boundary.

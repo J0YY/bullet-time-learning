@@ -1261,3 +1261,16 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - Next integration gap: bind actual isolated commands to predeclared input bytes
   and newly generated output inventories, then consume that evidence at release.
   Existing generic isolation receipts alone do not authenticate model execution.
+
+### 2026-10-31 03:40 EDT — Bind isolated jobs to declared inputs and new outputs
+
+- Added `job_evidence.py` and CLI: stream-hash declared canonical input files,
+  pin executable/command/boundary, require new separate output directories, retain
+  failures, and verify exact output files plus pinned request/evidence identities.
+  This is declared-artifact evidence; the consumer adapter must declare all relevant
+  files and validate command meaning. No assessment permission is granted.
+- Eighteen focused native boundary/job/fingerprint cases pass in 6.46 s, including
+  actual private-read denial, changed inputs, extra/missing/linked outputs, command
+  failure, retained failure receipts, CLI verification and later artifact mutation.
+- Public compiler commit 335c2c9 passed CI 41181302561. No costly data/model check
+  repeated. Linux/CUDA boundary and actual assessment execution remain unvalidated.
