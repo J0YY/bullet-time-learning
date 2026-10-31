@@ -965,3 +965,21 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Handoff:** corrected stale guide statements about scoring/MPS and linked the
   available S4b snapshot. Native 100/1,000 drops, joint split admission, full-model
   MPS measurement and 100-grid tail audit remain pending; no pilot launch.
+
+### 2026-10-31 01:43 EDT — Implement actual complete-pass and tail replay audit
+
+- **Change:** bounded audit executes every update in all eight schedules; compares
+  actual exposure, initialization, runtime, targets and schedule; checks complete
+  coverage and exact checkpoint replay including optimizer state. Native 100 grids
+  require twelve full updates plus a four-grid tail; no counter-jumping shortcut.
+  Preserve checkpoints/update hashes, compact exposure hashes, failed status and
+  immutable output paths. Scientific gates remain false.
+- **Checks:** six focused small-model cases passed in 14.07 s; after adding paired
+  source/runtime binding, eight focused tail/update/admission cases pass in 23.04 s.
+  Includes actual stochastic all-arm replay and fault injection for normalization,
+  coverage and optimizer state. Ruff, scaffold/original-spec and diff checks pass.
+  No native 100-grid pass or learning claim.
+- **Publication/progress:** previous push `bf5d371` CI 41173506494 successful; current
+  native measurement job has 1,079/1,600 groups at 01:43 EDT, with no capture error.
+- **Next:** separate cumulative code review, then publish; full-size MPS measurement
+  waits for native capture to release the GPU.

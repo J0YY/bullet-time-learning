@@ -169,6 +169,10 @@ records all eight grids reused with the original corpus hash unchanged, 32 exact
 repeat captures and zero new renders. Native integration exposed a tuple/list
 serialization defect, fixed in `4808af7`; separate review is clean in round 2.
 Accepted export: `artifacts/arena-progressive-eight-v2`; retain v1 as the failed attempt.
+Joy is implementing the J2 complete-pass/tail audit in a separate training module,
+CLI and tests. It must execute every update, compare all eight arms, and replay the
+final partial update from an actual checkpoint. Small synthetic checks validate
+code only; the native 100-grid pass remains pending.
 
 ## Update rules
 

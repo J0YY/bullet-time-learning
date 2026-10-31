@@ -121,9 +121,28 @@ The first eight-grid drop and its measured audit status are in the
 
 `audit-update` requires exactly eight grids;
 `train --scope integration --stop-after-updates 1` bounds a single-arm update.
-Do not use a synthetic fixture marker for real data. A 100-grid drop additionally
-checks the shared four-grid tail through the runner API/tests before freezing the
-1,000-grid corpus. Every later experiment must use that same frozen corpus.
+Do not use a synthetic fixture marker for real data. After a native 100-grid drop
+passes producer admission, execute its twelve complete updates and four-grid tail
+in every arm, then replay each tail from its saved checkpoint:
+
+```sh
+.venv/bin/python scripts/audit_tail.py --threads 4 \
+  --manifest artifacts/arena-progressive-100-v1/rgb-only/pretrain.jsonl \
+  --model-config configs/models/videomae-small.json \
+  --training-config configs/training/pilot-development.json \
+  --output runs/NEW-100-grid-tail-audit
+```
+
+This is a separate bounded integration pass, not a pilot checkpoint. Its output
+retains each arm's pre-tail checkpoint and update records; allow storage for eight
+full optimizer checkpoints. It checks actual source-coordinate exposure, target
+counts, shared initialization/runtime/schedule, complete coverage and exact replay
+of loss, gradients' norm, parameters and optimizer state. Detailed exposure is
+compared in memory and retained as a hash to keep reports small. Failed attempts
+retain their completed records and never publish a success report. Small synthetic
+tests validate this code; the native 100-grid pass remains pending. Joint split
+admission and scientific gates remain separate. Every later pilot experiment must
+use the same frozen 1,000-grid corpus and start from its own fresh initialization.
 
 For CUDA, set `CUBLAS_WORKSPACE_CONFIG=:4096:8` before starting Python, set `device`
 in a copied training config to the actual device and benchmark there. The runtime
