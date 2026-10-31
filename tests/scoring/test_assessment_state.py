@@ -277,3 +277,52 @@ def test_new_registry_ancestors_are_durable_before_any_claim_and_on_retry(tmp_pa
     assert not (registry / ".pilot-fixture-v1.reservation.json").exists()
     synced.clear()
     assert state.create_version(registry, payload())["state"] == "locked"
+
+
+@pytest.mark.parametrize("operation", ["lock", "release", "receipt"])
+def test_acknowledged_retries_complete_descendant_syncs_after_publication(
+    tmp_path, monkeypatch, operation
+):
+    lock = payload()
+    folder = tmp_path / lock["version"]
+    stage = folder / "H3"
+    if operation != "lock":
+        state.create_version(tmp_path, lock)
+    if operation == "receipt":
+        state.freeze_stage(tmp_path, lock["version"], "H3", exports(lock, "H3"))
+    published = {
+        "lock": folder / "lock.json",
+        "release": stage / "release.json",
+        "receipt": stage / "receipt.json",
+    }[operation]
+    directory = published.parent
+    original = state._sync
+    fail_once = True
+    synced = []
+
+    def sync(path):
+        nonlocal fail_once
+        if path == directory and published.exists() and fail_once:
+            fail_once = False
+            raise OSError("simulated interruption after atomic publication")
+        original(path)
+        synced.append(path)
+
+    def run():
+        if operation == "lock":
+            return state.create_version(tmp_path, lock)
+        if operation == "release":
+            return state.freeze_stage(tmp_path, lock["version"], "H3", exports(lock, "H3"))
+        return state.finish_stage(tmp_path, lock["version"], "H3", {}, outcome="pass")
+
+    monkeypatch.setattr(state, "_sync", sync)
+    with pytest.raises(OSError, match="atomic publication"):
+        run()
+    before = published.read_bytes()
+    synced.clear()
+    assert (
+        run()["state"]
+        == {"lock": "locked", "release": "H3_released", "receipt": "H3_passed"}[operation]
+    )
+    assert {directory, folder, tmp_path} <= set(synced)
+    assert published.read_bytes() == before

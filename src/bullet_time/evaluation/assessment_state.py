@@ -206,6 +206,14 @@ def _status(folder):
             state = "closed"
             break
         state = "H3_passed"
+    # An identical retry may encounter a file published just before the previous
+    # process stopped, before its containing directory was synced. Complete those
+    # syncs on every acknowledged status, including cached lock/release/receipt paths.
+    directories = [p for p in folder.rglob("*") if p.is_dir()]
+    for directory in sorted(directories, key=lambda p: len(p.parts), reverse=True):
+        _sync(directory)
+    _sync(folder)
+    _sync(folder.parent)
     return {
         "version": payload["version"],
         "lock_sha256": identity(payload),

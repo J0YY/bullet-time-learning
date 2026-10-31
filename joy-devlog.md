@@ -1172,3 +1172,29 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   and ordering assertions. All returned authorization/scientific flags remain false;
   separate scoring/admission integration is still required. Cumulative review
   continues; there is no independent collaborator acknowledgment.
+
+### 2026-10-31 03:06 EDT — Complete interrupted-publication retry durability
+
+- Cumulative review round 3 found a P2 on cached-success returns: after atomic
+  publication but before directory fsync, identical retries did not complete the
+  descendant syncs. Every acknowledged journal state now syncs the version/stage
+  directories and registry. This covers existing lock, release and receipt paths.
+- Sixteen focused state cases pass in 5.23 s, including fault injection after
+  publication of each of those three artifacts; retries preserve identical bytes
+  and complete required syncs. Cumulative round 4 follows; actual data/scoring
+  admission remains outside this journal, with authorization flags false.
+
+### 2026-10-31 03:06 EDT — Verify eight-grid pretraining/measurement raster separation
+
+- **Inputs:** accepted progressive eight-grid bundle `49cb481f…` versus full
+  measurement v4 `e078cdba…`; actual source byte inventories verified before and
+  after the new cross-pool comparison. Audit helper and checker hashes retained.
+- **Result:** 2,048 pretraining RGBs × 41,200 measurement RGBs = 84,377,600 image
+  pairs; no exact or near duplicates under the unchanged IoU ≥0.98 / RGB MAE
+  ≤1/255 rule. Runtime 113.75 s. All mask-pair candidates were excluded by the
+  conservative area/bounding-box bound; this is a narrow raster criterion.
+- **Artifacts/limits:** `artifacts/joint-eight-raster-v1` and public report. Symlinks
+  form an audit-only cohort view; original manifests/splits are untouched. Existing
+  generator-specific prototype hashes are not a common semantic lineage contract.
+  This covers eight grids only and does not admit joint lineage, H1–H4, assessment,
+  larger drops or learning. No prior train/dev-vs-dev check was repeated.
