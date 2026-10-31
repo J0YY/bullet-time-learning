@@ -42,6 +42,12 @@ does not depend on final tables, all pilot arms, data rendering or a meeting.
 
 ## Second delivery: S4b against a pinned snapshot
 
+The first [real dev snapshot](../reports/data/audit-snapshots/diagnostic-dev-v1/README.md)
+is now available in Git: one diagnostic, 16 predictions, eight complete collision
+pairs, permitted labels/groups, fit provenance and reproduce command. Start the
+metric/coverage comparison now; RGB/model files and full pilot gates are outside
+this small snapshot. No acknowledgment or independent result is inferred.
+
 Joy will publish an eligible snapshot as each stage finishes. It contains the
 source commit, schema versions, artifact locations/hashes, run/fit identity mapping,
 predictions, independently constructed expected keys, permitted labels/groups,

@@ -1,0 +1,321 @@
+{
+  "aggregation": "single-family pilot score",
+  "analysis_execution": {
+    "numpy": "2.3.5",
+    "python": "3.11.15",
+    "scipy": "1.16.3",
+    "sources": {
+      "evaluation/export.py": "1fa31b90102b2ef6a41d5d7609246f058d59cb880de97031eea5b3a027f1daa5",
+      "evaluation/label_contract.py": "fde160763f024f84f6fd70a806c8ef7fe63dfe4c3cb50115d745e4407b76ec72",
+      "evaluation/metrics.py": "052ba63d04f9b7c9764f9eee80df401b011244dd922fea1726e39082f53ca299",
+      "evaluation/score_plan.py": "dc148ba5eaad2481c543d95a94ba8cd32257819f09fc3de96d9e5cc1f63f452f",
+      "evaluation/scoring.py": "7a3273b151f6d667707ac3de735f29768a222625e0a6daf1471b5ebb631c2114",
+      "evaluation/statistics.py": "0d17f642ad36f3eced1b0cd850125ce2bef69ac4cddf1b73017d29a8c7223352",
+      "provenance.py": "e19fc805f18d15e62387ad2992c3fff6b825c94986d3dd6cb7761963197e6642"
+    }
+  },
+  "complete": true,
+  "expected_families": [
+    "projectile_arena"
+  ],
+  "families": {
+    "projectile_arena": {
+      "balanced_accuracy": 0.5,
+      "brier": 0.26998311140976217,
+      "class_recall": [
+        0.0,
+        1.0
+      ],
+      "complete": true,
+      "coverage": {
+        "expected": 16,
+        "failed": 0,
+        "missing": 0,
+        "ok": 16
+      },
+      "episodes": 16,
+      "groups": 8,
+      "primary": 0.5
+    }
+  },
+  "horizon": "0.5",
+  "predictor": {
+    "checkpoint_id": "92b42a7c0c62a6c0cbd0f0aafecfee696b44cc9c667b67e1d74eaed09b84e9ba",
+    "label_budget": 32,
+    "readout_seed": 101,
+    "run_id": "3afa49bf8558617fcebc8d7c4674151aa911d4ab8361a68f8801b670a094efa5",
+    "task_id": "collision"
+  },
+  "primary": 0.5,
+  "provenance": {
+    "coverage_sha256": "79549d8be73ce6bbcfa8e76786a0755f70f9d91d76268759652492659da8ea99",
+    "csv_sha256": "97760b5b5b9dcfc9273b85f1470a1873a12b14a5353c788f378a73750aec3163",
+    "expected_sha256": "bccb4c165c0a1620de8460cfa261ed8c31158e2ab4572bbb494fcafaa472eeac",
+    "groups_sha256": "35d613a1d10189ea91bc14ee52c563df6301fd2144fe31e51a6cc0420ab2d66a",
+    "labels_sha256": "fe4e21626d2f62599735045c9c6d03654628b7a5282578ea5c167fc5c56deba0",
+    "run_sha256": "920cb689a8f245cddc42a79d2bf93567ce4829005a6eac0da3c6fa13b7b72b95",
+    "state": "delivered"
+  },
+  "rows": [
+    {
+      "episode_id": "collision-d83d956d2de2161b-b0",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-d83d956d2de2161b",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.6414031982421875
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 1
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-d83d956d2de2161b-b1",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-d83d956d2de2161b",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.6414031386375427
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 0
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-0a5370a164c6e18d-b0",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-0a5370a164c6e18d",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.6408653855323792
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 1
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-0a5370a164c6e18d-b1",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-0a5370a164c6e18d",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.6408683061599731
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 0
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-3bdbe54b0e0ed3e3-b0",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-3bdbe54b0e0ed3e3",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.6413439512252808
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 1
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-3bdbe54b0e0ed3e3-b1",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-3bdbe54b0e0ed3e3",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.641345202922821
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 0
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-5ef8d75e300e2364-b0",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-5ef8d75e300e2364",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.6419885754585266
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 1
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-5ef8d75e300e2364-b1",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-5ef8d75e300e2364",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.6419891119003296
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 0
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-fdceab279d8a14fa-b0",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-fdceab279d8a14fa",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.640924870967865
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 1
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-fdceab279d8a14fa-b1",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-fdceab279d8a14fa",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.6409212350845337
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 0
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-b14dd93e39702198-b0",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-b14dd93e39702198",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.6408112645149231
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 1
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-b14dd93e39702198-b1",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-b14dd93e39702198",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.6408101320266724
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 0
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-c6ccd221341ba0b8-b0",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-c6ccd221341ba0b8",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.6417654752731323
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 1
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-c6ccd221341ba0b8-b1",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-c6ccd221341ba0b8",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.6417648196220398
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 0
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-09c358efaa35e143-b0",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-09c358efaa35e143",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.641789972782135
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 1
+      },
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-09c358efaa35e143-b1",
+      "error": "",
+      "family": "projectile_arena",
+      "group_id": "collision-09c358efaa35e143",
+      "horizon_or_frame": "0.5",
+      "prediction": {
+        "contact_probability": 0.6417886018753052
+      },
+      "query_id": "forecast",
+      "status": "ok",
+      "target": {
+        "contact": 0
+      },
+      "task_id": "collision"
+    }
+  ],
+  "schema_version": "bullet-time.score.v1",
+  "scientific_gate_pass": false,
+  "split": "dev",
+  "task_id": "collision"
+}

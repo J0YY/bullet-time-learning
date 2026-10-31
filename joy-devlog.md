@@ -871,3 +871,19 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Next:** publish increment and inspect exact CI. Full train/dev capture remains
   active; assessment generation/admission, staged release and model gates remain
   pending. No task is waiting on Sudarshan.
+
+### 2026-10-31 01:06 EDT — Package the first independent-audit input without a handoff wait
+
+- **Delivery:** `reports/data/audit-snapshots/diagnostic-dev-v1` contains the actual
+  one-epoch diagnostic's 16 dev predictions, fit/run/coverage records, declared
+  inputs, 16 matching labels, eight complete pairs, expected keys and scores.
+  Model/RGB files are omitted; no assessment/final data or S4 review is claimed.
+- **Checks:** reconstructed expected keys from the declared source dev inputs,
+  labels/groups and fit identity, independently of the prediction CSV; exact
+  equality with the inference-time expected inventory. Byte-identical fit/run/CSV
+  exports retained, subset records explicitly hashed. Current scorer reproduces
+  original completeness/primary/family/predictor/horizon results. Arithmetic sanity
+  check gives BA 0.5, recalls [0, 1], Brier 0.26998311140976217.
+- **Use:** S4 can audit this snapshot immediately using his own implementation.
+  One comparison command and immutable file inventory are included. No messages
+  sent and no acknowledgment recorded; Joy's required queue continues.

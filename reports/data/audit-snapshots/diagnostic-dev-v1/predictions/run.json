@@ -1,0 +1,104 @@
+{
+  "allowed_prediction_splits": [
+    "dev",
+    "assessment"
+  ],
+  "backbone_source": {
+    "assessment_eligible": true,
+    "backbone_kind": "dinov2",
+    "binding": {
+      "external_lock": {
+        "archive_sha256": "04276715cddb29d45d05bff3a6fc132224dc27749b279ac98ad2ce4620e20d48",
+        "archive_url": "https://codeload.github.com/facebookresearch/dinov2/zip/7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+        "features": "x_norm_patchtokens; CLS excluded; no register tokens",
+        "input": "224 square letterbox, ImageNet mean/std, one image per encoder invocation",
+        "name": "dinov2_vits14",
+        "pretraining": "External LVD-142M pretrained reference; not part of the causal random-initialization comparison",
+        "repository": "https://github.com/facebookresearch/dinov2",
+        "revision": "7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+        "schema_version": "bullet-time.external-model.v1",
+        "source_license": "Apache-2.0; retained inside the verified source archive",
+        "verification_date": "2026-10-28",
+        "weights_sha256": "b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9",
+        "weights_url": "https://dl.fbaipublicfiles.com/dinov2/dinov2_vits14/dinov2_vits14_pretrain.pth"
+      },
+      "model": {
+        "encoder_width": 384,
+        "frames": 1,
+        "image_size": 224,
+        "patch_size": 14,
+        "tubelet": 1
+      },
+      "reference_kind": "dinov2",
+      "reference_status": "external_pretrained",
+      "training": {
+        "seed": 0
+      }
+    },
+    "checkpoint_sha256": "8fbacf210aae8396a5f5715a61548c331ce56d5868878cd8fdfde11a95380e77",
+    "global_step": 0,
+    "run_id": "e41666fb4fb9296fa25be1d7963373594406a0fb272a32c8ff23a03856a17889"
+  },
+  "classes": 174,
+  "coverage_sha256": "79549d8be73ce6bbcfa8e76786a0755f70f9d91d76268759652492659da8ea99",
+  "csv_sha256": "97760b5b5b9dcfc9273b85f1470a1873a12b14a5353c788f378a73750aec3163",
+  "fit_execution": {
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "device_name": "cpu",
+    "machine": "arm64",
+    "numpy_version": "2.3.5",
+    "pillow_version": "12.0.0",
+    "precision": "float32",
+    "python_version": "3.11.15",
+    "source_sha256": "bc5964691807a0a99fff893a6e0b4c59c2e8a65f0cdb1086819f7dabe62b4d94",
+    "system": "Darwin",
+    "threads": 1,
+    "timm_version": "1.0.22",
+    "torch_version": "2.9.1"
+  },
+  "fit_sha256": "f7691a991408e4d38a9711d2bbc7495de6e796a64803019f4b0674a0e9ca55c3",
+  "image_manifest_sha256": "1a78e1eb95e19f628bf89784c40d5ca01b04066457935213a0ec302f7232d8b8",
+  "inference_execution": {
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "device_name": "cpu",
+    "machine": "arm64",
+    "numpy_version": "2.3.5",
+    "pillow_version": "12.0.0",
+    "precision": "float32",
+    "python_version": "3.11.15",
+    "source_sha256": "bc5964691807a0a99fff893a6e0b4c59c2e8a65f0cdb1086819f7dabe62b4d94",
+    "system": "Darwin",
+    "threads": 1,
+    "timm_version": "1.0.22",
+    "torch_version": "2.9.1"
+  },
+  "input_sha256": "13abd01a10f8881ec5fcf43e5be71e7ebcba6d0e3d7a1ad450a92fba979554ab",
+  "prediction_identity": {
+    "checkpoint_id": "92b42a7c0c62a6c0cbd0f0aafecfee696b44cc9c667b67e1d74eaed09b84e9ba",
+    "run_id": "3afa49bf8558617fcebc8d7c4674151aa911d4ab8361a68f8801b670a094efa5"
+  },
+  "prediction_schema_version": "bullet-time.prediction.v1",
+  "readout_config": {
+    "batch_size": 1,
+    "classes": 174,
+    "depth": 2,
+    "device": "cpu",
+    "epochs": 1,
+    "heads": 4,
+    "horizon_seconds": 0.5,
+    "image_size": 224,
+    "kind": "diagnostic",
+    "label_budget": 32,
+    "learning_rate": 0.001,
+    "mode": "sequence",
+    "seed": 101,
+    "task": "collision",
+    "weight_decay": 0.01,
+    "width": 256
+  },
+  "readout_sha256": "92b42a7c0c62a6c0cbd0f0aafecfee696b44cc9c667b67e1d74eaed09b84e9ba",
+  "schema_version": "bullet-time.run.v1",
+  "split": "dev"
+}

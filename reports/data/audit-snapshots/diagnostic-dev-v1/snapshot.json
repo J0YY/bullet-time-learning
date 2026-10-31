@@ -1,0 +1,49 @@
+{
+  "complete_slots": 1,
+  "episodes": 16,
+  "expected_construction": "all dev collision 0.5-second inputs joined to full declared source groups/labels and actual fit identity; exact match to inference-time expected inventory; not derived from prediction CSV",
+  "expected_predictions": 16,
+  "failed_slots": [],
+  "fitting_source_commit": "0edab89",
+  "inventory": {
+    ".gitattributes": "3e42af38b7ff4ec6da3fc88c2c98928889d91daeff9cc3ff83957a562986a6d6",
+    "README.md": "234777789f80ca8ae15cf38253fa8d9fa63bac526c0022a3da8df3ea8e90e4b8",
+    "evaluation-inputs.jsonl": "d460fbc79bbe2945df2a8edee58f897d6737b737e7f07a782b7b9bfd028c0c5f",
+    "expected.json": "bccb4c165c0a1620de8460cfa261ed8c31158e2ab4572bbb494fcafaa472eeac",
+    "fit.json": "f7691a991408e4d38a9711d2bbc7495de6e796a64803019f4b0674a0e9ca55c3",
+    "groups.json": "35d613a1d10189ea91bc14ee52c563df6301fd2144fe31e51a6cc0420ab2d66a",
+    "historical-score.json": "3dcc931ebb5b484f5a16145b62e6d6d8efc7591561c1270b6c6a4c3e42980853",
+    "joy-score.json": "7d83b24376b81860776e65d3b2085496cf9063e6b2c3951e8bf24bc16d44f98a",
+    "labels.jsonl": "fe4e21626d2f62599735045c9c6d03654628b7a5282578ea5c167fc5c56deba0",
+    "predictions/coverage.json": "79549d8be73ce6bbcfa8e76786a0755f70f9d91d76268759652492659da8ea99",
+    "predictions/predictions.csv": "97760b5b5b9dcfc9273b85f1470a1873a12b14a5353c788f378a73750aec3163",
+    "predictions/run.json": "920cb689a8f245cddc42a79d2bf93567ce4829005a6eac0da3c6fa13b7b72b95"
+  },
+  "limits": [
+    "RGB and checkpoints omitted; this snapshot cannot reproduce fitting or raster/physics admission",
+    "one diagnostic/readout seed, one epoch, no paired-seed inference or H3/H4 verdict",
+    "original source and fit bindings retained; current scorer reproduction does not refit under new source",
+    "independent collaborator verification pending; no assessment or final-test data"
+  ],
+  "pairs": 8,
+  "planned_slots": 1,
+  "result": {
+    "balanced_accuracy": 0.5,
+    "brier": 0.26998311140976217,
+    "recalls": [
+      0.0,
+      1.0
+    ]
+  },
+  "schema_version": "bullet-time.audit-snapshot.v1",
+  "scientific_gate_pass": false,
+  "scope": "single real one-epoch diagnostic dev integration; scoring/coverage audit only",
+  "snapshot_source_commit": "87edaa9b10d396d096eeab765c8aaf5c96c385ac",
+  "source_build_script_sha256": "bf5b05271ad121dcfd7edd845bd5b064264c007dc68303a6f4260fbddcc41205",
+  "source_bundle_sha256": "d2ae2b507bcb4b9ac0e4571e4d40b21522831bdf4d2a80bf36e9e970d93d43a3",
+  "source_catalog_sha256": "1a78e1eb95e19f628bf89784c40d5ca01b04066457935213a0ec302f7232d8b8",
+  "source_dev_inputs_sha256": "13abd01a10f8881ec5fcf43e5be71e7ebcba6d0e3d7a1ad450a92fba979554ab",
+  "source_groups_sha256": "405c1cc40079365a94b9f74ca51e6dd25d4bfc77175c9b5e247c933c0fe38217",
+  "source_labels_sha256": "1c98a5777a06862f12b56e780db8b9b8071c8a82d859098e70af1e7db3d690e8",
+  "split": "dev"
+}

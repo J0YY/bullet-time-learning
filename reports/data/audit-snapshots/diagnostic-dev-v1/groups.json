@@ -1,0 +1,101 @@
+{
+  "records": [
+    {
+      "episode_id": "collision-d83d956d2de2161b-b0",
+      "group_id": "collision-d83d956d2de2161b",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-d83d956d2de2161b-b1",
+      "group_id": "collision-d83d956d2de2161b",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-0a5370a164c6e18d-b0",
+      "group_id": "collision-0a5370a164c6e18d",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-0a5370a164c6e18d-b1",
+      "group_id": "collision-0a5370a164c6e18d",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-3bdbe54b0e0ed3e3-b0",
+      "group_id": "collision-3bdbe54b0e0ed3e3",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-3bdbe54b0e0ed3e3-b1",
+      "group_id": "collision-3bdbe54b0e0ed3e3",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-5ef8d75e300e2364-b0",
+      "group_id": "collision-5ef8d75e300e2364",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-5ef8d75e300e2364-b1",
+      "group_id": "collision-5ef8d75e300e2364",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-fdceab279d8a14fa-b0",
+      "group_id": "collision-fdceab279d8a14fa",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-fdceab279d8a14fa-b1",
+      "group_id": "collision-fdceab279d8a14fa",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-b14dd93e39702198-b0",
+      "group_id": "collision-b14dd93e39702198",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-b14dd93e39702198-b1",
+      "group_id": "collision-b14dd93e39702198",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-c6ccd221341ba0b8-b0",
+      "group_id": "collision-c6ccd221341ba0b8",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-c6ccd221341ba0b8-b1",
+      "group_id": "collision-c6ccd221341ba0b8",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-09c358efaa35e143-b0",
+      "group_id": "collision-09c358efaa35e143",
+      "split": "dev",
+      "task_id": "collision"
+    },
+    {
+      "episode_id": "collision-09c358efaa35e143-b1",
+      "group_id": "collision-09c358efaa35e143",
+      "split": "dev",
+      "task_id": "collision"
+    }
+  ],
+  "schema_version": "bullet-time.evaluation-groups.v1"
+}

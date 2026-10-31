@@ -71,7 +71,7 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | Tiny train/dev drop and privacy foundation verified; full sets and assessment release remain | `c5a175a` native drop; `b530e73` randomized labels/local access boundary; 106 tests plus 37 post-fix checks; privacy review clean round 2 |
 | J8 | Joy | Operational metrics, coverage/failed slots, paired analysis and power scenarios | Train/dev scorer, paired-analysis foundation and 54 prospective power scenarios verified; full gate/assessment integration pending | Through `75c22ac`; 87-test full regression plus 33 final focused/CLI checks; separate review clean in round 4; no S4 import |
 | J3 | Joy | Causal heads, seven controls, external adapter plus SSv2 acquisition/split audit | Consumer and real J7 fit/predict/score integration complete; full H3/SSv2 pending | `0edab89` one-epoch DINOv2: 95.74 s CPU, 16/16 dev predictions, BA 50%; no H3 pass |
-| S4a/S4b | Sudarshan | Standalone independent verifier, then snapshot metrics/exposure/lineage/statistics audits | Assigned; acknowledgment/work unrecorded | Own fixtures now; eligible immutable snapshots later; not a prerequisite for Joy |
+| S4a/S4b | Sudarshan | Standalone independent verifier, then snapshot metrics/exposure/lineage/statistics audits | Assigned; acknowledgment/work unrecorded; first real dev snapshot ready | Own fixtures plus `reports/data/audit-snapshots/diagnostic-dev-v1`; not a prerequisite for Joy |
 | S5 | Sudarshan | Primary-source literature and claim review in separate reports | Assigned; acknowledgment/work unrecorded | Spec/public sources; no Joy output prerequisite |
 | J4 | Joy | Resource/runtime ledger, early screen and bounded pilot | Runner, candidate configs and slot enumeration implemented; execution not admitted | H1/H2 + complete 1,000-grid bundle + resources for screen; H3 + early stability for expansion |
 
@@ -150,6 +150,10 @@ source identifiers and PNG metadata removed, commitments sealed, and all four
 private reads denied in a real restricted consumer job. Separate review is clean
 in two rounds. No real assessment exists or is released; data admission and the
 locked H3/H4 stage policy remain pending. Full train/dev capture continues.
+The first [S4b audit snapshot](reports/data/audit-snapshots/diagnostic-dev-v1/README.md)
+is ready in Git with all 16 real dev predictions, labels/groups and fit identities.
+Sudarshan can verify it without model/RGB downloads or further Joy deliveries; his
+work remains unrecorded and nonblocking.
 
 ## Update rules
 
