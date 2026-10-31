@@ -33,7 +33,8 @@ models use kind `diagnostic`, objective `supervised`, their actual mode as condi
 pass zero and zero-filled corpus hash; their run/checkpoint identity is the fitted
 diagnostic identity. None of these references is counted as an extra independent
 pretraining seed. Inference metadata must bind the actual fit/config/source and
-prediction IDs; a plan cannot relabel a checkpoint's seed or budget.
+prediction IDs; a plan cannot relabel a checkpoint's seed, budget or fitted horizon.
+Seed zero is valid. Separate horizon heads may share the same frozen backbone ID.
 
 An unfitted slot may have `expected: null`; it remains explicitly incomplete, with
 no invented checkpoint keys. A missing prediction directory or failed-fit receipt
@@ -47,7 +48,11 @@ A contrast declares the same objective/task/horizon/budget/pass/model-kind/corpu
 recipe fields, plus `contrast_id`, `condition`, `reference` and a positive `margin`
 in score fractions (0.02 = two percentage points). All planned paired training
 seeds × three readout seeds must exist on both sides. Actual labels, related groups,
-queries and family inventories must match. The configuration is trusted as the
+queries and family inventories must match. Three readouts within a condition/seed
+must share the actual backbone run/checkpoint; different pretraining seeds cannot
+reuse that same backbone. Delivered development fits must also agree on training
+episode IDs, input/image/label hashes, selection and development inventory binding.
+Matching counts alone do not establish matching examples. The configuration is trusted as the
 predeclared analysis inventory; it is not proof of a prospective final freeze.
 Full pilot gate admission and its required run matrix remain separate work.
 

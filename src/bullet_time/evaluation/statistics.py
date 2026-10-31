@@ -167,21 +167,42 @@ def paired_reports(left, right, training_seeds, readout_seeds, margin):
             or _label_signature(r) != signature
         ):
             raise ValueError("unpaired evaluation inventory/labels/groups/families")
+        if r.get("readout_training") != reference.get("readout_training"):
+            raise ValueError("unpaired fitted readout training inventories/bindings")
+    for side in (left, right):
+        seen_checkpoints = set()
+        for seed in training_seeds:
+            checkpoints = set()
+            for readout in readout_seeds:
+                report = side[seed, readout]
+                predictor = report["predictor"]
+                if predictor["readout_seed"] != readout:
+                    raise ValueError("readout seed differs from paired cell")
+                # Supervised diagnostics identify the fitted head in the prediction
+                # wire. Their bound parent backbone is the unit being paired here.
+                backbone = report.get("backbone_identity", predictor)
+                checkpoints.add((backbone["run_id"], backbone["checkpoint_id"]))
+            if len(checkpoints) != 1:
+                raise ValueError("readout seeds do not share one backbone checkpoint")
+            checkpoint = next(iter(checkpoints))
+            if checkpoint in seen_checkpoints:
+                raise ValueError("same backbone counted as distinct pretraining seeds")
+            seen_checkpoints.add(checkpoint)
     averages = []
     differences = []
     for seed in training_seeds:
-        l = [left[seed, r]["primary"] for r in readout_seeds]
+        condition_scores = [left[seed, r]["primary"] for r in readout_seeds]
         ref = [right[seed, r]["primary"] for r in readout_seeds]
-        delta = float(np.mean(l) - np.mean(ref))
+        delta = float(np.mean(condition_scores) - np.mean(ref))
         differences.append(delta)
         averages.append(
             {
                 "pretraining_seed": seed,
-                "condition_scores": l,
+                "condition_scores": condition_scores,
                 "reference_scores": ref,
-                "condition_mean": float(np.mean(l)),
+                "condition_mean": float(np.mean(condition_scores)),
                 "reference_mean": float(np.mean(ref)),
-                "condition_readout_sd": float(np.std(l, ddof=1)),
+                "condition_readout_sd": float(np.std(condition_scores, ddof=1)),
                 "reference_readout_sd": float(np.std(ref, ddof=1)),
                 "paired_difference": delta,
             }

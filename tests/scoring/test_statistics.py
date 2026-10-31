@@ -13,6 +13,17 @@ from bullet_time.evaluation.statistics import (
 )
 from bullet_time.evaluation.scoring import score_directory
 from fixtures.scoring.factory import make_run
+from bullet_time.provenance import identity
+
+
+def paired_fixture(template, side, seed, readout):
+    report = deepcopy(template)
+    report["predictor"].update(
+        run_id=identity([side, seed]),
+        checkpoint_id=identity([side, seed, "checkpoint"]),
+        readout_seed=readout,
+    )
+    return report
 
 
 def test_tost_matches_independent_scipy_tests_and_strict_boundaries():
@@ -49,16 +60,16 @@ def test_holm_and_complete_conjunction():
 
 
 def test_readout_average_before_paired_seed_inference_and_group_bootstrap(tmp_path):
-    d, e, l, g, f = make_run(tmp_path / "r")
-    template = score_directory(d, e, l, g, split="dev", families=f)
+    d, e, labels_path, g, f = make_run(tmp_path / "r")
+    template = score_directory(d, e, labels_path, g, split="dev", families=f)
     left = {}
     right = {}
     seeds = [17, 29, 43]
     readouts = [101, 102, 103]
     for s in seeds:
         for r in readouts:
-            left[s, r] = deepcopy(template)
-            right[s, r] = deepcopy(template)
+            left[s, r] = paired_fixture(template, "left", s, r)
+            right[s, r] = paired_fixture(template, "right", s, r)
             left[s, r]["primary"] = 0.5 + (s / 1000) + (r - 102) * 0.1
     result = paired_reports(left, right, seeds, readouts, 0.1)
     assert result["inference"]["n_paired_pretraining_seeds"] == 3
@@ -69,18 +80,54 @@ def test_readout_average_before_paired_seed_inference_and_group_bootstrap(tmp_pa
     assert bootstrap["percentile_interval_95"] == [0, 0]
     right.pop((17, 101))
     assert not paired_reports(left, right, seeds, readouts, 0.1)["complete"]
-    right[17, 101] = deepcopy(template)
+    right[17, 101] = paired_fixture(template, "right", 17, 101)
     right[17, 101]["rows"][0]["group_id"] = "wrong"
     with pytest.raises(ValueError, match="unpaired"):
         paired_reports(left, right, seeds, readouts, 0.1)
 
 
 def test_bootstrap_keeps_three_frame_tracking_events_together(tmp_path):
-    d, e, l, g, f = make_run(tmp_path / "r", task="tracking")
-    template = score_directory(d, e, l, g, split="dev", families=f)
-    reports = {(s, r): deepcopy(template) for s in [17, 29, 43] for r in [101, 102, 103]}
+    d, e, labels_path, g, f = make_run(tmp_path / "r", task="tracking")
+    template = score_directory(d, e, labels_path, g, split="dev", families=f)
+    reports = {
+        (s, r): paired_fixture(template, "same", s, r)
+        for s in [17, 29, 43]
+        for r in [101, 102, 103]
+    }
     result = paired_group_bootstrap(reports, reports, [17, 29, 43], [101, 102, 103], replicates=100)
     assert result["percentile_interval_95"] == [0, 0]
+
+
+def test_pairing_rejects_checkpoint_mix_and_different_fitted_examples(tmp_path):
+    d, e, labels_path, g, f = make_run(tmp_path / "r")
+    template = score_directory(d, e, labels_path, g, split="dev", families=f)
+    seeds, readouts = [17, 29, 43], [101, 102, 103]
+    left = {(s, r): paired_fixture(template, "left", s, r) for s in seeds for r in readouts}
+    right = {(s, r): paired_fixture(template, "right", s, r) for s in seeds for r in readouts}
+    for reports in (left, right):
+        for report in reports.values():
+            report["readout_training"] = {
+                "training_episode_ids": ["a", "b"],
+                "label_sha256": "1" * 64,
+            }
+    bad = deepcopy(left)
+    bad[17, 102]["predictor"]["checkpoint_id"] = "f" * 64
+    with pytest.raises(ValueError, match="one backbone checkpoint"):
+        paired_reports(bad, right, seeds, readouts, 0.02)
+    bad = deepcopy(left)
+    for r in readouts:
+        bad[29, r]["predictor"] = deepcopy(bad[17, r]["predictor"])
+    with pytest.raises(ValueError, match="distinct pretraining seeds"):
+        paired_reports(bad, right, seeds, readouts, 0.02)
+    for binding in [
+        {"training_episode_ids": ["a", "c"], "label_sha256": "1" * 64},
+        {"training_episode_ids": ["a", "b"], "label_sha256": "2" * 64},
+        None,
+    ]:
+        bad = deepcopy(left)
+        bad[17, 101]["readout_training"] = binding
+        with pytest.raises(ValueError, match="training inventories"):
+            paired_reports(bad, right, seeds, readouts, 0.02)
 
 
 def test_joint_power_is_seeded_prospective_and_conjunction_is_harder():

@@ -90,6 +90,13 @@ def test_real_fit_metadata_controls_pairing_and_recipe_claims():
         "backbone_source": source,
         "train_episodes": 300,
         "execution": {"source_sha256": "3" * 64},
+        "training_episode_ids": [f"train-{i}" for i in range(300)],
+        "input_sha256": "5" * 64,
+        "image_manifest_sha256": "6" * 64,
+        "label_sha256": "7" * 64,
+        "selection": None,
+        "dev_episodes": 200,
+        "horizon_seconds": 0.5,
     }
     ids = {"run_id": source["run_id"], "checkpoint_id": source["checkpoint_sha256"]}
     meta = {
@@ -109,14 +116,52 @@ def test_real_fit_metadata_controls_pairing_and_recipe_claims():
         "readout_seed": 101,
         "task_id": "collision",
         "label_budget": 300,
+        "horizon": "0.5",
         "readout_recipe_sha256": identity({k: v for k, v in config.items() if k != "seed"}),
     }
-    validate_fit(slot, ids, fit, meta, "4" * 64)
+    result = validate_fit(slot, ids, fit, meta, "4" * 64)
+    assert result["backbone_identity"] == ids
+    assert result["readout_training"]["training_episode_ids"] == sorted(fit["training_episode_ids"])
+    assert result["readout_training"]["label_sha256"] == fit["label_sha256"]
     for key, value, match in [
         ("pretraining_seed", 29, "paired seed"),
         ("label_budget", 100, "budget"),
         ("condition", "time", "experimental slot"),
+        ("horizon", "0.25", "horizon"),
         ("readout_recipe_sha256", "f" * 64, "recipe"),
     ]:
         with pytest.raises(ValueError, match=match):
             validate_fit({**slot, key: value}, ids, fit, meta, "4" * 64)
+
+
+def test_separate_horizons_may_share_backbone_prediction_identity(tmp_path):
+    from bullet_time.provenance import digest, identity
+    from bullet_time.evaluation.export import KEY, write_predictions
+
+    path = make_plan(tmp_path / "plan")
+    plan = json.loads(path.read_text())
+    labels_path = path.parent / plan["labels"]["path"]
+    labels = [json.loads(line) for line in labels_path.read_text().splitlines()]
+    extra_labels = [{**r, "horizon_or_frame": "0.25"} for r in labels]
+    labels_path.write_text("".join(json.dumps(r) + "\n" for r in labels + extra_labels))
+    plan["labels"]["sha256"] = digest(labels_path.read_bytes())
+    slot = deepcopy(plan["slots"][0])
+    slot.update(slot_id="view-17-101-quarter", horizon="0.25", predictions="quarter/predictions")
+    rows = json.loads((path.parent / slot["expected"]["path"]).read_text())
+    for row, label in zip(rows, extra_labels, strict=True):
+        row.update(horizon_or_frame="0.25", target_reference_sha256=identity(label))
+    expected_path = path.parent / "quarter/expected.json"
+    atomic_json(expected_path, rows)
+    slot["expected"] = {
+        "path": "quarter/expected.json",
+        "sha256": digest(expected_path.read_bytes()),
+    }
+    predictions = [
+        {**{k: r[k] for k in KEY}, "status": "ok", "error": "", "contact_probability": 0.5}
+        for r in rows
+    ]
+    write_predictions(path.parent / slot["predictions"], rows, predictions, {"scope": "synthetic"})
+    plan["slots"].append(slot)
+    atomic_json(path, plan)
+    result = run_plan(path, tmp_path / "result.json")
+    assert result["complete"] and result["complete_slots"] == 19

@@ -45,6 +45,24 @@ def test_balanced_chance_and_brier(tmp_path):
     assert r["families"]["projectile_arena"]["brier"] == 0.25
 
 
+def test_readout_seed_zero_is_valid(tmp_path):
+    from bullet_time.evaluation.export import KEY, write_predictions
+
+    b = make_run(tmp_path / "r")
+    rows = json.loads(b[1].read_text())
+    for row in rows:
+        row["readout_seed"] = 0
+    atomic_json(b[1], rows)
+    observed = [
+        {**{k: r[k] for k in KEY}, "status": "ok", "error": "", "contact_probability": 0.5}
+        for r in rows
+    ]
+    directory = tmp_path / "seed-zero"
+    write_predictions(directory, rows, observed, {"scope": "synthetic"})
+    result = score((directory, *b[1:]))
+    assert result["complete"] and result["predictor"]["readout_seed"] == 0
+
+
 def test_missing_run_and_failed_prediction_never_score_success_subset(tmp_path):
     bundle = make_run(tmp_path / "r")
     d, *rest = bundle
@@ -120,11 +138,11 @@ def test_tracking_all_three_visibility_boundary_and_size_stratum(tmp_path):
 )
 def test_reject_inconsistent_wire_records(tmp_path, kind, match):
     b = make_run(tmp_path / "r")
-    d, e, l, g, _ = b
+    d, e, labels_path, g, _ = b
     if kind == "label":
-        rows = [json.loads(x) for x in l.read_text().splitlines()]
+        rows = [json.loads(x) for x in labels_path.read_text().splitlines()]
         rows[0]["target"]["contact"] = 1
-        l.write_text("".join(json.dumps(x) + "\n" for x in rows))
+        labels_path.write_text("".join(json.dumps(x) + "\n" for x in rows))
     elif kind == "group":
         data = json.loads(g.read_text())
         data["records"][0]["group_id"] = "wrong"
@@ -144,9 +162,9 @@ def test_reject_inconsistent_wire_records(tmp_path, kind, match):
     elif kind == "partial_pair":
         atomic_json(e, json.loads(e.read_text())[:1])
     elif kind == "split":
-        rows = [json.loads(x) for x in l.read_text().splitlines()]
+        rows = [json.loads(x) for x in labels_path.read_text().splitlines()]
         rows[0]["split"] = "assessment"
-        l.write_text("".join(json.dumps(x) + "\n" for x in rows))
+        labels_path.write_text("".join(json.dumps(x) + "\n" for x in rows))
     with pytest.raises(ValueError, match=match):
         score(b)
 

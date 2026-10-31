@@ -90,8 +90,8 @@ def load_expected(path, split):
         fields(row, EXPECTED)
         for k in ("run_id", "checkpoint_id", "target_reference_sha256"):
             sha256(row[k])
-        for k in ("label_budget", "readout_seed"):
-            integer(row[k], k, 1)
+        integer(row["label_budget"], "label_budget", 1)
+        integer(row["readout_seed"], "readout_seed")
         for k in (
             "episode_or_video_id",
             "query_id",

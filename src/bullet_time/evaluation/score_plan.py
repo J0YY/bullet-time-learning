@@ -95,6 +95,11 @@ def validate_fit(slot, expected, fit, metadata, fit_sha256):
         or fit["train_episodes"] != slot["label_budget"]
     ):
         raise ValueError("declared readout task/seed/budget differs from actual fit")
+    if config["task"] in ("collision", "order") and (
+        float(slot["horizon"]) != config["horizon_seconds"]
+        or fit["horizon_seconds"] != config["horizon_seconds"]
+    ):
+        raise ValueError("declared horizon differs from actual fitted head")
     recipe = {k: v for k, v in config.items() if k != "seed"}
     if identity(recipe) != slot["readout_recipe_sha256"]:
         raise ValueError("declared readout recipe differs from actual fit")
@@ -154,6 +159,31 @@ def validate_fit(slot, expected, fit, metadata, fit_sha256):
         }.items()
     ):
         raise ValueError("declared experimental slot differs from the fitted predictor")
+    episode_ids = fit["training_episode_ids"]
+    if (
+        not isinstance(episode_ids, list)
+        or len(episode_ids) != fit["train_episodes"]
+        or len(set(episode_ids)) != len(episode_ids)
+    ):
+        raise ValueError("invalid fitted training episode inventory")
+    for episode_id in episode_ids:
+        text_id(episode_id, "training episode")
+    for key in ("input_sha256", "image_manifest_sha256", "label_sha256"):
+        sha256(fit[key])
+    return {
+        "backbone_identity": {
+            "run_id": sha256(source["run_id"]),
+            "checkpoint_id": sha256(source["checkpoint_sha256"]),
+        },
+        "readout_training": {
+            "training_episode_ids": sorted(episode_ids),
+            "input_sha256": fit["input_sha256"],
+            "image_manifest_sha256": fit["image_manifest_sha256"],
+            "label_sha256": fit["label_sha256"],
+            "selection": fit["selection"],
+            "dev_episodes": integer(fit["dev_episodes"], "dev episodes", 1),
+        },
+    }
 
 
 def run_plan(plan_path, output):
@@ -271,7 +301,7 @@ def run_plan(plan_path, output):
         predictor = tuple(
             str(first[k])
             for k in ["run_id", "checkpoint_id", "task_id", "label_budget", "readout_seed"]
-        )
+        ) + (slot["horizon"],)
         if predictor in identities:
             raise ValueError("same predictor counted as multiple slots")
         identities.add(predictor)
@@ -289,7 +319,11 @@ def run_plan(plan_path, output):
                 raise ValueError("real scoring slot requires the bound fit report")
             fit_path = bound_file(root, slot["fit"])
             metadata = file_json(destination(root, slot["predictions"]) / "run.json")
-            validate_fit(slot, first, file_json(fit_path), metadata, digest(fit_path.read_bytes()))
+            report.update(
+                validate_fit(
+                    slot, first, file_json(fit_path), metadata, digest(fit_path.read_bytes())
+                )
+            )
         report["slot"] = slot
         reports[sid] = report
         slots[sid] = slot

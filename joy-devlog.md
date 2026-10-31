@@ -479,3 +479,18 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Next:** commit and separate read-only review; fix findings and publish normally.
   Continue real forward-generated J7 examples and release/access validation; full
   J8 pilot-gate integration follows those actual artifacts.
+
+### 2026-10-30 22:43 EDT — Tighten analysis pairing and valid input coverage
+
+- **Review fixes:** require one actual backbone per condition/pretraining seed across
+  all three readouts, reject reuse as another training seed, and compare bound fit
+  training episodes/input/image/label/selection inventories across paired arms.
+  Accept readout seed zero and separate horizon heads sharing a frozen backbone;
+  validate the declared horizon against the actual fitted configuration.
+- **Checks:** all 30 focused scoring tests and all 87 repository tests pass (full
+  suite 71.16 s). Ruff, format, scaffold, pilot provenance and whitespace pass.
+  Synthetic wire integration regenerated immutably as `artifacts/scoring-foundation-v2`:
+  all 18 slots and expected [0, 0.5, 0] paired differences. Public report hashes updated.
+- **Next:** cumulative read-only review round 2; publish the checked increment.
+  J7 forward simulation/rendering remains separate ongoing work, with no new gate
+  on Sudarshan and no empirical scientific result claimed.
