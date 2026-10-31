@@ -181,6 +181,9 @@ A [concrete assessment release proposal](docs/assessment-release-proposal.md)
 resolves the current one-inspection versus H3-before/H4-after timing conflict.
 Joy has been asked to choose two prelocked stages on the existing pool or separate
 pools. This is pending, not a protocol amendment; assessment scoring stays disabled.
+Joy is reconciling the live contract-status ledger in `docs/interfaces.md` with
+the measured native train/dev and exporter evidence; only status/provenance text
+and its bound planning-audit hash change, not wire formats or scientific policy.
 
 ## Update rules
 

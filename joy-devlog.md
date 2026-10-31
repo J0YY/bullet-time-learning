@@ -1011,3 +1011,15 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   not trained H3 sensitivity or complete data admission.
 - **Next:** full native train/dev capture and admission continue independently of
   the assessment-policy choice. No collaborator action is required.
+
+### 2026-10-31 01:52 EDT — Reconcile the live interface evidence ledger
+
+- **Correction:** `docs/interfaces.md` still described evaluation and run exports
+  as fixture-only. It now links the accepted native measurement, real dev snapshot,
+  progressive migration and synthetic privacy/tail evidence with explicit limits.
+  Wire formats, counts, scientific defaults and independent-review status unchanged.
+- **Checks:** refreshed only the bound interface-document hash in the pilot audit;
+  malformed-plan/self-test, recorded-audit equality, scaffold/original-spec and diff
+  checks pass. No runtime tests repeated for these status-only edits.
+- **CI:** `8103d16` successful (41173881990); assessment policy is still a pending
+  choice, and the full native measurement job continues.

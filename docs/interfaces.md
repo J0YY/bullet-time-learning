@@ -237,16 +237,19 @@ at 50% BA/Brier 0.25 for p=0.5; tracking success only if all three frames satisf
 visibility/tolerance including equality at the boundary; a failed/missing prediction
 that changes coverage; unequal family sizes (macro ≠ micro); three readout seeds
 averaged within each pretraining seed; one failed TOST component blocking the global
-conjunction. Joy consumer and first arena-admission cases are implemented; grouped
-evaluation/scoring and Sudarshan independent-verifier cases remain pending work.
+conjunction. Joy's consumer, grouped train/dev producer and operational scoring
+cases are implemented. Full data/scientific admission and Sudarshan's independent
+verification remain pending. The ledger below records the evidence available on
+2026-10-31; later captured-but-unadmitted data do not count as accepted contracts.
 
 | Contract | Producer implemented | Consumer validated | Independent producer/analysis acceptance |
 | --- | --- | --- | --- |
-| Grid v1 | Joy arena `0693adf`; larger/grouped datasets pending | Eight real grids, manifest `8fd92aa7…`; existing RGB adapter; see bound report | Not performed (S4) |
-| Evaluation v2 | No (Joy J7) | Joy fixtures only; real evaluation data pending | Not performed (S4) |
-| Exposure/update v1 | Joy actual full-model updates, all eight schedules | Joy comparison passes on 2,048 real images; report binds complete audit | Not performed (S4) |
-| Run/prediction v1 | Joy fixture exports | Joy J8 strict synthetic/train/dev joins implemented; real integration and S4 pending | Not performed |
-| Analysis v1 | Joy plan/coverage/paired-statistics foundation | Known-answer fixtures; real pilot/assessment gates pending | Not performed (S4) |
+| Grid v1 | Joy native arena; progressive bundle v2 exporter `4808af7` (grid wire format unchanged) | Eight real grids, manifest `8fd92aa7…`, byte-identical [progressive migration](../reports/data/progressive-arena-integration-20261031.json); larger/joint-grouped drops pending | Not performed (S4) |
+| Evaluation v2 | Joy J7 tiny native train/dev drop `c5a175a`; corrected full-selection prefix `8a6ad3f` | [Native producer/consumer evidence](../reports/data/evaluation-integration-20261030.json); 72 groups/120 episodes/1,800 RGBs. Full sets, joint pretraining admission and H3 pending | Not performed (S4) |
+| Exposure/update v1 | Joy actual full-model updates, all eight schedules | Comparison passes on 2,048 real RGBs; [complete-pass/tail code](../reports/data/tail-audit-integration-20261031.json) additionally verified on small fixtures; native 100-grid audit pending | Not performed (S4) |
+| Run/prediction v1 | Joy actual one-epoch diagnostic fit/export `0edab89` | All 16 dev predictions joined/scored; [immutable audit snapshot](../reports/data/audit-snapshots/diagnostic-dev-v1/README.md). This is integration only | Not performed (S4); snapshot available |
+| Analysis v1 | Joy expected coverage, metrics, paired seed/group analysis and prospective power | Known-answer tests and actual dev score reproduction; full pilot/assessment gates pending | Not performed (S4) |
+| Assessment labels v2 / opaque preparation v1 | Nonce commitments, opaque export and local restricted-job foundation | [Synthetic native consumer/export checks](../reports/data/opaque-assessment-export-20261031.json); no real assessment source or release admitted | Not performed (S4); no assessment access inferred |
 
 Breaking changes receive a new version and explicit migration. Compatible
 clarifications still need log and contract updates. Replace this table with actual
