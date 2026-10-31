@@ -274,6 +274,15 @@ producer/independent-analysis changes into model identity. This consumer utility
 change needs a fresh tiny integration fit; preserve historical checkpoints.
 No real assessment release, scientific-policy change or full capture is implied.
 
+The [native readout execution integration](reports/data/native-readout-execution-integration-20261031.json)
+now connects actual fit/inference jobs and supplied denied roots to the fitted
+predictor contract. Two train/two dev episodes from 62 native images pass with a
+tiny 32px model and 21 verified read-denial probes per job. Separate code review
+clean in round 2 after a default-configuration fix; 15 post-fix focused/native cases
+pass. This is integration, not a complete private registry, assessment release or
+learning result. The consumer-inventory utility changes its fingerprint once;
+preserve historical fits and use fresh fits for this source snapshot.
+
 ## Update rules
 
 Re-read before each edit. Patch your task/status only, retaining others' concurrent

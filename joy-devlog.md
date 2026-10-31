@@ -1514,3 +1514,22 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - Next bounded check: two actual native train/dev collision pairs with a tiny
   32px model/head and all currently named local assessment roots denied. This
   verifies execution integration without opening assessment labels or scoring it.
+
+### 2026-10-31 05:11 EDT — Verify native-data fit/inference evidence and finish review
+
+- Separate cumulative readout-execution review clean in round 2 after one P2
+  configuration-default fix. Parsing/diff checks ran in the reviewer; runtime
+  tests ran here because its read-only sandbox could not create dependency temp
+  files. The post-fix 15-case collector/native suite passes.
+- Native-data integration on dae9693 passes: two complete collision groups,
+  two train/two dev episodes, 62 actual RGBs and two complete dev predictions.
+  Tiny 32px untrained frozen backbone, head seed 101, one epoch; not pilot learning.
+  Fit and prediction take 3.38/3.11 s inside the boundary, each verifying 21
+  read-denial probes. Actual byte-bound job receipts feed the verification CLI.
+  Verification SHA 17b84ada…682fa0; sanitized report is committed separately.
+- v1 stopped before launching jobs because an empty old helper directory had no
+  probe. Preserve its copied inputs/reference and failure record. v2 excludes that
+  empty directory explicitly and succeeds. This inventory is observed populated
+  local roots, not complete future registry admission. No assessment data scored.
+- Shared spec/asset-policy question remains unchanged. Full source/common lineage,
+  locked-stage scoring, research compute and SSv2 access remain pending.

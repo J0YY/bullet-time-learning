@@ -1,0 +1,93 @@
+{
+  "assessment_authorized": false,
+  "contract": {
+    "consumer_sha256": "dbe2356f5155dfde0f673eec037be9b8f70142b016ad855bd3afbff1c3ed299c",
+    "execution_verifier_sha256": "f154afa77cddf0cc776722bee453016a50416fabb539040d48c62a085494f2bc",
+    "expected_inputs_sha256": "b1539c29a669b9c2299a7d65603fa3f4f52f4c82dbd53fddefdb461af8af1d51",
+    "predictor_sha256": "f8a770b3a73c4659ec66f1ec138862f68926d59ead558b16dd158ea64eaff540",
+    "recipe_sha256": "69a34f187a1106461857d2569f115467f78620adeb14a1063d0871f1ca83e4fc"
+  },
+  "counts": {
+    "declared_inputs": 12,
+    "dev_episodes": 2,
+    "groups": 2,
+    "images": 62,
+    "predictions": 2,
+    "train_episodes": 2
+  },
+  "empty_directory_without_probe": [
+    "assessment-contract-v1"
+  ],
+  "helper_sha256": "7fb5ad90977ed882e5eb2927538d4e3304c7c08ba9cd9b7cd85a4a591ac73a54",
+  "integration_command": ".venv/bin/python artifacts/readout-native-execution-v2/run.py",
+  "jobs": {
+    "fit-readout": {
+      "evidence_sha256": "f3d3def276e861dd4238776a3da5cf02b8bd74a0b886390d96e67390d10bcae8",
+      "isolation_receipt_sha256": "7b3950d044f5d0eef6dda9065ca88d823b2ab26f68dcf4fdd976e36f95f00ccb",
+      "private_read_denials": 21,
+      "request_sha256": "5d636a8ac1d3ac91bbe4e8ec27843c58c075f937fdf6d12583c0177a0e279e7a",
+      "seconds": 3.3815964160021394
+    },
+    "predict-readout": {
+      "evidence_sha256": "b208cbf53a23bc9745330c6d1d8ac05234b05607d1624cb386995f9a153fba42",
+      "isolation_receipt_sha256": "3f535ea72dfebae0c2e534eaef7e58dbe27486db1bb4e6c67396198cdfb305e9",
+      "private_read_denials": 21,
+      "request_sha256": "6087cdbf83f844917947962403a773abb0f9491cfacd185e1a3d050aabbac29f",
+      "seconds": 3.1118240830255672
+    }
+  },
+  "limits": [
+    "One tiny 32px frozen untrained backbone with one-epoch head; not native/full pilot recipe or useful-learning evidence",
+    "Native train/dev only; no assessment labels, prediction, score, lock or release",
+    "Verifies supplied populated assessment roots and generation-code denial, not completeness of a future admitted registry",
+    "macOS trusted-job boundary only; no Linux/CUDA execution or human-blinding claim",
+    "Private asset definition, common lineage, actual stage scorer and full scientific gates remain pending"
+  ],
+  "local_artifact": "artifacts/readout-native-execution-v2",
+  "model": {
+    "decoder_depth": 1,
+    "decoder_heads": 2,
+    "decoder_width": 16,
+    "drop_path": 0.0,
+    "dropout": 0.0,
+    "encoder_depth": 1,
+    "encoder_heads": 3,
+    "encoder_width": 24,
+    "frames": 16,
+    "image_size": 32,
+    "patch_size": 8,
+    "tubelet": 2
+  },
+  "prior_failed_attempt": {
+    "path": "artifacts/readout-native-execution-v1",
+    "phase": "before job launch",
+    "preserved": true,
+    "reason": "empty helper directory had no denial probe"
+  },
+  "readout": {
+    "batch_size": 8,
+    "classes": 174,
+    "depth": 2,
+    "device": "cpu",
+    "epochs": 1,
+    "heads": 3,
+    "horizon_seconds": 0.5,
+    "image_size": 32,
+    "kind": "frozen",
+    "label_budget": 2,
+    "learning_rate": 0.001,
+    "mode": "sequence",
+    "seed": 101,
+    "task": "collision",
+    "weight_decay": 0.01,
+    "width": 24
+  },
+  "recorded_at": "2026-10-31T05:09:52-04:00",
+  "schema_version": "bullet-time.native-readout-job-integration.v1",
+  "scientific_gate_pass": false,
+  "scope": "tiny untrained frozen backbone/head on actual native train/dev images; execution integration only",
+  "selection": "first lexicographically sorted complete collision group per train/dev split; no outcome-based selection",
+  "source_bundle_sha256": "e078cdba884adbde8f98cfe5184845171cb6fd7f46fffbb7a8c20b3fe136a442",
+  "source_commit": "dae96938f5847f7064773aae06b3d48ff6ce721e",
+  "verification_sha256": "17b84ada13b646863e9f1b50c3185f5d33fa7da4b13eea30bdb653f3ee682fa0"
+}
