@@ -4,8 +4,9 @@
 first arena producer now supplies eight complete real grids through the existing
 RGB grid-v1 contract; all eight schedules pass the full-model actual-update audit.
 [Measured evidence](../reports/arena-integration-20261030.json) binds the source,
-configs and bundle bytes. Grouped evaluation production and operational scoring
-remain pending. Sudarshan's independent verifier/acceptance remains pending.
+configs and bundle bytes. Grouped evaluation production remains pending. The first operational scorer now
+validates synthetic/train/dev prediction exports; real data, assessment release and
+pilot gate integration remain pending. See [operational scoring](operational-scoring.md). Sudarshan's independent verifier/acceptance remains pending.
 Record component evidence separately even when one person implements both sides.
 This status update does not change record fields, semantics or wire versions.
 
@@ -240,8 +241,8 @@ evaluation/scoring and Sudarshan independent-verifier cases remain pending work.
 | Grid v1 | Joy arena `0693adf`; larger/grouped datasets pending | Eight real grids, manifest `8fd92aa7…`; existing RGB adapter; see bound report | Not performed (S4) |
 | Evaluation v2 | No (Joy J7) | Joy fixtures only; real evaluation data pending | Not performed (S4) |
 | Exposure/update v1 | Joy actual full-model updates, all eight schedules | Joy comparison passes on 2,048 real images; report binds complete audit | Not performed (S4) |
-| Run/prediction v1 | Joy fixture exports | Joy J8 operational scorer and S4 verifier pending | Not performed |
-| Analysis v1 | No (Joy J8) | No | Not performed (S4) |
+| Run/prediction v1 | Joy fixture exports | Joy J8 strict synthetic/train/dev joins implemented; real integration and S4 pending | Not performed |
+| Analysis v1 | Joy plan/coverage/paired-statistics foundation | Known-answer fixtures; real pilot/assessment gates pending | Not performed (S4) |
 
 Breaking changes receive a new version and explicit migration. Compatible
 clarifications still need log and contract updates. Replace this table with actual

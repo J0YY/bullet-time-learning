@@ -1,0 +1,167 @@
+{
+  "analysis_sha256": "682df5d3eb78a90ef85e0b797db8318d902edf063fdc827ee1b26ce41533bf5d",
+  "complete": true,
+  "complete_slots": 18,
+  "contrast": {
+    "complete": true,
+    "crossed_sensitivity": {
+      "bootstrap_sd": 0.1438897663870907,
+      "complete": true,
+      "crossed_seed_and_group": true,
+      "interpretation": "sensitivity conditional on corpus; few training seeds limit tail reliability; not primary TOST",
+      "percentile_interval_95": [
+        0.0,
+        0.5
+      ],
+      "replicates": 100,
+      "seed": 99,
+      "unit": "whole related group within family/outcome stratum; paired across arms and seeds"
+    },
+    "design": {
+      "checkpoint_pass": 20,
+      "condition": "time",
+      "contrast_id": "time-view",
+      "corpus_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "horizon": "0.5",
+      "label_budget": 300,
+      "margin": 0.02,
+      "model_kind": "controlled",
+      "objective": "videomae_raw_rgb",
+      "readout_recipe_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "reference": "view",
+      "task_id": "collision"
+    },
+    "episode_group_sensitivity": {
+      "bootstrap_sd": 5.579080615598709e-17,
+      "complete": true,
+      "crossed_seed_and_group": false,
+      "interpretation": "sensitivity conditional on corpus; few training seeds limit tail reliability; not primary TOST",
+      "percentile_interval_95": [
+        0.16666666666666666,
+        0.16666666666666666
+      ],
+      "replicates": 100,
+      "seed": 99,
+      "unit": "whole related group within family/outcome stratum; paired across arms and seeds"
+    },
+    "inference": {
+      "alpha": 0.05,
+      "component_confidence": 0.9,
+      "component_interval": [
+        -0.31999759672591943,
+        0.6533309300592527
+      ],
+      "conventional_confidence": 0.95,
+      "conventional_interval": [
+        -0.5504421216160238,
+        0.883775454949357
+      ],
+      "equivalent": false,
+      "inference_available": true,
+      "margin": 0.02,
+      "mean_difference": 0.16666666666666666,
+      "n_paired_pretraining_seeds": 3,
+      "p_lower": 0.18957795088905505,
+      "p_superiority_two_sided": 0.42264973081037427,
+      "p_tost": 0.7641606585354408,
+      "p_upper": 0.7641606585354408,
+      "paired_differences": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "paired_sd": 0.2886751345948129,
+      "paired_sd_interval_95": [
+        0.1503010952171831,
+        1.8142466344006085
+      ],
+      "units": "score fraction; multiply by 100 for percentage points"
+    },
+    "pretraining_seeds": [
+      17,
+      29,
+      43
+    ],
+    "readout_seeds": [
+      101,
+      102,
+      103
+    ],
+    "scientific_claim_pass": false,
+    "seed_averages": [
+      {
+        "condition_mean": 0.5,
+        "condition_readout_sd": 0.0,
+        "condition_scores": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "paired_difference": 0.0,
+        "pretraining_seed": 17,
+        "reference_mean": 0.5,
+        "reference_readout_sd": 0.0,
+        "reference_scores": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "condition_mean": 1.0,
+        "condition_readout_sd": 0.0,
+        "condition_scores": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "paired_difference": 0.5,
+        "pretraining_seed": 29,
+        "reference_mean": 0.5,
+        "reference_readout_sd": 0.0,
+        "reference_scores": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "condition_mean": 0.5,
+        "condition_readout_sd": 0.0,
+        "condition_scores": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "paired_difference": 0.0,
+        "pretraining_seed": 43,
+        "reference_mean": 0.5,
+        "reference_readout_sd": 0.0,
+        "reference_scores": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    ]
+  },
+  "evidence": "Synthetic known-answer wire integration only; not empirical learning or scientific equivalence",
+  "execution": {
+    "numpy": "2.3.5",
+    "python": "3.11.15",
+    "scipy": "1.16.3",
+    "sources": {
+      "evaluation/export.py": "1fa31b90102b2ef6a41d5d7609246f058d59cb880de97031eea5b3a027f1daa5",
+      "evaluation/metrics.py": "052ba63d04f9b7c9764f9eee80df401b011244dd922fea1726e39082f53ca299",
+      "evaluation/score_plan.py": "59a57f98a65fda126fa069891a35d19e363e2368179e51d1f3b09b2f008f60c2",
+      "evaluation/scoring.py": "e92ce90d78561065be37bcac892a19a6ccfebf036623a2e510b151511d33242f",
+      "evaluation/statistics.py": "80866b45cec21dd3f50e3eb814eb411e6df089859ef4712cf73ec549ff54025e",
+      "provenance.py": "e19fc805f18d15e62387ad2992c3fff6b825c94986d3dd6cb7761963197e6642"
+    }
+  },
+  "plan_sha256": "4dc814f3daa564685d2074edcc86089a6c696ea84d183a1cb6e5179ddb88a0fa",
+  "planned_slots": 18,
+  "schema_version": "bullet-time.analysis.v1",
+  "scientific_claim_pass": false,
+  "scope": "synthetic"
+}

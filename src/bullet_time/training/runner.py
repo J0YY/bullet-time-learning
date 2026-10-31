@@ -77,7 +77,13 @@ def code_identity(root=None):
     # Producer/independent-analysis code is not imported by this consumer. Its
     # parallel development must not invalidate Joy's in-flight runs or checkpoints.
     independent_roots = {"generation", "rendering", "splits", "analysis"}
-    independent_files = {"schema.py", "evaluation/metrics.py"}
+    independent_files = {
+        "schema.py",
+        "evaluation/metrics.py",
+        "evaluation/scoring.py",
+        "evaluation/statistics.py",
+        "evaluation/score_plan.py",
+    }
     records = {}
     for path in sorted(root.rglob("*")):
         relative = path.relative_to(root)

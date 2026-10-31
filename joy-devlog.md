@@ -432,3 +432,50 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   queues; J5 grouping and J6/J2 100-grid tail remain before larger drops. Final
   links/provenance/whitespace, normal main push and exact-commit CI are checked
   before chat handoff. No paid run, full pilot or collaborator message was sent.
+
+### 2026-10-30 EDT — Start J7/J8 and continue the unblocked dependency queue
+
+- **Authority/base:** Joy requested J7/J8 ASAP, correctness checks, incremental pushes
+  and continued work until a real collaborator dependency. Base `d9c3409` is clean
+  and matches fetched main. Acting as Joy's agent; Sudarshan's log is still empty.
+- **Scope:** operational scoring/coverage/statistics first, forward-valid paired
+  collision/order and occlusion tracking production, grouped split/access evidence,
+  actual consumer/scorer checks, then the next feasible Joy-owned tasks. Independent
+  S4/S5 stays separate and nonblocking; no new personal approval gate is introduced.
+- **Resources:** local native Godot and CPU remain available; 28 GiB free storage.
+  No paid/GPU allocation or licensed SSv2 data is implied. Preserve research gates
+  and assessment separation while advancing implementation and bounded diagnostics.
+
+### 2026-10-30 EDT — Implement operational scoring and paired-analysis foundation
+
+- **Changes:** strict expected-key/CSV/coverage/target-hash/group joins; failed and
+  unfitted slot ledger; collision BA/Brier, three-frame episode tracking with size
+  strata, SSv2 top-1 and explicit family macro scores. Plan metadata is checked
+  against actual fit/backbone seeds, budgets, recipe and prediction identity.
+- **Statistics:** average three readout seeds within checkpoint, paired-seed t/TOST
+  with 90% component and 95% conventional intervals, Holm for individual families,
+  exact 30/70-component conjunction inventories, paired group/crossed sensitivity
+  and prospective correlated Gaussian power. Zero observed paired variance does not
+  auto-pass equivalence. SciPy 1.16.3 is pinned and installed locally.
+- **Boundary:** this first increment is synthetic/train/dev only. Assessment rejects
+  before label access until J7 release/isolation is implemented; no H3/H4 or final
+  claim is inferred. Source exclusions cover only unimported operational modules;
+  shared export/provenance code remains part of consumer identity.
+- **Checks underway:** known-answer and adversarial wire tests pass as added; full
+  regression, separate review and publication follow before continuing J7. No
+  collaborator code/logs, scientific defaults, actual study outcomes or paid runs.
+
+### 2026-10-30 EDT — Verify the first scoring increment
+
+- **Checks:** 27 new scoring tests and all 84 repository tests pass (full suite
+  47.70 s). Fixed a duplicate pytest module basename found only by full collection.
+  Ruff, format, dependency compatibility, scaffold/provenance, pilot freshness and
+  whitespace pass. Scientific planning arithmetic and SPEC are unchanged.
+- **Wire integration:** generated `artifacts/scoring-foundation-v1` with 18 explicitly
+  synthetic prediction slots; CLI validates all, computes the known paired differences
+  [0, 0.5, 0] after readout averaging, and emits no scientific claim. Small hash-bound
+  report: `reports/analysis/scoring-foundation-20261030.json`. No real J7 scores or
+  missing independent work are represented as completed.
+- **Next:** commit and separate read-only review; fix findings and publish normally.
+  Continue real forward-generated J7 examples and release/access validation; full
+  J8 pilot-gate integration follows those actual artifacts.

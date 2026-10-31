@@ -63,8 +63,8 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | J5 (was S1) | Joy | Producer schema/fixtures, Godot/asset pins, grouped splits, scripted arena and replay | Arena/replay/pins/admission implemented; group/split validation remains | Producer `0693adf`; 57 local tests, separate code review clean; native macOS validated |
 | J6 (was S2) | Joy | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Preview + 8 complete (2,048 real RGBs); 100/1,000 pending | Immutable bundles, 32 repeat captures, state/camera/hash evidence; see integration report |
 | J2 | Joy | Actual-loader/update audit; 100-grid tail check | All eight schedules pass actual full VideoMAE-S update on 8 real grids; 100-grid tail pending | CPU FP32 seed 17; shared exposure/targets/init/budget; one update each, no learning claim |
-| J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | Ready on the working J5 scene; unimplemented | Tiny train/dev slices before full corpus; same H3 counts/access rules |
-| J8 | Joy | Operational metrics, coverage/failed slots, paired analysis and power scenarios | Ready; unimplemented | Own known-answer fixtures now; eligible J3 exports later; no S4 import |
+| J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | In progress: forward-valid paired histories and causal tracking, grouped split/access evidence | User continuation; base `d9c3409`; tiny train/dev slices then full admitted sets |
+| J8 | Joy | Operational metrics, coverage/failed slots, paired analysis and power scenarios | In progress: strict scoring, coverage, paired statistics and gate reports | User continuation; base `d9c3409`; own known-answer fixtures, no S4 import |
 | J3 | Joy | Causal heads, seven controls, external adapter plus SSv2 acquisition/split audit | Consumer implemented; real J7/external data pending | J7 sets for H3; licensed official-training metadata/videos for external checks |
 | S4a/S4b | Sudarshan | Standalone independent verifier, then snapshot metrics/exposure/lineage/statistics audits | Assigned; acknowledgment/work unrecorded | Own fixtures now; eligible immutable snapshots later; not a prerequisite for Joy |
 | S5 | Sudarshan | Primary-source literature and claim review in separate reports | Assigned; acknowledgment/work unrecorded | Spec/public sources; no Joy output prerequisite |
@@ -98,6 +98,15 @@ The real producer and integration are now measured; operational scoring and
 scientific experiments remain unimplemented/unrun. Sudarshan's log is preserved.
 Implementation and final evidence/handoff are committed on main; publication is
 checked before the chat handoff. No collaborator review or acknowledgment is inferred.
+
+### Active continuation — 2026-10-30 EDT
+
+Joy asked to implement J7/J8 promptly, double-check correctness, push increments and
+continue while work can proceed without Sudarshan. Joy's agent owns generation,
+evaluation/scoring/statistics, tests/configs and associated shared contracts. Start
+with strict operational scoring and tiny forward-valid train/dev examples, then
+continue the dependency queue under the unchanged scientific/access/resource gates.
+No Sudarshan action is inferred or made a new implementation gate.
 
 ## Update rules
 

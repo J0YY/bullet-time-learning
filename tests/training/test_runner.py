@@ -112,7 +112,12 @@ def test_consumer_hash_tracks_used_code_and_pins_without_blocking_producer_work(
     (tmp_path / "generation/generator.py").write_text("producer version = 2")
     (tmp_path / "evaluation").mkdir()
     (tmp_path / "evaluation/metrics.py").write_text("independent analysis version = 3")
+    for name in ("scoring.py", "statistics.py", "score_plan.py"):
+        (tmp_path / "evaluation" / name).write_text("unimported operational scoring")
     assert code_identity(tmp_path) == original
+    (tmp_path / "evaluation/export.py").write_text("shared consumer export code")
+    assert code_identity(tmp_path) != original
+    (tmp_path / "evaluation/export.py").unlink()
     (tmp_path / "loading/consumer.py").write_text("version = 2")
     changed = code_identity(tmp_path)
     assert changed != original
