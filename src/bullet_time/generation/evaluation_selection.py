@@ -17,7 +17,7 @@ from bullet_time.provenance import (
     strict_json,
 )
 from .bundle import ROOT
-from .evaluation_motion import select_collection
+from .evaluation_motion import select_collection, tracking_background, background_conflict
 
 SCOPE = "prospective train/dev selection only; no rendering, assessment or learning"
 
@@ -77,11 +77,22 @@ def check_collection(requests, counts):
         raise ValueError("duplicate measurement group ID")
     if any(set(r["assigned_pools"].values()) != {r["split"]} for r in requests):
         raise ValueError("prototype assigned to a different split")
+    backgrounds = {
+        split: [
+            tracking_background(r)
+            for r in requests
+            if r["task"] == "tracking" and r["split"] == split
+        ]
+        for split in ("train", "dev")
+    }
+    if any(background_conflict(a, b) for a in backgrounds["train"] for b in backgrounds["dev"]):
+        raise ValueError("tracking background proximity crosses splits")
     return {
         "groups": len(requests),
         "episodes": sum(1 if r["task"] == "tracking" else 2 for r in requests),
         "prospective_rgb_images": sum(len(r["frames"]) for r in requests),
         "unique_prototypes": {kind: len(requests) for kind in kinds},
+        "background_guard": "tracking camera bin modulo 16; cross-split palette L1 distance must exceed 4; pixel admission still required",
         "rendered": False,
         "near_duplicate_check": "not run: requires actual pixels",
         "joint_pretraining_lineage": "not admitted",

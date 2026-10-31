@@ -222,7 +222,7 @@ def test_raw_capture_reuse_preserves_bytes_and_rejects_changed_renderer(tmp_path
     current = {**sources, "src/bullet_time/generation/evaluation_bundle.py": "c" * 64}
     _, receipt = reuse_capture_source(tmp_path, plan, pin, current)
     assert receipt["producer_sources"] == sources
-    with pytest.raises(ValueError, match="renderer/motion"):
+    with pytest.raises(ValueError, match="renderer/runtime"):
         reuse_capture_source(
             tmp_path, plan, pin, {**current, "game/evaluation_driver.gd": "d" * 64}
         )

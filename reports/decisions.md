@@ -287,3 +287,27 @@ outputs migrate; accepted bundle bytes bind the source/config/runtime that made 
   blinding. All raw labels, private generation evidence, copies and previous score
   outputs must also be excluded from fitting/inference. Actual assessment generation,
   protocol lock and one-time release remain disabled/pending; a receipt is not a release.
+
+## 2026-10-31 EDT — Exclude cross-split tracking background proximity before rendering
+
+- **Authority/reason:** Joy's continuing J7 data/quality assignment. The first
+  eight-group-per-stratum prefix passed, but a targeted native probe found a later
+  training/development pair with no visible objects and whole-image MAE 0.00256436,
+  below the declared 1/255 limit. The full prospective v1 selection is therefore
+  not eligible for a full render/admission. Preserve it and the failed probe.
+- **Prospective data-only rule:** for tracking, disallow a new group if a group in
+  another split has the same camera bin modulo 16 (half-turn roof/floor symmetry)
+  and palette L1 distance ≤4. Record excluded candidate indices and draw complete
+  replacement groups in the existing seeded order. Keep seed 20261028, accepted
+  count targets and all pixel thresholds. This conservative metadata guard targets
+  the observed failure; it is not proof that all other pixel duplicates are absent.
+- **Timing/scope:** no model was fitted to this full-selection dataset, no H3/H4
+  outcome inspected, and no assessment generated. Reconstruct a new immutable
+  selection version and rerun pixel admission; do not retrofit the old snapshot.
+  This is implementation of pilot data admission, not a change to SPEC endpoints,
+  margins or post-outcome sample-size selection.
+- **Raw reuse:** revised prospective selections may reuse a retained group's raw
+  captures only when canonical request bytes, native game/rendering source bytes,
+  runtime pin and every stored file hash match. Changed/missing requests render
+  afresh in a new output; old outputs stay intact. Rebuild/revalidate all exports
+  and the complete resulting set. Never mix learned runs across changed corpora.

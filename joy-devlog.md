@@ -767,7 +767,7 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   6 groups / 10 episodes / 150 RGBs. Inspect and admit that before expanding. This
   is an integration step with no training, assessment, paid compute or H3 claim.
 
-### 2026-10-31 00:21 EDT — Admit first full-selection native prefix
+### 2026-10-31 00:20 EDT — Admit first full-selection native prefix
 
 - **Result:** `artifacts/full-development-preview-v2` passes full reconstruction,
   native capture/physical/mask checks, split/duplicate checks and actual consumers:
@@ -789,3 +789,27 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Next bounded run:** eight groups per task/split with `--reuse-captures` v2,
   preserving the same full selection. Expect 48 groups / 80 episodes / 1,200 RGBs;
   admit and inspect before any full 1,600-group capture. No training or assessment.
+
+### 2026-10-31 00:37 EDT — Catch full-set background duplication before the expensive render
+
+- **Eight-prefix result:** `artifacts/full-development-eight-v1` passed with 48
+  groups / 80 episodes / 1,200 RGBs / 256 queries. Six groups reused, 42 new capture
+  commands totaling 144.10 s. Public report `reports/data/full-selection-eight-20261031.json`.
+  CI for published `b7832af` passed (41168168074).
+- **Targeted preflight:** camera/palette metadata identified 24 candidate tracking
+  background pairs. Rendering only the closest pair confirmed an actual violation:
+  train index 4146 / dev index 65287, camera bin 9, palettes [31,21,13] / [30,21,13].
+  Both objects are hidden at frame 20; full-image MAE 0.0025643591 is below 1/255.
+  Current rule also rejects frame 18. Retained `artifacts/background-probe-v1` and
+  `reports/data/background-duplicate-probe-20261031.json`; do not render full v1.
+- **Correction:** add a prospective cross-split background-proximity exclusion,
+  recording rejected candidate indices, before drawing the same complete counts.
+  Seed and actual pixel rule remain unchanged; no model or assessment outcomes
+  informed this change. New immutable selection required, original retained.
+- **Reuse migration:** compare native game/render source and pins, verify every old
+  file, then reuse only canonical-byte-identical current requests. A revised
+  selection or Python generation change alone need not waste unchanged captures;
+  changed requests render fresh and all exports/admission rerun.
+- **Checks:** 45 data/producer tests pass (8.66 s), including the actual failing
+  metadata pair, guard boundaries, exclusion accounting and exact-request reuse.
+  Scoped Ruff passes. Separate review and new-selection reconstruction follow.

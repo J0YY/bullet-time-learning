@@ -425,7 +425,7 @@ def reuse_capture_source(root, plan, pin, sources):
         compatible_plan = all(
             old["plan"][key] == value
             for key, value in plan.items()
-            if key not in {"per_stratum", "groups_per_task"}
+            if key not in {"per_stratum", "groups_per_task", "selection_sha256"}
         )
     if (
         old["schema_version"] != "bullet-time.measurement-bundle.v1"
@@ -434,16 +434,18 @@ def reuse_capture_source(root, plan, pin, sources):
         or old["engine_pin"] != pin
     ):
         raise ValueError("raw capture plan/runtime/development mismatch")
-    admission_files = {
-        "src/bullet_time/generation/evaluation_bundle.py",
-        "scripts/data/build_evaluation.py",
-    }
-    if old["producer_sources"].keys() != sources.keys() or any(
-        old["producer_sources"][key] != checksum
-        for key, checksum in sources.items()
-        if key not in admission_files
-    ):
-        raise ValueError("raw capture renderer/motion source changed; cannot reuse")
+
+    def rendering_sources(records):
+        return {
+            key: value
+            for key, value in records.items()
+            if key.startswith(("game/", "configs/rendering/"))
+        }
+
+    if not rendering_sources(sources) or rendering_sources(
+        old["producer_sources"]
+    ) != rendering_sources(sources):
+        raise ValueError("raw capture renderer/runtime source changed; cannot reuse")
     actual = {
         p.relative_to(root).as_posix()
         for p in root.rglob("*")
@@ -459,6 +461,11 @@ def reuse_capture_source(root, plan, pin, sources):
         producer_sources=old["producer_sources"],
         original_generation=read(root / "generation.json"),
     )
+
+
+def reusable_request(root, request):
+    path = root / "private" / request["group_id"] / "request.json"
+    return path.is_file() and canonical_bytes(read(path)) == canonical_bytes(request)
 
 
 def build_measurements(
@@ -506,10 +513,10 @@ def build_measurements(
     for request in requests:
         gid = request["group_id"]
         private = output / "private" / gid
-        if old and (old[0] / "private" / gid).is_dir():
+        if old and reusable_request(old[0], request):
             shutil.copytree(old[0] / "private" / gid, private)
             shutil.copytree(old[0] / "inputs/rgb" / gid, private / "rgb")
-            if read(private / "request.json") != request:
+            if canonical_bytes(read(private / "request.json")) != canonical_bytes(request):
                 raise ValueError("raw capture request differs from current selected request")
             commands.append(
                 dict(reused_capture_group=gid, source_bundle_sha256=old[1]["bundle_sha256"])

@@ -1,0 +1,57 @@
+{
+  "catalog_sha256": "f98afdff9fbf659e615a59213cf1f93ea21b683df19d9fd8dda1b637e5e3e13c",
+  "export_source": "b7832af0e627ebd276e87a78818a72a7d882d264",
+  "input_sha256": "150a802dd4e194bee8cd6b64b654526c85e2da229c3add093121209550eb0a34",
+  "new_capture_commands": 42,
+  "new_capture_seconds": 144.1036147888517,
+  "result": {
+    "bundle_sha256": "15da7f135d19bb3e1da09b94ca85f869033105f7e1119b311a3211183bb5ee6e",
+    "development": false,
+    "duplicates": {
+      "candidate_rgb_comparisons": 0,
+      "cross_split_image_pairs": 360000,
+      "exact_cross_split_duplicates": 0,
+      "foreground_iou": 0.98,
+      "images": 1200,
+      "mask_candidates": 12995,
+      "mean_bound_skips": 64,
+      "near_duplicates": 0,
+      "retained_mask_bytes": 6071296,
+      "rgb_cache_capacity": 64,
+      "rgb_mae": 0.00392156862745098,
+      "scope": "train/dev raster and prototype checks; old pretraining integration pool and future final test not admitted",
+      "unique_cross_split_comparisons": 234231,
+      "unique_raster_mask_pairs": 968
+    },
+    "episodes": 80,
+    "examples": 256,
+    "groups": 48,
+    "images": 1200,
+    "lineage": {
+      "asset": 48,
+      "configuration": 48,
+      "trajectory": 48
+    },
+    "pair_checks": {
+      "collision": {
+        "group_sha256": "c9a6ea0310da574d895e0298762c7c3aab6d22aacd7b547f11cf3d0ae580be62",
+        "pairs": 16,
+        "query_horizon_comparisons": 48,
+        "scope": "pixel/query/label checks only; forward dynamics and visual solvability require S3 and models"
+      },
+      "order": {
+        "group_sha256": "c9a6ea0310da574d895e0298762c7c3aab6d22aacd7b547f11cf3d0ae580be62",
+        "pairs": 16,
+        "query_horizon_comparisons": 48,
+        "scope": "pixel/query/label checks only; forward dynamics and visual solvability require S3 and models"
+      }
+    },
+    "scientific_gate_pass": false,
+    "scope": "progressive full-selection train/dev capture; no assessment or H3 acceptance"
+  },
+  "reused_groups": 6,
+  "schema_version": "bullet-time.progressive-measurement-integration.v1",
+  "scientific_gate_pass": false,
+  "scope": "eight-group prefix passes; separate targeted probe rejects the unrendered full selection",
+  "selection_sha256": "5e4a060cb910599f69432e394940ffceb10bc75a53af8ff25f59c206316b70b4"
+}

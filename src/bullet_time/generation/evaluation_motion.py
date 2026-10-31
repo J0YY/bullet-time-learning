@@ -237,7 +237,7 @@ def forecast_candidate(seed, index, task):
     )
 
 
-def select_groups(seed, split, count, task, *, limit=100000, reserved=None):
+def select_groups(seed, split, count, task, *, limit=100000, reserved=None, candidate_allowed=None):
     if split not in ("train", "dev"):
         raise ValueError("initial generator is train/dev only")
     integer(count, "count", 1)
@@ -245,7 +245,7 @@ def select_groups(seed, split, count, task, *, limit=100000, reserved=None):
     if reserved is not None and set(reserved) != set(kinds):
         raise ValueError("reserved prototypes must cover every lineage kind")
     seen = {k: set() if reserved is None else set(reserved[k]) for k in kinds}
-    selected, considered = [], 0
+    selected, considered, background_exclusions = [], 0, []
     # No scene, trajectory or appearance prototype recurs within a task drop.
     # The pool map also prevents sharing any prototype across splits.
     for index in range(limit):
@@ -259,20 +259,40 @@ def select_groups(seed, split, count, task, *, limit=100000, reserved=None):
             continue
         if any(candidate["groups"][k] in seen[k] for k in ("trajectory", "asset", "configuration")):
             continue
+        if candidate_allowed is not None and not candidate_allowed(candidate, split):
+            background_exclusions.append(index)
+            continue
         for k in seen:
             seen[k].add(candidate["groups"][k])
         gid = f"{task}-{identity([seed, task, index])[:16]}"
         candidate.update(group_id=gid, split=split)
         selected.append(candidate)
         if len(selected) == count:
-            return selected, {
+            evidence = {
                 "candidates_considered": considered,
                 "accepted": count,
                 "selection": "content pool and duplicate prototype checks only; no model outcomes",
             }
+            if candidate_allowed is not None:
+                evidence.update(
+                    background_proximity_rejections=len(background_exclusions),
+                    background_proximity_excluded_indices=background_exclusions,
+                    selection="content pools, unique prototypes and prospective background-proximity exclusion; no model outcomes",
+                )
+            return selected, evidence
     raise ValueError(
         "insufficient disjoint prototypes; change the development version, never silently shrink"
     )
+
+
+def tracking_background(request):
+    """Roof/floor repeat after a half-turn; palettes use the fixed producer bins."""
+    return (request["prototypes"]["configuration"][1] % 16, tuple(request["prototypes"]["asset"]))
+
+
+def background_conflict(a, b):
+    """Conservative pre-render guard, never a replacement for the pixel check."""
+    return a[0] == b[0] and sum(abs(x - y) for x, y in zip(a[1], b[1], strict=True)) <= 4
 
 
 def select_collection(seed, counts):
@@ -286,13 +306,26 @@ def select_collection(seed, counts):
         for count in counts[task].values():
             integer(count, "group count", 1)
     reserved = {k: set() for k in ("trajectory", "asset", "configuration")}
+    backgrounds = {split: [] for split in splits}
+
+    def allowed(request, split):
+        if request["task"] != "tracking":
+            return True
+        key = tracking_background(request)
+        other = "dev" if split == "train" else "train"
+        return not any(background_conflict(key, old) for old in backgrounds[other])
+
     requests, evidence = [], {}
     for task in tasks:
         for split in splits:
-            rows, stats = select_groups(seed, split, counts[task][split], task, reserved=reserved)
+            rows, stats = select_groups(
+                seed, split, counts[task][split], task, reserved=reserved, candidate_allowed=allowed
+            )
             for row in rows:
                 for kind in reserved:
                     reserved[kind].add(row["groups"][kind])
+                if task == "tracking":
+                    backgrounds[split].append(tracking_background(row))
             requests.extend(rows)
             evidence[f"{task}/{split}"] = stats
     return requests, evidence

@@ -98,12 +98,22 @@ def test_progressive_raw_reuse_requires_same_selection_and_immutable_bytes(tmp_p
     assert root == tmp_path and evidence["bundle_sha256"] == digest(
         (tmp_path / "bundle.json").read_bytes()
     )
-    with pytest.raises(ValueError, match="plan/runtime"):
-        bundle.reuse_capture_source(tmp_path, bundle.progressive_plan("d" * 64, 8), pin, sources)
-    with pytest.raises(ValueError, match="renderer/motion"):
+    # Revised selection may retain only raw groups whose canonical requests match.
+    bundle.reuse_capture_source(tmp_path, bundle.progressive_plan("d" * 64, 8), pin, sources)
+    with pytest.raises(ValueError, match="renderer/runtime"):
         bundle.reuse_capture_source(
             tmp_path, new_plan, pin, {**sources, "game/evaluation_driver.gd": "e" * 64}
         )
     data.write_bytes(b"changed")
     with pytest.raises(ValueError, match="bytes changed"):
         bundle.reuse_capture_source(tmp_path, new_plan, pin, sources)
+
+
+def test_raw_request_reuse_requires_exact_current_canonical_request(tmp_path):
+    request = dict(group_id="group", frames={"final": {"x": 0.0}}, labels=[0, 1])
+    path = tmp_path / "private/group/request.json"
+    atomic_json(path, request)
+    assert bundle.reusable_request(tmp_path, request)
+    assert not bundle.reusable_request(tmp_path, {**request, "labels": [1, 0]})
+    assert not bundle.reusable_request(tmp_path, {**request, "frames": {"final": {"x": 0}}})
+    assert not bundle.reusable_request(tmp_path, {**request, "group_id": "missing"})

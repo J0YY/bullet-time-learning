@@ -1,0 +1,188 @@
+{
+  "candidate": {
+    "camera_mod16": 9,
+    "dev_group": "tracking-923f51f7fc9d4662",
+    "palette_l1_distance": 1,
+    "train_group": "tracking-7e6716e01a9b9bde"
+  },
+  "commands": [
+    {
+      "command": [
+        "/Users/joyyang/Projects/bullet-time-learning/.cache/godot/4.5.1/Godot.app/Contents/MacOS/Godot",
+        "--path",
+        "/Users/joyyang/Projects/bullet-time-learning/game",
+        "--rendering-method",
+        "gl_compatibility",
+        "--resolution",
+        "224x224",
+        "--position",
+        "20,60",
+        "--script",
+        "res://evaluation_driver.gd",
+        "--",
+        "/Users/joyyang/Projects/bullet-time-learning/artifacts/background-probe-v1/private/tracking-7e6716e01a9b9bde/request.json",
+        "/Users/joyyang/Projects/bullet-time-learning/artifacts/background-probe-v1/private/tracking-7e6716e01a9b9bde"
+      ],
+      "log": "render.log",
+      "seconds": 5.035030666040257
+    },
+    {
+      "command": [
+        "/Users/joyyang/Projects/bullet-time-learning/.cache/godot/4.5.1/Godot.app/Contents/MacOS/Godot",
+        "--path",
+        "/Users/joyyang/Projects/bullet-time-learning/game",
+        "--rendering-method",
+        "gl_compatibility",
+        "--resolution",
+        "224x224",
+        "--position",
+        "20,60",
+        "--script",
+        "res://evaluation_driver.gd",
+        "--",
+        "/Users/joyyang/Projects/bullet-time-learning/artifacts/background-probe-v1/private/tracking-923f51f7fc9d4662/request.json",
+        "/Users/joyyang/Projects/bullet-time-learning/artifacts/background-probe-v1/private/tracking-923f51f7fc9d4662"
+      ],
+      "log": "render.log",
+      "seconds": 5.148242958995979
+    }
+  ],
+  "evidence": [
+    {
+      "checks": {
+        "first_reappearance": 25,
+        "frame_count": 28,
+        "frozen_states": true,
+        "full_diagonal_pixels": {
+          "17": 20.518284528683193,
+          "25": 21.213203435596427,
+          "26": 21.213203435596427,
+          "27": 19.79898987322333
+        },
+        "physical_clearance": 0.19999999999999996,
+        "reference_frame": 16,
+        "renderer": {
+          "display": "macOS",
+          "renderer": "gl_compatibility",
+          "video_adapter": "Apple M3"
+        },
+        "repeated_frames": 2,
+        "visibility": {
+          "0": false,
+          "1": false,
+          "10": true,
+          "11": true,
+          "12": true,
+          "13": true,
+          "14": true,
+          "15": true,
+          "16": true,
+          "17": false,
+          "18": false,
+          "19": false,
+          "2": true,
+          "20": false,
+          "21": false,
+          "22": false,
+          "23": false,
+          "24": false,
+          "25": true,
+          "26": true,
+          "27": true,
+          "3": true,
+          "4": true,
+          "5": true,
+          "6": true,
+          "7": true,
+          "8": true,
+          "9": true
+        }
+      },
+      "group_id": "tracking-7e6716e01a9b9bde"
+    },
+    {
+      "checks": {
+        "first_reappearance": 25,
+        "frame_count": 28,
+        "frozen_states": true,
+        "full_diagonal_pixels": {
+          "17": 21.213203435596427,
+          "25": 21.213203435596427,
+          "26": 21.213203435596427,
+          "27": 21.213203435596427
+        },
+        "physical_clearance": 0.19999999999999996,
+        "reference_frame": 16,
+        "renderer": {
+          "display": "macOS",
+          "renderer": "gl_compatibility",
+          "video_adapter": "Apple M3"
+        },
+        "repeated_frames": 2,
+        "visibility": {
+          "0": true,
+          "1": true,
+          "10": true,
+          "11": true,
+          "12": true,
+          "13": true,
+          "14": true,
+          "15": true,
+          "16": true,
+          "17": false,
+          "18": false,
+          "19": false,
+          "2": true,
+          "20": false,
+          "21": false,
+          "22": false,
+          "23": false,
+          "24": false,
+          "25": true,
+          "26": true,
+          "27": true,
+          "3": true,
+          "4": true,
+          "5": true,
+          "6": true,
+          "7": true,
+          "8": true,
+          "9": true
+        }
+      },
+      "group_id": "tracking-923f51f7fc9d4662"
+    }
+  ],
+  "raw_report_sha256": "bcb55375b8ec6d21d2b383561b6c9baf3c0244be0b30df2c4410d3bf648cb241",
+  "result": {
+    "duplicate_error": "near duplicate RGB across splits: ('tracking-7e6716e01a9b9bde', 'frame-18') / ('tracking-923f51f7fc9d4662', 'frame-18')",
+    "frame20_foreground_pixels": [
+      0,
+      0
+    ],
+    "frame20_full_rgb_mae": 0.002564359076964119,
+    "raster_rule_pass": false
+  },
+  "schema_version": "bullet-time.targeted-raster-probe.v1",
+  "scientific_gate_pass": false,
+  "scope": "targeted native data-only preflight; no model fitting or assessment",
+  "script_sha256": "d9cbbacb07e0c5da17838c211a43b925281ff14792a27ad60d18c3d4853a6ea5",
+  "selection_sha256": "5e4a060cb910599f69432e394940ffceb10bc75a53af8ff25f59c206316b70b4",
+  "source_commit": "b7832af0e627ebd276e87a78818a72a7d882d264",
+  "source_sha256": {
+    "configs/generation/evaluation-development.json": "98a8d00992959476eebeb6a86ecf5fd8b2d06457edae5bc346460f9d520ad374",
+    "configs/pilot-plan.json": "b160a832f9799f2cf049a56d2ca1002e942688702e523a5dcf0a6cd8929f89f5",
+    "configs/rendering/godot-macos.json": "01cbf61ad11518cf7d54ad83b8a18604159f392a98b0bef83ab3b196d6fab03c",
+    "game/LICENSE": "dbf8c0ec29216abd05bc76cd663541cd1ded38680c0fd54e1a4b4be57d6e2f23",
+    "game/arena_driver.gd": "a143e28781586a30c4f91fd61d4f487f21f9bd2fa22e4c6ccc934ea28a076d0f",
+    "game/evaluation_driver.gd": "c54a3aaa59c5688d9a529b5cbc6adcb4a301e927a9f29aa196eae3b44911c95e",
+    "game/project.godot": "e0dc45b0c338b547eb68a869a8f1d8cf0693af21554c34d6623cca1f1a4957b8",
+    "scripts/data/build_evaluation.py": "1ad21ae5bc52e9b8769ae7037eb3bd5f2e4dc6faa6eb2b57193db9f665803b33",
+    "src/bullet_time/generation/arena.py": "65f8ca0dd2f51860aa232c6fca71fd261e435314e9df2c709340ed069fde4830",
+    "src/bullet_time/generation/bundle.py": "dbeb9f3ef371e15d963dc9c2ec050622f1e3136e154af58fc0fd2df884b537a5",
+    "src/bullet_time/generation/evaluation_bundle.py": "2362a83dc5cea28bfdfe388cd70aa12b6b286695d1555be69330f743e94fcb93",
+    "src/bullet_time/generation/evaluation_motion.py": "a071c053820da8c76421359451ab0a3ef545f8e60ecb05dbdd895dbbbe957d6a",
+    "src/bullet_time/generation/evaluation_selection.py": "306731bc37656de204e5a4e2c59464def55ae03f296c72504790a6577e1d32eb",
+    "src/bullet_time/provenance.py": "e19fc805f18d15e62387ad2992c3fff6b825c94986d3dd6cb7761963197e6642"
+  }
+}

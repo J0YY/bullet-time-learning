@@ -21,10 +21,12 @@ is retained. The initial builder stops on a failed admission instead of silently
 shrinking the dataset. Godot script errors fail admission even if the engine exits
 with status zero. A new producer version requires a new drop, retaining old bytes.
 For an export/admission-only repair, add `--reuse-captures OLD_DROP` to reuse the
-verified raw captures in a new output. It requires unchanged renderer/motion/pins,
-the same selected requests and every original file hash. All exports and admission
+verified raw captures in a new output. It requires unchanged native renderer/pins, matching canonical requests and every
+original file hash. Revisions to selection/generation code alone do not force
+rerendering retained groups whose complete requests are identical. All exports and admission
 are recomputed; original capture provenance is retained and no old acceptance is
-inherited. Changed scene or render code requires new rendering.
+inherited. Changed native scene/render code requires new rendering. A changed request is
+rendered afresh in the new output; it is never substituted with an old capture.
 
 ## Forward histories and rendered evidence
 
@@ -117,8 +119,8 @@ split order. JSON key order cannot change the selection. The tiny integration
 uses its separately documented seed `20261030`; it is not silently enlarged.
 
 ```sh
-.venv/bin/python scripts/data/plan_evaluation.py --output artifacts/full-development-selection-v1
-.venv/bin/python scripts/data/plan_evaluation.py --output artifacts/full-development-selection-v1 --verify-only
+.venv/bin/python scripts/data/plan_evaluation.py --output artifacts/full-development-selection-v2
+.venv/bin/python scripts/data/plan_evaluation.py --output artifacts/full-development-selection-v2 --verify-only
 ```
 
 This writes an immutable **prospective** inventory, with private request records and
@@ -170,7 +172,7 @@ These measurements describe that small drop, not the unrendered full collection.
 
 ```sh
 .venv/bin/python scripts/data/build_evaluation.py \
-  --full-selection artifacts/full-development-selection-v1 --per-stratum 1 \
+  --full-selection artifacts/full-development-selection-v2 --per-stratum 1 \
   --godot .cache/godot/4.5.1/Godot.app/Contents/MacOS/Godot \
   --output artifacts/full-development-preview-v1
 ```
@@ -183,8 +185,10 @@ fixed order comes from the full globally reserved selection, not fresh per-task
 sampling. Prefixes are engineering drops, not full pilot measurements.
 
 Use `--reuse-captures PRIOR-PREFIX` to copy unchanged, byte-verified raw captures
-into a larger new prefix; already rendered groups are not rerendered. The selection
-receipt, renderer/motion/pins and raw bytes must match, and prefixes can only grow.
+into a larger new prefix; already rendered groups are not rerendered. The native renderer/pins and raw bytes must match, and prefixes can only grow.
+A revised prospective selection may retain an existing group only when its full
+canonical request matches; missing or changed requests render anew. Record both
+selection versions and keep their outputs separate.
 Every old and new group is revalidated and all exports rebuilt; no old acceptance
 status is inherited. Preserve each output, including failed attempts. The final
 checker examines the entire resulting prefix across splits, not just new images.
@@ -207,3 +211,19 @@ records the admitted six-group prefix. Its first attempt retained valid raw
 captures but failed aggregate catalog ordering; the repaired version re-exported
 those same images with canonical frame-key order. No captures were repeated.
 Separate review is clean in round 2; full-data/H3 acceptance remains pending.
+
+## Background-proximity exclusion before the full render
+
+The [eight-group prefix](../reports/data/full-selection-eight-20261031.json) passed
+with 48 groups / 80 episodes / 1,200 RGBs, reusing six groups and capturing 42. A
+[targeted native probe](../reports/data/background-duplicate-probe-20261031.json)
+then found a near-duplicate background elsewhere in prospective selection v1.
+That full selection is retained but rejected for full admission.
+
+The next selection excludes tracking candidates with camera bin modulo 16 matching
+another split and palette L1 distance ≤4. Counts, seed and raster thresholds stay
+fixed. Excluded indices are recorded, with complete replacement groups drawn in
+canonical seeded order. This is a conservative data-only filter before model fitting;
+full pixel/physical/split admission still runs. Version v2 is a new snapshot; do
+not overwrite v1 or describe the old full selection as admitted. Retained raw
+captures can be reused using the exact-request and native-renderer checks above.

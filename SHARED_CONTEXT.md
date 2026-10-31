@@ -133,9 +133,12 @@ owns the generation/config/test changes; no collaborator input is required. The
 [bounded raster checker](reports/data/raster-check-20261031.json) passes the unchanged
 rule on all 1,800 native images in 3.75 s at 59.1 MB peak RSS; review clean.
 Progressive capture and reuse are implemented; review clean in round 2 after a
-serialized-catalog fix. Next native increment is eight groups per task/split,
-reusing the verified six-group prefix. Full-data/joint-pretraining admission and
-resource gates remain.
+serialized-catalog fix. The eight-group prefix also passed: 48 groups / 80 episodes /
+1,200 RGBs. A targeted native probe then found a cross-split empty-background near
+duplicate elsewhere in the full selection. Do not render that full selection.
+Joy is adding a prospective background-proximity exclusion and exact-request raw
+capture reuse across revised selections; preserve all old artifacts. Pixel
+thresholds, accepted count targets and scientific/resource gates stay unchanged.
 
 ## Update rules
 

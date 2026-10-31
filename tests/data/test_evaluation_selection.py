@@ -13,6 +13,7 @@ def test_global_reservation_with_cross_task_collisions_and_reordered_json(monkey
         return dict(
             task=task,
             index=index,
+            prototypes={"configuration": [task, index % 16], "asset": [index % 32, 0, 0]},
             groups={
                 "asset": str(index),
                 "trajectory": f"{task}-{index}",
@@ -111,3 +112,32 @@ def test_selection_snapshot_reconstructs_and_rejects_rewritten_counts_or_bytes(
     atomic_json(output / "selection.json", report)
     with pytest.raises(ValueError, match="counts/seed"):
         selection.verify_selection(output)
+
+
+def test_tracking_background_guard_rejects_observed_native_failure_and_keeps_other_views():
+    # Actual failed native pair; no untracked artifact is required for its metadata.
+    a = motion.tracking_candidate(20261028, 4146)
+    b = motion.tracking_candidate(20261028, 65287)
+    ka, kb = motion.tracking_background(a), motion.tracking_background(b)
+    assert ka == (9, (31, 21, 13)) and kb == (9, (30, 21, 13))
+    assert motion.background_conflict(ka, kb)
+    assert motion.background_conflict((9, (31, 21, 13)), (9, (27, 21, 13)))
+    assert not motion.background_conflict((9, (31, 21, 13)), (9, (26, 21, 13)))
+    assert not motion.background_conflict(ka, (8, kb[1]))
+    b["prototypes"]["configuration"][1] = 25
+    assert motion.tracking_background(b) == kb
+
+
+def test_prospective_rejections_are_counted_and_preserve_full_requested_units():
+    first, _ = motion.select_groups(71, "train", 1, "tracking")
+    rejected = first[0]["index"]
+    rows, evidence = motion.select_groups(
+        71,
+        "train",
+        1,
+        "tracking",
+        candidate_allowed=lambda request, split: request["index"] != rejected,
+    )
+    assert len(rows) == evidence["accepted"] == 1 and rows[0]["index"] != rejected
+    assert evidence["background_proximity_excluded_indices"] == [rejected]
+    assert evidence["background_proximity_rejections"] == 1
