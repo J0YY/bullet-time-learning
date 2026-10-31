@@ -264,3 +264,26 @@ outputs migrate; accepted bundle bytes bind the source/config/runtime that made 
   simple geometry does not establish gameplay breadth or visual solvability. Full
   J7 sets, joint pretraining lineage, assessment isolation and H3 remain separate
   required work; neither S4 completion nor collaborator acknowledgment is added.
+
+## 2026-10-30 EDT — Randomized assessment labels and local access boundary
+
+- **Authority/reason:** Joy's continuing J7/J8 assignment requires assessment labels
+  to remain unavailable to fitting/inference. A canonical hash of a binary target
+  without a secret nonce can be guessed; file separation alone is insufficient.
+- **Choice:** private label v2 adds an independent cryptographic 256-bit nonce per
+  assessment record. Public provenance hashes the complete salted record. Retain
+  train/dev v1. A producer-only sealer makes the private/public exports; no actual
+  assessment data existed to migrate. Reject unsalted assessment labels.
+- **Local boundary:** a bounded macOS job launcher denies private read/write and
+  network access, verifies denial before launching, and retains command/profile/
+  runtime/log receipts. It has no unconfined fallback and requires existing private
+  roots plus probe files. Linux/CUDA needs a separate validated mount implementation.
+- **Affected:** evaluation target validation and interfaces, producer sealing CLI,
+  local job launcher and tests. This implements SPEC access/provenance requirements
+  without changing scientific endpoints, sample sizes, H3/H4 thresholds or the
+  unchanged original SPEC. Fitted consumers must retain their original code snapshot
+  or be regenerated under the new source hash. Existing results remain historical.
+- **Limits:** restricted trusted jobs are not adversarial-code isolation or human
+  blinding. All raw labels, private generation evidence, copies and previous score
+  outputs must also be excluded from fitting/inference. Actual assessment generation,
+  protocol lock and one-time release remain disabled/pending; a receipt is not a release.

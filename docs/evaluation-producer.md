@@ -93,8 +93,10 @@ Verification reconstructs the selected requests and exports from saved evidence.
 Raw artifacts remain outside Git.
 
 These are separate directories, **not an OS access sandbox or human blinding**.
-Assessment generation/scoring is unavailable here. A future version must implement
-and verify restricted access and locked assessment release before that stage.
+Assessment generation/scoring is unavailable here. The [assessment isolation foundation](assessment-isolation.md)
+adds randomized private-label commitments and a locally tested restricted-job launcher.
+A future version must integrate those with complete data admission, a locked protocol
+and the selected execution host before that stage.
 
 Run the pure-component checks with:
 

@@ -17,17 +17,9 @@ from bullet_time.provenance import (
 )
 from .export import COLUMNS, KEY, OUTPUTS, key_of
 from .metrics import summarize
+from .label_contract import validate_label_header
 
 EXPECTED = set(COLUMNS) - set(OUTPUTS) - {"status", "error"}
-LABEL_FIELDS = {
-    "schema_version",
-    "task_id",
-    "episode_id",
-    "query_id",
-    "horizon_or_frame",
-    "split",
-    "target",
-}
 
 
 def file_json(path):
@@ -44,13 +36,7 @@ def label_key(row):
 
 
 def validate_target(row, classes=174):
-    fields(row, LABEL_FIELDS)
-    if row["schema_version"] != "bullet-time.labels.v1" or row["split"] not in (
-        "train",
-        "dev",
-        "assessment",
-    ):
-        raise ValueError("unsupported label schema/split")
+    validate_label_header(row)
     for key in ("episode_id", "query_id", "horizon_or_frame"):
         text_id(row[key], key)
     t = row["target"]

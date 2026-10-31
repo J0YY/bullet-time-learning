@@ -285,7 +285,7 @@ as grids. Evaluation pixels are letterboxed deterministically; queries use the
 exact transformed coordinate map. Game labels must use those resulting coordinates
 and the declared 224-pixel bounding-box diagonal convention.
 
-The consumer's private label format is `bullet-time.labels.v1`: `schema_version`,
+Training/development use private `bullet-time.labels.v1`: `schema_version`,
 `task_id`, `episode_id`, `query_id`, `horizon_or_frame` (canonical string), `split`,
 `target`. Targets are `{contact: 0|1}`, `{class_id: integer}`, or for tracking
 `{x, y, visible: 0|1, bbox_diagonal_pixels, prediction_role}`. These labels are never
@@ -293,11 +293,23 @@ forwarded as model inputs. Source/pair/physics annotations remain a separate J7
 admission/analysis export. `horizon_or_frame` is `"0.5"` etc., tracking frame string,
 or `"clip"` for SSv2. Hash the canonical full label record for prediction provenance.
 
+Assessment labels use `bullet-time.labels.v2`, adding `commitment_nonce`: a fresh
+secret 32-byte cryptographic random value encoded as 64 lowercase hex characters,
+independent for every record. Hash the **full** v2 record, including that nonce.
+Keep both nonce and target private. Plain hashes of binary v1 targets are guessable
+and are rejected for assessment. Existing train/dev v1 exports are unchanged; no
+real assessment artifacts existed to migrate. The producer-only sealer converts
+private unsealed v1 assessment records and emits public target commitments; it
+does not authorize inference, scoring or release. See [isolation](assessment-isolation.md).
+
 Prediction CSV adds the compatible `prediction_role` column, allowing J8 and S4 to keep
 auxiliary visibility queries out of the three-frame primary score. An independent
 expected-key inventory is mandatory; missing predictions become explicit missing
 rows and cannot produce a complete gate. Assessment inference uses a label-free
-expected inventory whose target hashes were prepared by the authorized auditor.
+expected inventory whose randomized v2 target commitments were prepared by the
+authorized generation/admission process. Preserve those commitments when binding
+the inventory to actual fitted predictor IDs. Do not expose raw-label hashes,
+private nonce values or private generation evidence through the public inventory.
 
 Consumer implementations: [inputs](../src/bullet_time/evaluation/inputs.py),
 [targets/fitting](../src/bullet_time/evaluation/training.py),

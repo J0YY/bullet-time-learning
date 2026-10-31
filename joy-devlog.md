@@ -627,3 +627,28 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Publication/checks:** producer milestone `0edab89` has green GitHub Actions run
   41163642044. No implementation code changed after 100 passing tests; current work
   adds run evidence and a thin wrapper around the checked power helper.
+
+### 2026-10-30 23:38 EDT — Implement assessment privacy foundation
+
+- **Reason/implementation:** binary target hashes can be guessed. Added independent
+  cryptographic 256-bit nonces in assessment-only private label v2, producer sealing
+  and public commitments. Train/dev v1 remains compatible; unsealed assessment v1
+  is rejected. No actual assessment set, lock or release was created.
+- **Local boundary:** added a fail-closed macOS trusted-job launcher with explicit
+  denied roots, preflight denial probes, no inherited stdin/minimal environment,
+  denied network, bounded process-group cleanup and hash-bound receipts. Native
+  synthetic tests verify child/symlink reads and link/rename attempts are denied,
+  permitted reads work, and timed-out children cannot finish later. Linux remains
+  unsupported and fails closed; these are not human-blinding or hostile-code claims.
+- **Checks:** first focused run found an expected exception-type mismatch; the next
+  63-case consumer/scorer run found one old error-message assertion. Both failures
+  were diagnostic compatibility, with the denial behavior correct; fixed explicitly.
+  Native access/timeout tests pass. Repository F-lint/format and scaffold/pilot
+  freshness pass. An exploratory full Ruff rule set found pre-existing E731 in the
+  measurement exporter; the configured CI rule set is F and passes.
+- **Migration:** new shared label validation changes the consumer source identity.
+  Old fitted checkpoints stay bound to their original code; do not silently reuse
+  them with new inference code. Original SPEC and scientific thresholds unchanged.
+- **Publication:** prior evidence commit `315515d` is on main, CI 41164583874 passed.
+  All 106 tests pass in 65.88 s (`artifacts/privacy-regression-v1.log`). This
+  implementation enters separate cumulative review before publication.

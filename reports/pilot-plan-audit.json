@@ -50,7 +50,7 @@
   "source_sha256": {
     "SPEC.md": "bff787e8650f543b47e2f12bafb1081d62f80c377936a12762693da30ef85112",
     "division-of-labor.md": "b07c7eb0e2b49c69bb3fcadf9c90e142a947c0be77d95eb9f3576e8c0c76a56d",
-    "docs/interfaces.md": "48ea997a0163156b0fad92085cca127d7ab89b2790243a7be9bd7b352b39d7c7",
+    "docs/interfaces.md": "9b1bdea52c943c56c551b6ba9a53bc54648ef4c153c06b96558f028027ddad3d",
     "docs/pilot-plan.md": "cb8e6b4bb5e720da90c16af54223a7e4dab503ecb7e9175705ab8fd54f25dd3a",
     "scripts/check_pilot_plan.py": "4412aa03eb1e4032be18838d04bb8279860cbd39c1db0b340965f25333bcfaa3"
   },

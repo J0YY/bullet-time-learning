@@ -7,6 +7,7 @@ import torch
 from torch.nn import functional as F
 from bullet_time.provenance import strict_json, fields, integer, number, identity, digest, seed_for
 from bullet_time.evaluation.inputs import point
+from bullet_time.evaluation.label_contract import validate_label_header
 from bullet_time.models.video import seeded_rng, model_identity
 
 
@@ -18,22 +19,10 @@ class Targets:
         self.sha256 = digest(self.path.read_bytes())
         self.rows = {}
         examples = {(e.task_id, *e.key): e for e in inputs.examples if e.split in allowed_splits}
-        required = {
-            "schema_version",
-            "task_id",
-            "episode_id",
-            "query_id",
-            "horizon_or_frame",
-            "split",
-            "target",
-        }
         for line in self.path.read_bytes().splitlines():
             row = strict_json(line)
-            fields(row, required)
-            if (
-                row["schema_version"] != "bullet-time.labels.v1"
-                or row["split"] not in allowed_splits
-            ):
+            validate_label_header(row)
+            if row["split"] not in allowed_splits:
                 raise ValueError("unsupported/inaccessible target")
             key = (row["task_id"], row["episode_id"], row["query_id"], str(row["horizon_or_frame"]))
             if key in self.rows or key not in examples:

@@ -118,6 +118,11 @@ with strict operational scoring and tiny forward-valid train/dev examples, then
 continue the dependency queue under the unchanged scientific/access/resource gates.
 No Sudarshan action is inferred or made a new implementation gate.
 
+Active next increment: Joy owns assessment label v2 commitments and a local
+restricted-job launcher, with synthetic access tests. Changes touch evaluation label
+validation, scripts, tests and interfaces. Real assessment release remains disabled;
+this increment does not freeze a protocol, enable scoring or claim human blinding.
+
 ## Update rules
 
 Re-read before each edit. Patch your task/status only, retaining others' concurrent
