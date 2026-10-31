@@ -200,7 +200,9 @@ hash-bound exclusion record for the two affected dev groups, preserving all coun
 and replacing complete groups before model fitting. Re-export/revalidate unchanged
 captures by exact request; full revised admission remains pending.
 Assessment inventory/H3 numeric checks pass 12 focused cases with separate code
-review clean in round 1. This is not a real release or scientific gate pass.
+review clean in round 1. Joy is adding durable full-version/stage commitments and
+crash/retry/concurrency checks. Actual data/fit/scorer/isolation integration remains
+required; this journal does not grant release or scientific gate passage.
 
 ## Update rules
 

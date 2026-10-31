@@ -1117,3 +1117,19 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Next:** fresh full export reusing the rejected drop's valid raw captures;
   render only the two new requests, then repeat combined admission. Retain the
   old rejected bundle and its logs. No model training or assessment release.
+
+### 2026-10-31 02:50 EDT — Implement durable assessment stage commitments
+
+- **Component:** whole-version/complete-slot journal reserves pool identity, H3
+  predictors and future H4 recipe/input identities. Stage manifests retain failed
+  slots; exact retries reuse the same receipt. File locks serialize writers and
+  fsynced reservations prevent interrupted writes from permitting new outcomes.
+- **Checks:** 21 combined policy/state cases pass in 5.71 s; added concurrent
+  alternate-release regression and receipt-to-reservation verification. Focused
+  checks and separate review follow before publication.
+- **Limits:** this component stores validated commitments supplied by a future
+  admission/scoring adapter; it does not itself verify actual model/data bytes,
+  inspect labels, enforce job isolation or authorize assessment. Every returned
+  status marks authorization/scientific passage false. No real locks were created.
+- **Native/CI:** replacement full-data drop has all 1,600 per-group validations
+  complete and combined admission running. Push b5f97d2 CI 41177843899 successful.

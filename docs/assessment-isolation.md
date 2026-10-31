@@ -141,3 +141,31 @@ The opaque export has synthetic tests in `tests/readouts/test_assessment_export.
 for all three tasks, exact assembled tensors in every allowed mode, private PNG
 metadata, randomized IDs/order, complete pairs, malformed inputs, CLI verification
 and artifact mutation. These tests create synthetic assessment fixtures only.
+
+## Staged persistence component
+
+Joy selected [two locked stages on the existing pool](assessment-release-proposal.md).
+`evaluation/assessment_policy.py` derives the exact 7 H3 / 243 H4 / 117 development-
+only head inventories and checks the numerical H3 rules against complete matched
+400-episode task pools. `evaluation/assessment_state.py` provides the persistent
+version/stage journal; its tests use synthetic commitments only.
+
+The whole-version payload commits protocol, pipeline, source/runtime, admission,
+early resume points and every slot's recipe/input inventory. H3 predictor hashes
+are required immediately; H4 hashes may append once to their fixed slots. A shared
+registry reserves each pool for one version. Stage release commits every delivered
+or failed slot before scoring. File locking serializes concurrent operators;
+fsynced reservations survive interrupted creation/report publication. Identical
+retries return the same state/receipt; changing predictions, recipes, reports or
+outcomes fails. Failed/incomplete H3 closes the version; H4 requires H3 completion
+and closes it after its own receipt.
+
+This journal validates commitments and state transitions, **not their scientific
+contents or underlying artifact bytes**. It never opens labels or runs a scorer,
+and every status retains `assessment_authorized=false` and `scientific_gate_pass=false`.
+The upcoming admission/scoring adapter must verify actual data and fit contracts,
+immutable expected/prediction bytes, complete coverage, quantitative H3 and actual
+job-isolation receipts, then supply these commitments/outcomes. Keeping one registry
+and a verified pool identity is part of that admission contract; the journal is
+not a malicious-user or human-blinding boundary. Direct scoring remains train/dev
+only. No real pilot lock, release or inspection is recorded by these tests.
