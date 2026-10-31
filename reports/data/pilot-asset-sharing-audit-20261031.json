@@ -1,0 +1,160 @@
+{
+  "appearance_definition": "individual object primitive kind, exact dimensions and material RGB; excludes instance ID and pose",
+  "bindings": {
+    "assessment_prefix": {
+      "groups": 24,
+      "receipt_sha256": "4ad4f82a8ad9e8d31aa6fa3101d3696a4ac93d7e3579c48e61a8a1e88f86c200",
+      "request_inventory_sha256": "4390952b5fc667c0832eed19f931debe7d2ccc6bc7f44395ed7134d43b9a4441"
+    },
+    "development": {
+      "groups": 1600,
+      "receipt_sha256": "e078cdba884adbde8f98cfe5184845171cb6fd7f46fffbb7a8c20b3fe136a442",
+      "request_inventory_sha256": "26f0423c43cdfed5f6cf1ff9e23e6fcdde6faf2755e40469ee50aed9853eed19"
+    },
+    "pretraining": {
+      "groups": 8,
+      "receipt_sha256": "49cb481ff6af45cbc7d480e1bc4fcff2d1b6a9a349716a16a320ef0775bd23c1",
+      "request_inventory_sha256": "888cd8d98141b96df28a96ada41d6e8739bbd7c272b9c00755c88ba0606e9976"
+    }
+  },
+  "geometry_definition": "individual primitive kind and exact dimensions only; category sharing alone is not leakage",
+  "helper_sha256": "751a74d6dcf0f4f09fd43a0e5b3667d722a42b9610170eae7bb6a281aac2b729",
+  "interpretation": "Existing palette-level asset groups do not certify that every individual rendered asset is held out. Shared target/roof components need an explicit pilot asset-group definition before joint admission.",
+  "joint_lineage_admitted": false,
+  "limits": [
+    "Exact requested primitive/material descriptions, not a learned perceptual similarity metric",
+    "Does not invalidate already measured immutable RGB/geometry/duplicate checks",
+    "No labels, model predictions, scores or assessment source identities published",
+    "No change to protocol or source data; no joint-lineage or scientific gate admitted"
+  ],
+  "recorded_at": "2026-10-31T04:33:23-04:00",
+  "schema_version": "bullet-time.pilot-asset-sharing-audit.v1",
+  "scientific_gate_pass": false,
+  "shared_geometry": [
+    {
+      "descriptor_sha256": "00572497b1ed6076a813f1e35f1edbd152e2225dd77a608c03ab70596d067156",
+      "groups_by_split": {
+        "assessment": 7,
+        "dev": 63,
+        "train": 152
+      },
+      "roles": [
+        "projectile"
+      ]
+    },
+    {
+      "descriptor_sha256": "0f4350cf719fd903191e741c0c169fc2a00b221c682909116a3e657a1ff91874",
+      "groups_by_split": {
+        "assessment": 2,
+        "dev": 47,
+        "train": 151
+      },
+      "roles": [
+        "projectile"
+      ]
+    },
+    {
+      "descriptor_sha256": "5b58e7f5e0edece8fdedfd46c27e8710e791ffb861bdd37b2f4209d3611b2df7",
+      "groups_by_split": {
+        "assessment": 4,
+        "dev": 44,
+        "train": 152
+      },
+      "roles": [
+        "projectile"
+      ]
+    },
+    {
+      "descriptor_sha256": "a2f638e346dc89c470ea50d9d52a1f2a410c34a812e81d53f1c50b4386a19c71",
+      "groups_by_split": {
+        "assessment": 16,
+        "dev": 200,
+        "train": 600
+      },
+      "roles": [
+        "floor"
+      ]
+    },
+    {
+      "descriptor_sha256": "b4301cc02a8e454026eef77ca844ed17b15c41c199de69a9c8b4bd6f5a395839",
+      "groups_by_split": {
+        "assessment": 8,
+        "dev": 200,
+        "train": 600
+      },
+      "roles": [
+        "roof"
+      ]
+    },
+    {
+      "descriptor_sha256": "c1571806dcf1f47e833d464ec923bb4ed00458a13822dab83a82638ceadaef90",
+      "groups_by_split": {
+        "assessment": 3,
+        "dev": 46,
+        "pretrain": 8,
+        "train": 145
+      },
+      "roles": [
+        "projectile"
+      ]
+    },
+    {
+      "descriptor_sha256": "d54d46dbf73d868a9b7ec96ad247d4654bd5f88e5450a851bf882452c4c462a9",
+      "groups_by_split": {
+        "assessment": 8,
+        "dev": 200,
+        "train": 600
+      },
+      "roles": [
+        "distractor",
+        "projectile"
+      ]
+    },
+    {
+      "descriptor_sha256": "e28abb1c407831ed64106195d8c9fa569ff7f067b92357e19d045fc6de78478d",
+      "groups_by_split": {
+        "assessment": 16,
+        "dev": 200,
+        "train": 600
+      },
+      "roles": [
+        "target"
+      ]
+    },
+    {
+      "descriptor_sha256": "f83d95673cbd49a6da1ab64a8efe3ae88771e993a61190a338bfa0e244cc0d4a",
+      "groups_by_split": {
+        "assessment": 8,
+        "dev": 200,
+        "train": 600
+      },
+      "roles": [
+        "floor"
+      ]
+    }
+  ],
+  "shared_individual_appearances": [
+    {
+      "descriptor_sha256": "2cfed232be2c7a37362c85f18e5d0cda840766f2a4ef1f8f4257ea57032851f0",
+      "groups_by_split": {
+        "assessment": 16,
+        "dev": 200,
+        "train": 600
+      },
+      "roles": [
+        "target"
+      ]
+    },
+    {
+      "descriptor_sha256": "ceb10702c9db7206cd2edec51b6107897458c765f2eab27e2864544c2440d690",
+      "groups_by_split": {
+        "assessment": 8,
+        "dev": 200,
+        "train": 600
+      },
+      "roles": [
+        "roof"
+      ]
+    }
+  ]
+}
