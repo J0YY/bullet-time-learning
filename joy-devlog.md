@@ -766,3 +766,26 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Next bounded run:** one group per task/split from the full pilot-seed selection:
   6 groups / 10 episodes / 150 RGBs. Inspect and admit that before expanding. This
   is an integration step with no training, assessment, paid compute or H3 claim.
+
+### 2026-10-31 00:21 EDT — Admit first full-selection native prefix
+
+- **Result:** `artifacts/full-development-preview-v2` passes full reconstruction,
+  native capture/physical/mask checks, split/duplicate checks and actual consumers:
+  6 groups / 10 episodes / 150 RGBs / 32 query records. Collision/order each have
+  two complete pairs and six horizon comparisons. No scientific gate passed.
+- **Failure/fix:** original v1 captured all six groups on `d98ae42`, then correctly
+  failed aggregate admission because serialized collision frame dictionaries and
+  regenerated ones produced different catalog order. Separate review identified
+  the same P1. `d7adca1` uses one canonical catalog helper and a serialized-request
+  round-trip regression. V1 remains rejected/intact; v2 reused all six raw groups
+  and issued no render commands.
+- **Checks:** 41 initial data cases, 17 focused post-fix cases; cumulative separate
+  review clean in round 2. Reviewer reconstructed selection/prefix and ran eleven
+  pure tests; native/file-write checks ran in this agent. Inspected real collision
+  and tracking RGB from the new selection; target visibility/contrast are clear.
+- **Evidence:** `reports/data/full-selection-preview-20261031.json` binds source,
+  artifacts, measured capture time, review logs and complete result. Original SPEC
+  and pilot counts remain unchanged.
+- **Next bounded run:** eight groups per task/split with `--reuse-captures` v2,
+  preserving the same full selection. Expect 48 groups / 80 episodes / 1,200 RGBs;
+  admit and inspect before any full 1,600-group capture. No training or assessment.

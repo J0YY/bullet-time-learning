@@ -1,0 +1,71 @@
+{
+  "catalog_sha256": "cbb1ce573c8c5547c8da843bf88818ae1cd073725520726932834e1006945189",
+  "checks": {
+    "initial_data_tests": 41,
+    "post_fix_tests": 17,
+    "review_findings_fixed": 1,
+    "review_logs": {
+      "1": "9bfd79c410497d22d21b7038b6c2a9eb8d031b141480ae678364027e5588877b",
+      "2": "1c08494d89a0c40f109f4fcd1e2915a0667f4fc91ab9ee57afddad6649bb7800"
+    },
+    "review_rounds": 2,
+    "review_status": "clean"
+  },
+  "export_source": "d7adca145496621408b80e5e0d744ddb386087c5",
+  "generation_sha256": "5e049251a865c65b0c8206d223da7638353dc4c2cc343fbd498996fd673449f9",
+  "groups_sha256": "dfd09da2143e9a815e1a2aff23ab42065d99d811b0f36f002bbb2f09d5edeb14",
+  "input_sha256": "4188e00331dce8cdf2dbd2c8398da6ffb1dcf7d0f23317a86021ee02c6877f98",
+  "native_capture_seconds": 23.66268999892054,
+  "new_render_commands": 0,
+  "raw_capture_source": "d98ae429d531424e367b3f5abbf687633f688cbd",
+  "result": {
+    "bundle_sha256": "f81d4f58f1127daf65082d5ffe3edd834da27e271c5561b6dbed976dd0a0903c",
+    "development": false,
+    "duplicates": {
+      "candidate_rgb_comparisons": 0,
+      "cross_split_image_pairs": 5625,
+      "exact_cross_split_duplicates": 0,
+      "foreground_iou": 0.98,
+      "images": 150,
+      "mask_candidates": 630,
+      "mean_bound_skips": 1,
+      "near_duplicates": 0,
+      "retained_mask_bytes": 765184,
+      "rgb_cache_capacity": 64,
+      "rgb_mae": 0.00392156862745098,
+      "scope": "train/dev raster and prototype checks; old pretraining integration pool and future final test not admitted",
+      "unique_cross_split_comparisons": 3720,
+      "unique_raster_mask_pairs": 122
+    },
+    "episodes": 10,
+    "examples": 32,
+    "groups": 6,
+    "images": 150,
+    "lineage": {
+      "asset": 6,
+      "configuration": 6,
+      "trajectory": 6
+    },
+    "pair_checks": {
+      "collision": {
+        "group_sha256": "dfd09da2143e9a815e1a2aff23ab42065d99d811b0f36f002bbb2f09d5edeb14",
+        "pairs": 2,
+        "query_horizon_comparisons": 6,
+        "scope": "pixel/query/label checks only; forward dynamics and visual solvability require S3 and models"
+      },
+      "order": {
+        "group_sha256": "dfd09da2143e9a815e1a2aff23ab42065d99d811b0f36f002bbb2f09d5edeb14",
+        "pairs": 2,
+        "query_horizon_comparisons": 6,
+        "scope": "pixel/query/label checks only; forward dynamics and visual solvability require S3 and models"
+      }
+    },
+    "scientific_gate_pass": false,
+    "scope": "progressive full-selection train/dev capture; no assessment or H3 acceptance"
+  },
+  "reused_groups": 6,
+  "schema_version": "bullet-time.progressive-measurement-integration.v1",
+  "scientific_gate_pass": false,
+  "scope": "first full-selection prefix; no H3, assessment or full pilot admission",
+  "selection_sha256": "5e4a060cb910599f69432e394940ffceb10bc75a53af8ff25f59c206316b70b4"
+}

@@ -125,12 +125,17 @@ Global full J7 train/dev selection is implemented and reconstructed: 1,600 uniqu
 prototype groups / 2,400 prospective episodes / 41,200 planned RGBs, using pilot seed
 20261028; see [selection evidence](reports/data/full-development-selection-20261030.json).
 This fixes cross-task appearance reuse found by the earlier development-seed stress
-check. Nothing in this full set is rendered or admitted yet.
+check. Its first [native prefix](reports/data/full-selection-preview-20261031.json)
+is admitted: six groups / ten episodes / 150 RGBs / 32 query records. The rest of
+the full set remains unrendered.
 Next: progressive chunk capture and combined pixel/joint-pretraining admission. Joy
 owns the generation/config/test changes; no collaborator input is required. The
 [bounded raster checker](reports/data/raster-check-20261031.json) passes the unchanged
 rule on all 1,800 native images in 3.75 s at 59.1 MB peak RSS; review clean.
-Progressive capture is next, retaining full-data admission and resource gates.
+Progressive capture and reuse are implemented; review clean in round 2 after a
+serialized-catalog fix. Next native increment is eight groups per task/split,
+reusing the verified six-group prefix. Full-data/joint-pretraining admission and
+resource gates remain.
 
 ## Update rules
 
