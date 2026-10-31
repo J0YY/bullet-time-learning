@@ -1,0 +1,66 @@
+{
+  "assessment_authorized": false,
+  "capture_header_sha256": "036cb76019996682783e1fb2c04f34115c9ce2e81c82514e7979cc9bc177a400",
+  "command": ".venv/bin/python scripts/data/build_assessment.py --selection artifacts/assessment-selection-v2 --godot .cache/godot/4.5.1/Godot.app/Contents/MacOS/Godot --per-task 1 --reuse-captures artifacts/assessment-interrupted-native-fixture-v1 --output artifacts/assessment-native-recovered-prefix-v2",
+  "counts": {
+    "episodes": 5,
+    "groups": 3,
+    "input_records": 16,
+    "native_rgb": 75
+  },
+  "focused_tests": {
+    "cases": 19,
+    "seconds": 1.09
+  },
+  "limits": [
+    "Bounded three-group recovery; not full-pool capture or semantic lineage admission",
+    "No actual assessment lock, model fit/prediction, stage score or collaborator review",
+    "Native image durability against power loss is not claimed"
+  ],
+  "local_source": "artifacts/assessment-native-recovered-prefix-v2",
+  "recorded_at": "2026-10-31T04:42:33-04:00",
+  "recovery": {
+    "aggregate_receipt_before_resume": false,
+    "completed_groups": 3,
+    "fixture": "artifacts/assessment-interrupted-native-fixture-v1",
+    "input_label_group_bytes_unchanged": true,
+    "new_renders": 0,
+    "reused_groups": 3,
+    "temporary_receipt_ignored": true,
+    "unrecorded_partial_groups": 1
+  },
+  "runtime": {
+    "numpy": "2.3.5",
+    "pillow": "12.0.0",
+    "platform": "macOS-14.6.1-arm64-arm-64bit",
+    "python": "3.11.15"
+  },
+  "schema_version": "bullet-time.native-assessment-recovery-integration.v1",
+  "scientific_gate_pass": false,
+  "scope": "controlled interruption fixture with actual native raw captures; not an observed crash or power-loss test",
+  "selection_sha256": "5a3d61b785dc1fdf5744d46b6c53669313940382c3fd7028d2c0ff706b624591",
+  "source_commit": "db7c6fd9a53f230dbc8f86acc76890ba6acd5362",
+  "source_files": {
+    "configs/generation/evaluation-development.json": "98a8d00992959476eebeb6a86ecf5fd8b2d06457edae5bc346460f9d520ad374",
+    "configs/generation/evaluation-raster-exclusions.json": "fe3d5ec3b45b3ee76cb8dda56de05b5efecb577b413422c85dd98fe0cb58bdff",
+    "configs/pilot-plan.json": "b160a832f9799f2cf049a56d2ca1002e942688702e523a5dcf0a6cd8929f89f5",
+    "configs/rendering/godot-macos.json": "01cbf61ad11518cf7d54ad83b8a18604159f392a98b0bef83ab3b196d6fab03c",
+    "game/LICENSE": "dbf8c0ec29216abd05bc76cd663541cd1ded38680c0fd54e1a4b4be57d6e2f23",
+    "game/arena_driver.gd": "a143e28781586a30c4f91fd61d4f487f21f9bd2fa22e4c6ccc934ea28a076d0f",
+    "game/evaluation_driver.gd": "c54a3aaa59c5688d9a529b5cbc6adcb4a301e927a9f29aa196eae3b44911c95e",
+    "game/project.godot": "e0dc45b0c338b547eb68a869a8f1d8cf0693af21554c34d6623cca1f1a4957b8",
+    "scripts/data/build_assessment.py": "2a25f988616a8784663505d2513b60500d989bbae4692c0d209ce83e9c26a529",
+    "scripts/data/build_evaluation.py": "1ad21ae5bc52e9b8769ae7037eb3bd5f2e4dc6faa6eb2b57193db9f665803b33",
+    "src/bullet_time/generation/arena.py": "65f8ca0dd2f51860aa232c6fca71fd261e435314e9df2c709340ed069fde4830",
+    "src/bullet_time/generation/assessment_capture.py": "98240e3414ccc81b5cc2a1246502cac3794d1e92197f2100b9a5d34a621eeedc",
+    "src/bullet_time/generation/assessment_recovery.py": "29e47e59ebaebc620f34571cd878de82fa673053ced1e31b3db7c3adac1a12e5",
+    "src/bullet_time/generation/assessment_selection.py": "f383ae5812797d70eec0ce805c91f4babff3a9f57f471e2d4a2ba00fecae75b1",
+    "src/bullet_time/generation/bundle.py": "dbeb9f3ef371e15d963dc9c2ec050622f1e3136e154af58fc0fd2df884b537a5",
+    "src/bullet_time/generation/evaluation_bundle.py": "05e2f3a0efad677a9be1d4bfceb707536cd890999d6a259ed4889e2b37bf9eca",
+    "src/bullet_time/generation/evaluation_motion.py": "759162aebe8746dfa0ca3ea24b1ad95f38e6c78b964dad574519c04ab4e80f2e",
+    "src/bullet_time/generation/evaluation_selection.py": "e5611b615d89773c1349eceac00377a80e7e6f9db56e229c3f41a240ccdd07b0",
+    "src/bullet_time/generation/progressive_arena.py": "0107cbca5d0aa4aa777b53c7b7fc93e82872d01b8154e16518e895bcd6f3a6ac",
+    "src/bullet_time/provenance.py": "e19fc805f18d15e62387ad2992c3fff6b825c94986d3dd6cb7761963197e6642"
+  },
+  "source_sha256": "9eb391e98fbc9f23dd9d010c268c3e86d61fa05ee7b0f9e95ab2c9140565ec5b"
+}

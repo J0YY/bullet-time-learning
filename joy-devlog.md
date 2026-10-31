@@ -1437,3 +1437,17 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   concrete claim-narrowing versus regeneration choices; no SPEC amendment adopted.
   Existing RGB/physics checks stand, common semantic lineage remains unadmitted.
   Full capture waits for Joy's requested definition; other local work continues.
+
+### 2026-10-31 04:42 EDT — Verify native interrupted capture recovery
+
+- Final code db7c6fd reuses all three completed native groups from the controlled
+  interrupted journal into `artifacts/assessment-native-recovered-prefix-v2`,
+  with zero new renders and byte-identical input/label/group exports. Source SHA
+  9eb391e9…5ec5b; five episodes / 75 RGBs / 16 input records.
+- Separate cumulative code review clean in round 2 after one P2 ancestor-link
+  fix. Reviewer ran its read-only-compatible case; all 19 focused filesystem
+  cases and the native recovery check ran here. Scaffold/planning provenance pass.
+- No full assessment capture/release, semantic lineage, scores or research fits.
+  Pending asset-definition choice is recorded in the proposal, not adopted policy.
+- Next independent local work: H4 numerical aggregation over the fixed 243 game
+  plus 81 SSv2 final/reference heads, including failed slots and all arms.

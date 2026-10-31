@@ -248,6 +248,15 @@ implements per-group capture recovery and full-count capture support in the
 assessment capture module plus a separate recovery helper/CLI tests. No full
 research training or release is authorized by these source checks.
 
+The [native recovery integration](reports/data/native-assessment-recovery-integration-20261031.json)
+passes with three completed groups reused and zero new renders from a controlled
+interrupted journal. All 19 focused checks pass; separate review clean in round 2.
+An [actual asset audit](reports/data/pilot-asset-sharing-audit-20261031.json) finds
+shared target/roof fixtures: the [asset-policy proposal](docs/pilot-asset-policy-proposal.md)
+is pending Joy's choice, and full capture/common lineage remain unadmitted. Joy
+continues independent H4 numerical aggregation in `evaluation/assessment_policy.py`,
+its focused tests and scoring CLI. No new scientific policy or collaborator gate.
+
 ## Update rules
 
 Re-read before each edit. Patch your task/status only, retaining others' concurrent
