@@ -20,6 +20,11 @@ marks dirty-source debugging; such outputs are not accepted drops. A failed atte
 is retained. The initial builder stops on a failed admission instead of silently
 shrinking the dataset. Godot script errors fail admission even if the engine exits
 with status zero. A new producer version requires a new drop, retaining old bytes.
+For an export/admission-only repair, add `--reuse-captures OLD_DROP` to reuse the
+verified raw captures in a new output. It requires unchanged renderer/motion/pins,
+the same selected requests and every original file hash. All exports and admission
+are recomputed; original capture provenance is retained and no old acceptance is
+inherited. Changed scene or render code requires new rendering.
 
 ## Forward histories and rendered evidence
 
@@ -43,7 +48,8 @@ with status zero. A new producer version requires a new drop, retaining old byte
   Track a fixed local top-surface point. Rendered object masks must show that point
   at reference frame 16, hide it at 17–24, and reveal it at 25–27. All three primary
   current-inclusive sixteen-frame windows retain reference 16; frame 17 supplies
-  an auxiliary invisible example. Isolated full silhouettes supply raster bounding
+  an auxiliary invisible example. All four records share one event query ID;
+  the prediction frame distinguishes their keys. Isolated full silhouettes supply raster bounding
   box diagonals, including portions hidden by the roof. These fixtures target the
   primary >=16-pixel stratum. Continuous trajectories keep the drones physically
   separated; mask visibility supplies the actual screen-space occlusion evidence.

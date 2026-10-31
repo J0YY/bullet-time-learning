@@ -234,7 +234,7 @@ def exports(request, records, evidence):
                 schema_version="bullet-time.evaluation.v2",
                 episode_id=eid,
                 task_id=task,
-                query_id=f"reacquire-{frame}",
+                query_id="reacquire",
                 split=split,
                 observed_image_ids=[
                     image_id(f"frame-{t:02d}") for t in range(frame - 15, frame + 1)
@@ -275,7 +275,45 @@ def write_lines(path, rows):
     path.write_bytes(b"".join(canonical_bytes(r) + b"\n" for r in rows))
 
 
-def build_measurements(output, binary, *, development=False):
+def reuse_capture_source(root, plan, pin, sources):
+    """Admit raw captures only; old exports/admission status are never inherited."""
+    root = Path(root).resolve(strict=True)
+    old = read(root / "bundle.json")
+    if (
+        old["schema_version"] != "bullet-time.measurement-bundle.v1"
+        or old["development"]
+        or old["plan"] != plan
+        or old["engine_pin"] != pin
+    ):
+        raise ValueError("raw capture plan/runtime/development mismatch")
+    admission_files = {
+        "src/bullet_time/generation/evaluation_bundle.py",
+        "scripts/data/build_evaluation.py",
+    }
+    if old["producer_sources"].keys() != sources.keys() or any(
+        old["producer_sources"][key] != checksum
+        for key, checksum in sources.items()
+        if key not in admission_files
+    ):
+        raise ValueError("raw capture renderer/motion source changed; cannot reuse")
+    actual = {
+        p.relative_to(root).as_posix()
+        for p in root.rglob("*")
+        if p.is_file() and p != root / "bundle.json"
+    }
+    if actual != old["inventory"].keys():
+        raise ValueError("raw capture inventory differs")
+    for name, checksum in old["inventory"].items():
+        if sha(inside(root, name)) != checksum:
+            raise ValueError("raw capture bytes changed")
+    return root, dict(
+        bundle_sha256=sha(root / "bundle.json"),
+        producer_sources=old["producer_sources"],
+        original_generation=read(root / "generation.json"),
+    )
+
+
+def build_measurements(output, binary, *, development=False, reuse=None):
     output = Path(output).resolve()
     if output.exists():
         raise ValueError("refusing to overwrite an existing measurement drop")
@@ -289,10 +327,12 @@ def build_measurements(output, binary, *, development=False):
         raise ValueError(
             "commit producer before accepted generation; development labels debugging only"
         )
+    old = reuse_capture_source(reuse, plan, pin, sources) if reuse is not None else None
     output.mkdir(parents=True)
     requests, selection = [], {}
     for task in plan["tasks"]:
-        for split, count in plan["groups_per_task"].items():
+        for split in ("train", "dev"):
+            count = plan["groups_per_task"][split]
             candidates, evidence = select_groups(plan["seed"], split, count, task)
             requests.extend(candidates)
             selection[f"{task}/{split}"] = evidence
@@ -301,26 +341,35 @@ def build_measurements(output, binary, *, development=False):
     for request in requests:
         gid = request["group_id"]
         private = output / "private" / gid
-        for folder in ("rgb", "masks", "full-masks", "repeat"):
-            (private / folder).mkdir(parents=True)
-        atomic_json(private / "request.json", request)
-        args = [
-            str(binary),
-            "--path",
-            str(ROOT / "game"),
-            "--rendering-method",
-            "gl_compatibility",
-            "--resolution",
-            "224x224",
-            "--position",
-            "20,60",
-            "--script",
-            "res://evaluation_driver.gd",
-            "--",
-            str(private / "request.json"),
-            str(private),
-        ]
-        commands.append(invoke(args, private / "render.log", 90))
+        if old:
+            shutil.copytree(old[0] / "private" / gid, private)
+            shutil.copytree(old[0] / "inputs/rgb" / gid, private / "rgb")
+            if read(private / "request.json") != request:
+                raise ValueError("raw capture request differs from current selected request")
+            commands.append(
+                dict(reused_capture_group=gid, source_bundle_sha256=old[1]["bundle_sha256"])
+            )
+        else:
+            for folder in ("rgb", "masks", "full-masks", "repeat"):
+                (private / folder).mkdir(parents=True)
+            atomic_json(private / "request.json", request)
+            args = [
+                str(binary),
+                "--path",
+                str(ROOT / "game"),
+                "--rendering-method",
+                "gl_compatibility",
+                "--resolution",
+                "224x224",
+                "--position",
+                "20,60",
+                "--script",
+                "res://evaluation_driver.gd",
+                "--",
+                str(private / "request.json"),
+                str(private),
+            ]
+            commands.append(invoke(args, private / "render.log", 90))
         if "ERROR:" in (private / "render.log").read_text():
             raise ValueError("Godot logged an error; retain this rejected attempt")
         records, evidence = validate_capture(private, request, plan, pin)
@@ -378,6 +427,7 @@ def build_measurements(output, binary, *, development=False):
             commands=commands,
             host=platform.platform(),
             development=development,
+            reused_captures=None if old is None else old[1],
             source_commit=subprocess.check_output(
                 ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
             ).strip(),
@@ -429,7 +479,8 @@ def verify_measurements(root):
     expected_inputs, expected_labels, expected_groups, requests, summaries = [], [], [], [], []
     expected_images = []
     for task in bundle["plan"]["tasks"]:
-        for split, count in bundle["plan"]["groups_per_task"].items():
+        for split in ("train", "dev"):
+            count = bundle["plan"]["groups_per_task"][split]
             selected, _ = select_groups(bundle["plan"]["seed"], split, count, task)
             for request in selected:
                 gid = request["group_id"]

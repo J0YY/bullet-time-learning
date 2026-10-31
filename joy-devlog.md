@@ -563,3 +563,21 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   fixed 72-group drop with native Godot. Generation/verification bind exact source,
   engine, plan, actual transforms, masks, contacts and image bytes. Research gates
   stay false even if the small drop passes.
+
+### 2026-10-30 23:10 EDT — Repair export admission without rerendering
+
+- **Observed failures:** all 72 native groups rendered and passed individual capture
+  checks, but aggregate admission rejected `evaluation-development-v1`: canonical
+  JSON reordered split dictionary keys, changing reconstruction order. A separate
+  review and a direct consumer regression also exposed per-frame tracking query IDs;
+  all four records must share one event query ID.
+- **Fixes:** explicit train/dev iteration independent of JSON key order; one tracking
+  event query ID with frame-specific keys. Added direct export→actual consumer/targets/
+  groups checks for all three tasks, plus a strict raw-capture reuse path. It checks
+  every old byte, renderer/motion/pins and selected requests, preserves old provenance,
+  and rebuilds all exports/admission into a new directory. No old acceptance is inherited.
+- **Checks:** 13 focused data tests pass. Existing full regression had 96 passing tests;
+  new checks exercise the exact failed boundary. Reuse will save rerendering 1,800
+  unchanged RGBs. The rejected v1 drop remains intact; v2 must pass full admission.
+- **Publication:** scoring commit `c1685e6` now has green GitHub Actions run 41162333220.
+  J7 review round 2 and re-export follow before publishing the producer milestone.

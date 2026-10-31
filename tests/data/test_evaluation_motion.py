@@ -139,3 +139,93 @@ def test_cross_split_raster_duplicate_admission(tmp_path, difference, match):
             check_duplicates(tmp_path, requests, plan)
     else:
         assert check_duplicates(tmp_path, requests, plan)["near_duplicates"] == 0
+
+
+@pytest.mark.parametrize("task", ["collision", "order", "tracking"])
+def test_producer_exports_are_accepted_by_actual_consumer(tmp_path, task):
+    """Synthetic pixels isolate the wire contract; native evidence is separate."""
+    from bullet_time.generation.evaluation_bundle import exports, write_lines
+    from bullet_time.evaluation.inputs import ImageStore, EvaluationInputs
+    from bullet_time.evaluation.training import Targets
+    from bullet_time.evaluation.subsets import Groups, verify_pairs
+    from bullet_time.provenance import atomic_json, digest
+
+    request = tracking_candidate(71, 0) if task == "tracking" else forecast_candidate(71, 0, task)
+    request.update(group_id="synthetic-group", split="train")
+    records = {
+        k: dict(
+            projected_centers=dict(projectile=[0.4, 0.5], target=[0.6, 0.5]),
+            tracking=dict(surface_point=[0.5, 0.5]),
+        )
+        for k in request["frames"]
+    }
+    evidence = dict(
+        visibility={str(t): t != 17 for t in [17, 25, 26, 27]},
+        full_diagonal_pixels={str(t): 32 for t in [17, 25, 26, 27]},
+    )
+    inputs, labels, groups = exports(request, records, evidence)
+    pixels = np.zeros((224, 224, 3), dtype=np.uint8)
+    path = tmp_path / "fixture.png"
+    Image.fromarray(pixels).save(path)
+    images = [
+        dict(
+            image_id=f"synthetic-group/{key}",
+            rgb_path="fixture.png",
+            file_sha256=digest(path.read_bytes()),
+            rgb_sha256=digest(pixels.tobytes()),
+            height=224,
+            width=224,
+            channels=3,
+        )
+        for key in request["frames"]
+    ]
+    write_lines(tmp_path / "images.jsonl", images)
+    write_lines(tmp_path / "inputs.jsonl", inputs)
+    write_lines(tmp_path / "labels.jsonl", labels)
+    atomic_json(
+        tmp_path / "groups.json",
+        dict(schema_version="bullet-time.evaluation-groups.v1", records=groups),
+    )
+    consumer = EvaluationInputs(tmp_path / "inputs.jsonl", ImageStore(tmp_path / "images.jsonl"))
+    targets = Targets(tmp_path / "labels.jsonl", consumer)
+    group_store = Groups(tmp_path / "groups.json")
+    assert len(group_store.validate_inputs(consumer, task)) == 1
+    if task != "tracking":
+        assert verify_pairs(consumer, targets, group_store, task)["pairs"] == 1
+    else:
+        assert len({e.query_id for e in consumer.examples}) == 1
+        assert len([e for e in consumer.examples if e.prediction_role == "primary"]) == 3
+
+
+def test_raw_capture_reuse_preserves_bytes_and_rejects_changed_renderer(tmp_path):
+    from bullet_time.generation.evaluation_bundle import reuse_capture_source
+    from bullet_time.provenance import atomic_json, digest
+
+    data = tmp_path / "raw.bin"
+    data.write_bytes(b"synthetic capture bytes")
+    atomic_json(tmp_path / "generation.json", {"source_commit": "synthetic fixture"})
+    sources = {
+        "game/evaluation_driver.gd": "a" * 64,
+        "src/bullet_time/generation/evaluation_bundle.py": "b" * 64,
+    }
+    plan = {"scope": "synthetic"}
+    pin = {"version": "synthetic"}
+    old = dict(
+        schema_version="bullet-time.measurement-bundle.v1",
+        plan=plan,
+        engine_pin=pin,
+        development=False,
+        producer_sources=sources,
+        inventory={p.name: digest(p.read_bytes()) for p in tmp_path.iterdir()},
+    )
+    atomic_json(tmp_path / "bundle.json", old)
+    current = {**sources, "src/bullet_time/generation/evaluation_bundle.py": "c" * 64}
+    _, receipt = reuse_capture_source(tmp_path, plan, pin, current)
+    assert receipt["producer_sources"] == sources
+    with pytest.raises(ValueError, match="renderer/motion"):
+        reuse_capture_source(
+            tmp_path, plan, pin, {**current, "game/evaluation_driver.gd": "d" * 64}
+        )
+    data.write_bytes(b"changed bytes")
+    with pytest.raises(ValueError, match="bytes changed"):
+        reuse_capture_source(tmp_path, plan, pin, current)
