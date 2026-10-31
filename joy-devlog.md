@@ -1102,3 +1102,18 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   tests ran here. Not Sudarshan's review; real locked scoring is still disabled.
 - **Checks:** 30 selection/motion/raster cases pass in 8.31 s; added capture-side
   reconstruction regression and running focused progressive tests before commit.
+
+### 2026-10-31 02:44 EDT — Verify revised full selection before replacement capture
+
+- **Code/selection:** 4675aef; `artifacts/full-development-selection-v3` reconstructs
+  exactly 1,600 groups / 2,400 episodes / 41,200 planned RGBs. Exactly the two
+  recorded dev groups are removed and two complete groups added. All 1,598
+  retained requests are byte-equivalent as canonical JSON. Background exclusions
+  remain 24; scientific thresholds and quotas unchanged.
+- **Checks/review:** 14 focused selection/progressive cases pass in 5.35 s after
+  the capture reconstruction change. Separate review clean in round 1, including
+  its full prospective reconstruction and 16 read-only cases; filesystem-dependent
+  checks ran here. This is code/data selection review, not collaborator review.
+- **Next:** fresh full export reusing the rejected drop's valid raw captures;
+  render only the two new requests, then repeat combined admission. Retain the
+  old rejected bundle and its logs. No model training or assessment release.
