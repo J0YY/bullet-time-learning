@@ -1198,3 +1198,17 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   generator-specific prototype hashes are not a common semantic lineage contract.
   This covers eight grids only and does not admit joint lineage, H1–H4, assessment,
   larger drops or learning. No prior train/dev-vs-dev check was repeated.
+
+### 2026-10-31 03:12 EDT — Complete stage-journal review and publish native evidence
+
+- Cumulative review is clean in round 4 after three P2 durability/recovery findings
+  were fixed: reservation-before-directory, durable registry ancestry, and completing
+  descendant syncs on cached retries. Sixteen focused runtime state cases pass here;
+  reviewer parsing/provenance checks pass, while its runtime imports were blocked
+  by read-only temporary-directory restrictions. Not Sudarshan's independent review.
+- Publishing the reviewed journal plus admitted full measurement/cross-pool reports
+  and updated live interfaces/handoff. Original SPEC remains in Git; the selected
+  two-stage amendment remains the only current SPEC change in this continuation.
+- Next local work: actual fit/export recipe binding, then the admission/scoring
+  adapter. No real assessment set, version lock, release, GPU job or H3/H4 pass is
+  inferred from this persistence component or these data checks.
