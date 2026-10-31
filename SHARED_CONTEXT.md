@@ -209,10 +209,11 @@ review clean in round 1. Joy is adding durable full-version/stage commitments an
 crash/retry/concurrency checks. Actual data/fit/scorer/isolation integration remains
 required; this journal does not grant release or scientific gate passage.
 
-Joy is auditing the existing eight pretraining grids against every RGB in the full
-measurement drop under the unchanged raster rule. This checks new cross-pool image
-pairs only; common semantic lineage is a separate unresolved contract. No actual
-split assignment, training input or scientific gate is changed by the audit view.
+The [eight-grid cross-pool raster audit](reports/data/joint-eight-raster-20261031.json)
+passes all 84,377,600 pretraining-versus-measurement image pairs. Actual source
+bytes are verified before/after; no split or training-input assignment changed.
+Common semantic lineage remains unresolved, and larger grid drops require their
+own comparisons. This is not an H1–H4 or joint-lineage admission.
 
 ## Update rules
 

@@ -1,0 +1,47 @@
+{
+  "artifacts": "artifacts/joint-eight-raster-v1",
+  "checker_sha256": "05e2f3a0efad677a9be1d4bfceb707536cd890999d6a259ed4889e2b37bf9eca",
+  "joint_lineage_admitted": false,
+  "limits": [
+    "Eight pretraining grids only, not 100 or 1000",
+    "Pixel test unchanged: mask IoU >=.98 and union RGB MAE <=1/255; not a semantic/perceptual-independence proof",
+    "Existing producer-specific prototype hashes are not a shared semantic lineage contract",
+    "No labels scored, model fit, assessment release, H1-H4 or full pilot"
+  ],
+  "mapping": {
+    "dev": "all 41200 train+dev measurement RGBs",
+    "train": "all 2048 existing pretraining RGBs"
+  },
+  "mask_semantics": "all visible task objects: pretraining projectile+targets; measurements projectile+target+distractor; fixed roof/floor/background excluded in both",
+  "recorded_at": "2026-10-31T02:59:32.559555-04:00",
+  "schema_version": "bullet-time.cross-pool-raster-audit.v1",
+  "scientific_gate_pass": false,
+  "script_sha256": "07265388aa9150707b673789d9f5f0a44299dbda9228d37aa8f6c6385c54e7b6",
+  "seconds": 113.7470978749916,
+  "source_bindings": {
+    "measurement": {
+      "bundle_sha256": "e078cdba884adbde8f98cfe5184845171cb6fd7f46fffbb7a8c20b3fe136a442",
+      "root": "/Users/joyyang/Projects/bullet-time-learning/artifacts/full-development-v4"
+    },
+    "pretraining": {
+      "bundle_sha256": "49cb481ff6af45cbc7d480e1bc4fcff2d1b6a9a349716a16a320ef0775bd23c1",
+      "root": "/Users/joyyang/Projects/bullet-time-learning/artifacts/arena-progressive-eight-v2"
+    }
+  },
+  "validation": {
+    "candidate_rgb_comparisons": 0,
+    "cross_split_image_pairs": 84377600,
+    "exact_cross_split_duplicates": 0,
+    "foreground_iou": 0.98,
+    "images": 43248,
+    "mask_candidates": 0,
+    "mean_bound_skips": 0,
+    "near_duplicates": 0,
+    "retained_mask_bytes": 221338880,
+    "rgb_cache_capacity": 64,
+    "rgb_mae": 0.00392156862745098,
+    "scope": "Existing eight pretraining grids versus all full measurement train/dev RGBs; audit-only cohort mapping, no actual split reassignment",
+    "unique_cross_split_comparisons": 67517800,
+    "unique_raster_mask_pairs": 35290
+  }
+}
