@@ -283,6 +283,15 @@ pass. This is integration, not a complete private registry, assessment release o
 learning result. The consumer-inventory utility changes its fingerprint once;
 preserve historical fits and use fresh fits for this source snapshot.
 
+**Current dependency — October 31:** the asset-policy choice remains unanswered
+after the recovery/H4 and actual-job integration increments. Full J7 source/common
+lineage admission and actual locked J8 scoring are incomplete. Resume from
+[the concrete choice](docs/pilot-asset-policy-proposal.md): explicit shared pilot
+fixtures with a narrower claim, or strict individual-asset variants and regeneration.
+Do not adopt either through silence. Research GPU details/SSv2 access are separate
+dependencies; Sudarshan is not a prerequisite. Code through ed8b942 passes CI
+41187665952 (278 passed, 15 platform skips); original spec and data are preserved.
+
 ## Update rules
 
 Re-read before each edit. Patch your task/status only, retaining others' concurrent

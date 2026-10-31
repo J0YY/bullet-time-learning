@@ -1533,3 +1533,23 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   local roots, not complete future registry admission. No assessment data scored.
 - Shared spec/asset-policy question remains unchanged. Full source/common lineage,
   locked-stage scoring, research compute and SSv2 access remain pending.
+
+### 2026-10-31 05:19 EDT — Revalidate the pending asset-policy dependency
+
+- Previous goal turn made progress: execution verifier/native integration pushed
+  at ed8b942; CI 41187665952 passes (278 tests, 15 platform skips). Current main
+  is remote-equal and clean; no incoming commits or live capture/review/test job.
+- The same unresolved asset-definition choice has persisted through recovery/H4,
+  execution-verifier work, and this dependency audit. Neither proposal option is
+  adopted. Existing native assessment sources contain only one/eight groups per
+  task and retain authorization=false; no complete source or assessment score.
+- J7 common-lineage/full-source admission and J8 actual locked-stage integration
+  remain incomplete. Completing those against an unchosen definition would either
+  narrow the asset-generalization claim without authority or regenerate data
+  while the explicit policy question is pending. Do not do either silently.
+- Remaining development must resume from the selected policy, then the full
+  source/admission/scoring path; further successful fixture checks alone do not
+  establish that outcome. GPU details and SSv2 access are separate execution
+  dependencies. Sudarshan's verification is still nonblocking and unrecorded.
+- Goal is awaiting the already-presented asset-policy choice, not complete. Keep
+  the original spec/data, reviewed code and failure evidence unchanged.
