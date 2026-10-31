@@ -581,3 +581,26 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   unchanged RGBs. The rejected v1 drop remains intact; v2 must pass full admission.
 - **Publication:** scoring commit `c1685e6` now has green GitHub Actions run 41162333220.
   J7 review round 2 and re-export follow before publishing the producer milestone.
+
+### 2026-10-30 23:17 EDT — Admit and publish the small measurement drop
+
+- **Result:** `artifacts/evaluation-development-v2` passes complete raw evidence,
+  deterministic export reconstruction and actual consumer admission: 72 groups,
+  120 episodes, 1,800 RGBs, 384 query records. Bundle SHA-256
+  `d2ae2b507bcb4b9ac0e4571e4d40b21522831bdf4d2a80bf36e9e970d93d43a3`.
+  No cross-split exact/declared-near duplicate among 720,000 candidate image pairs;
+  4,705 required RGB comparisons. All 72 configuration/asset/trajectory prototypes
+  are distinct. New contrast was visually inspected on native collision/tracking RGB.
+- **Cost/provenance:** original 72 capture processes totaled 258.65 s; admitted drop
+  is 16,221,299 bytes. Raw source `9a6702b`, repaired export source `c5a175a`; v1 remains
+  rejected/intact and v2 reuses its verified captures. Small public reports are in
+  `reports/data/evaluation-integration-20261030.{json,md}`.
+- **Checks:** all 100 tests pass (62.76 s). Separate cumulative review clean in round
+  2; reviewer reproduced 72 raw groups/384 exports, lineage and duplicate checks.
+  Scaffold/whitespace pass; refreshed the pilot audit with its self-test flag after
+  the first regeneration omitted that field. Final pilot freshness passes.
+- **Next bounded run:** commit `configs/readouts/measurement-integration.json` first,
+  then one CPU FP32 DINOv2 sequence collision readout, seed 101, one epoch, batch 1,
+  32 training / 16 development episodes at horizon 0.5. Use the already pinned
+  local DINO reference/cache and admitted v2 data. This checks real fit→predict→score
+  and measures runtime; no H3 acceptance, tuning sweep, paid compute or full pilot.

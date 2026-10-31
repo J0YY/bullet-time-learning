@@ -3,8 +3,10 @@
 **Current capability:** Joy's training/consumer/readout pipeline, synthetic tests,
 reference setup and collaboration checks are implemented. The first scripted Godot
 arena and eight real grids are available; see the [producer guide](docs/arena-producer.md)
-and [integration report](reports/arena-integration-20261030.json). Grouped evaluation
-generation, larger drops and operational scoring remain pending.
+and [integration report](reports/arena-integration-20261030.json). A small grouped
+train/dev measurement drop now passes [producer/consumer admission](docs/evaluation-producer.md),
+and [operational scoring](docs/operational-scoring.md) is verified. Full sets, larger
+grid drops and assessment release remain pending.
 Independent verification, compute access and empirical scientific gates remain
 pending. The [spec](SPEC.md), [ownership map](division-of-labor.md), and
 [interfaces](docs/interfaces.md) govern those tasks.

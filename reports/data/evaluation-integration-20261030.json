@@ -1,0 +1,49 @@
+{
+  "artifact_bytes": 16221299,
+  "bundle_sha256": "d2ae2b507bcb4b9ac0e4571e4d40b21522831bdf4d2a80bf36e9e970d93d43a3",
+  "capture_process_seconds": 258.64818653813563,
+  "capture_processes": 72,
+  "capture_source_commit": "9a6702b5e732f68fe30b2d94291a5392f8ed8cf6",
+  "development": false,
+  "duplicates": {
+    "candidate_rgb_comparisons": 4705,
+    "cross_split_image_pairs": 720000,
+    "exact_cross_split_duplicates": 0,
+    "foreground_iou": 0.98,
+    "images": 1800,
+    "near_duplicates": 0,
+    "rgb_mae": 0.00392156862745098,
+    "scope": "train/dev raster and prototype checks; old pretraining integration pool and future final test not admitted"
+  },
+  "episodes": 120,
+  "examples": 384,
+  "export_source_commit": "c5a175a5a72e0a637a94af578106668db261886c",
+  "group_manifest_sha256": "405c1cc40079365a94b9f74ca51e6dd25d4bfc77175c9b5e247c933c0fe38217",
+  "groups": 72,
+  "image_manifest_sha256": "1a78e1eb95e19f628bf89784c40d5ca01b04066457935213a0ec302f7232d8b8",
+  "images": 1800,
+  "input_manifest_sha256": "82ced021adb241e335b50db34049ac22b3d471ae8697ec44ead9367aec00bc24",
+  "lineage": {
+    "asset": 72,
+    "configuration": 72,
+    "trajectory": 72
+  },
+  "pair_checks": {
+    "collision": {
+      "group_sha256": "405c1cc40079365a94b9f74ca51e6dd25d4bfc77175c9b5e247c933c0fe38217",
+      "pairs": 24,
+      "query_horizon_comparisons": 72,
+      "scope": "pixel/query/label checks only; forward dynamics and visual solvability require S3 and models"
+    },
+    "order": {
+      "group_sha256": "405c1cc40079365a94b9f74ca51e6dd25d4bfc77175c9b5e247c933c0fe38217",
+      "pairs": 24,
+      "query_horizon_comparisons": 72,
+      "scope": "pixel/query/label checks only; forward dynamics and visual solvability require S3 and models"
+    }
+  },
+  "review": "Separate read-only code review clean in round 2; not collaborator scientific verification",
+  "schema_version": "bullet-time.measurement-integration-report.v1",
+  "scientific_gate_pass": false,
+  "scope": "tiny train/dev integration only; assessment, visual solvability and pilot remain pending"
+}

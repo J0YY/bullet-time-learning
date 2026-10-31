@@ -4,9 +4,13 @@
 first arena producer now supplies eight complete real grids through the existing
 RGB grid-v1 contract; all eight schedules pass the full-model actual-update audit.
 [Measured evidence](../reports/arena-integration-20261030.json) binds the source,
-configs and bundle bytes. Grouped evaluation production remains pending. The first operational scorer now
-validates synthetic/train/dev prediction exports; real data, assessment release and
-pilot gate integration remain pending. See [operational scoring](operational-scoring.md). Sudarshan's independent verifier/acceptance remains pending.
+configs and bundle bytes. The small train/dev measurement drop now passes producer
+and consumer checks through evaluation v2, label v1 and group v1: 72 groups, 120
+episodes and 1,800 RGBs. [Measurement evidence](../reports/data/evaluation-integration-20261030.json)
+records native masks/contacts, lineage and raster-duplicate checks. The operational
+scorer validates synthetic/train/dev exports and actual fit/inference metadata.
+Full measurement sets, learned sensitivity, assessment release and pilot gates remain
+pending. See [operational scoring](operational-scoring.md). Sudarshan's independent verifier/acceptance remains pending.
 Record component evidence separately even when one person implements both sides.
 This status update does not change record fields, semantics or wire versions.
 

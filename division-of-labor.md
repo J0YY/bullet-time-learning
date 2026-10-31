@@ -32,7 +32,9 @@ grants access to the other person's machines or credentials.
 
 J1/J3 consumers and the first arena producer are implemented. The one-grid preview
 and eight real grids are recorded in the [integration report](reports/arena-integration-20261030.json).
-Grouped evaluation generation, larger drops and operational scoring remain pending.
+The small [measurement drop](reports/data/evaluation-integration-20261030.json) and
+train/dev [operational scorer](docs/operational-scoring.md) are verified. Full
+measurement sets, larger grid drops and assessment release remain pending.
 
 | Task | Deliverable and acceptance | Dependency / priority |
 | --- | --- | --- |
@@ -45,8 +47,8 @@ Grouped evaluation generation, larger drops and operational scoring remain pendi
 | J4: bounded pilot and report | Resource validation; H1/H2; frozen 1,000 grids; three-slot four-pass screen; H3 + early stability before expansion; complete H4 operational report via J8 | Evidence and authorized resources, never S4/S5 completion |
 
 The current J5/J6/J2 milestone and measured audit status are in
-[shared context](SHARED_CONTEXT.md). Next independent queues: **J7 tiny measurement
-sets and J8 operational scoring**, alongside planning the 100-grid tail check.
+[shared context](SHARED_CONTEXT.md). Next independent queues: **actual readout/scoring
+integration and resource measurement**, then full J7 sets/release and the 100-grid tail check.
 Use the [operator guide](docs/joy-handoff.md) and [producer guide](docs/arena-producer.md). The existing [pilot plan](docs/pilot-plan.md) still controls counts,
 seeds, budgets and launch gates. This queue does not launch jobs automatically.
 

@@ -16,7 +16,8 @@ scheduler/collator audit, VideoMAE/image-MAE runner, resumable checkpoints and
 readout/input/export components run on fixtures. The pinned Godot arena now supplies
 2,048 real RGBs; all eight schedules pass the actual full VideoMAE-S update audit.
 Operational train/dev scoring and paired analysis now pass synthetic and actual-CLI
-integration, with separate code review clean. Grouped evaluation generation, larger
+integration, with separate code review clean. A small native measurement drop now
+passes producer/consumer admission: 72 groups, 120 episodes and 1,800 RGBs. Larger
 drops, assessment release, independent collaborator verification, research compute,
 empirical learning and freeze remain pending.
 
@@ -65,9 +66,9 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | J5 (was S1) | Joy | Producer schema/fixtures, Godot/asset pins, grouped splits, scripted arena and replay | Arena/replay/pins/admission implemented; group/split validation remains | Producer `0693adf`; 57 local tests, separate code review clean; native macOS validated |
 | J6 (was S2) | Joy | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Preview + 8 complete (2,048 real RGBs); 100/1,000 pending | Immutable bundles, 32 repeat captures, state/camera/hash evidence; see integration report |
 | J2 | Joy | Actual-loader/update audit; 100-grid tail check | All eight schedules pass actual full VideoMAE-S update on 8 real grids; 100-grid tail pending | CPU FP32 seed 17; shared exposure/targets/init/budget; one update each, no learning claim |
-| J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | In progress: forward-valid paired histories and causal tracking, grouped split/access evidence | User continuation; base `d9c3409`; tiny train/dev slices then full admitted sets |
+| J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | Tiny train/dev drop admitted; full sets and assessment access/release remain | `c5a175a`; 72 groups / 120 episodes / 1,800 RGBs; native masks/contacts, split/duplicate and actual consumer checks; code review clean in round 2 |
 | J8 | Joy | Operational metrics, coverage/failed slots, paired analysis and power scenarios | Train/dev scorer and paired-analysis foundation verified; full gate/assessment integration pending | Through `75c22ac`; 87-test full regression plus 33 final focused/CLI checks; separate review clean in round 4; no S4 import |
-| J3 | Joy | Causal heads, seven controls, external adapter plus SSv2 acquisition/split audit | Consumer implemented; real J7/external data pending | J7 sets for H3; licensed official-training metadata/videos for external checks |
+| J3 | Joy | Causal heads, seven controls, external adapter plus SSv2 acquisition/split audit | Consumer implemented; small real J7 inputs available; local readout integration next | Full J7 sets for H3; licensed official-training metadata/videos for external checks |
 | S4a/S4b | Sudarshan | Standalone independent verifier, then snapshot metrics/exposure/lineage/statistics audits | Assigned; acknowledgment/work unrecorded | Own fixtures now; eligible immutable snapshots later; not a prerequisite for Joy |
 | S5 | Sudarshan | Primary-source literature and claim review in separate reports | Assigned; acknowledgment/work unrecorded | Spec/public sources; no Joy output prerequisite |
 | J4 | Joy | Resource/runtime ledger, early screen and bounded pilot | Runner, candidate configs and slot enumeration implemented; execution not admitted | H1/H2 + complete 1,000-grid bundle + resources for screen; H3 + early stability for expansion |
@@ -85,8 +86,10 @@ The [October 30 integration report](reports/arena-integration-20261030.md) recor
 the completed arena/preview/eight-grid/full-model milestone. Raw artifacts are local
 under `artifacts/arena-preview-v1`, `artifacts/arena-eight-v1` and
 `runs/arena-update-v1`; [producer commands](docs/arena-producer.md) reproduce them.
-Next: Joy J7 tiny measurement sets and J8 operational scoring, with J5 grouped-split
-validation and J6/J2 100-grid tail checks before larger drops. These queues have no
+The [measurement report](reports/data/evaluation-integration-20261030.json) records
+the admitted `artifacts/evaluation-development-v2` train/dev drop and its limits.
+Next: bounded actual readout/scoring integration and runtime measurement, then full
+J7 sets/release and J5 grouped-split / J6/J2 100-grid tail work. These queues have no
 collaborator handoff dependency. H1–H4 and research resource/access gates remain.
 Sudarshan starts S4a using [the independent-review brief](docs/independent-review.md);
 he can finish fixtures and S5 without accessing Joy's artifacts. Publish eligible snapshots

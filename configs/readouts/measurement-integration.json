@@ -1,0 +1,18 @@
+{
+  "batch_size": 1,
+  "classes": 174,
+  "depth": 2,
+  "device": "cpu",
+  "epochs": 1,
+  "heads": 4,
+  "horizon_seconds": 0.5,
+  "image_size": 224,
+  "kind": "diagnostic",
+  "label_budget": 32,
+  "learning_rate": 0.001,
+  "mode": "sequence",
+  "seed": 101,
+  "task": "collision",
+  "weight_decay": 0.01,
+  "width": 256
+}
