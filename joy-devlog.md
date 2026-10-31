@@ -1327,3 +1327,15 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - New incomplete-attempt resume option keeps the same private stream and source
   list in a new output. It refuses completed-pool reuse or resampling. No counts,
   thresholds, content pools or model-outcome criteria changed.
+
+### 2026-10-31 04:02 EDT — Verify complete private assessment selection
+
+- Accepted prospective plan `artifacts/assessment-selection-v2`: 200 collision
+  pairs, 200 order pairs, 400 tracking episodes; 1,200 episodes / 20,600 planned
+  RGBs. Full saved-plan reconstruction passes with receipt SHA 5a3d61b7…4591.
+- Same private config bytes as rejected v1; tracking needed 203,213 candidates
+  and had 70 prospective background exclusions. Preserve v1 and its failure log.
+  Seven focused cases pass in 2.42 s; cumulative code review clean in round 2.
+- Public sanitized report records hashes/counts/checks, never private reconstruction
+  material. No native assessment capture, pixel/joint-lineage admission, model
+  outcome, real release or H3/H4 pass is claimed. Next: bounded native prefix.

@@ -223,6 +223,14 @@ without private reads. Joy is connecting isolated executions to exact input/outp
 bytes in `evaluation/job_evidence.py` and its CLI/tests. These receipts feed the
 staged scorer; actual source admission, locks and assessment remain unrun.
 
+The [private assessment selection](reports/data/assessment-selection-integration-20261031.json)
+now reconstructs all 800 groups / 1,200 episodes / 20,600 prospective RGBs. The
+first candidate-cap failure is preserved; the accepted retry retains identical
+private randomness, counts and exclusions. Seven focused cases pass; code review
+clean in two rounds. Native capture and all actual assessment admission remain
+pending. Joy next owns a bounded native prefix in a separate assessment capture
+module/CLI, then opaque-export and cross-pool checks. No S-task dependency.
+
 ## Update rules
 
 Re-read before each edit. Patch your task/status only, retaining others' concurrent

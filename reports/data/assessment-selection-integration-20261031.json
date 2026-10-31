@@ -1,0 +1,75 @@
+{
+  "assessment_authorized": false,
+  "checks": {
+    "focused_tests": 7,
+    "full_saved_selection_reconstructed": true,
+    "known_request_reconstruction_seconds": 2.703575124964118,
+    "private_file_modes_checked": true,
+    "read_only_review": "clean in round 2; three read-only cases passed; filesystem tests ran in main session"
+  },
+  "commands": [
+    ".venv/bin/python scripts/data/plan_assessment.py --known-sources artifacts/assessment-selection-inputs-v1/known-sources.json --resume-private-config artifacts/assessment-selection-v1/private-config.json --output artifacts/assessment-selection-v2",
+    ".venv/bin/python scripts/data/plan_assessment.py --verify-only --output artifacts/assessment-selection-v2"
+  ],
+  "episodes": 1200,
+  "failed_attempt": {
+    "accepted_receipt": false,
+    "path": "artifacts/assessment-selection-v1",
+    "private_config_retained_unchanged": true,
+    "reason": "200000-candidate search cap exhausted"
+  },
+  "groups_per_task": {
+    "collision": 200,
+    "order": 200,
+    "tracking": 400
+  },
+  "known_measurement_bundle_sha256": "e078cdba884adbde8f98cfe5184845171cb6fd7f46fffbb7a8c20b3fe136a442",
+  "known_measurement_groups": 1600,
+  "known_request_content_sha256": "7c6db25bd979e52da007d424e34efb336e93450203e418c0649e5da78be5c8ab",
+  "limits": [
+    "No reconstruction nonce, candidate seed, raw requests, labels or episode identities published",
+    "Known measurement prototypes and prospective background exclusion only; common pretraining lineage remains pending",
+    "Native capture, actual cross-pool RGB, opaque consumer export, registry completeness, locked jobs and H3/H4 remain pending",
+    "No collaborator work or independent scientific review inferred"
+  ],
+  "local_selection": "artifacts/assessment-selection-v2",
+  "prospective_rgb_images": 20600,
+  "recorded_at": "2026-10-31T04:02:15-04:00",
+  "request_content_sha256": "c6382afe76763c8fae4d58fdba71722c3e9e6c061ec06c6388e6a59505db8e13",
+  "schema_version": "bullet-time.assessment-selection-integration.v1",
+  "scientific_gate_pass": false,
+  "scope": "private prospective selection only; no native assessment capture or scoring",
+  "selection": {
+    "collision": {
+      "accepted": 200,
+      "background_rejections": 0,
+      "candidates_considered": 82576
+    },
+    "order": {
+      "accepted": 200,
+      "background_rejections": 0,
+      "candidates_considered": 64600
+    },
+    "tracking": {
+      "accepted": 400,
+      "background_rejections": 70,
+      "candidates_considered": 203213
+    }
+  },
+  "selection_sha256": "5a3d61b785dc1fdf5744d46b6c53669313940382c3fd7028d2c0ff706b624591",
+  "source_binding": {
+    "files": {
+      "configs/pilot-plan.json": "b160a832f9799f2cf049a56d2ca1002e942688702e523a5dcf0a6cd8929f89f5",
+      "scripts/data/plan_assessment.py": "8aaeb743c0bcbbaf5ac984ac8fcbe1aaa49e438a68c6eb70a1f48d76d8b32acb",
+      "src/bullet_time/generation/assessment_selection.py": "f383ae5812797d70eec0ce805c91f4babff3a9f57f471e2d4a2ba00fecae75b1",
+      "src/bullet_time/generation/evaluation_motion.py": "759162aebe8746dfa0ca3ea24b1ad95f38e6c78b964dad574519c04ab4e80f2e",
+      "src/bullet_time/provenance.py": "e19fc805f18d15e62387ad2992c3fff6b825c94986d3dd6cb7761963197e6642"
+    },
+    "runtime": {
+      "numpy": "2.3.5",
+      "platform": "macOS-14.6.1-arm64-arm-64bit",
+      "python": "3.11.15"
+    }
+  },
+  "source_commit": "16b0195fa1b71b6999e92917ea70359c886383b0"
+}
