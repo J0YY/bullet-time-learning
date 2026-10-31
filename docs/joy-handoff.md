@@ -13,7 +13,9 @@ Joy owns all required pilot code/data and operational analysis. Sudarshan's
 separate verifier can start on its own fixtures and later audit eligible snapshots;
 it is not a prerequisite for Joy's progress. Historical S1/S2/S3 deliveries below
 are now Joy's J5/J6/J7; operational scoring is J8. The [arena producer](arena-producer.md)
-now supplies the first eight real grids; operational scoring is still pending.
+now supplies the first eight real grids. Train/dev operational scoring and a tiny
+native measurement/readout integration are complete; larger admission and research
+gates remain pending.
 
 | Owner / task | Work now | Smallest delivery / next dependency |
 | --- | --- | --- |
@@ -25,8 +27,10 @@ now supplies the first eight real grids; operational scoring is still pending.
 | Joy, J4 | Resource admission, four-pass screen, then gated expansion | Frozen 1,000 grids + actual H1/H2/resources; H3 and early stability for expansion |
 
 No acknowledgment or completed work is recorded on Sudarshan's behalf. The first
-eight real grids are available; evaluation bundles, operational scoring and
-independent collaborator verification remain absent.
+eight real grids and a small measurement bundle are available. Operational scoring
+has known-answer and real export checks; independent collaborator verification
+remains pending. The [first S4b snapshot](../reports/data/audit-snapshots/diagnostic-dev-v1/README.md)
+can be audited immediately without another Joy delivery.
 Compute allocation, intended CUDA hardware, SSv2 access and empirical calibration
 remain unverified. Scientific evidence still gates experiments; the other person's
 availability does not gate implementation.
@@ -34,7 +38,9 @@ availability does not gate implementation.
 ## Local setup and synthetic smoke
 
 Run from the repository root with Python 3.11. CPU was checked on macOS arm64.
-CUDA is implemented but needs validation on the selected host; MPS is unsupported.
+CUDA is implemented but needs validation on the selected host. Explicit MPS FP32
+support passes native small-model integration checks; full-model benchmarking and
+resource admission remain pending (see the MPS section below).
 The original model source is retained with its own noncommercial license.
 
 ```sh

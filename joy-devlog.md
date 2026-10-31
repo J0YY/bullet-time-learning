@@ -952,3 +952,16 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   Separate review round 1 independently reported the same P1 defect, now addressed.
 - **Next:** cumulative round 2 and a fresh eight-grid export reusing these captured
   bytes, with no native rerender.
+
+### 2026-10-31 01:40 EDT — Admit and publish the native progressive migration
+
+- **Evidence:** `4808af7`, `artifacts/arena-progressive-eight-v2`; all eight native
+  grids reused, zero new render commands, all 32 repeat captures exact. Corpus
+  SHA-256 remains `8fd92aa73e4a349b849c0453368a2773046a42e8843851b41e8883208337a065`.
+  Bundle SHA-256 `49cb481ff6af45cbc7d480e1bc4fcff2d1b6a9a349716a16a320ef0775bd23c1`.
+- **Review:** cumulative round 2 clean after the one serialization finding. Reviewer
+  also verified the actual eight-grid bundle read-only and the 1,000-request prefix
+  test; write-dependent tests were performed here. Not Sudarshan's independent review.
+- **Handoff:** corrected stale guide statements about scoring/MPS and linked the
+  available S4b snapshot. Native 100/1,000 drops, joint split admission, full-model
+  MPS measurement and 100-grid tail audit remain pending; no pilot launch.

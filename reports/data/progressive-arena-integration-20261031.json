@@ -1,0 +1,80 @@
+{
+  "artifact_root": "artifacts/arena-progressive-eight-v2",
+  "capture_header_sha256": "46c563c13f8e133b84a12d433009b0716296dafe58e46288c902b31340d72c3f",
+  "engine_pin": {
+    "archive_sha256": "65c27959d02aaacfc131ec7ecb90179ba8045200cb02982bf2be96d117010b8a",
+    "binary_sha256": "0d214c6c85e47e7060ac13b035b404ce4dda653992503914963e149a45cd0dca",
+    "license": "MIT",
+    "license_url": "https://github.com/godotengine/godot/blob/4.5.1-stable/LICENSE.txt",
+    "physics": "GodotPhysics3D",
+    "physics_hz": 64,
+    "platform": "macos.universal",
+    "release_metadata": "https://api.github.com/repos/godotengine/godot-builds/releases/tags/4.5.1-stable",
+    "renderer": "gl_compatibility",
+    "schema_version": "bullet-time.engine-pin.v1",
+    "url": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_macos.universal.zip",
+    "version": "4.5.1.stable.official.f62fdbde1"
+  },
+  "limits": [
+    "100/1000 native grids not generated",
+    "Joint pretraining/readout lineage and pixel admission pending",
+    "No learning, H1-H4 pass, protocol freeze, assessment release or independent collaborator verification"
+  ],
+  "native_validation": {
+    "bundle_sha256": "49cb481ff6af45cbc7d480e1bc4fcff2d1b6a9a349716a16a320ef0775bd23c1",
+    "cadences_ticks": {
+      "16": 3,
+      "4": 2,
+      "8": 3
+    },
+    "corpus_sha256": "8fd92aa73e4a349b849c0453368a2773046a42e8843851b41e8883208337a065",
+    "development": false,
+    "grids": 8,
+    "images": 2048,
+    "joint_evaluation_admission": "pending; lineage and cross-split pixel checks required",
+    "repeated_cells": 32,
+    "scientific_gate_pass": false
+  },
+  "new_native_renders": 0,
+  "original_corpus_root": "artifacts/arena-eight-v1",
+  "original_manifest_unchanged": true,
+  "producer_sources": {
+    "configs/generation/arena-integration.json": "435666aa8ee50b6ca95106b79a4b3b477a88f41f9fc1a80811e425066e29172d",
+    "configs/pilot-plan.json": "b160a832f9799f2cf049a56d2ca1002e942688702e523a5dcf0a6cd8929f89f5",
+    "configs/rendering/godot-macos.json": "01cbf61ad11518cf7d54ad83b8a18604159f392a98b0bef83ab3b196d6fab03c",
+    "game/LICENSE": "dbf8c0ec29216abd05bc76cd663541cd1ded38680c0fd54e1a4b4be57d6e2f23",
+    "game/arena_driver.gd": "a143e28781586a30c4f91fd61d4f487f21f9bd2fa22e4c6ccc934ea28a076d0f",
+    "game/project.godot": "e0dc45b0c338b547eb68a869a8f1d8cf0693af21554c34d6623cca1f1a4957b8",
+    "scripts/data/build_pilot_arena.py": "7c59e024278ffd3e1e506a2a15fbdfdfa46c2268287bd97b56cb8b16688104a4",
+    "src/bullet_time/generation/arena.py": "65f8ca0dd2f51860aa232c6fca71fd261e435314e9df2c709340ed069fde4830",
+    "src/bullet_time/generation/bundle.py": "dbeb9f3ef371e15d963dc9c2ec050622f1e3136e154af58fc0fd2df884b537a5",
+    "src/bullet_time/generation/progressive_arena.py": "0107cbca5d0aa4aa777b53c7b7fc93e82872d01b8154e16518e895bcd6f3a6ac",
+    "src/bullet_time/provenance.py": "e19fc805f18d15e62387ad2992c3fff6b825c94986d3dd6cb7761963197e6642"
+  },
+  "recorded_at": "2026-10-31T01:39:02.963028-04:00",
+  "reused_grids": 8,
+  "review": {
+    "findings_fixed": 1,
+    "independent_collaborator_review": false,
+    "result": "clean",
+    "reviewer_checks": "Read-only native eight-grid verification and deterministic 1000-request prefix test passed; write-dependent orchestration tests performed by Joy agent",
+    "rounds": 2
+  },
+  "runtime": {
+    "numpy": "2.3.5",
+    "pillow": "12.0.0",
+    "platform": "macOS-14.6.1-arm64-arm-64bit",
+    "python": "3.11.15"
+  },
+  "schema_version": "bullet-time.progressive-arena-integration.v1",
+  "source_commit": "4808af7961dc8fb22e000c8ec7af2e97af33939f",
+  "source_root": "artifacts/arena-progressive-eight-v1",
+  "source_status": "retained failed export; native captures valid; aggregate tuple/list comparison rejected",
+  "tests": {
+    "initial_focused_cases": 23,
+    "initial_seconds": 6.14,
+    "post_fix_progressive_cases": 11,
+    "post_fix_seconds": 1.98,
+    "transport_fixtures": "mocked captures; native evidence recorded separately"
+  }
+}

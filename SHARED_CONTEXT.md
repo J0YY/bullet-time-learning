@@ -66,7 +66,7 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | REDISTRIBUTE | Joy | User-requested end-to-end pilot ownership and separate nonblocking verification track | Complete; 45 regression tests and workflow/provenance checks pass | Reassignment `2ff0980`; implementation progress below; no Sudarshan acknowledgment claimed |
 | J1 | Joy | Consumer fixtures, all schedules/RNG/update tests, JSON adapter and exports | Complete; 45 tests and Linux CI pass; cumulative review clean in round 3 | Working v1 contracts; no S task or schema import needed |
 | J5 (was S1) | Joy | Producer schema/fixtures, Godot/asset pins, grouped splits, scripted arena and replay | Arena/replay/pins/admission implemented; group/split validation remains | Producer `0693adf`; 57 local tests, separate code review clean; native macOS validated |
-| J6 (was S2) | Joy | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Preview + 8 complete (2,048 real RGBs); 100/1,000 pending | Immutable bundles, 32 repeat captures, state/camera/hash evidence; see integration report |
+| J6 (was S2) | Joy | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Preview + 8 complete; v2 progressive producer and native migration verified; 100/1,000 pending | Immutable bundles, 32 repeat captures, state/camera/hash evidence; see integration report |
 | J2 | Joy | Actual-loader/update audit; 100-grid tail check | All eight schedules pass actual full VideoMAE-S update on 8 real grids; 100-grid tail pending | CPU FP32 seed 17; shared exposure/targets/init/budget; one update each, no learning claim |
 | J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | Tiny train/dev drop and privacy foundation verified; full sets and assessment release remain | `c5a175a` native drop; `b530e73` randomized labels/local access boundary; 106 tests plus 37 post-fix checks; privacy review clean round 2 |
 | J8 | Joy | Operational metrics, coverage/failed slots, paired analysis and power scenarios | Train/dev scorer, paired-analysis foundation and 54 prospective power scenarios verified; full gate/assessment integration pending | Through `75c22ac`; 87-test full regression plus 33 final focused/CLI checks; separate review clean in round 4; no S4 import |
@@ -164,6 +164,11 @@ and producer guide, to support 1/8/100/1,000 immutable grid drops and per-grid r
 capture receipts. First validate migration of the existing eight grids without
 rendering; larger native captures wait for the current measurement job. Joint
 pretraining/readout admission and the 100-grid update audit remain separate gates.
+The [progressive migration evidence](reports/data/progressive-arena-integration-20261031.json)
+records all eight grids reused with the original corpus hash unchanged, 32 exact
+repeat captures and zero new renders. Native integration exposed a tuple/list
+serialization defect, fixed in `4808af7`; separate review is clean in round 2.
+Accepted export: `artifacts/arena-progressive-eight-v2`; retain v1 as the failed attempt.
 
 ## Update rules
 
