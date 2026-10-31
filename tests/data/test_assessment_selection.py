@@ -131,14 +131,20 @@ def test_private_inventory_mutation_fails(known, tmp_path, monkeypatch):
         module.verify_selection(output)
 
 
-def test_prefilter_matches_full_generator_and_retains_prior_selected_bytes():
+def test_prefilter_matches_full_generator_and_retains_prior_selection():
     for task in module.TASKS:
         for index in range(128):
             row = module.candidate(134, task, index, "assessment")
             assert module.appearance_palette(134, task, index) == row["prototypes"]["asset"]
     rows, _ = module.select_requests(134, known_rows(), dict.fromkeys(module.TASKS, 1))
-    # Captured from the unfiltered implementation before adding the optimization.
-    assert identity(rows) == "d3b88655d3a9429528c36d6a0bd8b2c7a19cba89e1d58d3460931d0430325f72"
+    # Indices captured from the unfiltered implementation before optimization.
+    # Raw floating-point requests are runtime-bound; compare their full bytes
+    # against unfiltered generation on this runtime, not a Mac-specific hash.
+    expected = [
+        module.candidate(134, task, index, "assessment")
+        for task, index in (("collision", 184), ("order", 35), ("tracking", 102))
+    ]
+    assert canonical_bytes(rows) == canonical_bytes(expected)
 
 
 def test_resume_retains_private_stream_and_requires_incomplete_attempt(

@@ -1351,3 +1351,14 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   must agree. Full-pool/cross-pool/scientific admission is explicitly not granted.
 - Next: native five-episode prefix, opaque export/public compilation, then separate
   code review and byte-bound integration evidence. No model scoring or research fit.
+
+### 2026-10-31 04:09 EDT — Fix a platform-specific regression assertion
+
+- CI 41182950237 on 4dc628b reported one failure (226 passed, 15 platform skips):
+  the prefilter test compared full floating-point requests on Linux with a fixed
+  Mac hash. Production selection correctly binds its actual runtime and bytes.
+- Preserve the original unfiltered selected indices (184/35/102) and compare all
+  optimized request bytes with unfiltered generation on the same runtime. The
+  384 palette checks stay. Seven focused cases pass in 2.15 s; CI will verify Linux.
+- Native prefix on 07c8f58 passed: three groups / five episodes / 75 RGBs / 16
+  queries, with no scientific or assessment release. Opaque export/consumer follows.
