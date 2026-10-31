@@ -1,6 +1,6 @@
 # Shared context — bullet-time-learning
 
-Last updated: 2026-10-30 EDT. Read the live files and Git state before acting.
+Last updated: 2026-10-31 EDT. Read the live files and Git state before acting.
 
 ## Authority and status
 
@@ -127,9 +127,10 @@ prototype groups / 2,400 prospective episodes / 41,200 planned RGBs, using pilot
 This fixes cross-task appearance reuse found by the earlier development-seed stress
 check. Nothing in this full set is rendered or admitted yet.
 Next: progressive chunk capture and combined pixel/joint-pretraining admission. Joy
-owns the generation/config/test changes; no collaborator input is required. Current
-substep: bound duplicate-check memory and vectorize conservative candidate pruning
-without changing the raster rule, before the larger capture.
+owns the generation/config/test changes; no collaborator input is required. The
+[bounded raster checker](reports/data/raster-check-20261031.json) passes the unchanged
+rule on all 1,800 native images in 3.75 s at 59.1 MB peak RSS; review clean.
+Progressive capture is next, retaining full-data admission and resource gates.
 
 ## Update rules
 

@@ -731,3 +731,21 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   comparison reuse. Scoped Ruff passes; replaced the previously reported lambda
   style issue in the already edited exporter. Separate review and native-data
   comparison follow, with no rerendering or model execution needed.
+
+### 2026-10-31 00:05 EDT — Verify and publish bounded raster admission
+
+- **Native result:** `72e1374` processed all 1,800 existing RGBs / 720,000 declared
+  cross-split pairs in 3.746 s, peak RSS 59,129,856 bytes. Comparison reuse yields
+  1,465 distinct RGB/mask units; 9,188,480 packed-mask bytes retained. Conservative
+  bounds left one exact RGB comparison. Zero exact/declared-near duplicates,
+  matching the original accepted result; no original image was removed.
+- **Evidence:** raw command/report in `artifacts/raster-check-v1`; public result
+  `reports/data/raster-check-20261031.json` binds source, input bundle and checks.
+  This checks the old immutable native drop under a new validator; it does not
+  relabel it as a new producer version or admit the full unrendered collection.
+- **Review:** separate cumulative review clean in round 1, including nine new
+  raster cases with in-memory I/O plus the actual native dataset. Own 22 focused
+  cases passed. No model test repetition or new rendering was needed.
+- **Next:** progressive captures from the verified full-count selection, followed
+  by combined image/physical/consumer and joint-pretraining checks. GPU/storage
+  details requested earlier remain pending; no Sudarshan action blocks this work.

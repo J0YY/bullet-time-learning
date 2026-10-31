@@ -160,3 +160,9 @@ search. Reports distinguish original image-pair counts, unique comparison units,
 mask candidates, mean-bound skips and actual RGB comparisons. Memory scales with
 packed masks and small metadata, plus the fixed cache, rather than retaining every
 RGB image. Actual full-set time/memory still require measurement after capture.
+
+On the existing native drop, the [October 31 check](../reports/data/raster-check-20261031.json)
+processed all 1,800 images in 3.75 s with 59,129,856 bytes peak RSS. It retained
+9,188,480 mask bytes and reproduced zero exact/declared-near duplicates. Separate
+review reran the nine new oracle/boundary cases and the native check successfully.
+These measurements describe that small drop, not the unrendered full collection.

@@ -1,0 +1,38 @@
+{
+  "input_bundle_sha256": "d2ae2b507bcb4b9ac0e4571e4d40b21522831bdf4d2a80bf36e9e970d93d43a3",
+  "local_checks": {
+    "cases_passed": 22,
+    "scope": "producer integration and direct raster oracle",
+    "seconds": 5.98
+  },
+  "peak_rss_bytes": 59129856,
+  "result": {
+    "candidate_rgb_comparisons": 1,
+    "cross_split_image_pairs": 720000,
+    "exact_cross_split_duplicates": 0,
+    "foreground_iou": 0.98,
+    "images": 1800,
+    "mask_candidates": 32882,
+    "mean_bound_skips": 128,
+    "near_duplicates": 0,
+    "retained_mask_bytes": 9188480,
+    "rgb_cache_capacity": 64,
+    "rgb_mae": 0.00392156862745098,
+    "scope": "train/dev raster and prototype checks; old pretraining integration pool and future final test not admitted",
+    "unique_cross_split_comparisons": 475300,
+    "unique_raster_mask_pairs": 1465
+  },
+  "review": {
+    "checks": "reviewer reran nine raster cases using in-memory I/O and the 1800-image native check",
+    "log_sha256": "8aaf10af84e9d2857c9cd2181931df9c9e6d3741ca373cffbd67640ff50940ba",
+    "rounds": 1,
+    "status": "clean"
+  },
+  "schema_version": "bullet-time.raster-check-integration.v1",
+  "scientific_gate_pass": false,
+  "scope": "existing 1800-image native train/dev drop; duplicate-check regression only, not new dataset admission",
+  "script_sha256": "9b10195538b924d790a1436b8bc4156f8d902bc47077f92a64381af90385e89e",
+  "seconds": 3.746347666019574,
+  "source_commit": "72e137468ceda7c251f6b47eaa49077cae5ef003",
+  "source_sha256": "1b588d0fd7558ee00406736a28ad977e685f025f843e4c9765ad246fb5f1199c"
+}
