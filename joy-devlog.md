@@ -1253,3 +1253,11 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - Seventeen focused cases pass in 14.12 s; Ruff/scaffold/diff checks pass.
 - Last published 3bfc603 passed CI 41180594374. No native capture or model update
   was repeated. Actual assessment source/job/scoring admission is still pending.
+
+### 2026-10-31 03:36 EDT — Publish public-input compiler after separate review
+
+- Review clean in round 1; reviewer parsing checks pass, runtime imports blocked
+  by read-only temporary-file restrictions. Seventeen runtime cases passed here.
+- Next integration gap: bind actual isolated commands to predeclared input bytes
+  and newly generated output inventories, then consume that evidence at release.
+  Existing generic isolation receipts alone do not authenticate model execution.

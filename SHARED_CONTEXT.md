@@ -217,6 +217,12 @@ bytes are verified before/after; no split or training-input assignment changed.
 Common semantic lineage remains unresolved, and larger grid drops require their
 own comparisons. This is not an H1–H4 or joint-lineage admission.
 
+Public expected-input compilation now passes 17 focused checks and separate review
+clean in round 1: exact public files/RGB/groups/commitments and primary query counts,
+without private reads. Joy is connecting isolated executions to exact input/output
+bytes in `evaluation/job_evidence.py` and its CLI/tests. These receipts feed the
+staged scorer; actual source admission, locks and assessment remain unrun.
+
 ## Update rules
 
 Re-read before each edit. Patch your task/status only, retaining others' concurrent
