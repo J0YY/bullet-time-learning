@@ -1274,3 +1274,12 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   failure, retained failure receipts, CLI verification and later artifact mutation.
 - Public compiler commit 335c2c9 passed CI 41181302561. No costly data/model check
   repeated. Linux/CUDA boundary and actual assessment execution remain unvalidated.
+
+### 2026-10-31 03:44 EDT — Prevent competing jobs from attributing the same outputs
+
+- Separate review found one P2: different receipt directories could share an
+  artifact destination while both passed the initial absence check. Added an
+  exclusive canonical sibling reservation before launch, retained on failure.
+  Verification binds the reservation to the exact request/receipt directory.
+- Concurrent regression holds the first job before output creation and confirms
+  the second is rejected before execution. Focused runtime results follow.

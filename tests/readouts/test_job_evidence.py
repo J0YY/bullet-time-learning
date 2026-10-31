@@ -174,3 +174,37 @@ def test_cli_run_and_pinned_verification(job):
         text=True,
     )
     assert json.loads(verified.stdout) == report
+
+
+@pytest.mark.skipif(platform.system() != "Darwin", reason="native macOS isolated execution")
+def test_concurrent_jobs_cannot_claim_one_artifact_destination(job, monkeypatch):
+    from concurrent.futures import ThreadPoolExecutor
+    from threading import Event
+    from bullet_time.evaluation import job_evidence
+
+    entered, release = Event(), Event()
+    original = job_evidence.run_isolated
+    calls = []
+
+    def paused(*args, **kwargs):
+        calls.append(kwargs["output"])
+        assert len(calls) == 1, "second job must be rejected before launch"
+        entered.set()
+        assert release.wait(5)
+        return original(*args, **kwargs)
+
+    monkeypatch.setattr(job_evidence, "run_isolated", paused)
+    with ThreadPoolExecutor(max_workers=1) as workers:
+        first = workers.submit(run_bound, **job)
+        try:
+            assert entered.wait(5)
+            assert not job["artifact_output"].exists()
+            second = dict(job, output=job["cwd"] / "other-job")
+            with pytest.raises(FileExistsError):
+                run_bound(**second)
+            failure = json.loads((second["output"] / "evidence.json").read_text())
+            assert failure["status"] == "failed"
+        finally:
+            release.set()
+        result = first.result(timeout=10)
+    assert len(calls) == 1 and verify(job, result) == result

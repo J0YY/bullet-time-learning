@@ -6,8 +6,9 @@ must declare every relevant artifact and validate the command's meaning.
 
 from pathlib import Path
 import hashlib
+import os
 
-from bullet_time.provenance import atomic_json, identity, sha256, strict_json
+from bullet_time.provenance import atomic_json, canonical_bytes, identity, sha256, strict_json
 from .isolated_job import prepare_boundary, run_isolated
 
 
@@ -57,6 +58,33 @@ def _execution():
         "evidence_source_sha256": file_hash(__file__),
         "isolation_source_sha256": file_hash(isolated_job.__file__),
     }
+
+
+def _reservation(artifact_output):
+    return artifact_output.parent / ("." + artifact_output.name + ".bound-job-reservation.json")
+
+
+def _reserve_artifact(artifact_output, output, request):
+    # The consumer needs a nonexistent output directory. Reserve its canonical
+    # destination with an exclusive sibling claim, retained even after failure.
+    claim = _reservation(artifact_output)
+    claim.parent.mkdir(parents=True, exist_ok=True)
+    fd = os.open(claim, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(fd, "wb") as stream:
+        stream.write(
+            canonical_bytes({"request_sha256": identity(request), "receipt_directory": str(output)})
+        )
+        stream.flush()
+        os.fsync(stream.fileno())
+    directory = os.open(claim.parent, os.O_RDONLY)
+    try:
+        os.fsync(directory)
+    finally:
+        os.close(directory)
+    # A concurrent non-wrapper producer might have created the directory while
+    # the request was prepared. Fail rather than attributing its files to this job.
+    if artifact_output.exists() or artifact_output.is_symlink():
+        raise ValueError("artifact destination appeared before launch")
 
 
 def run_bound(
@@ -134,6 +162,7 @@ def run_bound(
         "scope": "declared artifact bytes and isolated command only; not a complete model/data admission",
     }
     try:
+        _reserve_artifact(artifact_output, output, request)
         receipt = run_isolated(
             command,
             denied_roots=roots,
@@ -188,6 +217,12 @@ def verify_bound(output, *, expected_request_sha256, expected_evidence_sha256):
         raise ValueError("job request differs from required execution")
     if evidence.get("status") != "complete" or request["execution"] != _execution():
         raise ValueError("job failed or execution verifier changed")
+    claim = _reservation(Path(request["artifact_output"]))
+    if claim.is_symlink() or strict_json(claim.read_bytes()) != {
+        "request_sha256": identity(request),
+        "receipt_directory": str(output.resolve()),
+    }:
+        raise ValueError("artifact destination reservation differs")
     receipt_path = output / "isolation/receipt.json"
     if file_hash(receipt_path) != evidence["isolation_receipt_sha256"]:
         raise ValueError("isolation receipt changed")

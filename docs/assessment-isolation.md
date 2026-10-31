@@ -247,7 +247,9 @@ its fixed complete command and every required denied root, including reconstruct
 copies/prior scores. Fitting also denies public assessment inputs. A single private
 root does not prove those broader boundaries. The wrapper rechecks declared input
 bytes and code after execution, rejects extra/missing/linked outputs, and records
-actual output hashes. Existing artifact/receipt folders cannot be reused. Preserve
+actual output hashes. An exclusive sibling reservation prevents concurrent jobs claiming the same artifact
+destination. Existing artifact/receipt folders and reserved destinations cannot be
+reused. Keep the reservation with its artifacts. Preserve
 failed directories and receipts. The CLI prints request and evidence identities;
 retain both outside the mutable job folder for subsequent verification:
 
