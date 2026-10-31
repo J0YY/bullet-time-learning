@@ -186,3 +186,30 @@ def test_separate_horizons_may_share_backbone_prediction_identity(tmp_path):
     atomic_json(path, plan)
     result = run_plan(path, tmp_path / "result.json")
     assert result["complete"] and result["complete_slots"] == 19
+
+
+def test_scoring_fingerprint_covers_imported_local_dependencies():
+    """A shared validator must not escape the before/after execution hash check."""
+    import ast
+    import importlib.util
+    from pathlib import Path
+    from bullet_time.evaluation import score_plan
+    from bullet_time.provenance import digest
+
+    root = Path(score_plan.__file__).resolve().parent.parent
+    binding = score_plan.source_binding()["sources"]
+    for relative, checksum in binding.items():
+        path = root / relative
+        assert checksum == digest(path.read_bytes())
+        package = "bullet_time." + ".".join(path.relative_to(root).parts[:-1])
+        for node in ast.walk(ast.parse(path.read_text())):
+            if not isinstance(node, ast.ImportFrom) or not node.module:
+                continue
+            module = (
+                importlib.util.resolve_name("." * node.level + node.module, package)
+                if node.level
+                else node.module
+            )
+            if module.startswith("bullet_time."):
+                dependency = module.removeprefix("bullet_time.").replace(".", "/") + ".py"
+                assert dependency in binding, f"{relative} uses unbound {dependency}"

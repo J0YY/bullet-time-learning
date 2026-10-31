@@ -42,7 +42,14 @@ def source_binding():
     here = Path(__file__).resolve().parent
     files = [
         here / n
-        for n in ["metrics.py", "scoring.py", "statistics.py", "score_plan.py", "export.py"]
+        for n in [
+            "metrics.py",
+            "scoring.py",
+            "statistics.py",
+            "score_plan.py",
+            "export.py",
+            "label_contract.py",
+        ]
     ] + [here.parent / "provenance.py"]
     return {
         "sources": {p.relative_to(here.parent).as_posix(): digest(p.read_bytes()) for p in files},
