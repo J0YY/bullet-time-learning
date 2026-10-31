@@ -15,8 +15,10 @@ adopts the user-requested audit fixes and pilot defaults. Joy's RGB consumer,
 scheduler/collator audit, VideoMAE/image-MAE runner, resumable checkpoints and
 readout/input/export components run on fixtures. The pinned Godot arena now supplies
 2,048 real RGBs; all eight schedules pass the actual full VideoMAE-S update audit.
-Grouped evaluation generation, larger drops, operational scoring, independent
-collaborator verification, research compute, empirical learning and freeze remain pending.
+Operational train/dev scoring and paired analysis now pass synthetic and actual-CLI
+integration, with separate code review clean. Grouped evaluation generation, larger
+drops, assessment release, independent collaborator verification, research compute,
+empirical learning and freeze remain pending.
 
 Effective 2026-10-30 at Joy's request, Joy owns the complete required pilot pipeline,
 including game/data/rendering/splits, training/readouts and operational analysis.
@@ -64,7 +66,7 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | J6 (was S2) | Joy | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Preview + 8 complete (2,048 real RGBs); 100/1,000 pending | Immutable bundles, 32 repeat captures, state/camera/hash evidence; see integration report |
 | J2 | Joy | Actual-loader/update audit; 100-grid tail check | All eight schedules pass actual full VideoMAE-S update on 8 real grids; 100-grid tail pending | CPU FP32 seed 17; shared exposure/targets/init/budget; one update each, no learning claim |
 | J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | In progress: forward-valid paired histories and causal tracking, grouped split/access evidence | User continuation; base `d9c3409`; tiny train/dev slices then full admitted sets |
-| J8 | Joy | Operational metrics, coverage/failed slots, paired analysis and power scenarios | In progress: strict scoring, coverage, paired statistics and gate reports | User continuation; base `d9c3409`; own known-answer fixtures, no S4 import |
+| J8 | Joy | Operational metrics, coverage/failed slots, paired analysis and power scenarios | Train/dev scorer and paired-analysis foundation verified; full gate/assessment integration pending | Through `75c22ac`; 87-test full regression plus 33 final focused/CLI checks; separate review clean in round 4; no S4 import |
 | J3 | Joy | Causal heads, seven controls, external adapter plus SSv2 acquisition/split audit | Consumer implemented; real J7/external data pending | J7 sets for H3; licensed official-training metadata/videos for external checks |
 | S4a/S4b | Sudarshan | Standalone independent verifier, then snapshot metrics/exposure/lineage/statistics audits | Assigned; acknowledgment/work unrecorded | Own fixtures now; eligible immutable snapshots later; not a prerequisite for Joy |
 | S5 | Sudarshan | Primary-source literature and claim review in separate reports | Assigned; acknowledgment/work unrecorded | Spec/public sources; no Joy output prerequisite |
@@ -94,8 +96,9 @@ evidence. Missing independent verification stays explicitly pending.
 The [operator guide](docs/joy-handoff.md) contains current commands/contracts. The
 [October 28 completion audit](reports/joy-implementation-audit-20261028.md) remains
 historical evidence for the consumer only; its S-task ownership is superseded here.
-The real producer and integration are now measured; operational scoring and
-scientific experiments remain unimplemented/unrun. Sudarshan's log is preserved.
+The real producer and integration are now measured; operational scoring is implemented
+for train/dev with [commands and limits](docs/operational-scoring.md). Scientific
+experiments and locked assessment remain unrun. Sudarshan's log is preserved.
 Implementation and final evidence/handoff are committed on main; publication is
 checked before the chat handoff. No collaborator review or acknowledgment is inferred.
 

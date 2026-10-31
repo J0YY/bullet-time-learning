@@ -521,3 +521,15 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   collision/order captures agree with Godot contacts; tracking mask visibility is
   true at reference 16, false at 17–24 and true at 25–27. These are debug observations,
   not yet an admitted dataset or visual-solvability result.
+
+### 2026-10-30 22:59 EDT — Scoring review complete; publish increment
+
+- **Outcome:** separate read-only cumulative review clean in round 4. Eight
+  correctness findings across rounds 1–3 were fixed, with regression checks and
+  actual fit/predict/scoring receipt integration. Reviewer replayed the 18-slot
+  fixture and three numerical tests; its broader runs were sandbox-limited.
+- **Publication:** normal main push follows with source through `75c22ac`, preserving
+  original SPEC and Sudarshan's log. Temporarily stash only this agent's five
+  untracked J7 files to satisfy the clean-tree publication rule, then restore them.
+  This is a code-review result, not independent collaborator scientific review.
+- **Next:** J7 bounded development drop and native admission; no Sudarshan blocker.
