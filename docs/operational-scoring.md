@@ -118,3 +118,9 @@ producer integration and locked assessment are still required before research us
 Scoring records its source/runtime and input hashes. Unimported scoring modules
 are excluded from the training/inference fingerprint so analysis work does not
 invalidate fits; shared export/provenance and actual model/input code stay bound.
+
+The [October 30 prospective power scenarios](../reports/analysis/prospective-power-20261030.md)
+record 30/70-component conjunction sensitivity to paired SD, margin, correlation and
+seed count. They are planning calculations, not empirical power or a protocol freeze.
+The [real readout integration](../reports/data/readout-integration-20261030.md) records
+actual native-image fit, prediction and scoring execution, without claiming H3.

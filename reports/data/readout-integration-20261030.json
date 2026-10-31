@@ -1,0 +1,163 @@
+{
+  "backbone_source": {
+    "assessment_eligible": true,
+    "backbone_kind": "dinov2",
+    "binding": {
+      "external_lock": {
+        "archive_sha256": "04276715cddb29d45d05bff3a6fc132224dc27749b279ac98ad2ce4620e20d48",
+        "archive_url": "https://codeload.github.com/facebookresearch/dinov2/zip/7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+        "features": "x_norm_patchtokens; CLS excluded; no register tokens",
+        "input": "224 square letterbox, ImageNet mean/std, one image per encoder invocation",
+        "name": "dinov2_vits14",
+        "pretraining": "External LVD-142M pretrained reference; not part of the causal random-initialization comparison",
+        "repository": "https://github.com/facebookresearch/dinov2",
+        "revision": "7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+        "schema_version": "bullet-time.external-model.v1",
+        "source_license": "Apache-2.0; retained inside the verified source archive",
+        "verification_date": "2026-10-28",
+        "weights_sha256": "b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9",
+        "weights_url": "https://dl.fbaipublicfiles.com/dinov2/dinov2_vits14/dinov2_vits14_pretrain.pth"
+      },
+      "model": {
+        "encoder_width": 384,
+        "frames": 1,
+        "image_size": 224,
+        "patch_size": 14,
+        "tubelet": 1
+      },
+      "reference_kind": "dinov2",
+      "reference_status": "external_pretrained",
+      "training": {
+        "seed": 0
+      }
+    },
+    "checkpoint_sha256": "8fbacf210aae8396a5f5715a61548c331ce56d5868878cd8fdfde11a95380e77",
+    "global_step": 0,
+    "run_id": "e41666fb4fb9296fa25be1d7963373594406a0fb272a32c8ff23a03856a17889"
+  },
+  "complete": true,
+  "config": {
+    "batch_size": 1,
+    "classes": 174,
+    "depth": 2,
+    "device": "cpu",
+    "epochs": 1,
+    "heads": 4,
+    "horizon_seconds": 0.5,
+    "image_size": 224,
+    "kind": "diagnostic",
+    "label_budget": 32,
+    "learning_rate": 0.001,
+    "mode": "sequence",
+    "seed": 101,
+    "task": "collision",
+    "weight_decay": 0.01,
+    "width": 256
+  },
+  "consumer_execution": {
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "device_name": "cpu",
+    "machine": "arm64",
+    "numpy_version": "2.3.5",
+    "pillow_version": "12.0.0",
+    "precision": "float32",
+    "python_version": "3.11.15",
+    "source_sha256": "bc5964691807a0a99fff893a6e0b4c59c2e8a65f0cdb1086819f7dabe62b4d94",
+    "system": "Darwin",
+    "threads": 1,
+    "timm_version": "1.0.22",
+    "torch_version": "2.9.1"
+  },
+  "dev_balanced_accuracy": 0.5,
+  "dev_episodes": 16,
+  "expected_sha256": "bccb4c165c0a1620de8460cfa261ed8c31158e2ab4572bbb494fcafaa472eeac",
+  "fit_execution": {
+    "bundle_sha256": "d2ae2b507bcb4b9ac0e4571e4d40b21522831bdf4d2a80bf36e9e970d93d43a3",
+    "code_commit": "0edab89960ce7b96d7096ded93c74816f2ce1a5c",
+    "command": [
+      "/Users/joyyang/Projects/bullet-time-learning/.venv/bin/python",
+      "-m",
+      "bullet_time.cli",
+      "--threads",
+      "1",
+      "fit-readout",
+      "--images",
+      "/Users/joyyang/Projects/bullet-time-learning/artifacts/evaluation-development-v2/inputs/images.jsonl",
+      "--inputs",
+      "/Users/joyyang/Projects/bullet-time-learning/artifacts/evaluation-development-v2/inputs/evaluation.jsonl",
+      "--labels",
+      "/Users/joyyang/Projects/bullet-time-learning/artifacts/evaluation-development-v2/private/labels.jsonl",
+      "--groups",
+      "/Users/joyyang/Projects/bullet-time-learning/artifacts/evaluation-development-v2/groups.json",
+      "--backbone",
+      "/Users/joyyang/Projects/bullet-time-learning/checkpoints/references/dinov2-vits14.pt",
+      "--external-cache",
+      "/Users/joyyang/Projects/bullet-time-learning/.cache/dinov2",
+      "--readout-config",
+      "/Users/joyyang/Projects/bullet-time-learning/configs/readouts/measurement-integration.json",
+      "--output",
+      "/Users/joyyang/Projects/bullet-time-learning/runs/measurement-fit-v1"
+    ],
+    "config_sha256": "7fd4f7239e1f712e47d578187f9603ba6baccd4d5fe4a75236ed611795696af2",
+    "finished_utc": "2026-10-31T03:18:45.952798+00:00",
+    "host": "macOS-14.6.1-arm64-arm-64bit",
+    "log_sha256": "b231029617786420690c448bc2c6618a197938973ddf37433460548b798331f0",
+    "peak_child_rss_bytes": 2493825024,
+    "returncode": 0,
+    "scientific_gate_pass": false,
+    "seconds": 95.73650112497853,
+    "started_utc": "2026-10-31T03:17:10.197669+00:00",
+    "status": "complete"
+  },
+  "fit_history": [
+    {
+      "dev_loss": 0.734801335260272,
+      "epoch": 0,
+      "train_loss": 1.3942293272557436
+    }
+  ],
+  "fit_sha256": "f7691a991408e4d38a9711d2bbc7495de6e796a64803019f4b0674a0e9ca55c3",
+  "image_manifest_sha256": "1a78e1eb95e19f628bf89784c40d5ca01b04066457935213a0ec302f7232d8b8",
+  "input_manifest_sha256": "82ced021adb241e335b50db34049ac22b3d471ae8697ec44ead9367aec00bc24",
+  "label_manifest_sha256": "23bae570ecc40e8863f18f5e7ab5afe0760addcf41f3ff19a706d98e2da448d8",
+  "metrics": {
+    "projectile_arena": {
+      "balanced_accuracy": 0.5,
+      "brier": 0.26998311140976217,
+      "class_recall": [
+        0.0,
+        1.0
+      ],
+      "complete": true,
+      "coverage": {
+        "expected": 16,
+        "failed": 0,
+        "missing": 0,
+        "ok": 16
+      },
+      "episodes": 16,
+      "groups": 8,
+      "primary": 0.5
+    }
+  },
+  "prediction_run_sha256": "920cb689a8f245cddc42a79d2bf93567ce4829005a6eac0da3c6fa13b7b72b95",
+  "schema_version": "bullet-time.readout-integration-report.v1",
+  "scientific_gate_pass": false,
+  "scope": "one-epoch diagnostic integration; no H3 acceptance or main-condition comparison",
+  "score_execution": {
+    "numpy": "2.3.5",
+    "python": "3.11.15",
+    "scipy": "1.16.3",
+    "sources": {
+      "evaluation/export.py": "1fa31b90102b2ef6a41d5d7609246f058d59cb880de97031eea5b3a027f1daa5",
+      "evaluation/metrics.py": "052ba63d04f9b7c9764f9eee80df401b011244dd922fea1726e39082f53ca299",
+      "evaluation/score_plan.py": "ab5857ac0774d37fe205cdf08995ddd8e0cd981153c3a03011237425314ccf65",
+      "evaluation/scoring.py": "ae98545c4c380d107203127da534fe6d4d2a7a76ce171fa6f344b6345701dcfe",
+      "evaluation/statistics.py": "0d17f642ad36f3eced1b0cd850125ce2bef69ac4cddf1b73017d29a8c7223352",
+      "provenance.py": "e19fc805f18d15e62387ad2992c3fff6b825c94986d3dd6cb7761963197e6642"
+    }
+  },
+  "score_sha256": "3dcc931ebb5b484f5a16145b62e6d6d8efc7591561c1270b6c6a4c3e42980853",
+  "training_episodes": 32
+}

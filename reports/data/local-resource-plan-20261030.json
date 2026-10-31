@@ -1,0 +1,35 @@
+{
+  "allocation_authorized": false,
+  "controlled_18_run_cpu_hours_range": [
+    507.9066479251196,
+    681.0071958374465
+  ],
+  "controlled_clips": 5760000,
+  "first_three_four_pass_screen_cpu_hours_range": [
+    16.930221597503987,
+    22.700239861248217
+  ],
+  "host": "Joy local Apple M3, CPU FP32",
+  "limitations": "Linear planning extrapolations from one CPU update per arm and one small one-epoch fit. Excludes most I/O, setup, reference/frozen-readout fits, transfer, failed trials and assessment. Larger batches/dev-train ratios may change rates. No GPU estimate or allocation.",
+  "measured_diagnostic_fit_seconds": 95.73650112497853,
+  "measured_diagnostic_peak_rss_bytes": 2493825024,
+  "measured_seconds_per_controlled_clip_range": [
+    0.31744165495319976,
+    0.42562949739840406
+  ],
+  "missing": [
+    "Validated CUDA host and measured GPU recipe",
+    "Storage/quota and data roots",
+    "Full admitted corpus/evaluation sets",
+    "H1/H2/H3/early-stability evidence",
+    "Licensed SSv2 official-training data",
+    "Assessment isolation/release"
+  ],
+  "schema_version": "bullet-time.resource-planning.v1",
+  "single_full_collision_diagnostic_cpu_hours_naive": 8.86449084490542,
+  "source_hashes": {
+    "configs/pilot-plan.json": "b160a832f9799f2cf049a56d2ca1002e942688702e523a5dcf0a6cd8929f89f5",
+    "reports/arena-integration-20261030.json": "13795aaf0a8d0d8326a28b1ccd1741e49ce65f924dd48adca651779cd4a8ccef",
+    "reports/data/readout-integration-20261030.json": "1f5eff9b488b8955acb314acd875be6e82473a2fd6af78cc739c6bb082208002"
+  }
+}

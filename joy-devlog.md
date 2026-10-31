@@ -604,3 +604,26 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   32 training / 16 development episodes at horizon 0.5. Use the already pinned
   local DINO reference/cache and admitted v2 data. This checks real fit→predict→score
   and measures runtime; no H3 acceptance, tuning sweep, paid compute or full pilot.
+
+### 2026-10-30 23:21 EDT — Complete real readout/scoring integration and cost scenarios
+
+- **Actual run:** CPU FP32 DINOv2 sequence collision diagnostic, seed 101, one epoch,
+  32 train / 16 dev episodes, batch 1, horizon 0.5. Fit completed in 95.7365 s, peak
+  child RSS 2,493,825,024 bytes. All 16 dev predictions exported and scored; BA 50%,
+  train/dev losses 1.3942/0.7348. This is pipeline/cost evidence, not learned sensitivity
+  or an H3 pass. No tuning, assessment or main-condition comparison was performed.
+- **Artifacts:** `runs/measurement-fit-v1{,.execution.json,.log}`,
+  `runs/measurement-predict-v1{,.expected.json,.score.json,.log}`. Public hash-bound
+  report `reports/data/readout-integration-20261030.json`; actual code `0edab89` and
+  consumer source `bc5964691807a0a99fff893a6e0b4c59c2e8a65f0cdb1086819f7dabe62b4d94`.
+- **Resource finding:** measured CPU rates imply 16.9–22.7 h for the first three
+  four-pass runs and 508–681 h for eighteen twenty-pass runs, excluding much supporting
+  work. GPU host/storage remain unselected; asked Joy asynchronously for an existing
+  target while continuing independent implementation. No paid allocation is implied.
+- **J8 planning:** generated 54 prospective Gaussian 30/70-component power scenarios,
+  with Monte Carlo intervals and explicit SD/margin/correlation assumptions. Checked
+  inventory/probability bounds; used the previously reviewed numerical implementation.
+  This is not empirical power or a sample-size freeze. Script/report hashes are bound.
+- **Publication/checks:** producer milestone `0edab89` has green GitHub Actions run
+  41163642044. No implementation code changed after 100 passing tests; current work
+  adds run evidence and a thin wrapper around the checked power helper.
