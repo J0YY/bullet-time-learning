@@ -1065,3 +1065,21 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   full-version evidence and verified isolation are separate prerequisites.
 - **Native progress:** all 1,600 train/dev groups captured; complete combined
   raster/consumer admission is still running. No success claim before it finishes.
+
+### 2026-10-31 02:38 EDT — Preserve full-capture rejection and implement assessment inventories
+
+- **Native failure:** all 1,600 groups captured, but combined admission rejected
+  tracking train `tracking-3a80daa33f6a79a7` / dev `tracking-2d65b6bd379625c2`,
+  both frame 25, under the unchanged foreground near-duplicate rule. Keep the
+  full `artifacts/full-development-v3` rejected drop and log. No admission report
+  was emitted or success claimed. A diagnostic-only full conflict collection is
+  running to avoid discovering/re-rendering conflicts one at a time; unchanged
+  requests can be reused in a replacement export.
+- **Policy implementation:** exact seven H3 / 243 H4 / 117 development-only head
+  inventories derive from the 360-fit plan. Numerical H3 checks require all seven
+  diagnostics, complete 400-episode task pools, matched targets/groups, actual row
+  metrics, chance restricted controls and paired probabilities. These checks alone
+  never authorize expansion or release.
+- **Checks:** 12 focused known-answer/boundary/missing/shortcut/coverage cases pass
+  in 3.36 s; Ruff passes. Lock/release persistence and real data/access integration
+  remain separate ongoing work; direct assessment scoring remains disabled.
