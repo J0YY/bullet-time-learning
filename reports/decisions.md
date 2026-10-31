@@ -373,3 +373,18 @@ outputs migrate; accepted bundle bytes bind the source/config/runtime that made 
 - **Impact:** selection/producer source snapshots change; original captures and
   reports stay intact. No label/model outcome, threshold, count, SPEC or final-test
   access change; full capture admission remains pending until actual checks pass.
+
+### 2026-10-31 03:52 EDT — Keep assessment reconstruction randomness private
+
+- **Authority/reason:** continued local development authorized by Joy; existing
+  assessment privacy contract requires reconstruction material inaccessible to
+  fitting/inference, with opaque public identifiers.
+- **Implementation:** retain master data seed 20261028; derive each prospective
+  assessment candidate stream from that master and a fresh private 256-bit nonce.
+  Persist both privately for exact reconstruction. Global content-pool allocation,
+  counts, task definitions and numerical gates are unchanged.
+- **Affected:** new private assessment selection CLI/module and isolation guide.
+  Existing train/dev selections and original SPEC Git provenance remain unchanged.
+- **Downstream:** bind private source bytes before opaque preparation; declare all
+  prior assessment selections and require registry completeness and pixel/common
+  lineage admission before release. Selection alone grants no inspection authority.

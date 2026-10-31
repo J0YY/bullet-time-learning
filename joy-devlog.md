@@ -1297,3 +1297,17 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - Next local prerequisite: an explicit private assessment source-selection/capture
   path. The existing measurement producer only accepts train/dev. Keep its admitted
   bundles unchanged; new assessment data needs source, cross-pool and job admission.
+
+### 2026-10-31 03:52 EDT — Plan private assessment content without rendering
+
+- Added a separate private selector, preserving the existing train/dev producer.
+  It reconstructs hash-bound known requests, reserves all three prototype kinds,
+  excludes prior tracking-background proximity and keeps 200/200/400 whole groups.
+  A private nonce derives the candidate stream under the unchanged master seed.
+- Five focused synthetic cases pass, including repeatability, prior-pool exclusion,
+  known-source byte/content drift, prior dependency completeness, mode restrictions,
+  immutable outputs and altered summary rejection. Native full-plan check follows.
+- Selection is not RGB, common pretraining-lineage, physical capture or model
+  admission. Missing/unlisted prior pools need the future registry adapter check.
+  No assessment score or real source capture has been produced.
+- Bound-job integration commit 3197ee9 passed CI 41181974291.

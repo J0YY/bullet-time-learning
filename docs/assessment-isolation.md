@@ -263,3 +263,36 @@ Verification checks the actual input/output bytes and command/boundary/probe/log
 bindings against those pinned identities. This is a trusted-command evidence
 component, not a hostile-code sandbox, complete model/data admission, release
 permission or scientific gate. Linux/CUDA still requires a validated boundary.
+
+### Private prospective assessment source selection
+
+`scripts/data/plan_assessment.py` selects 200 collision pairs, 200 order pairs and
+400 tracking episodes before rendering. All three tasks use the existing generator
+and globally assigned assessment content pools. The master data seed stays 20261028;
+a fresh private 256-bit nonce derives a reproducible candidate stream, kept only in
+the private selection directory. Opaque public export remains a later step.
+
+Supply a private JSON list of existing receipt objects, each with `path` (absolute
+path to the train/dev `bundle.json` or a prior assessment `selection.json`) and
+`sha256` (its actual file hash). Include the accepted development bundle and every
+prior assessment selection in this pilot lineage. Dependencies of listed prior
+selections cannot be omitted. The eventual release adapter must also compare this
+list with the whole version registry; this selector alone cannot discover omitted
+unlisted versions.
+
+```bash
+.venv/bin/python scripts/data/plan_assessment.py \
+  --known-sources /absolute/private/known-sources.json \
+  --output /absolute/private/new-assessment-selection
+.venv/bin/python scripts/data/plan_assessment.py \
+  --verify-only --output /absolute/private/new-assessment-selection
+```
+
+The selector reconstructs actual known requests, reserves trajectory/appearance/
+configuration prototypes across tasks and prior pools, and applies the existing
+tracking-background proximity exclusion. It retains complete groups and exact
+pilot counts. Keep the entire output private: it contains states, branch outcomes,
+original identifiers and reconstruction randomness. The CLI prints only counts and
+receipt identity. Verification rejects byte/source/count drift or exposed file modes.
+This is a prospective source plan, not rendering, visual sensitivity, cross-pool RGB
+or common pretraining lineage admission. Neither command opens a scoring release.
