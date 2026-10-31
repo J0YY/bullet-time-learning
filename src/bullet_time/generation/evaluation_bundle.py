@@ -150,6 +150,26 @@ def validate_selection_copy(root, plan, full_requests, selection):
         raise ValueError("progressive source selection does not reconstruct")
 
 
+def image_catalog(input_root, request):
+    """Catalog order is independent of request dictionary serialization."""
+    rows = []
+    gid = request["group_id"]
+    for key in sorted(request["frames"]):
+        path = input_root / "rgb" / gid / (key + ".png")
+        rows.append(
+            dict(
+                image_id=f"{gid}/{key}",
+                rgb_path=path.relative_to(input_root).as_posix(),
+                file_sha256=sha(path),
+                rgb_sha256=digest(rgb(path).tobytes()),
+                height=224,
+                width=224,
+                channels=3,
+            )
+        )
+    return rows
+
+
 def foreground(mask, channel=0):
     return (mask[:, :, channel] > 200) & (mask[:, :, (channel + 1) % 3] < 20)
 
@@ -525,19 +545,7 @@ def build_measurements(
         rgb_root = output / "inputs" / "rgb" / gid
         rgb_root.parent.mkdir(parents=True, exist_ok=True)
         shutil.move(str(private / "rgb"), str(rgb_root))
-        for key in request["frames"]:
-            path = rgb_root / (key + ".png")
-            images.append(
-                dict(
-                    image_id=f"{gid}/{key}",
-                    rgb_path=path.relative_to(output / "inputs").as_posix(),
-                    file_sha256=sha(path),
-                    rgb_sha256=digest(rgb(path).tobytes()),
-                    height=224,
-                    width=224,
-                    channels=3,
-                )
-            )
+        images.extend(image_catalog(output / "inputs", request))
         summaries.append(
             dict(
                 group_id=gid,
@@ -648,19 +656,7 @@ def verify_measurements(root):
         expected_labels.extend(lab)
         expected_groups.extend(grp)
         requests.append(request)
-        for key in request["frames"]:
-            path = root / "inputs/rgb" / gid / (key + ".png")
-            expected_images.append(
-                dict(
-                    image_id=f"{gid}/{key}",
-                    rgb_path=path.relative_to(root / "inputs").as_posix(),
-                    file_sha256=sha(path),
-                    rgb_sha256=digest(rgb(path).tobytes()),
-                    height=224,
-                    width=224,
-                    channels=3,
-                )
-            )
+        expected_images.extend(image_catalog(root / "inputs", request))
         summaries.append(
             dict(group_id=gid, task=task, split=split, groups=request["groups"], **evidence)
         )

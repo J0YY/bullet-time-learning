@@ -1,10 +1,31 @@
 from copy import deepcopy
+import json
 
+import numpy as np
+from PIL import Image
 import pytest
 
 from bullet_time.generation import evaluation_bundle as bundle
 from bullet_time.generation.evaluation_motion import select_collection
 from bullet_time.provenance import atomic_json, digest
+
+
+def test_image_catalog_survives_canonical_request_serialization(tmp_path):
+    from bullet_time.generation.evaluation_motion import forecast_candidate
+    from bullet_time.provenance import canonical_bytes
+
+    request = forecast_candidate(20261028, 0, "collision")
+    request["group_id"] = "synthetic-catalog"
+    restored = json.loads(canonical_bytes(request))
+    assert list(request["frames"]) != list(restored["frames"])
+    root = tmp_path / "rgb/synthetic-catalog"
+    root.mkdir(parents=True)
+    for index, key in enumerate(request["frames"]):
+        Image.fromarray(np.full((224, 224, 3), index, dtype=np.uint8)).save(root / (key + ".png"))
+    actual = bundle.image_catalog(tmp_path, restored)
+    reconstructed = bundle.image_catalog(tmp_path, request)
+    assert actual == reconstructed
+    assert len(actual) == 31 and len({r["image_id"] for r in actual}) == 31
 
 
 def test_progressive_counts_and_prefixes_preserve_complete_groups():
