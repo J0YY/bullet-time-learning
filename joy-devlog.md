@@ -1311,3 +1311,19 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   admission. Missing/unlisted prior pools need the future registry adapter check.
   No assessment score or real source capture has been produced.
 - Bound-job integration commit 3197ee9 passed CI 41181974291.
+
+### 2026-10-31 03:58 EDT — Preserve failed selection and extend its prospective search
+
+- Initial selector review clean in round 1, with two read-only cases and all 1,600
+  actual known development requests reconstructed by the reviewer. Five runtime
+  cases passed here; separate native known-request check took 2.70 s.
+- Full source selection in `artifacts/assessment-selection-v1` hit the 200,000-
+  candidate cap before filling all required groups. No accepted selection receipt
+  or capture was produced. Retain its private stream/config and failure log.
+- Extend the prospective search cap to 1,000,000 and skip appearances already
+  excluded by the existing pool/reservation rule before simulating dynamics. This
+  preserves candidate order/content; the old fixture content hash is unchanged,
+  and the prefix agrees with full generator palettes across 384 task/index cases.
+- New incomplete-attempt resume option keeps the same private stream and source
+  list in a new output. It refuses completed-pool reuse or resampling. No counts,
+  thresholds, content pools or model-outcome criteria changed.

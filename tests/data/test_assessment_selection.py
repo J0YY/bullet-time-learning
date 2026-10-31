@@ -129,3 +129,40 @@ def test_private_inventory_mutation_fails(known, tmp_path, monkeypatch):
     path.write_bytes(path.read_bytes() + b"\n")
     with pytest.raises(ValueError, match="bytes changed"):
         module.verify_selection(output)
+
+
+def test_prefilter_matches_full_generator_and_retains_prior_selected_bytes():
+    for task in module.TASKS:
+        for index in range(128):
+            row = module.candidate(134, task, index, "assessment")
+            assert module.appearance_palette(134, task, index) == row["prototypes"]["asset"]
+    rows, _ = module.select_requests(134, known_rows(), dict.fromkeys(module.TASKS, 1))
+    # Captured from the unfiltered implementation before adding the optimization.
+    assert identity(rows) == "d3b88655d3a9429528c36d6a0bd8b2c7a19cba89e1d58d3460931d0430325f72"
+
+
+def test_resume_retains_private_stream_and_requires_incomplete_attempt(
+    known, tmp_path, monkeypatch
+):
+    tiny_counts(monkeypatch)
+    original = module.select_requests
+
+    def fail(*args, **kwargs):
+        raise ValueError("synthetic candidate limit")
+
+    monkeypatch.setattr(module, "select_requests", fail)
+    first = tmp_path / "failed"
+    with pytest.raises(ValueError, match="candidate limit"):
+        module.plan_assessment(first, known)
+    config = first / "private-config.json"
+    before = config.read_bytes()
+    monkeypatch.setattr(module, "select_requests", original)
+    monkeypatch.setattr(module.secrets, "token_hex", lambda size: pytest.fail("must not resample"))
+    output = tmp_path / "resumed"
+    report = module.plan_assessment(output, known, resume_private_config=config)
+    assert (output / "private-config.json").read_bytes() == before
+    assert module.verify_selection(output) == report
+    with pytest.raises(ValueError, match="already completed"):
+        module.plan_assessment(
+            tmp_path / "forbidden", known, resume_private_config=output / "private-config.json"
+        )

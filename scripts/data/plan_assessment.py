@@ -12,15 +12,22 @@ p = argparse.ArgumentParser(description=__doc__)
 p.add_argument("--output", required=True)
 p.add_argument("--known-sources", help="JSON list of private receipt paths and SHA-256 hashes")
 p.add_argument("--verify-only", action="store_true")
+p.add_argument(
+    "--resume-private-config", help="retain the stream from an incomplete private selection"
+)
 a = p.parse_args()
 if a.verify_only:
-    if a.known_sources:
+    if a.known_sources or a.resume_private_config:
         p.error("verification uses the already pinned private source list")
     report = verify_selection(a.output)
 else:
     if not a.known_sources:
         p.error("creation requires known development/prior-assessment receipts")
-    report = plan_assessment(a.output, strict_json(Path(a.known_sources).read_bytes()))
+    report = plan_assessment(
+        a.output,
+        strict_json(Path(a.known_sources).read_bytes()),
+        resume_private_config=a.resume_private_config,
+    )
 print(
     json.dumps(
         {

@@ -296,3 +296,11 @@ original identifiers and reconstruction randomness. The CLI prints only counts a
 receipt identity. Verification rejects byte/source/count drift or exposed file modes.
 This is a prospective source plan, not rendering, visual sensitivity, cross-pool RGB
 or common pretraining lineage admission. Neither command opens a scoring release.
+
+If a prospective attempt exhausts its search budget or is interrupted before
+`selection.json` exists, retain it and use `--resume-private-config` with its
+private configuration in a new output directory. Master seed, private nonce and
+known-source list must match exactly. Completed selections cannot be resumed as
+new pools. The bounded search checks up to 1,000,000 candidates per task, skipping
+appearances already rejected by the unchanged pool/reservation rule before the
+expensive dynamics construction. Failure never reduces the required counts.

@@ -9,6 +9,7 @@ from collections import Counter
 from pathlib import Path
 import secrets
 import platform
+import random
 
 import numpy as np
 
@@ -28,6 +29,7 @@ from .evaluation_motion import (
     tracking_candidate,
     tracking_background,
     background_conflict,
+    pool,
 )
 
 TASKS = ("collision", "order", "tracking")
@@ -161,7 +163,13 @@ def read_known(sources):
     return requests, bindings
 
 
-def select_requests(seed, known, counts, *, limit=200000):
+def appearance_palette(seed, task, index):
+    """Cheap exact prefix of the pinned generator RNG, checked against full requests."""
+    rng = random.Random(int(identity([seed, task, index])[:16], 16))
+    return [rng.randrange(32) for _ in range(3)]
+
+
+def select_requests(seed, known, counts, *, limit=1000000):
     integer(seed, "candidate seed")
     if set(counts) != set(TASKS):
         raise ValueError("all assessment tasks required")
@@ -172,7 +180,15 @@ def select_requests(seed, known, counts, *, limit=200000):
         wanted = integer(counts[task], "group count", 1)
         accepted, background_rejections = 0, 0
         for index in range(limit):
+            palette = appearance_palette(seed, task, index)
+            if (
+                pool("asset", palette) != "assessment"
+                or identity(["asset", palette]) in reserved["asset"]
+            ):
+                continue
             row = candidate(seed, task, index, "assessment")
+            if row["prototypes"]["asset"] != palette:
+                raise ValueError("appearance prefilter differs from pinned generator")
             if set(row["assigned_pools"].values()) != {"assessment"}:
                 continue
             if any(row["groups"][kind] in reserved[kind] for kind in KINDS):
@@ -194,7 +210,9 @@ def select_requests(seed, known, counts, *, limit=200000):
                 }
                 break
         else:
-            raise ValueError("insufficient disjoint assessment content; never shrink counts")
+            raise ValueError(
+                f"insufficient disjoint assessment content for {task}: {accepted}/{wanted} after {limit} candidates; never shrink counts"
+            )
     return selected, stats
 
 
@@ -228,7 +246,7 @@ def _report(output, before, counts, bindings, rows, stats):
     }
 
 
-def plan_assessment(output, known_sources):
+def plan_assessment(output, known_sources, *, resume_private_config=None):
     output = Path(output)
     if output.exists() or output.is_symlink():
         raise ValueError("new private assessment selection directory required")
@@ -236,7 +254,17 @@ def plan_assessment(output, known_sources):
     master, counts = pilot_counts()
     known, bindings = read_known(known_sources)
     sources = [{"path": b["path"], "sha256": b["sha256"]} for b in bindings]
-    config = _config(master, secrets.token_hex(32), sources)
+    if resume_private_config is None:
+        config = _config(master, secrets.token_hex(32), sources)
+    else:
+        prior = Path(resume_private_config)
+        if (prior.parent / "selection.json").exists():
+            raise ValueError("cannot resume an already completed selection into another pool")
+        if prior.stat().st_mode & 0o077 or prior.parent.stat().st_mode & 0o077:
+            raise ValueError("resume configuration must remain private")
+        config = strict_json(prior.read_bytes())
+        if config != _config(master, config["private_nonce"], sources):
+            raise ValueError("resumption must retain exact master/nonce/known sources")
     output.mkdir(parents=True, mode=0o700, exist_ok=False)
     atomic_json(output / "private-config.json", config)
     rows, stats = select_requests(config["candidate_seed"], known, counts)
