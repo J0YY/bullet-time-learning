@@ -749,3 +749,20 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Next:** progressive captures from the verified full-count selection, followed
   by combined image/physical/consumer and joint-pretraining checks. GPU/storage
   details requested earlier remain pending; no Sudarshan action blocks this work.
+
+### 2026-10-31 00:12 EDT — Implement progressive full-selection capture
+
+- **Change:** the measurement builder can consume the verified global selection
+  with fixed 1 → 8 → full prefixes per task/split. Private plan v2 binds the copied
+  selection receipt and actual capture counts. Whole groups and original selection
+  ordering are preserved; producer verification reconstructs the full selection.
+- **Reuse:** growing prefixes copy only immutable matching raw captures and rerun
+  all current exports/admission. Different selection, changed render/motion/pins
+  or tampered raw bytes fail. Existing input/label/group wires remain unchanged.
+  Pilot geometry/cadence mismatches fail rather than silently using fixed defaults.
+- **Checks:** all 41 data/producer tests pass (10.98 s), including new complete-prefix
+  units/counts, cadence rejection and raw-reuse corruption checks. Scoped Ruff and
+  formatting pass. Separate review and a committed native preview follow.
+- **Next bounded run:** one group per task/split from the full pilot-seed selection:
+  6 groups / 10 episodes / 150 RGBs. Inspect and admit that before expanding. This
+  is an integration step with no training, assessment, paid compute or H3 claim.

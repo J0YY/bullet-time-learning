@@ -10,6 +10,13 @@ parser.add_argument("--output", required=True)
 parser.add_argument("--godot")
 parser.add_argument("--development", action="store_true")
 parser.add_argument("--verify-only", action="store_true")
+parser.add_argument("--full-selection", help="Verified full-count prospective selection directory")
+parser.add_argument(
+    "--per-stratum",
+    type=int,
+    choices=(1, 8, 600),
+    help="Progressive prefix per task/split; 600 captures the full declared train/dev selection",
+)
 parser.add_argument(
     "--reuse-captures", help="Re-export unchanged, byte-verified raw captures into a new drop"
 )
@@ -20,6 +27,11 @@ else:
     if not args.godot:
         parser.error("--godot is required to render")
     report = build_measurements(
-        args.output, args.godot, development=args.development, reuse=args.reuse_captures
+        args.output,
+        args.godot,
+        development=args.development,
+        reuse=args.reuse_captures,
+        full_selection=args.full_selection,
+        per_stratum=args.per_stratum,
     )
 print(json.dumps(report, indent=2, sort_keys=True))

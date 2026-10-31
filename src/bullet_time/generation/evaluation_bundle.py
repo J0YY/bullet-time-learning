@@ -10,9 +10,26 @@ import subprocess
 
 import numpy as np
 
-from bullet_time.provenance import atomic_json, canonical_bytes, digest, identity, inside, number
+from bullet_time.provenance import (
+    atomic_json,
+    canonical_bytes,
+    digest,
+    identity,
+    inside,
+    number,
+    sha256,
+    strict_json,
+)
 from .bundle import ROOT, read, rgb, sha, same_request, verify_engine, invoke
-from .evaluation_motion import select_groups
+from .evaluation_motion import select_groups, select_collection
+from .evaluation_selection import (
+    counts_from_pilot,
+    read_pilot,
+    selection_sources,
+    selection_runtime,
+    check_collection,
+    verify_selection,
+)
 
 
 def source_files():
@@ -25,9 +42,11 @@ def source_files():
         "src/bullet_time/generation/bundle.py",
         "src/bullet_time/generation/evaluation_motion.py",
         "src/bullet_time/generation/evaluation_bundle.py",
+        "src/bullet_time/generation/evaluation_selection.py",
         "src/bullet_time/provenance.py",
         "scripts/data/build_evaluation.py",
         "configs/generation/evaluation-development.json",
+        "configs/pilot-plan.json",
         "configs/rendering/godot-macos.json",
     ]
     return {p: sha(ROOT / p) for p in paths}
@@ -35,8 +54,100 @@ def source_files():
 
 def check_plan(plan):
     expected = read(ROOT / "configs/generation/evaluation-development.json")
+    if plan.get("schema_version") == "bullet-time.measurement-plan.v2":
+        expected = progressive_plan(plan["selection_sha256"], plan["per_stratum"])
     if plan != expected:
         raise ValueError("this version accepts only the checked-in bounded development plan")
+
+
+def progressive_plan(selection_sha256, per_stratum):
+    """Fixed 1 → 8 → full prefixes of the already declared full selection."""
+    sha256(selection_sha256)
+    if type(per_stratum) is not int or per_stratum not in (1, 8, 600):
+        raise ValueError("progressive per-stratum capture must be 1, 8 or 600 (full)")
+    pilot = read_pilot()
+    if (
+        pilot["family"] != "projectile_arena"
+        or pilot["physics_hz"] != 64
+        or pilot["evaluation_hz"] != 16
+        or pilot["observed_frames"] != 16
+        or pilot["rgb_shape"] != [224, 224, 3]
+        or pilot["forecast_horizon_seconds"] != [0.25, 0.5, 1.0]
+    ):
+        raise ValueError("pilot geometry/cadence differs from implemented measurement producer")
+    counts = counts_from_pilot(pilot)
+    if max(n for row in counts.values() for n in row.values()) > 600:
+        raise ValueError("pilot counts exceed this bounded progressive implementation")
+    plan = read(ROOT / "configs/generation/evaluation-development.json")
+    plan.update(
+        schema_version="bullet-time.measurement-plan.v2",
+        seed=pilot["data_seed"],
+        groups_per_task={
+            task: {split: min(n, per_stratum) for split, n in row.items()}
+            for task, row in counts.items()
+        },
+        selection_sha256=selection_sha256,
+        per_stratum=per_stratum,
+        scope="progressive full-selection train/dev capture; no assessment or H3 acceptance",
+    )
+    return plan
+
+
+def plan_counts(plan):
+    if plan["schema_version"] == "bullet-time.measurement-plan.v1":
+        return {task: dict(plan["groups_per_task"]) for task in plan["tasks"]}
+    return plan["groups_per_task"]
+
+
+def select_for_capture(plan, *, full_requests=None, full_selection=None):
+    if plan["schema_version"] == "bullet-time.measurement-plan.v1":
+        requests, evidence = [], {}
+        for task in plan["tasks"]:
+            for split in ("train", "dev"):
+                rows, stats = select_groups(
+                    plan["seed"], split, plan["groups_per_task"][split], task
+                )
+                requests.extend(rows)
+                evidence[f"{task}/{split}"] = stats
+        return requests, evidence, None
+    if full_requests is None:
+        full_requests, full_selection = select_collection(
+            plan["seed"], counts_from_pilot(read_pilot())
+        )
+    selected, counts = [], Counter()
+    for request in full_requests:
+        task, split = request["task"], request["split"]
+        if counts[task, split] < plan["groups_per_task"][task][split]:
+            selected.append(request)
+            counts[task, split] += 1
+    check_collection(selected, plan["groups_per_task"])
+    return selected, full_selection, full_requests
+
+
+def validate_selection_copy(root, plan, full_requests, selection):
+    path = root / "selection.json"
+    if sha(path) != plan["selection_sha256"]:
+        raise ValueError("progressive selection receipt differs")
+    report = read(path)
+    expected_counts = counts_from_pilot(read_pilot())
+    if (
+        report["schema_version"] != "bullet-time.measurement-selection.v1"
+        or report["scope"]
+        != "prospective train/dev selection only; no rendering, assessment or learning"
+        or report["source_sha256"] != selection_sources()
+        or report["runtime"] != selection_runtime()
+        or report["data_seed"] != plan["seed"]
+        or report["groups_per_task"] != expected_counts
+        or report["selection"] != selection
+        or report["summary"] != check_collection(full_requests, expected_counts)
+        or report["inventory"]
+        != {
+            "private/requests.jsonl": digest(
+                b"".join(canonical_bytes(r) + b"\n" for r in full_requests)
+            )
+        }
+    ):
+        raise ValueError("progressive source selection does not reconstruct")
 
 
 def foreground(mask, channel=0):
@@ -283,10 +394,23 @@ def reuse_capture_source(root, plan, pin, sources):
     """Admit raw captures only; old exports/admission status are never inherited."""
     root = Path(root).resolve(strict=True)
     old = read(root / "bundle.json")
+    compatible_plan = old["plan"] == plan
+    if (
+        old["plan"].get("schema_version")
+        == plan.get("schema_version")
+        == "bullet-time.measurement-plan.v2"
+        and old["plan"]["per_stratum"] <= plan["per_stratum"]
+    ):
+        check_plan(old["plan"])
+        compatible_plan = all(
+            old["plan"][key] == value
+            for key, value in plan.items()
+            if key not in {"per_stratum", "groups_per_task"}
+        )
     if (
         old["schema_version"] != "bullet-time.measurement-bundle.v1"
         or old["development"]
-        or old["plan"] != plan
+        or not compatible_plan
         or old["engine_pin"] != pin
     ):
         raise ValueError("raw capture plan/runtime/development mismatch")
@@ -317,11 +441,28 @@ def reuse_capture_source(root, plan, pin, sources):
     )
 
 
-def build_measurements(output, binary, *, development=False, reuse=None):
+def build_measurements(
+    output, binary, *, development=False, reuse=None, full_selection=None, per_stratum=None
+):
     output = Path(output).resolve()
     if output.exists():
         raise ValueError("refusing to overwrite an existing measurement drop")
-    plan = read(ROOT / "configs/generation/evaluation-development.json")
+    full_requests, full_stats = None, None
+    if full_selection is None:
+        if per_stratum is not None:
+            raise ValueError("per-stratum capture requires a full selection")
+        plan = read(ROOT / "configs/generation/evaluation-development.json")
+    else:
+        full_selection = Path(full_selection).resolve(strict=True)
+        selected_report = verify_selection(full_selection)
+        full_requests = [
+            strict_json(line)
+            for line in (full_selection / "private/requests.jsonl").read_bytes().splitlines()
+        ]
+        full_stats = selected_report["selection"]
+        plan = progressive_plan(
+            sha(full_selection / "selection.json"), 1 if per_stratum is None else per_stratum
+        )
     check_plan(plan)
     pin = read(ROOT / "configs/rendering/godot-macos.json")
     binary = verify_engine(binary, pin)
@@ -333,19 +474,19 @@ def build_measurements(output, binary, *, development=False, reuse=None):
         )
     old = reuse_capture_source(reuse, plan, pin, sources) if reuse is not None else None
     output.mkdir(parents=True)
-    requests, selection = [], {}
-    for task in plan["tasks"]:
-        for split in ("train", "dev"):
-            count = plan["groups_per_task"][split]
-            candidates, evidence = select_groups(plan["seed"], split, count, task)
-            requests.extend(candidates)
-            selection[f"{task}/{split}"] = evidence
+    if full_selection is not None:
+        shutil.copy2(full_selection / "selection.json", output / "selection.json")
+    requests, selection, all_selected = select_for_capture(
+        plan, full_requests=full_requests, full_selection=full_stats
+    )
+    if all_selected is not None:
+        validate_selection_copy(output, plan, all_selected, selection)
     check_lineage(requests, plan)
     all_inputs, all_labels, all_groups, images, summaries, commands = [], [], [], [], [], []
     for request in requests:
         gid = request["group_id"]
         private = output / "private" / gid
-        if old:
+        if old and (old[0] / "private" / gid).is_dir():
             shutil.copytree(old[0] / "private" / gid, private)
             shutil.copytree(old[0] / "inputs/rgb" / gid, private / "rgb")
             if read(private / "request.json") != request:
@@ -409,7 +550,7 @@ def build_measurements(output, binary, *, development=False, reuse=None):
         print(f"Validated {gid}: {len(records)} frames; {request['split']}", flush=True)
     write_lines(output / "inputs/images.jsonl", images)
     write_lines(output / "inputs/evaluation.jsonl", all_inputs)
-    for split in plan["groups_per_task"]:
+    for split in ("train", "dev"):
         write_lines(
             output / f"inputs/{split}.jsonl", [r for r in all_inputs if r["split"] == split]
         )
@@ -423,7 +564,12 @@ def build_measurements(output, binary, *, development=False, reuse=None):
     )
     atomic_json(
         output / "validation.json",
-        dict(summaries=summaries, selection=selection, scientific_gate_pass=False),
+        dict(
+            summaries=summaries,
+            selection=selection,
+            capture_counts=plan_counts(plan),
+            scientific_gate_pass=False,
+        ),
     )
     atomic_json(
         output / "generation.json",
@@ -482,42 +628,42 @@ def verify_measurements(root):
             raise ValueError("measurement artifact hash mismatch")
     expected_inputs, expected_labels, expected_groups, requests, summaries = [], [], [], [], []
     expected_images = []
-    for task in bundle["plan"]["tasks"]:
-        for split in ("train", "dev"):
-            count = bundle["plan"]["groups_per_task"][split]
-            selected, _ = select_groups(bundle["plan"]["seed"], split, count, task)
-            for request in selected:
-                gid = request["group_id"]
-                if read(root / "private" / gid / "request.json") != request:
-                    raise ValueError("request differs from reproducible content selection")
-                records, evidence = validate_capture(
-                    root / "private" / gid,
-                    request,
-                    bundle["plan"],
-                    bundle["engine_pin"],
-                    rgb_root=root / "inputs/rgb" / gid,
+    selected, selection, all_selected = select_for_capture(bundle["plan"])
+    if all_selected is not None:
+        validate_selection_copy(root, bundle["plan"], all_selected, selection)
+    for request in selected:
+        task, split = request["task"], request["split"]
+        gid = request["group_id"]
+        if read(root / "private" / gid / "request.json") != request:
+            raise ValueError("request differs from reproducible content selection")
+        records, evidence = validate_capture(
+            root / "private" / gid,
+            request,
+            bundle["plan"],
+            bundle["engine_pin"],
+            rgb_root=root / "inputs/rgb" / gid,
+        )
+        inp, lab, grp = exports(request, records, evidence)
+        expected_inputs.extend(inp)
+        expected_labels.extend(lab)
+        expected_groups.extend(grp)
+        requests.append(request)
+        for key in request["frames"]:
+            path = root / "inputs/rgb" / gid / (key + ".png")
+            expected_images.append(
+                dict(
+                    image_id=f"{gid}/{key}",
+                    rgb_path=path.relative_to(root / "inputs").as_posix(),
+                    file_sha256=sha(path),
+                    rgb_sha256=digest(rgb(path).tobytes()),
+                    height=224,
+                    width=224,
+                    channels=3,
                 )
-                inp, lab, grp = exports(request, records, evidence)
-                expected_inputs.extend(inp)
-                expected_labels.extend(lab)
-                expected_groups.extend(grp)
-                requests.append(request)
-                for key in request["frames"]:
-                    path = root / "inputs/rgb" / gid / (key + ".png")
-                    expected_images.append(
-                        dict(
-                            image_id=f"{gid}/{key}",
-                            rgb_path=path.relative_to(root / "inputs").as_posix(),
-                            file_sha256=sha(path),
-                            rgb_sha256=digest(rgb(path).tobytes()),
-                            height=224,
-                            width=224,
-                            channels=3,
-                        )
-                    )
-                summaries.append(
-                    dict(group_id=gid, task=task, split=split, groups=request["groups"], **evidence)
-                )
+            )
+        summaries.append(
+            dict(group_id=gid, task=task, split=split, groups=request["groups"], **evidence)
+        )
 
     def line_bytes(rows):
         return b"".join(canonical_bytes(r) + b"\n" for r in rows)
@@ -529,7 +675,7 @@ def verify_measurements(root):
         root / "private/labels.jsonl"
     ).read_bytes() != line_bytes(expected_labels):
         raise ValueError("measurement exports differ from admitted renderer evidence")
-    for split in bundle["plan"]["groups_per_task"]:
+    for split in ("train", "dev"):
         if (root / f"inputs/{split}.jsonl").read_bytes() != line_bytes(
             [r for r in expected_inputs if r["split"] == split]
         ) or (root / f"private/{split}-labels.jsonl").read_bytes() != line_bytes(
@@ -539,6 +685,8 @@ def verify_measurements(root):
     if (
         read(root / "groups.json")["records"] != expected_groups
         or read(root / "validation.json")["summaries"] != summaries
+        or read(root / "validation.json")["selection"] != selection
+        or read(root / "validation.json")["capture_counts"] != plan_counts(bundle["plan"])
     ):
         raise ValueError("group/summary report differs from actual validation")
     lineage = check_lineage(requests, bundle["plan"])
@@ -560,7 +708,7 @@ def verify_measurements(root):
         bundle_sha256=sha(root / "bundle.json"),
         development=bundle["development"],
         scientific_gate_pass=False,
-        scope="tiny train/dev integration only; assessment, visual solvability and pilot remain pending",
+        scope=bundle["plan"]["scope"],
         lineage=lineage,
         duplicates=duplicates,
     )
@@ -568,7 +716,7 @@ def verify_measurements(root):
 
 def check_lineage(requests, plan):
     counts = Counter((r["task"], r["split"]) for r in requests)
-    wanted = {(t, s): n for t in plan["tasks"] for s, n in plan["groups_per_task"].items()}
+    wanted = {(t, s): n for t, row in plan_counts(plan).items() for s, n in row.items()}
     if counts != wanted or len({r["group_id"] for r in requests}) != len(requests):
         raise ValueError("measurement task/split/group inventory mismatch")
     seen = {k: {} for k in ("trajectory", "asset", "configuration")}
