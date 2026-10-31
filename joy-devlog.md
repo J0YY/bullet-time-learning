@@ -834,3 +834,22 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Next:** full v2 capture, reusing the prefix. Native-time extrapolation remains
   about 96 minutes; observed available disk 25 GiB. No fitting, paid compute or
   assessment access. H1–H4, joint-pretraining admission and resources remain open.
+
+### 2026-10-31 00:54 EDT — Prepare opaque assessment inputs without releasing outcomes
+
+- **Change:** producer-only utility/CLI preserves decoded RGB and all permitted
+  input tensors while replacing reconstructible IDs and branch ordering. Strip
+  PNG metadata, export only used images, seal renamed labels and retain private
+  maps/source digests. A complete preparation receipt follows exact target/pair/
+  reference checks; every release/scientific-gate flag remains false.
+- **Checks:** 31 focused exporter/privacy/input/subset cases pass in 12.29 s. Ten
+  new cases include all three tasks, all applicable input modes, metadata removal,
+  randomized records, missing/extra labels/groups, broken pairs/pixels/queries,
+  actual CLI and both private/public mutation. Scoped formatting/lint passed.
+- **Scope:** synthetic assessment fixtures only; no real assessment source exists
+  or is admitted. New code is producer-only and leaves fitted consumer identity
+  unchanged. Source paths used by the ongoing native train/dev capture are unchanged.
+- **Publication:** corrected selection/prefix `e34586c` and `8a6ad3f` both have
+  successful hosted CI (41169855426 / 41169667558). Full train/dev capture is active
+  in `artifacts/full-development-v3`; no model or assessment run.
+- **Next:** separate code review; preserve source isolation/one-time release gates.

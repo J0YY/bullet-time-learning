@@ -1,7 +1,7 @@
 # Assessment access foundation
 
-No real assessment set or score has been released. This increment implements
-private label commitments and a **local macOS trusted-job boundary**. Complete
+No real assessment set or score has been released. Implemented components include
+opaque input exports, private label commitments and a **local macOS trusted-job boundary**. Complete
 data admission, the locked pilot protocol, stage inventory and release procedure
 remain required before using assessment. Direct operational scoring still rejects
 assessment before opening labels. Existing predictor eligibility is a necessary
@@ -31,11 +31,53 @@ v2 only for assessment. The inference format stays unchanged: combine each publi
 target commitment with its separately validated family/group and actual predictor
 identity to prepare the expected-key inventory. A nonce is never a model feature.
 The sealer does not check physical validity, split lineage, full expected coverage
-or scientific gates. Future assessment generation must also keep its reconstruction
-seed/requests private and use opaque, label-independent IDs; sealing cannot hide a
-label already encoded in a branch ID or reconstructible from a public seed. Current
-train/dev branch IDs are not an assessment identifier scheme. Retain the sealed output bytes; rerunning the sealer creates
+or scientific gates. Assessment generation must keep its reconstruction seed/requests private and use
+opaque, label-independent IDs; sealing alone cannot hide a label encoded in a
+branch ID or reconstructible from a public seed. The producer-only preparation
+command below implements identifier removal. Current train/dev branch IDs are
+not an assessment identifier scheme. Retain the sealed output bytes; rerunning the sealer creates
 different commitments and must be treated as a different artifact.
+
+## Opaque assessment preparation
+
+```sh
+.venv/bin/python scripts/data/prepare_assessment.py \
+  --private-source PRIVATE-ASSESSMENT-SOURCE --output NEW-PREPARED-DROP
+.venv/bin/python scripts/data/prepare_assessment.py \
+  --output NEW-PREPARED-DROP --verify-only
+```
+
+The private source must already contain assessment-only game inputs in
+`inputs/evaluation.jsonl`, an RGB catalog in `inputs/images.jsonl`, unsealed v1
+labels in `private/labels.jsonl`, and complete `groups.json`. This command refuses
+train/dev inputs; it does not convert an existing development set into assessment.
+Real source generation still needs private randomness, physical/lineage and full
+pixel admission. No such source has yet been admitted.
+
+Preparation samples independent 256-bit names for episodes, queries, groups and
+images; records are sorted by the new IDs so original branch order is absent.
+Queries shared by counterparts stay shared, image reuse and temporal order stay
+exact, and tracking keeps its fixed reference. Only RGBs referenced by permitted
+inputs are copied. Lossless PNG re-encoding strips text/source metadata while
+preserving decoded RGB bytes. Private labels receive randomized commitments after
+renaming. Complete pair/target joins and actual RGB hashes are checked through the
+existing consumer, including opposite primary labels and same-image-bag equality.
+
+`public/` contains only the opaque input/catalog/group records, used PNGs, target
+commitments and `preparation.json`. `private/` retains labels, original-to-opaque
+maps and source digests, with a separate inventory. A complete receipt is written
+only after validation. Keep rejected partial outputs intact and never mount them
+for inference. The verifier checks both inventories and revalidates actual inputs,
+pairs and commitments. A new preparation has different IDs/nonces and is a new
+artifact, even with identical private source data.
+
+The new receipt schema is `bullet-time.opaque-assessment-preparation.v1`; input,
+label and group wire formats remain v2/v2/v1. Its release and scientific-gate flags
+are always false. Preparation is not full data admission, protocol locking,
+permission isolation, human blinding, or authorization to fit/predict/score.
+Deny the original source, prepared private directory and any copies to inference;
+fitting must exclude the entire prepared assessment. The staged H3/H4 release
+policy still needs a locked implementation before real use.
 
 ## Restricted local jobs
 
@@ -94,3 +136,8 @@ labels were denied. Separate cumulative code review was clean in round 2 after
 adding the shared validator to scoring provenance; 106 full-suite tests and 37
 focused post-fix tests passed locally. No assessment or independent collaborator
 review is claimed.
+
+The opaque export has synthetic tests in `tests/readouts/test_assessment_export.py`
+for all three tasks, exact assembled tensors in every allowed mode, private PNG
+metadata, randomized IDs/order, complete pairs, malformed inputs, CLI verification
+and artifact mutation. These tests create synthetic assessment fixtures only.

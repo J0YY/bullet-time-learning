@@ -144,6 +144,10 @@ review is clean in round 1; a targeted collision-foreground probe also passes.
 Next: render the full v2 train/dev selection using the accepted prefix, then run
 combined pixel admission. Pixel thresholds, counts and scientific/resource gates
 stay unchanged. Full capture is data preparation, not a learning or assessment run.
+In parallel, Joy owns a producer-only opaque assessment export in
+`generation/assessment_export.py`, its CLI/tests and access documentation. It must
+retain exact RGB/queries/pairs, strip source identifiers/order and seal target
+commitments; synthetic validation only, with release/scoring still disabled.
 
 ## Update rules
 

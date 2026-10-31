@@ -311,3 +311,20 @@ outputs migrate; accepted bundle bytes bind the source/config/runtime that made 
   runtime pin and every stored file hash match. Changed/missing requests render
   afresh in a new output; old outputs stay intact. Rebuild/revalidate all exports
   and the complete resulting set. Never mix learned runs across changed corpora.
+
+## 2026-10-31 EDT — Remove reconstructible identifiers from assessment preparation
+
+- **Authority/reason:** Joy's continuing J7 access/quality assignment. The prior
+  privacy review found that public branch IDs and deterministic private requests
+  can reveal binary targets despite salted label commitments.
+- **Implementation:** a producer-only opaque export randomizes episode/query/group/
+  image names, sorts public records by those names and strips PNG metadata without
+  altering decoded RGB. Retain source maps privately; sample label nonces after
+  renaming and preserve actual query, temporal, reference and pair relationships.
+- **Affected:** new generation utility/CLI, focused synthetic tests and assessment
+  access guide. Input v2, label v2 and group v1 remain unchanged. New preparation
+  receipt v1 is explicitly not a release or physical/lineage admission receipt.
+- **Limits:** no real assessment generation, model execution, outcome inspection
+  or protocol freeze. Private source randomness and verified access boundaries
+  remain required; H3/H4 staged-release policy is still unresolved. This changes
+  no SPEC endpoint, count, threshold, seed budget or original spec bytes.
