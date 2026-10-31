@@ -169,3 +169,30 @@ job-isolation receipts, then supply these commitments/outcomes. Keeping one regi
 and a verified pool identity is part of that admission contract; the journal is
 not a malicious-user or human-blinding boundary. Direct scoring remains train/dev
 only. No real pilot lock, release or inspection is recorded by these tests.
+
+## Fixed recipes and later predictor bytes
+
+`evaluation/assessment_contract.py` builds the fixed recipe from full fit config,
+training/development inputs and label/subset identities, consumer admission,
+backbone/source/initialization, pass position, and fit/inference runtime. A learned
+backbone's future checkpoint hash and fitted outcomes may be absent at planning;
+existing reference checkpoint hashes remain fixed. Actual predictor/fit/readout
+hashes append as a separate binding. The journal requires H3 predictor bindings
+already at the whole-version lock.
+
+A label-free expected-input commitment covers task/query/group/target-reference
+identities independently of future predictor IDs and readout seeds/budgets. It is
+additional to the recipe's actual input/catalog hashes. Delivered expected keys
+must match the declared task, seed, budget and horizon. The verifier checks actual
+fit/export joins, eligibility, source consistency, coverage and all artifact bytes
+before/after; it never opens labels. Historical real dev exports can exercise this
+component without claiming new fits or assessment.
+
+This validates fit/export metadata, not the checkpoint's actual execution or the
+scientific/admission claims behind it. The staged adapter still must validate
+complete admitted pools, actual checkpoint/job receipts and isolation before
+scoring. Status flags remain false. Assessment-only policy, journal and metadata
+verification files are excluded from the model's code identity because the model
+consumer does not import them; the verifier separately binds its own code and
+scoring dependencies. This one-time identity-rule change itself changes the
+consumer fingerprint. Preserve old fitted snapshots on their pinned revision.

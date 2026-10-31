@@ -1212,3 +1212,23 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - Next local work: actual fit/export recipe binding, then the admission/scoring
   adapter. No real assessment set, version lock, release, GPU job or H3/H4 pass is
   inferred from this persistence component or these data checks.
+
+### 2026-10-31 03:20 EDT — Bind future fits to fixed pre-H3 recipes
+
+- **Component:** `assessment_contract.py` separates exact planned recipe/input/
+  subset/source/runtime identity from unknown future learned checkpoint bytes.
+  Existing reference bytes remain pinned. Expected input commitments are invariant
+  to future predictor IDs but bind actual queries, groups and target commitments.
+  Actual exports must match task/seed/budget/horizon, fit metadata, runtime, source,
+  coverage and before/after artifact hashes; no labels are read.
+- **Checks:** 16 contract/consumer-fingerprint cases pass in 2.51 s, including the
+  real 16-prediction dev snapshot copied without labels/checkpoints, self-consistent
+  recipe drift, altered expectations, concurrent artifact mutation and verifier
+  source drift. An earlier name filter selected only contract cases; the exact
+  consumer-hash test was then run explicitly. Ruff/scaffold/diff checks pass.
+- **Workflow:** assessment-only modules no longer invalidate model fingerprints
+  when edited; the verifier binds its own code/dependencies separately. The exclusion
+  rule update changes the consumer hash once; old fits retain their pinned source.
+- **Limits:** metadata checks are not actual model/job/isolation or scientific
+  admission. The real staged scoring adapter remains pending; all authorization
+  and scientific-passage flags are false. c8ef82d CI 41179649872 is successful.

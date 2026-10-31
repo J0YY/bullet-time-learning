@@ -83,6 +83,9 @@ def code_identity(root=None):
         "evaluation/scoring.py",
         "evaluation/statistics.py",
         "evaluation/score_plan.py",
+        "evaluation/assessment_policy.py",
+        "evaluation/assessment_state.py",
+        "evaluation/assessment_contract.py",
     }
     records = {}
     for path in sorted(root.rglob("*")):

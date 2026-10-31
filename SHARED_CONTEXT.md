@@ -205,9 +205,11 @@ checks, zero exact/near conflicts across 318,270,000 train/dev RGB pairs. No red
 full verification was repeated after the builder passed. Joint pretraining/measurement
 lineage, assessment and H3 remain pending.
 Assessment inventory/H3 numeric checks pass 12 focused cases with separate code
-review clean in round 1. Joy is adding durable full-version/stage commitments and
-crash/retry/concurrency checks. Actual data/fit/scorer/isolation integration remains
-required; this journal does not grant release or scientific gate passage.
+review clean in round 1. Durable full-version/stage commitments pass 16 state
+cases and cumulative review is clean in round 4. Joy is adding actual fit/export
+recipe bindings and label-free expected-input commitments, checked against the real
+dev snapshot and mutation cases. Actual pool/job/scorer/isolation integration remains
+required; these components do not grant release or scientific gate passage.
 
 The [eight-grid cross-pool raster audit](reports/data/joint-eight-raster-20261031.json)
 passes all 84,377,600 pretraining-versus-measurement image pairs. Actual source
