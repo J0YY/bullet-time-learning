@@ -9,7 +9,7 @@ This is the common handoff record for Joy's and Sudarshan's project chats. Read
 [division-of-labor.md](division-of-labor.md) governs ownership. The user's current
 request controls scope. Historical log entries do not override newer decisions.
 
-**Stage:** First arena → eight real grids → full-model update audit complete; research gates pending.
+**Stage:** Eight real grids/full-model audit and full train/dev measurement admission complete; research gates pending.
 The original import remains unchanged in Git at `13e951d:SPEC.md`; current SPEC
 adopts the user-requested audit fixes and pilot defaults. Joy's RGB consumer,
 scheduler/collator audit, VideoMAE/image-MAE runner, resumable checkpoints and
@@ -19,8 +19,9 @@ Operational train/dev scoring and paired analysis now pass synthetic and actual-
 integration, with separate code review clean. A small native measurement drop now
 passes producer/consumer admission: 72 groups, 120 episodes and 1,800 RGBs. A one-epoch
 DINOv2 fit/predict/score integration completed with all 16 dev predictions; 50% BA
-is integration evidence only. Larger
-drops, assessment release, independent collaborator verification, research compute,
+is integration evidence only. The full train/dev measurement export now passes at 1,600 groups / 2,400 episodes /
+41,200 RGBs after replacing two raster-conflicting dev groups. Larger pretraining
+drops, joint lineage, assessment release, independent verification, research compute,
 empirical learning and freeze remain pending.
 
 Effective 2026-10-30 at Joy's request, Joy owns the complete required pilot pipeline,
@@ -68,7 +69,7 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | J5 (was S1) | Joy | Producer schema/fixtures, Godot/asset pins, grouped splits, scripted arena and replay | Arena/replay/pins/admission implemented; group/split validation remains | Producer `0693adf`; 57 local tests, separate code review clean; native macOS validated |
 | J6 (was S2) | Joy | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Preview + 8 complete; v2 progressive producer and native migration verified; 100/1,000 pending | Immutable bundles, 32 repeat captures, state/camera/hash evidence; see integration report |
 | J2 | Joy | Actual-loader/update audit; 100-grid tail check | All eight schedules pass actual full VideoMAE-S update on 8 real grids on CPU and MPS; complete-pass/tail code verified on fixtures; native 100-grid tail pending | FP32 seed 17; shared exposure/targets/init/budget; one update each, no learning claim |
-| J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | Tiny train/dev drop and privacy foundation verified; full sets and assessment release remain | `c5a175a` native drop; `b530e73` randomized labels/local access boundary; 106 tests plus 37 post-fix checks; privacy review clean round 2 |
+| J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | Full train/dev producer/consumer drop admitted; assessment/privacy/release work continues | `artifacts/full-development-v4`: 1,600 groups, 2,400 episodes, 41,200 RGBs; zero cross-split raster conflicts; joint pretraining admission and visual sensitivity pending |
 | J8 | Joy | Operational metrics, coverage/failed slots, paired analysis and power scenarios | Train/dev scorer, paired-analysis foundation and 54 prospective power scenarios verified; full gate/assessment integration pending | Through `75c22ac`; 87-test full regression plus 33 final focused/CLI checks; separate review clean in round 4; no S4 import |
 | J3 | Joy | Causal heads, seven controls, external adapter plus SSv2 acquisition/split audit | Consumer and real J7 fit/predict/score integration complete; full H3/SSv2 pending | `0edab89` one-epoch DINOv2: 95.74 s CPU, 16/16 dev predictions, BA 50%; no H3 pass |
 | S4a/S4b | Sudarshan | Standalone independent verifier, then snapshot metrics/exposure/lineage/statistics audits | Assigned; acknowledgment/work unrecorded; first real dev snapshot ready | Own fixtures plus `reports/data/audit-snapshots/diagnostic-dev-v1`; not a prerequisite for Joy |
@@ -92,7 +93,7 @@ The [measurement report](reports/data/evaluation-integration-20261030.json) reco
 the admitted `artifacts/evaluation-development-v2` train/dev drop and its limits.
 The [real readout report](reports/data/readout-integration-20261030.md) records the
 completed bounded integration and measured resource estimates.
-Next: full J7 sets/release and J5 grouped-split / J6/J2 100-grid tail work. These queues have no
+Next: J7 assessment preparation/release and J5 joint grouped-split / J6/J2 100-grid tail work. These queues have no
 collaborator handoff dependency. H1–H4 and research resource/access gates remain. Joy will supply the existing GPU host/storage details and explicitly requested
 continued local development; data/validation work continues meanwhile.
 Sudarshan starts S4a using [the independent-review brief](docs/independent-review.md);
@@ -198,11 +199,20 @@ tracking frame pairs; [complete conflict evidence](reports/data/full-development
 records both. `artifacts/full-development-v3` stays rejected. Joy is adding a
 hash-bound exclusion record for the two affected dev groups, preserving all counts
 and replacing complete groups before model fitting. Re-export/revalidate unchanged
-captures by exact request; full revised admission remains pending.
+captures by exact request. The [repaired full drop](reports/data/full-development-integration-20261031.json)
+now passes: 1,598 reused captures and two new groups, complete 8,000-query consumer
+checks, zero exact/near conflicts across 318,270,000 train/dev RGB pairs. No redundant
+full verification was repeated after the builder passed. Joint pretraining/measurement
+lineage, assessment and H3 remain pending.
 Assessment inventory/H3 numeric checks pass 12 focused cases with separate code
 review clean in round 1. Joy is adding durable full-version/stage commitments and
 crash/retry/concurrency checks. Actual data/fit/scorer/isolation integration remains
 required; this journal does not grant release or scientific gate passage.
+
+Joy is auditing the existing eight pretraining grids against every RGB in the full
+measurement drop under the unchanged raster rule. This checks new cross-pool image
+pairs only; common semantic lineage is a separate unresolved contract. No actual
+split assignment, training input or scientific gate is changed by the audit view.
 
 ## Update rules
 

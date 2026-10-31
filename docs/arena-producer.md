@@ -35,8 +35,8 @@ or a v2 capture journal. These are successive preparation commands, not a record
 that the 100/1,000-grid jobs have run:
 
 ```sh
-.venv/bin/python scripts/data/build_pilot_arena.py --output artifacts/arena-progressive-eight-v1 --count 8 --reuse-captures artifacts/arena-eight-v1
-.venv/bin/python scripts/data/build_pilot_arena.py --output artifacts/arena-progressive-100-v1 --count 100 --reuse-captures artifacts/arena-progressive-eight-v1
+.venv/bin/python scripts/data/build_pilot_arena.py --output artifacts/arena-progressive-eight-v2 --count 8 --reuse-captures artifacts/arena-eight-v1
+.venv/bin/python scripts/data/build_pilot_arena.py --output artifacts/arena-progressive-100-v1 --count 100 --reuse-captures artifacts/arena-progressive-eight-v2
 .venv/bin/python scripts/data/build_pilot_arena.py --output artifacts/arena-progressive-1000-v1 --count 1000 --reuse-captures artifacts/arena-progressive-100-v1
 .venv/bin/python scripts/data/build_pilot_arena.py --output artifacts/arena-progressive-1000-v1 --verify-only
 ```

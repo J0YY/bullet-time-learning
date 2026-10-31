@@ -243,3 +243,12 @@ exclusions; an old selection must use its own pinned code. Reuse exact native
 requests only, then rerun full combined admission on the new export. Model outcomes
 never enter this data-quality exclusion, and passing still requires joint
 pretraining lineage/raster checks and the later scientific gates.
+
+The [repaired full native export](../reports/data/full-development-integration-20261031.json)
+is admitted at `artifacts/full-development-v4`: 1,600 groups, 2,400 episodes, 41,200
+RGBs and 8,000 query records, with all train/dev counts intact. It reused 1,598
+requests and rendered only the two replacements. Combined exact/near duplicate
+checks and actual input/label/group consumers pass. This is producer/consumer
+train/dev evidence; joint pretraining lineage, visual solvability and assessment
+remain separate gates. Reproduce on the pinned source recorded in the report;
+no full verification was needlessly repeated after the successful builder run.

@@ -1,16 +1,16 @@
 # Shared interfaces — versioned pilot contracts
 
-**2026-10-30 status:** Joy's consumer, runner and readouts are implemented. The
+**2026-10-31 status:** Joy's consumer, runner and readouts are implemented. The
 first arena producer now supplies eight complete real grids through the existing
 RGB grid-v1 contract; all eight schedules pass the full-model actual-update audit.
 [Measured evidence](../reports/arena-integration-20261030.json) binds the source,
-configs and bundle bytes. The small train/dev measurement drop now passes producer
-and consumer checks through evaluation v2, label v1 and group v1: 72 groups, 120
-episodes and 1,800 RGBs. [Measurement evidence](../reports/data/evaluation-integration-20261030.json)
-records native masks/contacts, lineage and raster-duplicate checks. The operational
+configs and bundle bytes. The full train/dev measurement drop now passes producer
+and consumer checks through evaluation v2, label v1 and group v1: 1,600 groups,
+2,400 episodes and 41,200 RGBs. [Measurement evidence](../reports/data/full-development-integration-20261031.json)
+records native geometry/contacts, prototype, raster and actual consumer checks. The operational
 scorer validates synthetic/train/dev exports and actual fit/inference metadata.
-Full measurement sets, learned sensitivity, assessment release and pilot gates remain
-pending. See [operational scoring](operational-scoring.md). Sudarshan's independent verifier/acceptance remains pending.
+Joint pretraining lineage, learned sensitivity, assessment release and pilot gates
+remain pending. See [operational scoring](operational-scoring.md). Sudarshan's independent verifier/acceptance remains pending.
 Record component evidence separately even when one person implements both sides.
 This status update does not change record fields, semantics or wire versions.
 
@@ -245,7 +245,7 @@ verification remain pending. The ledger below records the evidence available on
 | Contract | Producer implemented | Consumer validated | Independent producer/analysis acceptance |
 | --- | --- | --- | --- |
 | Grid v1 | Joy native arena; progressive bundle v2 exporter `4808af7` (grid wire format unchanged) | Eight real grids, manifest `8fd92aa7…`, byte-identical [progressive migration](../reports/data/progressive-arena-integration-20261031.json); larger/joint-grouped drops pending | Not performed (S4) |
-| Evaluation v2 | Joy J7 tiny native train/dev drop `c5a175a`; corrected full-selection prefix `8a6ad3f` | [Native producer/consumer evidence](../reports/data/evaluation-integration-20261030.json); 72 groups/120 episodes/1,800 RGBs. Full sets, joint pretraining admission and H3 pending | Not performed (S4) |
+| Evaluation v2 | Joy full native train/dev exporter `4675aef`, accepted drop v4 after two whole-group raster replacements | [Full producer/consumer evidence](../reports/data/full-development-integration-20261031.json); 1,600 groups/2,400 episodes/41,200 RGBs. Joint pretraining admission and H3 pending | Not performed (S4) |
 | Exposure/update v1 | Joy actual full-model updates, all eight schedules | Comparison passes on 2,048 real RGBs; [complete-pass/tail code](../reports/data/tail-audit-integration-20261031.json) additionally verified on small fixtures; native 100-grid audit pending | Not performed (S4) |
 | Run/prediction v1 | Joy actual one-epoch diagnostic fit/export `0edab89` | All 16 dev predictions joined/scored; [immutable audit snapshot](../reports/data/audit-snapshots/diagnostic-dev-v1/README.md). This is integration only | Not performed (S4); snapshot available |
 | Analysis v1 | Joy expected coverage, metrics, paired seed/group analysis and prospective power | Known-answer tests and actual dev score reproduction; full pilot/assessment gates pending | Not performed (S4) |

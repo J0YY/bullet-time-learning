@@ -279,3 +279,17 @@ for a practical pilot. Native 100-grid replay, joint data admission, H1–H4,
 quotas and launch authorization remain pending. Old CPU integration
 checkpoints retain their original consumer source; this code change requires the
 original revision or a fresh fit.
+
+## Full measurement handoff — October 31
+
+Use `artifacts/full-development-v4` for the admitted native train/dev measurement
+drop: 600 training and 200 development episodes per task, with complete collision
+and order pairs. There are 1,600 groups, 2,400 episodes, 41,200 rendered RGBs and
+8,000 input records across tasks/horizons/windows. The [full-data evidence](../reports/data/full-development-integration-20261031.json)
+binds its manifests, source/runtime and all combined checks. Earlier v3 is retained
+as rejected; do not use it as an admitted pool. Only two replacements were rendered.
+
+This does not authorize H3 fitting/scoring, an assessment release or full pilot.
+Joint pretraining/readout lineage and pixels, complete pretraining drops and
+scientific/resource/access gates remain. Joy requested continued local development
+and will supply the GPU host/storage; no additional collaborator handoff is needed.

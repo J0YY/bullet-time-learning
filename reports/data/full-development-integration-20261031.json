@@ -1,0 +1,185 @@
+{
+  "artifact_root": "artifacts/full-development-v4",
+  "capture": {
+    "new_capture_commands": [
+      {
+        "command": [
+          "/Users/joyyang/Projects/bullet-time-learning/.cache/godot/4.5.1/Godot.app/Contents/MacOS/Godot",
+          "--path",
+          "/Users/joyyang/Projects/bullet-time-learning/game",
+          "--rendering-method",
+          "gl_compatibility",
+          "--resolution",
+          "224x224",
+          "--position",
+          "20,60",
+          "--script",
+          "res://evaluation_driver.gd",
+          "--",
+          "/Users/joyyang/Projects/bullet-time-learning/artifacts/full-development-v4/private/tracking-ceec98b9bb4aeab6/request.json",
+          "/Users/joyyang/Projects/bullet-time-learning/artifacts/full-development-v4/private/tracking-ceec98b9bb4aeab6"
+        ],
+        "log": "render.log",
+        "seconds": 8.151248041016515
+      },
+      {
+        "command": [
+          "/Users/joyyang/Projects/bullet-time-learning/.cache/godot/4.5.1/Godot.app/Contents/MacOS/Godot",
+          "--path",
+          "/Users/joyyang/Projects/bullet-time-learning/game",
+          "--rendering-method",
+          "gl_compatibility",
+          "--resolution",
+          "224x224",
+          "--position",
+          "20,60",
+          "--script",
+          "res://evaluation_driver.gd",
+          "--",
+          "/Users/joyyang/Projects/bullet-time-learning/artifacts/full-development-v4/private/tracking-6926a2f74da2d883/request.json",
+          "/Users/joyyang/Projects/bullet-time-learning/artifacts/full-development-v4/private/tracking-6926a2f74da2d883"
+        ],
+        "log": "render.log",
+        "seconds": 6.7812234169687144
+      }
+    ],
+    "new_capture_seconds": 14.93247145798523,
+    "new_groups": 2,
+    "raw_source_bundle_sha256": "d9e9449cf080dd99bcba651bd6a48cc2c2b813f13c1c1eb305b3c09130098f48",
+    "raw_source_root": "artifacts/full-development-v3",
+    "reused_groups": 1598
+  },
+  "command": ".venv/bin/python scripts/data/build_evaluation.py --full-selection artifacts/full-development-selection-v3 --per-stratum 600 --godot .cache/godot/4.5.1/Godot.app/Contents/MacOS/Godot --reuse-captures artifacts/full-development-v3 --output artifacts/full-development-v4",
+  "engine_pin": {
+    "archive_sha256": "65c27959d02aaacfc131ec7ecb90179ba8045200cb02982bf2be96d117010b8a",
+    "binary_sha256": "0d214c6c85e47e7060ac13b035b404ce4dda653992503914963e149a45cd0dca",
+    "license": "MIT",
+    "license_url": "https://github.com/godotengine/godot/blob/4.5.1-stable/LICENSE.txt",
+    "physics": "GodotPhysics3D",
+    "physics_hz": 64,
+    "platform": "macos.universal",
+    "release_metadata": "https://api.github.com/repos/godotengine/godot-builds/releases/tags/4.5.1-stable",
+    "renderer": "gl_compatibility",
+    "schema_version": "bullet-time.engine-pin.v1",
+    "url": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_macos.universal.zip",
+    "version": "4.5.1.stable.official.f62fdbde1"
+  },
+  "files": {
+    "bundle.json": "e078cdba884adbde8f98cfe5184845171cb6fd7f46fffbb7a8c20b3fe136a442",
+    "generation.json": "c1e8f2faf32a11af4b08488beed4431ae1d8cf395f3325286ce001823a636f33",
+    "groups.json": "ed827bd51bfaab26338acc1e6ba5b23fc585bfd68ee7bf1a674e326b32577b7a",
+    "inputs/evaluation.jsonl": "f3d6a4674439920fb4170504143fba9ff02660bfe54507ab5cf9c7344b68e8d6",
+    "inputs/images.jsonl": "73110cc029466b85f5c99b625458de2193133a51f0203d8d1850a7e086bf3065",
+    "selection.json": "47eb4d79c37847a7a9b729067af4b06cbf17ad70038f63f45cd950fd0c0c690a",
+    "validation.json": "1faeaeff754021125241fb66c04b8840a9c96a46075174b2683cfd2af7b518a7"
+  },
+  "groups_by_task_split": {
+    "collision/dev": 100,
+    "collision/train": 300,
+    "order/dev": 100,
+    "order/train": 300,
+    "tracking/dev": 200,
+    "tracking/train": 600
+  },
+  "limits": [
+    "Train/dev producer/consumer admission only; no assessment generated/released",
+    "Native pretraining pool still requires joint lineage and raster admission",
+    "No learned visual sensitivity, H1-H4 pass, full pilot, final test or protocol freeze",
+    "Producer/consumer validation by Joy agent, not independent collaborator review",
+    "No redundant full verification repeated after builder completed combined admission",
+    "Prior full capture cost includes 324.61-second MPS audit pause; see retained pause receipt and failed drop, not replacement capture timing"
+  ],
+  "producer_sources": {
+    "configs/generation/evaluation-development.json": "98a8d00992959476eebeb6a86ecf5fd8b2d06457edae5bc346460f9d520ad374",
+    "configs/generation/evaluation-raster-exclusions.json": "fe3d5ec3b45b3ee76cb8dda56de05b5efecb577b413422c85dd98fe0cb58bdff",
+    "configs/pilot-plan.json": "b160a832f9799f2cf049a56d2ca1002e942688702e523a5dcf0a6cd8929f89f5",
+    "configs/rendering/godot-macos.json": "01cbf61ad11518cf7d54ad83b8a18604159f392a98b0bef83ab3b196d6fab03c",
+    "game/LICENSE": "dbf8c0ec29216abd05bc76cd663541cd1ded38680c0fd54e1a4b4be57d6e2f23",
+    "game/arena_driver.gd": "a143e28781586a30c4f91fd61d4f487f21f9bd2fa22e4c6ccc934ea28a076d0f",
+    "game/evaluation_driver.gd": "c54a3aaa59c5688d9a529b5cbc6adcb4a301e927a9f29aa196eae3b44911c95e",
+    "game/project.godot": "e0dc45b0c338b547eb68a869a8f1d8cf0693af21554c34d6623cca1f1a4957b8",
+    "scripts/data/build_evaluation.py": "1ad21ae5bc52e9b8769ae7037eb3bd5f2e4dc6faa6eb2b57193db9f665803b33",
+    "src/bullet_time/generation/arena.py": "65f8ca0dd2f51860aa232c6fca71fd261e435314e9df2c709340ed069fde4830",
+    "src/bullet_time/generation/bundle.py": "dbeb9f3ef371e15d963dc9c2ec050622f1e3136e154af58fc0fd2df884b537a5",
+    "src/bullet_time/generation/evaluation_bundle.py": "05e2f3a0efad677a9be1d4bfceb707536cd890999d6a259ed4889e2b37bf9eca",
+    "src/bullet_time/generation/evaluation_motion.py": "759162aebe8746dfa0ca3ea24b1ad95f38e6c78b964dad574519c04ab4e80f2e",
+    "src/bullet_time/generation/evaluation_selection.py": "e5611b615d89773c1349eceac00377a80e7e6f9db56e229c3f41a240ccdd07b0",
+    "src/bullet_time/provenance.py": "e19fc805f18d15e62387ad2992c3fff6b825c94986d3dd6cb7761963197e6642"
+  },
+  "recorded_at": "2026-10-31T02:55:47.238041-04:00",
+  "repair": {
+    "changed_counts_or_thresholds": false,
+    "conflict_evidence_sha256": "1711071e3098a83566a8f7b1099c46e6bbea495e52f520b7eb98443e866d3ea7",
+    "excluded_groups": [
+      "tracking-1f95158f92c687d3",
+      "tracking-2d65b6bd379625c2"
+    ],
+    "exclusions_sha256": "fe3d5ec3b45b3ee76cb8dda56de05b5efecb577b413422c85dd98fe0cb58bdff",
+    "failed_previous_drop_retained": true,
+    "replacement_groups": [
+      "tracking-6926a2f74da2d883",
+      "tracking-ceec98b9bb4aeab6"
+    ],
+    "retained_identical_requests": 1598
+  },
+  "report_builder_sha256": "e0af882071f28ef273b345218168ae737d5417831a89b5c00de9fd38c9633bbc",
+  "schema_version": "bullet-time.full-development-integration.v1",
+  "source_commit_at_export": "b5f97d2716e08226feb2a9bdbbaf02465a7e2512",
+  "validation": {
+    "bundle_sha256": "e078cdba884adbde8f98cfe5184845171cb6fd7f46fffbb7a8c20b3fe136a442",
+    "development": false,
+    "duplicates": {
+      "candidate_rgb_comparisons": 1944,
+      "cross_split_image_pairs": 318270000,
+      "exact_cross_split_duplicates": 0,
+      "foreground_iou": 0.98,
+      "images": 41200,
+      "mask_candidates": 8432814,
+      "mean_bound_skips": 119982,
+      "near_duplicates": 0,
+      "retained_mask_bytes": 208606720,
+      "rgb_cache_capacity": 64,
+      "rgb_mae": 0.00392156862745098,
+      "scope": "train/dev raster and prototype checks; old pretraining integration pool and future final test not admitted",
+      "unique_cross_split_comparisons": 207534036,
+      "unique_raster_mask_pairs": 33260
+    },
+    "episodes": 2400,
+    "examples": 8000,
+    "groups": 1600,
+    "images": 41200,
+    "lineage": {
+      "asset": 1600,
+      "configuration": 1600,
+      "trajectory": 1600
+    },
+    "pair_checks": {
+      "collision": {
+        "group_sha256": "ed827bd51bfaab26338acc1e6ba5b23fc585bfd68ee7bf1a674e326b32577b7a",
+        "pairs": 400,
+        "query_horizon_comparisons": 1200,
+        "scope": "pixel/query/label checks only; forward dynamics and visual solvability require S3 and models"
+      },
+      "order": {
+        "group_sha256": "ed827bd51bfaab26338acc1e6ba5b23fc585bfd68ee7bf1a674e326b32577b7a",
+        "pairs": 400,
+        "query_horizon_comparisons": 1200,
+        "scope": "pixel/query/label checks only; forward dynamics and visual solvability require S3 and models"
+      }
+    },
+    "scientific_gate_pass": false,
+    "scope": "progressive full-selection train/dev capture; no assessment or H3 acceptance"
+  },
+  "visual_spot_check": {
+    "group_id": "tracking-482909460757766b",
+    "observation": "Visual spot-check: two matching orange spheres before the roof; fully occluded at frame 20; reappearing at frames 25 and 27. This is not a trained visual-solvability result or full-bundle admission.",
+    "recorded_at": "2026-10-31T01:51:08.816212-04:00",
+    "rgb_sha256": {
+      "frame-12.png": "2c040fb632bcfc726a1de49161f98e8d36c975cb94f28b19e0245b2b755b46e7",
+      "frame-20.png": "a92edb7a4b9cffe6a6815be078133a445e0cd835a87105ca692ed1cdd53dee20",
+      "frame-25.png": "29c0adc2d77991e9a700d5c3a704005f51c8fae4091d3bfb6ae80b5a3b4b9f6c",
+      "frame-27.png": "7148f2297fd14f9834ce45f346b1d2fac78869252fbfb316bcb9a9c1fe8d3e0f"
+    },
+    "split": "train"
+  }
+}
