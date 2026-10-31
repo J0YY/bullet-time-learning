@@ -159,6 +159,11 @@ passes native small-model RNG/tail/resume and frozen-readout checks; separate re
 is clean in one round. Full-size native-data audit and resource measurement remain
 pending until the renderer releases the shared GPU. No pilot launch or resource
 admission follows from these synthetic checks; capture source hashes are unchanged.
+Joy is extending J6 in `generation/progressive_arena.py`, its separate CLI/tests
+and producer guide, to support 1/8/100/1,000 immutable grid drops and per-grid raw
+capture receipts. First validate migration of the existing eight grids without
+rendering; larger native captures wait for the current measurement job. Joint
+pretraining/readout admission and the 100-grid update audit remain separate gates.
 
 ## Update rules
 

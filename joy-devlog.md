@@ -924,3 +924,19 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   projection. New consumer hash is explicit; old fitted checkpoints stay pinned.
 - **Next:** continue full native measurement capture/admission and its independent
   work queue; run the bounded full-model MPS audit once GPU contention ends.
+
+### 2026-10-31 01:36 EDT — Extend progressive pretraining capture with recoverable receipts
+
+- **Implementation:** separate v2 producer/CLI supports the planned 1/8/100/1,000
+  deterministic prefixes. Reuses intact, request-identical native captures from
+  legacy bundles or stopped v2 journals; reruns current per-grid and aggregate
+  checks. Atomic metadata, no overwrite, no skipped invalid grids, no inherited
+  joint-split or scientific acceptance. Existing native measurement sources unchanged.
+- **Checks:** 23 focused orchestration/arena tests pass in 6.14 s; Ruff and scaffold/
+  original-spec/diff checks pass. Transport tests use explicit mocked captures;
+  interruption recovery, altered request/bytes/pins, prefix cadence/lineage and
+  unlisted consumer files are exercised. Native eight-grid migration is next.
+- **State:** full measurement capture remains active (993/1,600 groups at 01:36 EDT),
+  approximately 23.4 GiB free. No second renderer or learning job launched.
+- **Next:** separate cumulative review; migrate the eight real grids without
+  rendering, record evidence and publish. Larger drops and joint admission remain pending.

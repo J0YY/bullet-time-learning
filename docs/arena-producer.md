@@ -1,10 +1,13 @@
-# Arena producer: bounded integration milestone
+# Arena producer and progressive grid drops
 
 Joy owns this producer and its consumer integration. Sudarshan can independently
 verify a snapshot without being a dependency. This implementation covers one
-scripted projectile arena, a one-grid preview and eight complete grids. It does
-not implement J7 evaluation sets, J8 scoring, a 100/1,000-grid drop, the other two
-families, H1–H4, or a learning experiment. Scientific choices in [SPEC](../SPEC.md)
+scripted projectile arena. Native evidence currently covers a one-grid preview
+and eight complete grids. The progressive producer supports 1/8/100/1,000-grid
+drops; larger native drops are pending. Measurement production and operational
+scoring have [separate commands](evaluation-producer.md) and
+[limits](operational-scoring.md). The other two families, H1–H4 and learning
+experiments remain pending. Scientific choices in [SPEC](../SPEC.md)
 and [the pilot plan](pilot-plan.md) remain in force.
 
 ## Reproduce locally
@@ -24,8 +27,31 @@ failed attempts remain for diagnosis. `--development` explicitly labels an uncle
 working-tree debugging capture; it cannot be reused as the accepted preview.
 Preview reuse verifies source, plan, runtime and every artifact hash first. It copies
 the original 256 RGBs instead of rendering them again. New producer source bytes
-require a new preview. Do not put contact sheets or downstream results inside a
+require a new preview under this legacy v1 command. Do not put contact sheets or downstream results inside a
 completed bundle; its complete file inventory is immutable.
+
+The v2 progressive command can revalidate raw captures from a complete v1 bundle
+or a v2 capture journal. These are successive preparation commands, not a record
+that the 100/1,000-grid jobs have run:
+
+```sh
+.venv/bin/python scripts/data/build_pilot_arena.py --output artifacts/arena-progressive-eight-v1 --count 8 --reuse-captures artifacts/arena-eight-v1
+.venv/bin/python scripts/data/build_pilot_arena.py --output artifacts/arena-progressive-100-v1 --count 100 --reuse-captures artifacts/arena-progressive-eight-v1
+.venv/bin/python scripts/data/build_pilot_arena.py --output artifacts/arena-progressive-1000-v1 --count 1000 --reuse-captures artifacts/arena-progressive-100-v1
+.venv/bin/python scripts/data/build_pilot_arena.py --output artifacts/arena-progressive-1000-v1 --verify-only
+```
+
+Each drop uses the same deterministic prefix of pilot-seed requests. Reuse requires
+matching native game/engine pins, an intact per-grid capture inventory and an
+identical request; current validation runs again. Python producer changes do not
+inherit an earlier aggregate verdict. A legitimate changed request is rendered
+fresh; changed bytes in a recorded capture are rejected. Header, receipts and final
+bundle records use atomic replacement. On interruption, choose a new output path
+and pass the stopped directory to `--reuse-captures`: only completed receipts are
+eligible, while unreceipted partial captures are ignored. Failed outputs stay intact.
+An invalid grid stops the drop; the producer does not skip failures to fill a quota.
+Do not change its bound source files during capture. Joint pretraining/readout split
+and pixel admission remains required before learning.
 
 Simulation runs headlessly at fixed 64 Hz. RGB capture needs a native macOS display
 and the pinned Compatibility/OpenGL renderer; a headless dummy renderer is rejected.
@@ -68,8 +94,9 @@ pixel checksums, exact cross-grid RGB duplicates, and configuration/appearance/
 trajectory/rollout fingerprints. Fingerprints distinguish sampled instances; they
 are **not** a cross-split leakage audit. All eight share one arena and primitive
 asset family; related configurations/assets must be grouped before future splits.
-Near-duplicate analysis, grouped train/dev/test splits, counterfactual pairs and
-sealed evaluation artifacts remain J7 work. No test split exists in this bundle.
+Joint near-duplicate analysis and grouped pretraining/readout admission remain
+pending. Measurement pairs and sealed export foundations are separate J7 work.
+No test split exists in this bundle.
 
 ## Artifact and consumer boundary
 
@@ -81,8 +108,18 @@ sealed evaluation artifacts remain J7 work. No test split exists in this bundle.
 - `requests/`: seeded scene/camera/action inputs and lineage fingerprints.
 - `validation/render/`: actual camera/transform evidence and four repeat captures.
 - `validation/grids.json`: recomputed admission summaries, always scientific gate false.
-- `generation.json`: actual commands, elapsed times, host and source commit.
-- `bundle.json`: source pins, plan, engine pin and complete artifact-byte inventory.
+- Legacy v1 `generation.json`: commands, elapsed times, host and source commit.
+- V2 `capture.json`: source/engine/runtime pins, plan, host, commit and requested count.
+- V2 `private/capture-receipts/`: each completed grid's raw hashes and capture or
+  reuse provenance. These authorize revalidation, not aggregate acceptance.
+- `bundle.json`: complete artifact-byte inventory; v1 also stores plan/source pins,
+  while v2 binds them through `capture.json` in that inventory.
+
+Before actual pretraining, deny access to every evaluation/label copy, including
+the public development audit snapshot under `reports/data/audit-snapshots/`, as well
+as raw private trees. The RGB loader allowlist alone does not enforce OS access.
+The [restricted-job foundation](assessment-isolation.md) requires validation with
+the concrete run's complete deny list.
 
 The [operator guide](joy-handoff.md) describes the existing RGB consumer and update
 audit. For eight grids, its actual optimizer audit compares all six main schedules
