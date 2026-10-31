@@ -1,0 +1,14 @@
+{
+  "schema_version": "bullet-time.measurement-plan.v1",
+  "seed": 20261030,
+  "tasks": ["collision", "order", "tracking"],
+  "groups_per_task": {"train": 16, "dev": 8},
+  "physics_hz": 64,
+  "observation_hz": 16,
+  "image_size": 224,
+  "minimum_final_object_pixels": 16,
+  "minimum_tracking_diagonal_pixels": 16,
+  "near_duplicate_foreground_iou": 0.98,
+  "near_duplicate_rgb_mae": 0.00392156862745098,
+  "scope": "tiny development measurement integration; no H3 or assessment admission"
+}

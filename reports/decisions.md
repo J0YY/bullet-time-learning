@@ -246,3 +246,21 @@ root but not protected by a local OS access sandbox. J7 owns future isolation/te
 tests and producer guide. Existing SPEC, pilot science, RGB wire contract and
 consumer runtime remain unchanged. Original SPEC remains in Git. No prior research
 outputs migrate; accepted bundle bytes bind the source/config/runtime that made them.
+
+## 2026-10-30 EDT — Implement a bounded development measurement drop
+
+- **Authority/reason:** Joy requested J7/J8 implementation and continuation without
+  collaborator bottlenecks. Start with small real-rendered measurements before
+  committing resources to full visual sensitivity fits.
+- **Choice:** 16 train and 8 dev groups per collision/order/tracking task; forward
+  elastic projectile reflection, periodic rail release and two constant-velocity
+  drones under a roof. Pin 64 Hz control/physics checks and 16 Hz observations;
+  retain existing input v2, label v1 and group v1 consumer wires. No assessment.
+- **Affected sections:** implementation of SPEC §7 / Stage two and J7's tiny first
+  delivery, detailed in [the evaluation producer guide](../docs/evaluation-producer.md).
+  Pilot counts, budgets, models, H3 criteria and final-study defaults are unchanged.
+- **Impact/limits:** these development microtasks require real rendered visibility,
+  independent Godot contacts, lineage/duplicate admission and consumer checks. Their
+  simple geometry does not establish gameplay breadth or visual solvability. Full
+  J7 sets, joint pretraining lineage, assessment isolation and H3 remain separate
+  required work; neither S4 completion nor collaborator acknowledgment is added.

@@ -533,3 +533,33 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   untracked J7 files to satisfy the clean-tree publication rule, then restore them.
   This is a code-review result, not independent collaborator scientific review.
 - **Next:** J7 bounded development drop and native admission; no Sudarshan blocker.
+
+### 2026-10-30 23:04 EDT — Implement bounded forward measurement producer
+
+- **Changes:** new controlled collision/order/tracking trajectories, Godot shape-cast
+  and mesh/mask renderer, immutable train/dev exports and strict admission. Select
+  72 complete content-disjoint groups (120 episodes, 1,800 planned RGBs), with fixed
+  producer rules and no assessment or model-outcome selection.
+- **Debug evidence:** one native group per task passed capture/exports at
+  `artifacts/evaluation-debug-v5`; contact times agree, final/bag reuse is exact,
+  and tracking masks show reference 16 / occlusion 17–24 / reappearance 25–27.
+  Fixed a viewport lookup and a GDScript type-inference error in earlier rejected
+  debug attempts. Visual inspection prompted stronger object/background contrast;
+  that updated palette requires a fresh capture before acceptance.
+- **Checks:** nine physics/lineage/raster tests pass. A broad text edit temporarily
+  broke the sphere helper signature; lint/collection caught it and it was repaired
+  before the current full regression. No failed attempt is accepted or overwritten.
+  Full tests, separate review and complete native drop follow.
+- **Boundary:** controlled microtasks are narrow, not H3/gameplay/transfer evidence.
+  Assessment isolation, full counts, pretraining-pool lineage and learned sensitivity
+  remain unimplemented/unmeasured; all required work is Joy-owned.
+
+### 2026-10-30 23:05 EDT — Verify producer implementation before full small drop
+
+- **Checks:** all 96 repository tests pass (59.45 s), including nine new forward
+  motion/lineage/raster tests. Ruff, formatting, Godot parse-only, scaffold links,
+  unchanged SPEC provenance, pilot audit freshness and whitespace pass.
+- **Next run:** commit the producer, run separate read-only review, and generate the
+  fixed 72-group drop with native Godot. Generation/verification bind exact source,
+  engine, plan, actual transforms, masks, contacts and image bytes. Research gates
+  stay false even if the small drop passes.
