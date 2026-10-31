@@ -193,6 +193,15 @@ pure rendering-throughput estimates. Measured single-update extrapolation is abo
 456 device-hours for the eighteen controlled runs alone, so practical research
 compute remains unresolved. No quota, pilot launch, learning or H1–H4 pass is inferred.
 
+The full 1,600-group capture completed but failed combined raster admission on two
+tracking frame pairs; [complete conflict evidence](reports/data/full-development-conflicts-20261031.json)
+records both. `artifacts/full-development-v3` stays rejected. Joy is adding a
+hash-bound exclusion record for the two affected dev groups, preserving all counts
+and replacing complete groups before model fitting. Re-export/revalidate unchanged
+captures by exact request; full revised admission remains pending.
+Assessment inventory/H3 numeric checks pass 12 focused cases with separate code
+review clean in round 1. This is not a real release or scientific gate pass.
+
 ## Update rules
 
 Re-read before each edit. Patch your task/status only, retaining others' concurrent

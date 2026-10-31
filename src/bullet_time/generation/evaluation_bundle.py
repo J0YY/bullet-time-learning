@@ -29,6 +29,8 @@ from .evaluation_selection import (
     selection_runtime,
     check_collection,
     verify_selection,
+    exclusion_candidates,
+    read_exclusions,
 )
 
 
@@ -46,6 +48,7 @@ def source_files():
         "src/bullet_time/provenance.py",
         "scripts/data/build_evaluation.py",
         "configs/generation/evaluation-development.json",
+        "configs/generation/evaluation-raster-exclusions.json",
         "configs/pilot-plan.json",
         "configs/rendering/godot-macos.json",
     ]
@@ -112,7 +115,7 @@ def select_for_capture(plan, *, full_requests=None, full_selection=None):
         return requests, evidence, None
     if full_requests is None:
         full_requests, full_selection = select_collection(
-            plan["seed"], counts_from_pilot(read_pilot())
+            plan["seed"], counts_from_pilot(read_pilot()), exclusions=exclusion_candidates()
         )
     selected, counts = [], Counter()
     for request in full_requests:
@@ -139,6 +142,7 @@ def validate_selection_copy(root, plan, full_requests, selection):
         or report["data_seed"] != plan["seed"]
         or report["groups_per_task"] != expected_counts
         or report["selection"] != selection
+        or report.get("raster_exclusions") != read_exclusions()
         or report["summary"] != check_collection(full_requests, expected_counts)
         or report["inventory"]
         != {

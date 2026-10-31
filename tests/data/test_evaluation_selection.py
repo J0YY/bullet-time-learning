@@ -141,3 +141,53 @@ def test_prospective_rejections_are_counted_and_preserve_full_requested_units():
     assert len(rows) == evidence["accepted"] == 1 and rows[0]["index"] != rejected
     assert evidence["background_proximity_excluded_indices"] == [rejected]
     assert evidence["background_proximity_rejections"] == 1
+
+
+def test_raster_repair_excludes_whole_group_preserves_other_requests_and_counts():
+    counts = {task: {"train": 1, "dev": 2} for task in ("collision", "order", "tracking")}
+    before, _ = motion.select_collection(71, counts)
+    removed = next(r for r in before if r["task"] == "tracking" and r["split"] == "dev")
+    exclusion = {k: removed[k] for k in ("task", "split", "index")}
+    after, evidence = motion.select_collection(71, counts, exclusions=[exclusion])
+    assert len(after) == len(before) == 9
+    old_ids = {r["group_id"] for r in before}
+    new_ids = {r["group_id"] for r in after}
+    assert old_ids - new_ids == {removed["group_id"]}
+    assert len(new_ids - old_ids) == 1
+    old = {r["group_id"]: r for r in before}
+    assert all(r == old[r["group_id"]] for r in after if r["group_id"] in old)
+    assert evidence["tracking/dev"]["raster_excluded_indices"] == [removed["index"]]
+    with pytest.raises(ValueError, match="duplicate raster"):
+        motion.select_collection(71, counts, exclusions=[exclusion, exclusion])
+    with pytest.raises(ValueError, match="task/split"):
+        motion.select_collection(71, counts, exclusions=[{**exclusion, "split": "assessment"}])
+    with pytest.raises(ValueError, match="integer"):
+        motion.select_collection(71, counts, exclusions=[{**exclusion, "index": True}])
+
+
+def test_committed_raster_exclusions_bind_native_witnesses_and_seed(monkeypatch):
+    record = selection.read_exclusions()
+    assert [r["index"] for r in record["records"]] == [21791, 71764]
+    assert len(selection.exclusion_candidates()) == 2
+    monkeypatch.setattr(selection, "read_pilot", lambda: {"data_seed": 123})
+    with pytest.raises(ValueError, match="another seed"):
+        selection.read_exclusions()
+
+
+def test_capture_reconstruction_uses_same_frozen_exclusions(monkeypatch):
+    from bullet_time.generation import evaluation_bundle as bundle
+
+    counts = {task: {"train": 1, "dev": 2} for task in ("collision", "order", "tracking")}
+    before, _ = motion.select_collection(71, counts)
+    removed = next(r for r in before if r["task"] == "tracking" and r["split"] == "dev")
+    exclusions = [{k: removed[k] for k in ("task", "split", "index")}]
+    expected, stats = motion.select_collection(71, counts, exclusions=exclusions)
+    monkeypatch.setattr(bundle, "counts_from_pilot", lambda _: counts)
+    monkeypatch.setattr(bundle, "exclusion_candidates", lambda: exclusions)
+    plan = {
+        "schema_version": "bullet-time.measurement-plan.v2",
+        "seed": 71,
+        "groups_per_task": counts,
+    }
+    selected, observed, full = bundle.select_for_capture(plan)
+    assert selected == full == expected and observed == stats

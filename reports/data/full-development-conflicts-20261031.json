@@ -1,0 +1,48 @@
+{
+  "accepted": false,
+  "artifacts": "artifacts/full-development-conflicts-v1",
+  "bundle_sha256": "d9e9449cf080dd99bcba651bd6a48cc2c2b813f13c1c1eb305b3c09130098f48",
+  "candidate_rgb_comparisons": 1947,
+  "cross_split_image_pairs": 318270000,
+  "diagnostic_function_sha256": "7697a38cb0c4527aa78a0fea92f8c2de7732bca69c2ff2d7c767e4d1cd67524a",
+  "diagnostic_only": true,
+  "exact_cross_split_duplicates": 0,
+  "failed_capture_root": "artifacts/full-development-v3",
+  "failures": [
+    {
+      "dev_frame": "frame-25",
+      "dev_group": "tracking-2d65b6bd379625c2",
+      "kind": "near",
+      "mask_iou": 1.0,
+      "rgb_mae": 0.0027233115468409583,
+      "train_frame": "frame-25",
+      "train_group": "tracking-3a80daa33f6a79a7"
+    },
+    {
+      "dev_frame": "frame-18",
+      "dev_group": "tracking-1f95158f92c687d3",
+      "kind": "near",
+      "mask_iou": 1.0,
+      "rgb_mae": 0.0035045268107242898,
+      "train_frame": "frame-18",
+      "train_group": "tracking-d38e2995322e5214"
+    }
+  ],
+  "foreground_iou": 0.98,
+  "helper_failure": "First helper was named inspect.py and shadowed stdlib inspect; renamed before successful scan; failed helper log retained.",
+  "helper_sha256": "58dfeb612f463fd5bdbc6699b7ada8cf64f41bca25ba29cf016e61d9afd51560",
+  "images": 41200,
+  "mask_candidates": 8428420,
+  "mean_bound_skips": 119981,
+  "near_duplicates": 2,
+  "recorded_at": "2026-10-31T02:39:00-04:00",
+  "retained_mask_bytes": 208606720,
+  "rgb_cache_capacity": 64,
+  "rgb_mae": 0.00392156862745098,
+  "scientific_gate_pass": false,
+  "scope": "Diagnostic of rejected full train/dev capture; collect all unchanged-threshold witnesses, no admission or model outcomes",
+  "seconds": 152.8892206249875,
+  "source_sha256": "f0b657fd2299cbb65568feba9ff36eec96c13498ea61db4cd15735e6b8c4a16f",
+  "unique_cross_split_comparisons": 207534036,
+  "unique_raster_mask_pairs": 33260
+}

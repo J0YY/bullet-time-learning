@@ -1,0 +1,23 @@
+{
+  "schema_version": "bullet-time.measurement-raster-exclusions.v1",
+  "data_seed": 20261028,
+  "reason": "Actual unchanged-threshold train/dev raster duplicates; replace entire dev groups before any model outcome",
+  "evidence": {
+    "path": "reports/data/full-development-conflicts-20261031.json",
+    "sha256": "1711071e3098a83566a8f7b1099c46e6bbea495e52f520b7eb98443e866d3ea7"
+  },
+  "records": [
+    {
+      "task": "tracking",
+      "split": "dev",
+      "index": 21791,
+      "group_id": "tracking-1f95158f92c687d3"
+    },
+    {
+      "task": "tracking",
+      "split": "dev",
+      "index": 71764,
+      "group_id": "tracking-2d65b6bd379625c2"
+    }
+  ]
+}

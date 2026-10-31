@@ -15,6 +15,9 @@ from bullet_time.provenance import (
     integer,
     inside,
     strict_json,
+    fields,
+    identity,
+    sha256,
 )
 from .bundle import ROOT
 from .evaluation_motion import select_collection, tracking_background, background_conflict
@@ -39,6 +42,8 @@ def selection_sources():
         "src/bullet_time/provenance.py",
         "scripts/data/plan_evaluation.py",
         "configs/pilot-plan.json",
+        "configs/generation/evaluation-raster-exclusions.json",
+        read_exclusions()["evidence"]["path"],
     ]
     return {path: digest((ROOT / path).read_bytes()) for path in files}
 
@@ -104,6 +109,41 @@ def read_pilot():
     return strict_json((ROOT / "configs/pilot-plan.json").read_bytes())
 
 
+def read_exclusions():
+    record = strict_json(
+        (ROOT / "configs/generation/evaluation-raster-exclusions.json").read_bytes()
+    )
+    fields(record, {"schema_version", "data_seed", "reason", "evidence", "records"})
+    if record["schema_version"] != "bullet-time.measurement-raster-exclusions.v1":
+        raise ValueError("unknown raster exclusions")
+    if record["data_seed"] != read_pilot()["data_seed"]:
+        raise ValueError("raster exclusions belong to another seed")
+    fields(record["evidence"], {"path", "sha256"})
+    path = inside(ROOT, record["evidence"]["path"])
+    if digest(path.read_bytes()) != sha256(record["evidence"]["sha256"]):
+        raise ValueError("raster exclusion evidence changed")
+    witnesses = strict_json(path.read_bytes())["failures"]
+    seen = set()
+    for row in record["records"]:
+        fields(row, {"task", "split", "index", "group_id"})
+        integer(row["index"], "excluded index")
+        if row["task"] not in ("collision", "order", "tracking") or row["split"] != "dev":
+            raise ValueError("raster repair replaces complete dev groups only")
+        gid = f"{row['task']}-{identity([record['data_seed'], row['task'], row['index']])[:16]}"
+        if (
+            row["group_id"] != gid
+            or gid in seen
+            or not any(w.get("dev_group") == gid for w in witnesses)
+        ):
+            raise ValueError("raster exclusion does not match an actual witness")
+        seen.add(gid)
+    return record
+
+
+def exclusion_candidates():
+    return [{k: r[k] for k in ("task", "split", "index")} for r in read_exclusions()["records"]]
+
+
 def plan_collection(output):
     output = Path(output).resolve()
     if output.exists():
@@ -114,7 +154,9 @@ def plan_collection(output):
     pilot = read_pilot()
     counts = counts_from_pilot(pilot)
     start = time.perf_counter()
-    requests, selection = select_collection(pilot["data_seed"], counts)
+    requests, selection = select_collection(
+        pilot["data_seed"], counts, exclusions=exclusion_candidates()
+    )
     summary = check_collection(requests, counts)
     output.mkdir(parents=True, mode=0o700)
     (output / "private").mkdir(mode=0o700)
@@ -133,6 +175,7 @@ def plan_collection(output):
         "data_seed": pilot["data_seed"],
         "groups_per_task": counts,
         "selection": selection,
+        "raster_exclusions": read_exclusions(),
         "summary": summary,
         "seconds": time.perf_counter() - start,
         "inventory": {"private/requests.jsonl": digest(request_path.read_bytes())},
@@ -152,6 +195,8 @@ def verify_selection(output):
         raise ValueError("unsupported prospective selection")
     if report["source_sha256"] != selection_sources():
         raise ValueError("selection source changed; use its pinned revision")
+    if report.get("raster_exclusions") != read_exclusions():
+        raise ValueError("raster exclusions differ")
     if report["runtime"] != selection_runtime():
         raise ValueError("selection runtime changed; verify on its pinned runtime")
     actual = {
@@ -168,7 +213,9 @@ def verify_selection(output):
     counts = counts_from_pilot(pilot)
     if report["groups_per_task"] != counts or report["data_seed"] != pilot["data_seed"]:
         raise ValueError("selection differs from checked-in pilot counts/seed")
-    requests, selection = select_collection(report["data_seed"], counts)
+    requests, selection = select_collection(
+        report["data_seed"], counts, exclusions=exclusion_candidates()
+    )
     expected = b"".join(canonical_bytes(r) + b"\n" for r in requests)
     if expected != path.read_bytes() or report["selection"] != selection:
         raise ValueError("selection differs from reproducible global reservation")

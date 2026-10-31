@@ -1083,3 +1083,22 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Checks:** 12 focused known-answer/boundary/missing/shortcut/coverage cases pass
   in 3.36 s; Ruff passes. Lock/release persistence and real data/access integration
   remain separate ongoing work; direct assessment scoring remains disabled.
+
+### 2026-10-31 02:41 EDT — Collect all raster conflicts and repair selection prospectively
+
+- **Evidence:** complete diagnostic scan of 41,200 RGBs / 318,270,000 cross-split
+  pairs found exactly two near-duplicate witnesses and no exact duplicate. Both
+  masks have IoU 1.0; foreground MAE 0.00272331 / 0.00350453 is below 1/255.
+  Runtime 152.89 s; source/helper/bundle hashes in the public conflict report.
+  First helper naming attempt shadowed stdlib inspect; renamed before successful
+  execution, with the failed log retained. No candidate/model score was inspected.
+- **Repair:** checked-in evidence-bound exclusion list replaces complete dev
+  tracking groups at candidate indices 21791 and 71764. Selection and capture
+  reconstruction share this list; seed, count, native renderer and raster rules
+  remain unchanged. New output reuses matching immutable captures; old output
+  stays rejected. This does not make either split assessment or final test.
+- **Policy review:** dccc5f2 separate review clean in round 1; reviewer dependency
+  imports were blocked by read-only temporary-file restrictions. Twelve runtime
+  tests ran here. Not Sudarshan's review; real locked scoring is still disabled.
+- **Checks:** 30 selection/motion/raster cases pass in 8.31 s; added capture-side
+  reconstruction regression and running focused progressive tests before commit.

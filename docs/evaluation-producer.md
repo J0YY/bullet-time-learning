@@ -227,3 +227,19 @@ canonical seeded order. This is a conservative data-only filter before model fit
 full pixel/physical/split admission still runs. Version v2 is a new snapshot; do
 not overwrite v1 or describe the old full selection as admitted. Retained raw
 captures can be reused using the exact-request and native-renderer checks above.
+
+## Recorded full-raster exclusions
+
+Full v2 selection capture finished, but combined admission rejected two tracking
+frame pairs. The [conflict report](../reports/data/full-development-conflicts-20261031.json)
+retains both exact witnesses under the unchanged IoU/RGB rule; the failed native
+drop is `artifacts/full-development-v3`. It is not an admitted dataset.
+
+The [checked-in exclusion list](../configs/generation/evaluation-raster-exclusions.json)
+binds that report and the exact seed/task/split/candidate/group identities. It
+replaces the two complete dev groups in canonical seeded order, retaining all
+600/200 episode counts. Selection and capture verification reconstruct the same
+exclusions; an old selection must use its own pinned code. Reuse exact native
+requests only, then rerun full combined admission on the new export. Model outcomes
+never enter this data-quality exclusion, and passing still requires joint
+pretraining lineage/raster checks and the later scientific gates.

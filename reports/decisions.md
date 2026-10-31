@@ -360,3 +360,16 @@ outputs migrate; accepted bundle bytes bind the source/config/runtime that made 
 - **Provenance:** current SPEC SHA-256 `5218bc6ff5a67df2b21072371e0ed18254ee89eb07c738d83bfcff51ce6a6012`.
   Original remains unchanged at `13e951d:SPEC.md`. Existing train/dev evidence is
   unaffected; no real assessment exists, version lock is recorded, or gate passed.
+
+## 2026-10-31 02:41 EDT — Replace two raster-conflicting development groups
+
+- **Authority/reason:** Joy's continuing correctness/data-admission assignment.
+  Complete actual-pixel scan found two train/dev tracking near duplicates before
+  any fitting; retain [failed evidence](data/full-development-conflicts-20261031.json).
+- **Selected:** remove the whole affected dev groups from prospective selection
+  and replenish in canonical seeded order. Bind exclusions to seed, candidate,
+  group and witness report. Reuse only byte-identical native requests, then
+  revalidate the resulting full set. Never just remove frames or reduce counts.
+- **Impact:** selection/producer source snapshots change; original captures and
+  reports stay intact. No label/model outcome, threshold, count, SPEC or final-test
+  access change; full capture admission remains pending until actual checks pass.

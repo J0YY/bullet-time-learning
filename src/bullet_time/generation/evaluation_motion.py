@@ -237,13 +237,29 @@ def forecast_candidate(seed, index, task):
     )
 
 
-def select_groups(seed, split, count, task, *, limit=100000, reserved=None, candidate_allowed=None):
+def select_groups(
+    seed,
+    split,
+    count,
+    task,
+    *,
+    limit=100000,
+    reserved=None,
+    candidate_allowed=None,
+    excluded_indices=(),
+):
     if split not in ("train", "dev"):
         raise ValueError("initial generator is train/dev only")
     integer(count, "count", 1)
     kinds = ("trajectory", "asset", "configuration")
     if reserved is not None and set(reserved) != set(kinds):
         raise ValueError("reserved prototypes must cover every lineage kind")
+    excluded = set(excluded_indices)
+    if len(excluded) != len(excluded_indices):
+        raise ValueError("duplicate raster exclusion index")
+    for index in excluded:
+        integer(index, "excluded index")
+    raster_exclusions = []
     seen = {k: set() if reserved is None else set(reserved[k]) for k in kinds}
     selected, considered, background_exclusions = [], 0, []
     # No scene, trajectory or appearance prototype recurs within a task drop.
@@ -259,6 +275,9 @@ def select_groups(seed, split, count, task, *, limit=100000, reserved=None, cand
             continue
         if any(candidate["groups"][k] in seen[k] for k in ("trajectory", "asset", "configuration")):
             continue
+        if index in excluded:
+            raster_exclusions.append(index)
+            continue
         if candidate_allowed is not None and not candidate_allowed(candidate, split):
             background_exclusions.append(index)
             continue
@@ -273,6 +292,9 @@ def select_groups(seed, split, count, task, *, limit=100000, reserved=None, cand
                 "accepted": count,
                 "selection": "content pool and duplicate prototype checks only; no model outcomes",
             }
+            if excluded:
+                evidence["raster_excluded_indices"] = raster_exclusions
+                evidence["raster_exclusions_declared"] = sorted(excluded)
             if candidate_allowed is not None:
                 evidence.update(
                     background_proximity_rejections=len(background_exclusions),
@@ -295,7 +317,7 @@ def background_conflict(a, b):
     return a[0] == b[0] and sum(abs(x - y) for x, y in zip(a[1], b[1], strict=True)) <= 4
 
 
-def select_collection(seed, counts):
+def select_collection(seed, counts, *, exclusions=()):
     """Reserve prototypes across tasks; canonical order is independent of JSON key order."""
     tasks, splits = ("collision", "order", "tracking"), ("train", "dev")
     if not isinstance(counts, dict) or set(counts) != set(tasks):
@@ -305,6 +327,15 @@ def select_collection(seed, counts):
             raise ValueError("collection is train/dev only")
         for count in counts[task].values():
             integer(count, "group count", 1)
+    excluded = {(task, split): [] for task in tasks for split in splits}
+    for row in exclusions:
+        if set(row) != {"task", "split", "index"} or (row["task"], row["split"]) not in excluded:
+            raise ValueError("invalid raster exclusion task/split")
+        integer(row["index"], "excluded index")
+        key = row["task"], row["split"]
+        if row["index"] in excluded[key]:
+            raise ValueError("duplicate raster exclusion")
+        excluded[key].append(row["index"])
     reserved = {k: set() for k in ("trajectory", "asset", "configuration")}
     backgrounds = {split: [] for split in splits}
 
@@ -319,7 +350,13 @@ def select_collection(seed, counts):
     for task in tasks:
         for split in splits:
             rows, stats = select_groups(
-                seed, split, counts[task][split], task, reserved=reserved, candidate_allowed=allowed
+                seed,
+                split,
+                counts[task][split],
+                task,
+                reserved=reserved,
+                candidate_allowed=allowed,
+                excluded_indices=excluded[task, split],
             )
             for row in rows:
                 for kind in reserved:
