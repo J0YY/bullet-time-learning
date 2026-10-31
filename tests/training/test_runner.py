@@ -119,6 +119,7 @@ def test_consumer_hash_tracks_used_code_and_pins_without_blocking_producer_work(
         "assessment_policy.py",
         "assessment_state.py",
         "assessment_contract.py",
+        "assessment_inputs.py",
     ):
         (tmp_path / "evaluation" / name).write_text("unimported operational scoring")
     assert code_identity(tmp_path) == original

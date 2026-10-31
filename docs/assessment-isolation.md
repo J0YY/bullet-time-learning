@@ -196,3 +196,27 @@ verification files are excluded from the model's code identity because the model
 consumer does not import them; the verifier separately binds its own code and
 scoring dependencies. This one-time identity-rule change itself changes the
 consumer fingerprint. Preserve old fitted snapshots on their pinned revision.
+
+### Public expected-input compilation
+
+`evaluation/assessment_inputs.py` compiles primary game-task templates from the
+opaque public export without opening private labels, source maps or reconstruction
+files. It checks actual PNG bytes/decoded RGB, exact permitted-file and image
+inventories, opaque identifiers, complete groups, all target commitments (including
+auxiliary classification horizons), and three consecutive primary tracking queries.
+Half-second classification templates cover every declared episode. Both source bytes
+and compiler identity are checked again before returning.
+
+```bash
+.venv/bin/python scripts/scoring/assessment_inputs.py \
+  --public /absolute/prepared/public \
+  --output /absolute/assessment-input-inventory.json
+```
+
+The default requires 400 episodes per task; `--allow-partial` is for diagnostic
+fixtures only. Output must be new and outside the immutable public directory.
+A complete count flag does not establish source-pool freshness, physical/lineage
+validity, correct private labels, checkpoint execution or release authorization.
+All outputs keep authorization/scientific passage false. Source admission must
+verify the declared projectile-arena family. No actual assessment pool is admitted
+by these synthetic tests; staged scorer/job integration remains pending.

@@ -1241,3 +1241,15 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - Next: compile complete public expected-input inventories from opaque assessment
   exports, then connect the locked stage scorer and actual execution receipts.
   No real assessment lock/release, scientific gate or GPU execution is inferred.
+
+### 2026-10-31 03:34 EDT — Compile assessment expected inputs without private reads
+
+- Added public-only input templates with exact file/RGB/commitment/group checks,
+  fixed half-second selection and complete primary tracking windows. Outputs bind
+  compiler and actual public bytes; partial fixture counts cannot admit a pilot.
+- Synthetic tests exercise denied private/source reads, coherent malformed metadata,
+  byte changes, unused/missing artifacts, full count arithmetic and CLI output safety.
+  The full-count fixture deliberately repeats RGB: counts are not scientific admission.
+- Seventeen focused cases pass in 14.12 s; Ruff/scaffold/diff checks pass.
+- Last published 3bfc603 passed CI 41180594374. No native capture or model update
+  was repeated. Actual assessment source/job/scoring admission is still pending.
