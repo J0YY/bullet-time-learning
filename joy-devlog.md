@@ -1421,3 +1421,19 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   prefix accounting. Separate review and actual native recovery integration follow.
 - Latest published ed9e98a passes CI 41184402688. Full capture remains pending
   while recovery and common semantic lineage are resolved.
+
+### 2026-10-31 04:40 EDT — Protect recovered source ancestors and clarify asset scope
+
+- Separate recovery review found one P2: linked parent directories could bypass
+  immutable-source containment. Check every group-path component before accepting
+  a completed receipt. All 19 focused recovery/capture cases pass in 1.09 s,
+  including each linked-parent regression; cumulative review follows.
+- Actual native recovery integration already passes on implementation 171efad:
+  three completed groups reused, zero new renders, five episodes / 75 RGBs.
+  This is a controlled interruption fixture with an unrecorded partial group and
+  temporary receipt, not a claim of observing an actual process crash.
+- Actual request audit finds shared fixed target/roof variants across train/dev
+  and the bounded assessment prefix. Added a pending asset-policy proposal with
+  concrete claim-narrowing versus regeneration choices; no SPEC amendment adopted.
+  Existing RGB/physics checks stand, common semantic lineage remains unadmitted.
+  Full capture waits for Joy's requested definition; other local work continues.

@@ -40,8 +40,12 @@ def group_files(root, gid):
         raise ValueError("invalid private capture group ID")
     result = {}
     for relative in (f"private/{gid}", f"inputs/rgb/{gid}"):
-        directory = root / relative
-        if directory.is_symlink() or not directory.is_dir():
+        directory = root
+        for part in Path(relative).parts:
+            directory = directory / part
+            if directory.is_symlink():
+                raise ValueError("raw group path components cannot be linked")
+        if not directory.is_dir():
             raise ValueError("complete regular raw group directories required")
         members = inventory(directory)
         if not members:

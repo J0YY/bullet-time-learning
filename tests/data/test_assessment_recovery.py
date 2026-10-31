@@ -1,6 +1,5 @@
 """Raw-byte receipt fixtures; deliberately not physical/native admission evidence."""
 
-
 import pytest
 
 from bullet_time.generation import assessment_recovery as recovery
@@ -92,3 +91,19 @@ def test_full_count_prefix_preserves_all_declared_groups(tmp_path):
         task: {"assessment": n} for task, n in counts.items()
     }
     assert len(capture.prefix(tmp_path, 8)) == 24
+
+
+@pytest.mark.parametrize("relative", ["private", "inputs", "inputs/rgb"])
+def test_interrupted_capture_rejects_linked_parent_components(journal, relative):
+    import shutil
+
+    root, sources, pin = journal
+    request = group(root, "collision-0123456789abcdef")
+    recovery.record_group(root, request, {"synthetic_command": True})
+    original = root / relative
+    external = root.parent / ("external-" + relative.replace("/", "-"))
+    shutil.move(original, external)
+    original.symlink_to(external, target_is_directory=True)
+    with pytest.raises(ValueError, match="components cannot be linked"):
+        recovery.load_reusable(root, pin, sources)
+    assert external.is_dir() and original.is_symlink()
