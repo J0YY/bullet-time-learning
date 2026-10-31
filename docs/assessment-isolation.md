@@ -31,7 +31,10 @@ v2 only for assessment. The inference format stays unchanged: combine each publi
 target commitment with its separately validated family/group and actual predictor
 identity to prepare the expected-key inventory. A nonce is never a model feature.
 The sealer does not check physical validity, split lineage, full expected coverage
-or scientific gates. Retain the sealed output bytes; rerunning the sealer creates
+or scientific gates. Future assessment generation must also keep its reconstruction
+seed/requests private and use opaque, label-independent IDs; sealing cannot hide a
+label already encoded in a branch ID or reconstructible from a public seed. Current
+train/dev branch IDs are not an assessment identifier scheme. Retain the sealed output bytes; rerunning the sealer creates
 different commitments and must be treated as a different artifact.
 
 ## Restricted local jobs
@@ -84,3 +87,10 @@ code snapshot when using old fitted checkpoints; new inference cannot silently
 reuse a checkpoint fitted under another consumer hash. Historical integration
 reports remain valid for their recorded code. No assessment freeze or release is
 inferred from any of these engineering checks.
+
+The [October 30 native report](../reports/data/assessment-privacy-20261030.json)
+records the actual consumer assembling all three task types while private train/dev
+labels were denied. Separate cumulative code review was clean in round 2 after
+adding the shared validator to scoring provenance; 106 full-suite tests and 37
+focused post-fix tests passed locally. No assessment or independent collaborator
+review is claimed.

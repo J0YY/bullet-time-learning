@@ -68,7 +68,7 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | J5 (was S1) | Joy | Producer schema/fixtures, Godot/asset pins, grouped splits, scripted arena and replay | Arena/replay/pins/admission implemented; group/split validation remains | Producer `0693adf`; 57 local tests, separate code review clean; native macOS validated |
 | J6 (was S2) | Joy | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Preview + 8 complete (2,048 real RGBs); 100/1,000 pending | Immutable bundles, 32 repeat captures, state/camera/hash evidence; see integration report |
 | J2 | Joy | Actual-loader/update audit; 100-grid tail check | All eight schedules pass actual full VideoMAE-S update on 8 real grids; 100-grid tail pending | CPU FP32 seed 17; shared exposure/targets/init/budget; one update each, no learning claim |
-| J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | Tiny train/dev drop admitted; full sets and assessment access/release remain | `c5a175a`; 72 groups / 120 episodes / 1,800 RGBs; native masks/contacts, split/duplicate and actual consumer checks; code review clean in round 2 |
+| J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | Tiny train/dev drop and privacy foundation verified; full sets and assessment release remain | `c5a175a` native drop; `b530e73` randomized labels/local access boundary; 106 tests plus 37 post-fix checks; privacy review clean round 2 |
 | J8 | Joy | Operational metrics, coverage/failed slots, paired analysis and power scenarios | Train/dev scorer, paired-analysis foundation and 54 prospective power scenarios verified; full gate/assessment integration pending | Through `75c22ac`; 87-test full regression plus 33 final focused/CLI checks; separate review clean in round 4; no S4 import |
 | J3 | Joy | Causal heads, seven controls, external adapter plus SSv2 acquisition/split audit | Consumer and real J7 fit/predict/score integration complete; full H3/SSv2 pending | `0edab89` one-epoch DINOv2: 95.74 s CPU, 16/16 dev predictions, BA 50%; no H3 pass |
 | S4a/S4b | Sudarshan | Standalone independent verifier, then snapshot metrics/exposure/lineage/statistics audits | Assigned; acknowledgment/work unrecorded | Own fixtures now; eligible immutable snapshots later; not a prerequisite for Joy |
@@ -118,10 +118,13 @@ with strict operational scoring and tiny forward-valid train/dev examples, then
 continue the dependency queue under the unchanged scientific/access/resource gates.
 No Sudarshan action is inferred or made a new implementation gate.
 
-Active next increment: Joy owns assessment label v2 commitments and a local
-restricted-job launcher, with synthetic access tests. Changes touch evaluation label
-validation, scripts, tests and interfaces. Real assessment release remains disabled;
-this increment does not freeze a protocol, enable scoring or claim human blinding.
+Assessment label v2 and a verified local job boundary are implemented; see
+[access foundation](docs/assessment-isolation.md). Real assessment release remains
+disabled; no protocol freeze, scoring authorization or human blinding is inferred.
+Next: global group selection for full J7 train/dev sets. A pre-render
+[preflight](reports/data/fullset-selection-preflight-20261030.json) found 58 repeated
+appearance prototypes across task selections. Joy owns the generation/config/test
+changes to reserve prototypes globally before rendering; no collaborator input needed.
 
 ## Update rules
 

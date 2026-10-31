@@ -1,0 +1,79 @@
+{
+  "admitted": false,
+  "duplicate_prototype_counts": {
+    "asset": 58,
+    "configuration": 0,
+    "trajectory": 0
+  },
+  "producer_sources": {
+    "configs/generation/evaluation-development.json": "98a8d00992959476eebeb6a86ecf5fd8b2d06457edae5bc346460f9d520ad374",
+    "configs/rendering/godot-macos.json": "01cbf61ad11518cf7d54ad83b8a18604159f392a98b0bef83ab3b196d6fab03c",
+    "game/LICENSE": "dbf8c0ec29216abd05bc76cd663541cd1ded38680c0fd54e1a4b4be57d6e2f23",
+    "game/arena_driver.gd": "a143e28781586a30c4f91fd61d4f487f21f9bd2fa22e4c6ccc934ea28a076d0f",
+    "game/evaluation_driver.gd": "c54a3aaa59c5688d9a529b5cbc6adcb4a301e927a9f29aa196eae3b44911c95e",
+    "game/project.godot": "e0dc45b0c338b547eb68a869a8f1d8cf0693af21554c34d6623cca1f1a4957b8",
+    "scripts/data/build_evaluation.py": "4bd9c2ca040aa8506032f55c8833a19d02ea7ba78d0e5eb055aa5e943529c8d1",
+    "src/bullet_time/generation/arena.py": "65f8ca0dd2f51860aa232c6fca71fd261e435314e9df2c709340ed069fde4830",
+    "src/bullet_time/generation/bundle.py": "dbeb9f3ef371e15d963dc9c2ec050622f1e3136e154af58fc0fd2df884b537a5",
+    "src/bullet_time/generation/evaluation_bundle.py": "412480ece6e3da27b38063099cf13e44cf0ce9c4cddfdd524d025737fe42b1f9",
+    "src/bullet_time/generation/evaluation_motion.py": "60266b3481218a58641f5cd6121f833e064e48941fde8796866191ad6ab48d4a",
+    "src/bullet_time/provenance.py": "e19fc805f18d15e62387ad2992c3fff6b825c94986d3dd6cb7761963197e6642"
+  },
+  "raw_report_sha256": "cd43a2724cc012b90fe45c4efd5ae13bad331a1bac3079e6972fd94e3fa911fe",
+  "reason": "Current per-task selection repeats appearance prototypes across tasks; global prototype reservation is required before full rendering.",
+  "request_count": 1600,
+  "requests_sha256": "25a37cf2cfb18cdac8af6762ca6de11e9645619cce11aeb904ae67d09e579f08",
+  "schema_version": "bullet-time.fullset-selection-preflight.v1",
+  "scope": "prospective train/dev selection only; no rendering, assessment or learning",
+  "seconds": 37.020864333957434,
+  "stages": [
+    {
+      "accepted": 300,
+      "candidates_considered": 11425,
+      "seconds": 6.207814917026553,
+      "selection": "content pool and duplicate prototype checks only; no model outcomes",
+      "split": "train",
+      "task": "collision"
+    },
+    {
+      "accepted": 100,
+      "candidates_considered": 34609,
+      "seconds": 18.46090208302485,
+      "selection": "content pool and duplicate prototype checks only; no model outcomes",
+      "split": "dev",
+      "task": "collision"
+    },
+    {
+      "accepted": 300,
+      "candidates_considered": 11685,
+      "seconds": 2.168457292020321,
+      "selection": "content pool and duplicate prototype checks only; no model outcomes",
+      "split": "train",
+      "task": "order"
+    },
+    {
+      "accepted": 100,
+      "candidates_considered": 29302,
+      "seconds": 4.644503708987031,
+      "selection": "content pool and duplicate prototype checks only; no model outcomes",
+      "split": "dev",
+      "task": "order"
+    },
+    {
+      "accepted": 600,
+      "candidates_considered": 26859,
+      "seconds": 1.2204436670290306,
+      "selection": "content pool and duplicate prototype checks only; no model outcomes",
+      "split": "train",
+      "task": "tracking"
+    },
+    {
+      "accepted": 200,
+      "candidates_considered": 79788,
+      "seconds": 3.7313538339803927,
+      "selection": "content pool and duplicate prototype checks only; no model outcomes",
+      "split": "dev",
+      "task": "tracking"
+    }
+  ]
+}

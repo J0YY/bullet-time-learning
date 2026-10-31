@@ -1,0 +1,102 @@
+{
+  "assessment_release_authorized": false,
+  "check_script_sha256": "994bb700a2bae6b84cf4f843bd00e03fedc85492fef65fc1310c83712fdfa02d",
+  "independent_collaborator_verification": false,
+  "job_receipt": {
+    "assessment_release_authorized": false,
+    "backend_sha256": "e5b769a900a3b298b14ba3619625dc192cf1196320a130f68946f6dae7362e2b",
+    "command": [
+      "/Users/joyyang/Projects/bullet-time-learning/.venv/bin/python",
+      "/Users/joyyang/Projects/bullet-time-learning/artifacts/privacy-native-v1/check_consumer.py"
+    ],
+    "cwd": "/Users/joyyang/Projects/bullet-time-learning",
+    "denial_probe": [
+      true
+    ],
+    "denied_roots": [
+      "/Users/joyyang/Projects/bullet-time-learning/artifacts/evaluation-development-v2/private"
+    ],
+    "environment": {
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "PYTHONNOUSERSITE": "1"
+    },
+    "launcher_sha256": "9417de8838d581c7a84a566adfc52e5004d671c38940fff5555c141ccfe1722e",
+    "log_sha256": "64aeaaf5ded45aad5f37eab2073167db042889e579763acfeccc05540046fd42",
+    "platform": "macOS-14.6.1-arm64-arm-64bit",
+    "probe_files": [
+      "/Users/joyyang/Projects/bullet-time-learning/artifacts/evaluation-development-v2/private/labels.jsonl"
+    ],
+    "profile_sha256": "d725fe1591491c2eac8d0e6edb26c6b121fc0aa72a35d95751253e878963c386",
+    "returncode": 0,
+    "schema_version": "bullet-time.isolated-job.v1",
+    "seconds": 3.347113125026226,
+    "status": "complete",
+    "timeout_seconds": 60
+  },
+  "job_receipt_sha256": "33057101c83e0879f6f3c32408b258978c360691df2f65e3d642fc51f031ca89",
+  "linux_isolation_validated": false,
+  "native_consumer": {
+    "actual_consumer_source_sha256": "6d50de1743e67b1d4db62242227a1adc5ea4e09e78df6397abbfd57dbc212090",
+    "assessment_release_authorized": false,
+    "catalog_sha256": "1a78e1eb95e19f628bf89784c40d5ca01b04066457935213a0ec302f7232d8b8",
+    "input_records": 384,
+    "input_sha256": "82ced021adb241e335b50db34049ac22b3d471ae8697ec44ead9367aec00bc24",
+    "private_label_reads_denied": 3,
+    "tasks": {
+      "collision": {
+        "reference": false,
+        "shape": [
+          3,
+          16,
+          224,
+          224
+        ]
+      },
+      "order": {
+        "reference": false,
+        "shape": [
+          3,
+          16,
+          224,
+          224
+        ]
+      },
+      "tracking": {
+        "reference": true,
+        "shape": [
+          3,
+          16,
+          224,
+          224
+        ]
+      }
+    }
+  },
+  "post_fix_checks": {
+    "passed": 37,
+    "scope": "scoring suite and privacy checks",
+    "seconds": 6.93
+  },
+  "review": {
+    "actionable_findings_fixed": 1,
+    "baseline": "315515d",
+    "final_code": "b530e73",
+    "implementation": "969435d",
+    "limitation": "reviewer reran focused label/provenance checks; full/native suite ran in Joy agent environment only",
+    "round_log_sha256": {
+      "1": "4eb58f6b436c7106a310a2399807659bf33f17342a07f44053f39d5de54b6ecb",
+      "2": "dba8830a5cdb1517868a14463f285ef7c42b9691db4768231b78a59d7157f0de"
+    },
+    "rounds": 2,
+    "status": "clean"
+  },
+  "schema_version": "bullet-time.assessment-privacy-integration.v1",
+  "scientific_gate_pass": false,
+  "scope": "native local boundary engineering; train/dev RGB only; no assessment release",
+  "source_commit": "969435d",
+  "test_suite": {
+    "log_sha256": "1ee920f8848379a24c698ca9b9ace49de30f4f9df5022103f8fba3d7e5696768",
+    "passed": 106,
+    "seconds": 65.88
+  }
+}

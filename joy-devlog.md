@@ -652,3 +652,27 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Publication:** prior evidence commit `315515d` is on main, CI 41164583874 passed.
   All 106 tests pass in 65.88 s (`artifacts/privacy-regression-v1.log`). This
   implementation enters separate cumulative review before publication.
+
+### 2026-10-30 23:44 EDT — Verify and publish private-label/access foundation
+
+- **Review:** cumulative separate code review clean in round 2. Fixed one P2: shared
+  label validation was absent from the scorer's explicit source fingerprint. Added
+  dependency-coverage regression; all 37 scoring/privacy cases pass after the fix
+  (6.93 s). Earlier full regression: 106 pass. Reviewer reran focused pure checks;
+  read-only review sandbox could not rerun full/native tests. Not Sudarshan review.
+- **Actual consumer boundary:** on committed source `969435d`, the native launcher
+  denied all three private train/dev label files while loading 384 real input
+  records and assembling 16 × 224 × 224 RGB for collision/order/tracking, with the
+  tracking reference. Job completed in 3.35 s; receipt and script in
+  `artifacts/privacy-native-v1`, public report in `reports/data/assessment-privacy-20261030.json`.
+  No real assessment generation, score or release. Linux remains unsupported.
+- **Next data preflight:** before rendering full training/development counts,
+  selected 1,600 prospective groups in 37.02 s. Per-task selection repeats 58
+  appearance prototypes across tasks, so that collection is not admitted. New
+  report `reports/data/fullset-selection-preflight-20261030.json`; fix global
+  prototype reservation before paying rendering cost. This is local selection
+  arithmetic, not learned data quality or H3 evidence.
+- **Privacy limit recorded:** actual assessment must use private reconstruction
+  seeds/requests and opaque, label-independent IDs; nonces cannot conceal targets
+  encoded by deterministic public branch IDs. Current development IDs are not an
+  assessment ID scheme. No new scientific gate or collaborator approval dependency.
