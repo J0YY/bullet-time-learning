@@ -1,4 +1,76 @@
 {
+  "binding_reconstruction": {
+    "all_eight_match": true,
+    "common_binding_with_view_config": {
+      "corpus_grids": 8,
+      "corpus_sha256": "8fd92aa73e4a349b849c0453368a2773046a42e8843851b41e8883208337a065",
+      "deterministic_algorithms": true,
+      "device_name": "MPS: Apple M3",
+      "initialization_sha256": "1d01fed4063fa58bd78334759d90544b0cfc98eaee1e4cffca099994c718f6b5",
+      "machine": "arm64",
+      "model": {
+        "decoder_depth": 4,
+        "decoder_heads": 3,
+        "decoder_width": 192,
+        "drop_path": 0.0,
+        "dropout": 0.0,
+        "encoder_depth": 12,
+        "encoder_heads": 6,
+        "encoder_width": 384,
+        "frames": 16,
+        "image_size": 224,
+        "patch_size": 16,
+        "tubelet": 2
+      },
+      "mps_runtime": {
+        "fallback": "0",
+        "fast_math": "0",
+        "macos": "14.6.1",
+        "prefer_metal": "0"
+      },
+      "numpy_version": "2.3.5",
+      "pillow_version": "12.0.0",
+      "precision": "float32",
+      "python_version": "3.11.15",
+      "source_sha256": "d9570e02662f4c560273ff293f637ce128b5941ff682c6b905ec1990f272a942",
+      "system": "Darwin",
+      "threads": 4,
+      "timm_version": "1.0.22",
+      "torch_version": "2.9.1",
+      "training": {
+        "beta1": 0.9,
+        "beta2": 0.95,
+        "color_jitter": 0.0,
+        "condition": "view",
+        "crop_fraction": 1.0,
+        "device": "mps",
+        "epsilon": 1e-08,
+        "grad_clip": 0.0,
+        "grids_per_update": 8,
+        "learning_rate": 7.5e-05,
+        "mask_ratio": 0.9,
+        "microbatch_clips": 2,
+        "minimum_learning_rate": 5e-06,
+        "recipe": "controlled",
+        "seed": 17,
+        "total_passes": 20,
+        "warmup_learning_rate": 5e-07,
+        "warmup_passes": 2,
+        "weight_decay": 0.05
+      }
+    },
+    "condition_binding_sha256": {
+      "joint": "240a966f2460332fcbf33b5e871a619268cd92edcdfe48c48f402ee9f649b759",
+      "mix25": "6f4dc351280279a0a89bfa799e504241e3832212be838f93d8865cf63fda055c",
+      "mix50": "e17ca8220f3c33221a2f7c76564700a67f0d1d3101fb62633755f67ff3a85725",
+      "mix75": "1b1fe4b657d18f5d4c227a175a2326ab11de1f891f524331e283c8a81b6453ce",
+      "regrouped": "f2d2afe90fca01a1c7e6c9590ab1817833d890a96bf35e3ba05cedd49384d313",
+      "shuffled_time": "c5402c4513d2e80b1d9516cfb2c0d964fda270164180bf1659f6ac44966cf611",
+      "time": "6035d2895f6ea35fa57674f8849c9be71011a35460cf5b5d22ef0320d4a7cf2b",
+      "view": "3b263bc33d45a46f80af54d64170a8356c93443b715bc28d28f3961c72397134"
+    },
+    "scope": "Post-run reconstruction checked by exact equality with every recorded actual update binding; no rerun or GPU model execution"
+  },
   "capture_pause": {
     "benchmark_exit_code": 0,
     "capture_command": "/opt/homebrew/Cellar/python@3.11/3.11.15/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python scripts/data/build_evaluation.py --full-selection artifacts/full-development-selection-v2 --per-stratum 600 --godot .cache/godot/4.5.1/Godot.app/Contents/MacOS/Godot --reuse-captures artifacts/full-development-eight-v2 --output artifacts/full-development-v3",
@@ -15,9 +87,11 @@
   },
   "files": {
     "benchmark.py": "681d4dd673b8fb0f13bae3866ea286c9e750e675cb1d9063fe477bf040918007",
+    "binding-reconstruction.json": "2de890cd67b9d871a8b784cc266076f73ad1ec7ae1477ca1c5c1bf5806876c91",
     "capture-pause.json": "6de8ee85921506e4a0ee9df255c7e28366c528df6b230639606adb343fec0be4",
     "measurement.json": "fb7c94a7fac6f1fd54df1533f2b52d6d9b142970dba8efa176549016af63340b",
     "pause_and_audit.py": "96eb07d080f8af2840fe904b68543acca5923a4f57519759d46d2aaf44336e90",
+    "reconstruct_bindings.py": "6df10c944507f54c0fe2562fd747f39150667d0f3dc54ebc464b33172af2ebcd",
     "training.json": "5d0bf3b663b7bd40148cc68bcb01776c4ae640efce1c97b9a2727efea285a8bd",
     "update-audit.json": "3a8c3cfa55a0dd983bbaf79fa79d8622f2ddb572cc1c03f89d73fc6e275957b9"
   },

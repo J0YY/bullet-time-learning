@@ -1045,3 +1045,12 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   needed; no pilot launch. Full native 100-grid replay waits for selected resources.
 - **Publication:** `221afeb` CI 41174320813 and proposal `5c81cab` CI 41174220731 pass.
   Continue full measurement admission; assessment-policy and compute replies remain pending.
+
+### 2026-10-31 02:09 EDT — Verify complete MPS execution bindings without rerunning updates
+
+- Reconstructed source/config/corpus/runtime/initialization records and matched
+  their exact SHA-256 values to all eight actual MPS update events. CPU-only model
+  construction was sufficient; no GPU update repeated. Added the common record,
+  eight condition hashes and reconstruction-script hash to the public MPS report.
+- Full native measurement capture continues; no assessment-policy answer or
+  selected research compute allocation inferred.
