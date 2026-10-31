@@ -1,0 +1,163 @@
+{
+  "capture_pause": {
+    "benchmark_exit_code": 0,
+    "capture_command": "/opt/homebrew/Cellar/python@3.11/3.11.15/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python scripts/data/build_evaluation.py --full-selection artifacts/full-development-selection-v2 --per-stratum 600 --godot .cache/godot/4.5.1/Godot.app/Contents/MacOS/Godot --reuse-captures artifacts/full-development-eight-v2 --output artifacts/full-development-v3",
+    "capture_pid": 32443,
+    "capture_resumed": true,
+    "capture_resumed_at": "2026-10-31T02:00:43.163511-04:00",
+    "capture_timing_limit": "Any active invoke elapsed time may include this pause; exclude it from pure renderer throughput estimates.",
+    "max_benchmark_seconds": 900,
+    "native_children_finished_at": "2026-10-31T01:55:23.579732-04:00",
+    "pause_seconds": 324.61381220899057,
+    "pause_started_at": "2026-10-31T01:55:18.635915-04:00",
+    "purpose": "bounded exclusive full-model MPS eight-grid audit",
+    "status": "benchmark_completed"
+  },
+  "files": {
+    "benchmark.py": "681d4dd673b8fb0f13bae3866ea286c9e750e675cb1d9063fe477bf040918007",
+    "capture-pause.json": "6de8ee85921506e4a0ee9df255c7e28366c528df6b230639606adb343fec0be4",
+    "measurement.json": "fb7c94a7fac6f1fd54df1533f2b52d6d9b142970dba8efa176549016af63340b",
+    "pause_and_audit.py": "96eb07d080f8af2840fe904b68543acca5923a4f57519759d46d2aaf44336e90",
+    "training.json": "5d0bf3b663b7bd40148cc68bcb01776c4ae640efce1c97b9a2727efea285a8bd",
+    "update-audit.json": "3a8c3cfa55a0dd983bbaf79fa79d8622f2ddb572cc1c03f89d73fc6e275957b9"
+  },
+  "limits": [
+    "No native 100-grid tail pass or joint pretraining/readout admission",
+    "No learning, H1-H4 pass, pilot launch or protocol freeze",
+    "Memory is OS process peak plus one-second sampled MPS memory, not an exact device peak",
+    "No concurrent project renderer during measurement; ordinary desktop/system load uncontrolled",
+    "Single-update performance is not sustained pilot throughput"
+  ],
+  "measurement": {
+    "all_conditions_pass": true,
+    "audit_sha256": "3a8c3cfa55a0dd983bbaf79fa79d8622f2ddb572cc1c03f89d73fc6e275957b9",
+    "corpus_sha256": "8fd92aa73e4a349b849c0453368a2773046a42e8843851b41e8883208337a065",
+    "events": {
+      "joint": {
+        "binding_sha256": "240a966f2460332fcbf33b5e871a619268cd92edcdfe48c48f402ee9f649b759",
+        "clips": 128,
+        "images": 2048,
+        "loss": 0.40452561143672827,
+        "optimizer_steps": 1,
+        "scheduler_steps": 1,
+        "seconds": 36.237363957974594,
+        "target_values": 276824064
+      },
+      "mix25": {
+        "binding_sha256": "6f4dc351280279a0a89bfa799e504241e3832212be838f93d8865cf63fda055c",
+        "clips": 128,
+        "images": 2048,
+        "loss": 0.40454867346720264,
+        "optimizer_steps": 1,
+        "scheduler_steps": 1,
+        "seconds": 36.110537541040685,
+        "target_values": 276824064
+      },
+      "mix50": {
+        "binding_sha256": "e17ca8220f3c33221a2f7c76564700a67f0d1d3101fb62633755f67ff3a85725",
+        "clips": 128,
+        "images": 2048,
+        "loss": 0.40455362516822235,
+        "optimizer_steps": 1,
+        "scheduler_steps": 1,
+        "seconds": 35.90459762501996,
+        "target_values": 276824064
+      },
+      "mix75": {
+        "binding_sha256": "1b1fe4b657d18f5d4c227a175a2326ab11de1f891f524331e283c8a81b6453ce",
+        "clips": 128,
+        "images": 2048,
+        "loss": 0.40450463556882105,
+        "optimizer_steps": 1,
+        "scheduler_steps": 1,
+        "seconds": 36.54423474997748,
+        "target_values": 276824064
+      },
+      "regrouped": {
+        "binding_sha256": "f2d2afe90fca01a1c7e6c9590ab1817833d890a96bf35e3ba05cedd49384d313",
+        "clips": 128,
+        "images": 2048,
+        "loss": 0.40450385574138525,
+        "optimizer_steps": 1,
+        "scheduler_steps": 1,
+        "seconds": 34.82127791602397,
+        "target_values": 276824064
+      },
+      "shuffled_time": {
+        "binding_sha256": "c5402c4513d2e80b1d9516cfb2c0d964fda270164180bf1659f6ac44966cf611",
+        "clips": 128,
+        "images": 2048,
+        "loss": 0.40455057088172797,
+        "optimizer_steps": 1,
+        "scheduler_steps": 1,
+        "seconds": 35.14933558303164,
+        "target_values": 276824064
+      },
+      "time": {
+        "binding_sha256": "6035d2895f6ea35fa57674f8849c9be71011a35460cf5b5d22ef0320d4a7cf2b",
+        "clips": 128,
+        "images": 2048,
+        "loss": 0.404553239995783,
+        "optimizer_steps": 1,
+        "scheduler_steps": 1,
+        "seconds": 36.06834054196952,
+        "target_values": 276824064
+      },
+      "view": {
+        "binding_sha256": "3b263bc33d45a46f80af54d64170a8356c93443b715bc28d28f3961c72397134",
+        "clips": 128,
+        "images": 2048,
+        "loss": 0.40455808738867444,
+        "optimizer_steps": 1,
+        "scheduler_steps": 1,
+        "seconds": 40.824245291005354,
+        "target_values": 276824064
+      }
+    },
+    "model_config_sha256": "458842b458a6dc9334ae455d2b5585c647343cb4bd3b8199e049afff1619e31e",
+    "peak_process_rss_bytes": 1466269696,
+    "recorded_at": "2026-10-31T02:00:42.407808-04:00",
+    "sampled_mps_memory": {
+      "driver_bytes": 2490007552,
+      "samples": 315,
+      "tensor_bytes": 1153800192
+    },
+    "sampling_seconds": 1,
+    "scientific_gate_pass": false,
+    "scope": "one actual full-model update per arm; integration/resource measurement only; renderer temporarily paused",
+    "script_sha256": "681d4dd673b8fb0f13bae3866ea286c9e750e675cb1d9063fe477bf040918007",
+    "source_commit": "221afeb8dbc85c31f543e2fec33fbc5fd28223d4",
+    "status": "completed",
+    "total_seconds": 316.6261303339852,
+    "training_sha256": "5d0bf3b663b7bd40148cc68bcb01776c4ae640efce1c97b9a2727efea285a8bd"
+  },
+  "planning_extrapolation": {
+    "early_three_slots_device_hours": 15.66627548027706,
+    "eighteen_controlled_slots_device_hours": 456.2607519063022,
+    "excludes": [
+      "native/image pretraining",
+      "seven supervised diagnostics",
+      "360 frozen-head fits",
+      "tuning",
+      "failed runs",
+      "rendering",
+      "evaluation and data preparation",
+      "long-run thermal/runtime variation"
+    ],
+    "scope": "linear extrapolation from one actual eight-grid update per condition, seed 17; no allocation or launch admission",
+    "seconds_per_clip_by_pilot_condition": {
+      "joint": 0.2831044059216765,
+      "mix50": 0.28050466894546844,
+      "regrouped": 0.2720412337189373,
+      "shuffled_time": 0.2746041842424347,
+      "time": 0.28178391048413687,
+      "view": 0.31893941633597933
+    },
+    "single_update_range_device_hours_for_18": [
+      435.26597395029967,
+      510.30306613756693
+    ]
+  },
+  "recorded_at": "2026-10-31T02:01:56.587424-04:00",
+  "schema_version": "bullet-time.mps-full-model-integration.v1"
+}

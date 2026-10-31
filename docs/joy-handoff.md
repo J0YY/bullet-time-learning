@@ -39,8 +39,8 @@ availability does not gate implementation.
 
 Run from the repository root with Python 3.11. CPU was checked on macOS arm64.
 CUDA is implemented but needs validation on the selected host. Explicit MPS FP32
-support passes native small-model integration checks; full-model benchmarking and
-resource admission remain pending (see the MPS section below).
+support passes native small-model checks and the full-model eight-grid audit;
+research resource admission remains pending (see the MPS section below).
 The original model source is retained with its own noncommercial license.
 
 ```sh
@@ -266,9 +266,16 @@ or paired-analysis runtimes. CPU and MPS RNG states are restored even on excepti
 Native synthetic checks cover stochastic repeat/resume, a complete-grid tail,
 actual frozen-head fitting/prediction for collision and tracking, unchanged backbone
 weights and the existing input restrictions. Linux CI skips native MPS checks and
-provides no MPS evidence. These small checks are not a full VideoMAE-S native-data
-audit, useful-learning result, throughput benchmark or research resource admission.
-Run that bounded audit/benchmark before choosing MPS for any pilot slot; H1–H4,
-complete data, quotas and launch authorization remain unchanged. Old CPU integration
+provides no MPS evidence. The separate [full VideoMAE-S native-data audit](../reports/data/mps-full-model-integration-20261031.json)
+now passes all eight schedules on the original 2,048 RGBs: 316.63 seconds for the
+complete audit, 0.272–0.319 seconds/clip across the six pilot conditions. The project
+renderer was paused during measurement and resumed automatically afterward.
+
+Linear extrapolation gives about 15.7 device-hours for the three-slot early screen
+and 456 device-hours for the eighteen controlled runs alone (single-update range
+435–510 hours). It excludes readouts, support models, tuning and failures and is
+not sustained throughput. A faster validated compute allocation remains necessary
+for a practical pilot. Native 100-grid replay, joint data admission, H1–H4,
+quotas and launch authorization remain pending. Old CPU integration
 checkpoints retain their original consumer source; this code change requires the
 original revision or a fresh fit.

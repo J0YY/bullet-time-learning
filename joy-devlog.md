@@ -14,9 +14,9 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 | Local checks | Python 3.14.3, Git, and authenticated GitHub CLI available |
 | Compute host / scheduler | Not selected or validated for this project |
 | Remote work root / storage / quota | Not configured |
-| Godot / renderer / GPU runtime | Local Godot 4.5.1 `f62fdbde1`, pinned archive/binary in configs/rendering; Apple M3 Compatibility/OpenGL native display validated 2026-10-30; no CUDA/cluster validation |
+| Godot / renderer / GPU runtime | Local Godot 4.5.1 `f62fdbde1`, pinned archive/binary in configs/rendering; Apple M3 native renderer and MPS FP32 full-model eight-grid audit validated; macOS 14.6.1 / 24 GiB; no CUDA/cluster validation or pilot allocation |
 | Model / dependency revisions | Python 3.11.15 `.venv`; torch 2.9.1 / torchvision 0.24.1 / timm 1.0.22; VideoMAE `14ef8d8`; DINOv2 source/weight pins in models/pins; full requirements lock |
-| Data / caches / checkpoints | Real arena preview/eight-grid bundles in ignored artifacts/arena-*-v1; full-model one-update audit in runs/arena-update-v1; DINO cache/references retained; no learning experiment |
+| Data / caches / checkpoints | Real preview/eight-grid bundles; accepted progressive export artifacts/arena-progressive-eight-v2; CPU audit runs/arena-update-v1, MPS audit artifacts/mps-full-model-v1; DINO cache/references retained; no learning experiment |
 | Launch / monitoring commands | Local consumer CLI/test commands in docs/joy-handoff.md; no scheduler/job or CUDA validation |
 | Collaborator access | Check current GitHub access before relying on shared push; see setup audit |
 
@@ -1023,3 +1023,25 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   checks pass. No runtime tests repeated for these status-only edits.
 - **CI:** `8103d16` successful (41173881990); assessment policy is still a pending
   choice, and the full native measurement job continues.
+
+### 2026-10-31 02:03 EDT — Measure full-model native-data MPS and resume capture
+
+- **Run:** source `221afeb`, consumer `d9570e02662f4c560273ff293f637ce128b5941ff682c6b905ec1990f272a942`,
+  original eight-grid corpus `8fd92aa7…`, full VideoMAE-S, controlled objective,
+  all eight schedules, seed 17, FP32 MPS, four CPU threads, one optimizer update/arm.
+  Command/config/source/output hashes in `reports/data/mps-full-model-integration-20261031.json`;
+  actual audit/helper scripts/configs retained in `artifacts/mps-full-model-v1`.
+- **Measured:** all within-audit exposure/init/target/budget comparisons pass; total
+  316.626 s. Six pilot conditions take 0.2720–0.3189 s/clip. Peak process RSS 1.366 GiB;
+  one-second sampled MPS driver maximum 2,490,007,552 bytes (these are not additive
+  independent memory quantities or an exact GPU peak). No learning/solvability claim.
+- **Capture coordination:** paused this task's PID 32443, let its native child exit,
+  then benchmarked with a 900-second cap and finally-resume guard. Capture resumed
+  at 02:00:43 EDT after 324.614 s, successfully continuing to group 1,234 at check.
+  Pause receipt explicitly excludes affected invoke time from pure render estimates.
+- **Resource consequence:** linear estimate 15.67 device-hours for the early three
+  slots and 456.26 for eighteen controlled runs alone (435–510 single-update range),
+  excluding readouts/support/tuning/failures. Faster validated allocation remains
+  needed; no pilot launch. Full native 100-grid replay waits for selected resources.
+- **Publication:** `221afeb` CI 41174320813 and proposal `5c81cab` CI 41174220731 pass.
+  Continue full measurement admission; assessment-policy and compute replies remain pending.

@@ -67,7 +67,7 @@ does not launch chats/agents or authorize messages. Avoid copying lengthy logs.
 | J1 | Joy | Consumer fixtures, all schedules/RNG/update tests, JSON adapter and exports | Complete; 45 tests and Linux CI pass; cumulative review clean in round 3 | Working v1 contracts; no S task or schema import needed |
 | J5 (was S1) | Joy | Producer schema/fixtures, Godot/asset pins, grouped splits, scripted arena and replay | Arena/replay/pins/admission implemented; group/split validation remains | Producer `0693adf`; 57 local tests, separate code review clean; native macOS validated |
 | J6 (was S2) | Joy | Progressive 1 → 8 → 100 → 1,000 real-grid drops | Preview + 8 complete; v2 progressive producer and native migration verified; 100/1,000 pending | Immutable bundles, 32 repeat captures, state/camera/hash evidence; see integration report |
-| J2 | Joy | Actual-loader/update audit; 100-grid tail check | All eight schedules pass actual full VideoMAE-S update on 8 real grids; complete-pass/tail replay code verified on fixtures; native 100-grid tail pending | CPU FP32 seed 17; shared exposure/targets/init/budget; one update each, no learning claim |
+| J2 | Joy | Actual-loader/update audit; 100-grid tail check | All eight schedules pass actual full VideoMAE-S update on 8 real grids on CPU and MPS; complete-pass/tail code verified on fixtures; native 100-grid tail pending | FP32 seed 17; shared exposure/targets/init/budget; one update each, no learning claim |
 | J7 (was S3) | Joy | Collision/order/tracking sets, oracle/input checks and sealed assessment exports | Tiny train/dev drop and privacy foundation verified; full sets and assessment release remain | `c5a175a` native drop; `b530e73` randomized labels/local access boundary; 106 tests plus 37 post-fix checks; privacy review clean round 2 |
 | J8 | Joy | Operational metrics, coverage/failed slots, paired analysis and power scenarios | Train/dev scorer, paired-analysis foundation and 54 prospective power scenarios verified; full gate/assessment integration pending | Through `75c22ac`; 87-test full regression plus 33 final focused/CLI checks; separate review clean in round 4; no S4 import |
 | J3 | Joy | Causal heads, seven controls, external adapter plus SSv2 acquisition/split audit | Consumer and real J7 fit/predict/score integration complete; full H3/SSv2 pending | `0edab89` one-epoch DINOv2: 95.74 s CPU, 16/16 dev predictions, BA 50%; no H3 pass |
@@ -184,6 +184,12 @@ pools. This is pending, not a protocol amendment; assessment scoring stays disab
 Joy is reconciling the live contract-status ledger in `docs/interfaces.md` with
 the measured native train/dev and exporter evidence; only status/provenance text
 and its bound planning-audit hash change, not wire formats or scientific policy.
+The [full-model MPS audit](reports/data/mps-full-model-integration-20261031.json)
+passes all eight schedules on 2,048 actual RGBs in 316.63 seconds. Native capture
+was paused for 324.61 seconds and resumed automatically; exclude that pause from
+pure rendering-throughput estimates. Measured single-update extrapolation is about
+456 device-hours for the eighteen controlled runs alone, so practical research
+compute remains unresolved. No quota, pilot launch, learning or H1–H4 pass is inferred.
 
 ## Update rules
 
