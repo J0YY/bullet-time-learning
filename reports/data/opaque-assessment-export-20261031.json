@@ -1,0 +1,101 @@
+{
+  "assessment_release_authorized": false,
+  "checks": {
+    "consumer_sha256_unchanged": "6d50de1743e67b1d4db62242227a1adc5ea4e09e78df6397abbfd57dbc212090",
+    "final_export_cases": 11,
+    "final_seconds": 11.04,
+    "initial_focused_cases": 31,
+    "initial_seconds": 12.29,
+    "ongoing_capture_sources_unchanged": true,
+    "review_findings": 0,
+    "review_limits": "separate read-only reviewer syntax/static checks only; actual runtime and native denial checks by Joy agent",
+    "review_log_sha256": [
+      "46af3a6b52528ce9a0233fe419cd4116e51f06822e4934b9cfad4dea084c2671",
+      "0079d1a473277aab41bc6a1fac96d29361ecb71da507fabdd878e460c973a24d"
+    ],
+    "review_rounds": 2,
+    "review_status": "clean",
+    "self_review_fix": "Reject directory symlinks invisible to file-only inventories"
+  },
+  "consumer_result": {
+    "assessment_release_authorized": false,
+    "examples": 7,
+    "forbidden_reads_denied": 4,
+    "scientific_gate_pass": false,
+    "scope": "synthetic assessment-input integration only",
+    "tasks": [
+      "collision",
+      "order",
+      "tracking"
+    ]
+  },
+  "consumer_script_sha256": "7549448e3f4603564656f6a82555e32aeae795a81819ebbef45a1d0ab52c1408",
+  "fixture_source_sha256": "217f58ea504254c64333e2e7e4ff52aa2f6010fd4cbdf4de9071f792756904eb",
+  "job": {
+    "assessment_release_authorized": false,
+    "backend_sha256": "e5b769a900a3b298b14ba3619625dc192cf1196320a130f68946f6dae7362e2b",
+    "command": [
+      "/Users/joyyang/Projects/bullet-time-learning/.venv/bin/python",
+      "/Users/joyyang/Projects/bullet-time-learning/artifacts/opaque-preparation-v1/consumer.py",
+      "/Users/joyyang/Projects/bullet-time-learning/artifacts/opaque-preparation-v1"
+    ],
+    "cwd": "/Users/joyyang/Projects/bullet-time-learning",
+    "denial_probe": [
+      true,
+      true
+    ],
+    "denied_roots": [
+      "/Users/joyyang/Projects/bullet-time-learning/artifacts/opaque-preparation-v1/synthetic-source",
+      "/Users/joyyang/Projects/bullet-time-learning/artifacts/opaque-preparation-v1/prepared/private"
+    ],
+    "environment": {
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "PYTHONNOUSERSITE": "1"
+    },
+    "launcher_sha256": "9417de8838d581c7a84a566adfc52e5004d671c38940fff5555c141ccfe1722e",
+    "log_sha256": "3d29ad086bb0c56f5935086f3c07cd91af75f5cbbdbb46a9afc4e9cd8cc32113",
+    "platform": "macOS-14.6.1-arm64-arm-64bit",
+    "probe_files": [
+      "/Users/joyyang/Projects/bullet-time-learning/artifacts/opaque-preparation-v1/synthetic-source/private/labels.jsonl",
+      "/Users/joyyang/Projects/bullet-time-learning/artifacts/opaque-preparation-v1/prepared/private/labels.jsonl"
+    ],
+    "profile_sha256": "60e93188b23e827d8b18c64dc33a80f86240360e7f8c96614dcb53862e8dccba",
+    "returncode": 0,
+    "schema_version": "bullet-time.isolated-job.v1",
+    "seconds": 1.3782242499873973,
+    "status": "complete",
+    "timeout_seconds": 60
+  },
+  "postfix_verification_source": "683a29e61ff3985671b7b9c0e3510124d4c9fd39",
+  "preparation_receipt_sha256": "10f4e51493e38986583796fd6d70bb3e9d626e2cb7c10f0989ccde52cd9c2c8a",
+  "preparation_result": {
+    "assessment_release_authorized": false,
+    "episodes": 5,
+    "examples": 7,
+    "groups": 3,
+    "images": 16,
+    "scientific_gate_pass": false,
+    "task_checks": {
+      "collision": {
+        "group_sha256": "1aa0788c383a137a68f4e79ecca035fc5258772dd2b4f3a21c280cd86b2d58f5",
+        "pairs": 1,
+        "query_horizon_comparisons": 1,
+        "scope": "pixel/query/label checks only; forward dynamics and visual solvability require S3 and models"
+      },
+      "order": {
+        "group_sha256": "1aa0788c383a137a68f4e79ecca035fc5258772dd2b4f3a21c280cd86b2d58f5",
+        "pairs": 1,
+        "query_horizon_comparisons": 1,
+        "scope": "pixel/query/label checks only; forward dynamics and visual solvability require S3 and models"
+      },
+      "tracking": {
+        "episodes": 1
+      }
+    }
+  },
+  "schema_version": "bullet-time.opaque-preparation-integration.v1",
+  "scientific_gate_pass": false,
+  "scope": "synthetic fixtures only; no real assessment generation or release",
+  "script_sha256": "192c3ac6ec4d34ff19aadecc1c9ace418ed59c1cf32c7a98171e5ea269bdb4b4",
+  "source_commit": "f74daad78d7395fa50e3482656bbbf492a11e9cf"
+}

@@ -144,10 +144,12 @@ review is clean in round 1; a targeted collision-foreground probe also passes.
 Next: render the full v2 train/dev selection using the accepted prefix, then run
 combined pixel admission. Pixel thresholds, counts and scientific/resource gates
 stay unchanged. Full capture is data preparation, not a learning or assessment run.
-In parallel, Joy owns a producer-only opaque assessment export in
-`generation/assessment_export.py`, its CLI/tests and access documentation. It must
-retain exact RGB/queries/pairs, strip source identifiers/order and seal target
-commitments; synthetic validation only, with release/scoring still disabled.
+The [opaque assessment exporter](reports/data/opaque-assessment-export-20261031.json)
+is implemented and verified on synthetic fixtures: exact tensors/pairs preserved,
+source identifiers and PNG metadata removed, commitments sealed, and all four
+private reads denied in a real restricted consumer job. Separate review is clean
+in two rounds. No real assessment exists or is released; data admission and the
+locked H3/H4 stage policy remain pending. Full train/dev capture continues.
 
 ## Update rules
 

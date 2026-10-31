@@ -853,3 +853,21 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   successful hosted CI (41169855426 / 41169667558). Full train/dev capture is active
   in `artifacts/full-development-v3`; no model or assessment run.
 - **Next:** separate code review; preserve source isolation/one-time release gates.
+
+### 2026-10-31 01:00 EDT — Verify opaque export through the restricted real consumer
+
+- **Actual integration:** source `f74daad`, synthetic fixtures only, all seven
+  examples across collision/order/tracking assembled as 3×16×224×224 tensors.
+  The native restricted job denied reads of original labels/inputs and prepared
+  labels/private maps. No real assessment data or metrics were produced.
+- **Review/fix:** both separate cumulative reviews are clean; reviewer could do
+  syntax/static checks but not write-dependent runtime tests. Self-review found
+  that directory symlinks evade a file-only inventory; `683a29e` rejects them,
+  and all 11 exporter cases pass in 11.04 s. Earlier 31 focused cases passed.
+- **Evidence:** `artifacts/opaque-preparation-v1`; public report
+  `reports/data/opaque-assessment-export-20261031.json`. The corrected verifier
+  accepts that retained artifact. Confirmed unchanged consumer source hash versus
+  `e34586c` and unchanged in-flight capture producer hashes.
+- **Next:** publish increment and inspect exact CI. Full train/dev capture remains
+  active; assessment generation/admission, staged release and model gates remain
+  pending. No task is waiting on Sudarshan.
