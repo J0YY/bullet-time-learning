@@ -1362,3 +1362,14 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   384 palette checks stay. Seven focused cases pass in 2.15 s; CI will verify Linux.
 - Native prefix on 07c8f58 passed: three groups / five episodes / 75 RGBs / 16
   queries, with no scientific or assessment release. Opaque export/consumer follows.
+
+### 2026-10-31 04:10 EDT — Protect immutable inputs from nested capture destinations
+
+- Separate review found a P2: an output inside the verified selection recursively
+  copied/mutated that source. Resolve and reject destinations inside selection,
+  reused capture roots and known immutable measurement bundles before any write.
+- Three direct/linked-parent containment regressions verify the source tree is
+  unchanged. Native prefix v1 remains intact; migrate its raw captures into a new
+  current-source prefix, with zero new renders, before the final integration report.
+- Native v1 opaque export and public compiler passed: two collision/two order/one
+  tracking episodes, with complete primary/auxiliary queries and no release.

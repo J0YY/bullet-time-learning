@@ -105,7 +105,17 @@ def build_prefix(output, binary, selection, *, per_task=1, reuse=None):
     output, selection = Path(output), Path(selection).resolve(strict=True)
     if output.exists() or output.is_symlink():
         raise ValueError("new private capture output required")
+    destination = output.resolve()
+    if destination.is_relative_to(selection) or (
+        reuse is not None and destination.is_relative_to(Path(reuse).resolve(strict=True))
+    ):
+        raise ValueError("capture output must be outside immutable selection/reuse sources")
     verified = verify_selection(selection)
+    if any(
+        destination.is_relative_to(Path(b["path"]).resolve(strict=True).parent)
+        for b in verified["known_bindings"]
+    ):
+        raise ValueError("capture output must be outside known immutable source bundles")
     selected = prefix(selection, per_task)
     plan, sources = _plan(per_task), source_files()
     pin = read(ROOT / "configs/rendering/godot-macos.json")

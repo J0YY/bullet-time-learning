@@ -77,3 +77,25 @@ def test_capture_plan_rejects_unimplemented_pilot_geometry(monkeypatch):
         monkeypatch.setattr(capture, "read", altered)
         with pytest.raises(ValueError, match="geometry/cadence"):
             capture._plan(1)
+
+
+@pytest.mark.parametrize("kind", ["selection", "reuse", "known"])
+def test_nested_output_is_rejected_without_touching_inputs(tmp_path, monkeypatch, kind):
+    selection, reuse, known = (tmp_path / name for name in ("selection", "reuse", "known"))
+    for root in (selection, reuse, known):
+        root.mkdir()
+    receipt = known / "bundle.json"
+    receipt.write_text("synthetic immutable receipt")
+    monkeypatch.setattr(
+        capture, "verify_selection", lambda path: {"known_bindings": [{"path": str(receipt)}]}
+    )
+    source = {"selection": selection, "reuse": reuse, "known": known}[kind]
+    # Resolve a linked parent too, before the requested output exists.
+    alias = tmp_path / "alias"
+    alias.symlink_to(source, target_is_directory=True)
+    output = alias / "new-capture"
+    before = sorted(p.relative_to(tmp_path).as_posix() for p in tmp_path.rglob("*"))
+    with pytest.raises(ValueError, match="outside"):
+        capture.build_prefix(output, "absent-engine", selection, reuse=reuse)
+    assert not output.exists()
+    assert sorted(p.relative_to(tmp_path).as_posix() for p in tmp_path.rglob("*")) == before
