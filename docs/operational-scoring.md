@@ -124,3 +124,41 @@ record 30/70-component conjunction sensitivity to paired SD, margin, correlation
 seed count. They are planning calculations, not empirical power or a protocol freeze.
 The [real readout integration](../reports/data/readout-integration-20261030.md) records
 actual native-image fit, prediction and scoring execution, without claiming H3.
+
+## Fixed H4 numerical screens
+
+`assessment_policy.h4_verdict` checks exactly 324 pass-20/fixed-reference heads:
+243 game assessment heads plus 81 SSv2 internal-development heads. Each report must
+already have its slot-to-fit, actual execution and release bindings validated by
+the staged adapter. This calculation does not provide those bindings or release
+assessment; the direct scorer still refuses assessment.
+
+It recomputes metrics from complete rows, requires matching task pools/targets and
+label budgets, checks the fixed game counts/pairs and predictor consistency, and
+retains explicit failed slots. Missing/failed predictions in any arm (including
+image-only or external references) make the whole numerical screen incomplete.
+It averages three readout seeds within checkpoint, then pretraining seeds, then
+the predeclared View/Time/Mix50 arms. It reports every arm and checkpoint alongside
+the learning, per-task native-recipe, external-competence and grouping comparisons.
+The order diagnostic is reported but cannot substitute for a primary endpoint in
+the learning/grouping rules. Thresholds are the unchanged pilot-plan defaults.
+
+A plan has schema `bullet-time.h4-numerical-plan.v1` and `reports`, a map from each
+ID in `h4_inventory()` to `{ "path": "relative/report.json", "sha256": "..." }`.
+A report is a validated `bullet-time.score.v1` score, or
+`{ "status": "failed", "error": "concrete retained failure" }` for an undelivered
+slot. Paths resolve within the plan directory. Keep real assessment reports private
+under the existing staged release policy; this is not a way to inspect them early.
+
+```bash
+.venv/bin/python scripts/scoring/pilot_h4.py \
+  --plan /absolute/private/h4-report-plan.json \
+  --output /absolute/private/new-h4-numerical-report.json
+```
+
+The command checks actual report bytes and code before/after calculation, emits
+source/input hashes, and requires a new output. A numerical `pass` is not full H4:
+precision, paired uncertainty, prospective power, measured total resource costs,
+H1/H2/H3, early stability and actual locked execution remain separate. All outputs
+retain `assessment_authorized=false`, `scientific_gate_pass=false` and
+`main_launch_allowed=false`. Synthetic threshold/failure tests are not pilot results.

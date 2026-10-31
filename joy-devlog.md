@@ -1451,3 +1451,19 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   Pending asset-definition choice is recorded in the proposal, not adopted policy.
 - Next independent local work: H4 numerical aggregation over the fixed 243 game
   plus 81 SSv2 final/reference heads, including failed slots and all arms.
+
+### 2026-10-31 04:47 EDT — Implement fixed H4 numerical screens
+
+- Added all 324 final/reference slots (243 game assessment, 81 SSv2 internal
+  dev), complete row/pool/count/predictor checks, hierarchical averaging and the
+  unchanged learning/native/external/grouping comparisons. Failed slots remain
+  explicit; all four tasks, individual arms and checkpoints remain reported.
+- CLI binds actual score-report files and source before/after calculation. It
+  never opens label files or grants assessment/full H4/main-launch authority.
+  Actual slot-to-fit/job/release bindings and precision/resources remain separate.
+- Initial H4/H3 suite: 28 passed, one fixture assertion incorrectly expected an
+  exact native-tolerance boundary to fail. Corrected that assertion; it and the
+  new actual CLI/hash-drift case pass (2 cases, 11.94 s). No threshold changed.
+- Recovery publication 3acc30c is remote-equal and passes CI 41185725984. The
+  GitHub connector lists only PR-triggered runs, so push CI was checked with gh.
+  Next: separate cumulative code review of the H4 calculation implementation.
