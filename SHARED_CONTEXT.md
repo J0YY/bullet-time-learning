@@ -154,6 +154,10 @@ The first [S4b audit snapshot](reports/data/audit-snapshots/diagnostic-dev-v1/RE
 is ready in Git with all 16 real dev predictions, labels/groups and fit identities.
 Sudarshan can verify it without model/RGB downloads or further Joy deliveries; his
 work remains unrecorded and nonblocking.
+Joy is testing explicit local MPS support in model/runtime RNG, runner and readout
+configuration, with targeted native resume/tail checks. A tiny deterministic probe
+passed; this is not a resource admission or pilot launch. Native capture sources
+remain unchanged while the full train/dev render runs.
 
 ## Update rules
 

@@ -44,9 +44,19 @@ class ModelConfig:
 
 @contextmanager
 def seeded_rng(seed, device="cpu"):
-    device = torch.device(device)
-    if device.type not in ("cpu", "cuda"):
-        raise ValueError("only validated CPU/CUDA RNG isolation is supported")
+    from .runtime import validate_device
+
+    device = validate_device(device)
+    if device.type == "mps":
+        state = torch.mps.get_rng_state().clone()
+        with torch.random.fork_rng(devices=[]):
+            try:
+                torch.random.default_generator.manual_seed(seed)
+                torch.mps.manual_seed(seed)
+                yield
+            finally:
+                torch.mps.set_rng_state(state)
+        return
     devices = (
         []
         if device.type == "cpu"

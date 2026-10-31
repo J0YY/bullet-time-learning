@@ -328,3 +328,19 @@ outputs migrate; accepted bundle bytes bind the source/config/runtime that made 
   or protocol freeze. Private source randomness and verified access boundaries
   remain required; H3/H4 staged-release policy is still unresolved. This changes
   no SPEC endpoint, count, threshold, seed budget or original spec bytes.
+
+## 2026-10-31 01:10 EDT — Add explicit Apple Silicon MPS as a bounded runtime option
+
+- **Authority/reason:** Joy's continuing end-to-end implementation/resource work.
+  The local GPU is available, while CPU planning estimates are expensive and no
+  external research host has been selected. A tiny stochastic VideoMAE/AdamW
+  capability probe repeated its loss and all weights exactly.
+- **Implementation:** explicit MPS selection only on Apple Silicon, FP32 with
+  deterministic algorithms, no CPU fallback or fast math, isolated CPU/MPS RNG,
+  and actual chip/macOS/kernel-option provenance. No automatic backend selection,
+  precision change, arm-specific runtime or resource authorization is introduced.
+- **Validation/limits:** small native model tail/resume and frozen-readout checks
+  pass. A full-model native-data audit and meaningful resource measurement remain
+  required before pilot use. CPU/MPS results are not assumed numerically identical;
+  runtime/source bindings prohibit silent checkpoint reuse or cross-backend pairing.
+  This changes no scientific count, endpoint, threshold or original SPEC bytes.

@@ -27,6 +27,7 @@ from bullet_time.loading.batch import (
     audit_batch,
 )
 from bullet_time.models.video import build_model, model_identity, seeded_rng
+from bullet_time.models.runtime import validate_device, device_name, mps_runtime
 
 
 @dataclass(frozen=True)
@@ -68,8 +69,7 @@ class TrainConfig:
         number(self.grad_clip, "grad_clip", 0)
         number(self.crop_fraction, "crop_fraction", 0.25, 1)
         number(self.color_jitter, "color_jitter", 0, 0.5)
-        if torch.device(self.device).type not in ("cpu", "cuda"):
-            raise ValueError("device must be CPU or explicit CUDA")
+        validate_device(self.device)
 
 
 def code_identity(root=None):
@@ -173,9 +173,8 @@ class Runner:
             "machine": platform.machine(),
             "system": platform.system(),
             "threads": torch.get_num_threads(),
-            "device_name": torch.cuda.get_device_name(self.device)
-            if self.device.type == "cuda"
-            else "cpu",
+            "device_name": device_name(self.device),
+            **({"mps_runtime": mps_runtime()} if self.device.type == "mps" else {}),
             "deterministic_algorithms": torch.are_deterministic_algorithms_enabled(),
             "precision": "float32",
         }

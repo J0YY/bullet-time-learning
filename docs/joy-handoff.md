@@ -228,3 +228,22 @@ Extend it if adding a runtime import, and bind scoring's own code/config separat
 Fit/infer use the same consumer revision; a source change requires running the original revision
 or refitting explicitly. See the interface's pixel-center formula when preparing
 tracking labels or query points for any resized input.
+
+## Explicit local MPS runtime
+
+Training and readout configs can now select `"device": "mps"` (or `mps:0`) on an
+Apple Silicon Mac. Defaults remain CPU. Use FP32, deterministic algorithms and
+disabled `PYTORCH_ENABLE_MPS_FALLBACK` / `PYTORCH_MPS_FAST_MATH` before starting the
+process. Unsupported hosts/devices fail closed. Device/chip, macOS and MPS kernel
+options are bound to run/fit provenance; CPU and MPS are not interchangeable resume
+or paired-analysis runtimes. CPU and MPS RNG states are restored even on exceptions.
+
+Native synthetic checks cover stochastic repeat/resume, a complete-grid tail,
+actual frozen-head fitting/prediction for collision and tracking, unchanged backbone
+weights and the existing input restrictions. Linux CI skips native MPS checks and
+provides no MPS evidence. These small checks are not a full VideoMAE-S native-data
+audit, useful-learning result, throughput benchmark or research resource admission.
+Run that bounded audit/benchmark before choosing MPS for any pilot slot; H1–H4,
+complete data, quotas and launch authorization remain unchanged. Old CPU integration
+checkpoints retain their original consumer source; this code change requires the
+original revision or a fresh fit.

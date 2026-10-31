@@ -1,6 +1,8 @@
 import csv
 import json
+import platform
 import pytest
+import torch
 from bullet_time.evaluation.inputs import EvaluationInputs
 from bullet_time.evaluation.training import Targets, ReadoutConfig, build_readout, fit, predict
 from bullet_time.evaluation.export import write_predictions, KEY
@@ -8,7 +10,20 @@ from bullet_time.models.video import build_model, model_identity
 from fixtures.consumer.evaluation import fixtures, TINY
 
 
-def test_fit_frozen_head_predict_and_complete_failure_export(tmp_path):
+DEVICES = [
+    "cpu",
+    pytest.param(
+        "mps",
+        marks=pytest.mark.skipif(
+            not torch.backends.mps.is_available() or platform.machine() != "arm64",
+            reason="native Apple Silicon MPS required",
+        ),
+    ),
+]
+
+
+@pytest.mark.parametrize("device", DEVICES)
+def test_fit_frozen_head_predict_and_complete_failure_export(tmp_path, device):
     inputs_path, store, base = fixtures(tmp_path / "data")
     rows = []
     labels = []
@@ -31,7 +46,7 @@ def test_fit_frozen_head_predict_and_complete_failure_export(tmp_path):
     labels_path.write_text("".join(json.dumps(r) + "\n" for r in labels))
     inputs = EvaluationInputs(inputs_path, store)
     targets = Targets(labels_path, inputs)
-    cfg = ReadoutConfig(epochs=2, batch_size=3, image_size=32, width=24, heads=3)
+    cfg = ReadoutConfig(epochs=2, batch_size=3, image_size=32, width=24, heads=3, device=device)
     backbone = build_model(TINY, 17)
     initial = model_identity(backbone)
     model = build_readout(backbone, cfg)
@@ -91,7 +106,8 @@ def test_fit_frozen_head_predict_and_complete_failure_export(tmp_path):
         fit(model, assessment, targets, cfg)
 
 
-def test_tracking_window_and_visibility_training_guard(tmp_path):
+@pytest.mark.parametrize("device", DEVICES)
+def test_tracking_window_and_visibility_training_guard(tmp_path, device):
     inputs_path, store, base = fixtures(tmp_path / "data")
     rows = []
     labels = []
@@ -140,7 +156,9 @@ def test_tracking_window_and_visibility_training_guard(tmp_path):
     labels_path = tmp_path / "labels.jsonl"
     labels_path.write_text("".join(json.dumps(r) + "\n" for r in labels))
     targets = Targets(labels_path, data)
-    cfg = ReadoutConfig(task="tracking", epochs=1, image_size=32, width=24, heads=3, batch_size=4)
+    cfg = ReadoutConfig(
+        task="tracking", epochs=1, image_size=32, width=24, heads=3, batch_size=4, device=device
+    )
     model = build_readout(build_model(TINY, 17), cfg)
     report = fit(model, data, targets, cfg)
     assert report["train_episodes"] == 1 and len(predict(model, data, cfg)) == 8

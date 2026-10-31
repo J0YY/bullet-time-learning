@@ -9,6 +9,7 @@ from bullet_time.provenance import strict_json, fields, integer, number, identit
 from bullet_time.evaluation.inputs import point
 from bullet_time.evaluation.label_contract import validate_label_header
 from bullet_time.models.video import seeded_rng, model_identity
+from bullet_time.models.runtime import validate_device
 
 
 class Targets:
@@ -101,8 +102,7 @@ class ReadoutConfig:
         integer(self.seed, "seed")
         number(self.learning_rate, "learning_rate", 1e-12)
         number(self.weight_decay, "weight_decay", 0)
-        if torch.device(self.device).type not in ("cpu", "cuda"):
-            raise ValueError("unsupported device")
+        validate_device(self.device)
 
 
 def feature_batch(inputs, examples, config):

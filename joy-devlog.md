@@ -835,7 +835,7 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   about 96 minutes; observed available disk 25 GiB. No fitting, paid compute or
   assessment access. H1–H4, joint-pretraining admission and resources remain open.
 
-### 2026-10-31 00:54 EDT — Prepare opaque assessment inputs without releasing outcomes
+### 2026-10-31 00:53 EDT — Prepare opaque assessment inputs without releasing outcomes
 
 - **Change:** producer-only utility/CLI preserves decoded RGB and all permitted
   input tensors while replacing reconstructible IDs and branch ordering. Strip
@@ -872,7 +872,7 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   active; assessment generation/admission, staged release and model gates remain
   pending. No task is waiting on Sudarshan.
 
-### 2026-10-31 01:06 EDT — Package the first independent-audit input without a handoff wait
+### 2026-10-31 01:03 EDT — Package the first independent-audit input without a handoff wait
 
 - **Delivery:** `reports/data/audit-snapshots/diagnostic-dev-v1` contains the actual
   one-epoch diagnostic's 16 dev predictions, fit/run/coverage records, declared
@@ -887,3 +887,27 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Use:** S4 can audit this snapshot immediately using his own implementation.
   One comparison command and immutable file inventory are included. No messages
   sent and no acknowledgment recorded; Joy's required queue continues.
+
+### 2026-10-31 01:10 EDT — Implement and test the local GPU runtime before a larger benchmark
+
+- **Capability:** local PyTorch 2.9.1 reports MPS available and CUDA unavailable.
+  A bounded synthetic VideoMAE/AdamW probe on source `87edaa9` repeats losses and
+  every parameter exactly (maximum difference 0). Artifacts in
+  `artifacts/mps-capability-v1`; 8.30 s includes setup/compilation and concurrent
+  rendering, so it is explicitly not a throughput benchmark or resource admission.
+- **Change:** explicit Apple Silicon MPS config, FP32/deterministic policy with
+  fallback/fast-math rejection, CPU/MPS RNG restoration, chip/macOS/kernel bindings.
+  Preserve CPU defaults and all source/runtime checkpoint and pairing restrictions.
+- **Checks:** 14 targeted model/runner/readout cases pass in 33.03 s, including
+  native stochastic exact resume and a one-grid tail after a two-grid update;
+  collision/tracking frozen-head fit/predict and unchanged backbone. Two final
+  host/environment/RNG cases pass in 2.56 s after the Apple Silicon restriction.
+- **Data progress:** all 400 collision groups captured. Intermediate actual pixel
+  check passes 12,400 RGBs / 28,830,000 cross-split pairs in 54.88 s, with 219 exact
+  candidate comparisons after conservative bounds. Full other-task/cross-task
+  admission remains pending while native capture continues. No model trained on
+  those inputs.
+- **Publication:** opaque-export `87edaa9` and audit snapshot `fac8312` both have
+  successful CI (41170788437 / 41171061052). No Sudarshan review or response claimed.
+- **Next:** commit/review explicit MPS support, then full-model native-data audit
+  and resource measurement when the renderer is no longer sharing the GPU.
