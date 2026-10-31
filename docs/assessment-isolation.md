@@ -304,3 +304,30 @@ known-source list must match exactly. Completed selections cannot be resumed as
 new pools. The bounded search checks up to 1,000,000 candidates per task, skipping
 appearances already rejected by the unchanged pool/reservation rule before the
 expensive dynamics construction. Failure never reduces the required counts.
+
+### Bounded native assessment prefix
+
+`build_assessment.py` currently permits one or eight complete groups per task.
+The five-episode first prefix comes from the verified private selection, keeps all
+raw states/RNG/labels inside a private source directory and uses the existing native
+geometry, forward-dynamics, repeat-render and pixel-label checks. Its raw labels
+remain unsealed private producer records until opaque preparation.
+
+```bash
+.venv/bin/python scripts/data/build_assessment.py \
+  --selection /absolute/private/assessment-selection \
+  --godot /absolute/pinned/Godot --per-task 1 \
+  --output /absolute/private/new-native-assessment-prefix
+```
+
+For the eight-group prefix, use `--per-task 8` and optionally `--reuse-captures`
+with the completed first source. Reuse verifies actual immutable files, matching
+native code/runtime/engine and exact current requests; every reused capture is
+revalidated. It never inherits a scientific verdict. `--verify-only --output ...`
+reconstructs selection/captures/exports. The builder validates its new captures
+without rerunning the already completed selection search a second time.
+
+Only after native source checks pass, run `prepare_assessment.py` on that private
+source and compile its public inventory with `--allow-partial`. These commands are
+producer/consumer integration, not a scoring release. Full capture, common lineage,
+cross-pool pixel admission, actual model/job receipts and H3/H4 remain separate.

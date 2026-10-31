@@ -1339,3 +1339,15 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - Public sanitized report records hashes/counts/checks, never private reconstruction
   material. No native assessment capture, pixel/joint-lineage admission, model
   outcome, real release or H3/H4 pass is claimed. Next: bounded native prefix.
+
+### 2026-10-31 04:05 EDT — Add bounded native assessment capture
+
+- Separate producer permits one/eight whole groups per task from the verified
+  private plan; reuses common native physics/geometry/label checks and can reuse
+  immutable matching raw captures. All source material remains private.
+- Nine initial prefix/reuse/measurement regressions pass in 2.29 s; an additional
+  incompatible-pilot-geometry check also passes. Exact copied selections, renderer
+  pins, captured requests, actual RGB, exported labels/inputs and output inventories
+  must agree. Full-pool/cross-pool/scientific admission is explicitly not granted.
+- Next: native five-episode prefix, opaque export/public compilation, then separate
+  code review and byte-bound integration evidence. No model scoring or research fit.
