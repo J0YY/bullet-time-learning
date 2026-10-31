@@ -813,3 +813,24 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
 - **Checks:** 45 data/producer tests pass (8.66 s), including the actual failing
   metadata pair, guard boundaries, exclusion accounting and exact-request reuse.
   Scoped Ruff passes. Separate review and new-selection reconstruction follow.
+
+### 2026-10-31 00:46 EDT — Admit corrected selection and preserve capture work
+
+- **Result:** source `8a6ad3f` selected and independently reconstructed the same
+  1,600 groups / 2,400 episodes / 41,200 planned RGBs. The prospective guard
+  excludes 24 tracking-dev candidates before any model or assessment outcome.
+- **Native check:** `artifacts/full-development-eight-v2` passes with 48 groups,
+  80 episodes, 1,200 RGBs and 256 queries. It reuses 47 groups and renders one
+  changed group in 4.64 s; corrected the earlier chat shorthand claiming all 48
+  were reused. Bundle SHA `aff0736792026503df541bc189806c18b67f0da08b35436e7ea963219a7281cc`.
+- **Additional targeted check:** metadata found 14 collision-final projected
+  geometry pairs. The closest projectile-color pair's native foreground IoU is
+  0.9949875, but union RGB MAE is 0.0487297, safely above the unchanged 1/255
+  threshold. All 961 cross-split image pairs pass. This one probe is not full
+  admission. Raw evidence stays in `artifacts/foreground-probe-v1`.
+- **Review:** clean in one separate cumulative round; reviewer ran 13 focused
+  cases and reconstructed the full selection. Own 45 data tests and native checks
+  provide file-write/render evidence. Published `8a6ad3f`; CI being checked.
+- **Next:** full v2 capture, reusing the prefix. Native-time extrapolation remains
+  about 96 minutes; observed available disk 25 GiB. No fitting, paid compute or
+  assessment access. H1–H4, joint-pretraining admission and resources remain open.

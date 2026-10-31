@@ -1,0 +1,376 @@
+{
+  "checks": {
+    "focused_data_seconds": 8.66,
+    "focused_data_tests": 45,
+    "review_limits": "13 focused tests, full selection reconstruction and existing raw reuse checked; file-writing/native checks performed by Joy agent",
+    "review_log_sha256": "88995a8d1aa5eca1b7876db6e572c7828e616976eceaafd41dcdd03ae8899b57",
+    "review_rounds": 1,
+    "separate_review_status": "clean"
+  },
+  "foreground_probe": {
+    "candidate": {
+      "dev_group": "collision-e555893c5ad21e42",
+      "dev_index": 7321,
+      "dev_palette": [
+        13,
+        31,
+        7
+      ],
+      "geometry": [
+        1,
+        0.5625,
+        15
+      ],
+      "projectile_color_mean_abs_delta": 0.011840000000000009,
+      "same_camera": false,
+      "train_group": "collision-124d9129cc07cc5f",
+      "train_index": 11292,
+      "train_palette": [
+        3,
+        31,
+        3
+      ]
+    },
+    "commands": [
+      {
+        "command": [
+          "/Users/joyyang/Projects/bullet-time-learning/.cache/godot/4.5.1/Godot.app/Contents/MacOS/Godot",
+          "--path",
+          "/Users/joyyang/Projects/bullet-time-learning/game",
+          "--rendering-method",
+          "gl_compatibility",
+          "--resolution",
+          "224x224",
+          "--position",
+          "20,60",
+          "--script",
+          "res://evaluation_driver.gd",
+          "--",
+          "/Users/joyyang/Projects/bullet-time-learning/artifacts/foreground-probe-v1/private/collision-124d9129cc07cc5f/request.json",
+          "/Users/joyyang/Projects/bullet-time-learning/artifacts/foreground-probe-v1/private/collision-124d9129cc07cc5f"
+        ],
+        "log": "render.log",
+        "seconds": 3.5398454170208424
+      },
+      {
+        "command": [
+          "/Users/joyyang/Projects/bullet-time-learning/.cache/godot/4.5.1/Godot.app/Contents/MacOS/Godot",
+          "--path",
+          "/Users/joyyang/Projects/bullet-time-learning/game",
+          "--rendering-method",
+          "gl_compatibility",
+          "--resolution",
+          "224x224",
+          "--position",
+          "20,60",
+          "--script",
+          "res://evaluation_driver.gd",
+          "--",
+          "/Users/joyyang/Projects/bullet-time-learning/artifacts/foreground-probe-v1/private/collision-e555893c5ad21e42/request.json",
+          "/Users/joyyang/Projects/bullet-time-learning/artifacts/foreground-probe-v1/private/collision-e555893c5ad21e42"
+        ],
+        "log": "render.log",
+        "seconds": 3.188625624985434
+      }
+    ],
+    "evidence": [
+      {
+        "checks": {
+          "contact_probes": [
+            {
+              "branch": 0.0,
+              "hits": [
+                {
+                  "safe_fraction": 0.99755859375,
+                  "step": 72,
+                  "unsafe_fraction": 0.998291015625
+                }
+              ],
+              "margin": 9.999999747378752e-05
+            },
+            {
+              "branch": 1.0,
+              "hits": [
+                {
+                  "safe_fraction": 0.99755859375,
+                  "step": 48,
+                  "unsafe_fraction": 0.998291015625
+                }
+              ],
+              "margin": 9.999999747378752e-05
+            }
+          ],
+          "final_rgb_identical": true,
+          "frame_count": 31,
+          "frozen_states": true,
+          "renderer": {
+            "display": "macOS",
+            "renderer": "gl_compatibility",
+            "video_adapter": "Apple M3"
+          },
+          "repeated_frames": 2,
+          "same_bag": false
+        },
+        "group_id": "collision-124d9129cc07cc5f"
+      },
+      {
+        "checks": {
+          "contact_probes": [
+            {
+              "branch": 0.0,
+              "hits": [
+                {
+                  "safe_fraction": 0.99462890625,
+                  "step": 84,
+                  "unsafe_fraction": 0.99609375
+                }
+              ],
+              "margin": 9.999999747378752e-05
+            },
+            {
+              "branch": 1.0,
+              "hits": [
+                {
+                  "safe_fraction": 0.99462890625,
+                  "step": 36,
+                  "unsafe_fraction": 0.99609375
+                }
+              ],
+              "margin": 9.999999747378752e-05
+            }
+          ],
+          "final_rgb_identical": true,
+          "frame_count": 31,
+          "frozen_states": true,
+          "renderer": {
+            "display": "macOS",
+            "renderer": "gl_compatibility",
+            "video_adapter": "Apple M3"
+          },
+          "repeated_frames": 2,
+          "same_bag": false
+        },
+        "group_id": "collision-e555893c5ad21e42"
+      }
+    ],
+    "result": {
+      "duplicate_check": {
+        "candidate_rgb_comparisons": 11,
+        "cross_split_image_pairs": 961,
+        "exact_cross_split_duplicates": 0,
+        "foreground_iou": 0.98,
+        "images": 62,
+        "mask_candidates": 412,
+        "mean_bound_skips": 0,
+        "near_duplicates": 0,
+        "retained_mask_bytes": 257152,
+        "rgb_cache_capacity": 64,
+        "rgb_mae": 0.00392156862745098,
+        "scope": "train/dev raster and prototype checks; old pretraining integration pool and future final test not admitted",
+        "unique_cross_split_comparisons": 418,
+        "unique_raster_mask_pairs": 41
+      },
+      "final_foreground_iou": 0.9949874686716792,
+      "final_union_rgb_mae": 0.0487296673055187,
+      "raster_rule_pass": true
+    },
+    "schema_version": "bullet-time.targeted-raster-probe.v1",
+    "scientific_gate_pass": false,
+    "scope": "targeted native data-only preflight; no model fitting or assessment",
+    "script_sha256": "f1d9ef5757790883e904916e136845b7e338d39b8de10860a92431ffaa558df2",
+    "selection_sha256": "5f9d43bf7ef28c3be9510623ea6f7853044cb5041e009f69152f2ce7684f74ee",
+    "source_commit": "8a6ad3f931393f8a5f3cda91aa4644b8e26e9cd5",
+    "source_sha256": {
+      "configs/generation/evaluation-development.json": "98a8d00992959476eebeb6a86ecf5fd8b2d06457edae5bc346460f9d520ad374",
+      "configs/pilot-plan.json": "b160a832f9799f2cf049a56d2ca1002e942688702e523a5dcf0a6cd8929f89f5",
+      "configs/rendering/godot-macos.json": "01cbf61ad11518cf7d54ad83b8a18604159f392a98b0bef83ab3b196d6fab03c",
+      "game/LICENSE": "dbf8c0ec29216abd05bc76cd663541cd1ded38680c0fd54e1a4b4be57d6e2f23",
+      "game/arena_driver.gd": "a143e28781586a30c4f91fd61d4f487f21f9bd2fa22e4c6ccc934ea28a076d0f",
+      "game/evaluation_driver.gd": "c54a3aaa59c5688d9a529b5cbc6adcb4a301e927a9f29aa196eae3b44911c95e",
+      "game/project.godot": "e0dc45b0c338b547eb68a869a8f1d8cf0693af21554c34d6623cca1f1a4957b8",
+      "scripts/data/build_evaluation.py": "1ad21ae5bc52e9b8769ae7037eb3bd5f2e4dc6faa6eb2b57193db9f665803b33",
+      "src/bullet_time/generation/arena.py": "65f8ca0dd2f51860aa232c6fca71fd261e435314e9df2c709340ed069fde4830",
+      "src/bullet_time/generation/bundle.py": "dbeb9f3ef371e15d963dc9c2ec050622f1e3136e154af58fc0fd2df884b537a5",
+      "src/bullet_time/generation/evaluation_bundle.py": "f0b657fd2299cbb65568feba9ff36eec96c13498ea61db4cd15735e6b8c4a16f",
+      "src/bullet_time/generation/evaluation_motion.py": "1327acf5d57c3bb8b89641712f00db22e02d6fad933bec1a8b7edc0c6f1cfb6e",
+      "src/bullet_time/generation/evaluation_selection.py": "3e98a8d41eeaab683b098b6f564f390d31febef77f61ce7e7e53b2ec58983a8e",
+      "src/bullet_time/provenance.py": "e19fc805f18d15e62387ad2992c3fff6b825c94986d3dd6cb7761963197e6642"
+    }
+  },
+  "new_capture_commands": 1,
+  "new_capture_seconds": 4.635738958022557,
+  "prefix_result": {
+    "bundle_sha256": "aff0736792026503df541bc189806c18b67f0da08b35436e7ea963219a7281cc",
+    "development": false,
+    "duplicates": {
+      "candidate_rgb_comparisons": 0,
+      "cross_split_image_pairs": 360000,
+      "exact_cross_split_duplicates": 0,
+      "foreground_iou": 0.98,
+      "images": 1200,
+      "mask_candidates": 13333,
+      "mean_bound_skips": 64,
+      "near_duplicates": 0,
+      "retained_mask_bytes": 6071296,
+      "rgb_cache_capacity": 64,
+      "rgb_mae": 0.00392156862745098,
+      "scope": "train/dev raster and prototype checks; old pretraining integration pool and future final test not admitted",
+      "unique_cross_split_comparisons": 234231,
+      "unique_raster_mask_pairs": 968
+    },
+    "episodes": 80,
+    "examples": 256,
+    "groups": 48,
+    "images": 1200,
+    "lineage": {
+      "asset": 48,
+      "configuration": 48,
+      "trajectory": 48
+    },
+    "pair_checks": {
+      "collision": {
+        "group_sha256": "6a1af07b41bf9185acee8d409b39ca07566e546a9de61f71f3c395dc8e3880da",
+        "pairs": 16,
+        "query_horizon_comparisons": 48,
+        "scope": "pixel/query/label checks only; forward dynamics and visual solvability require S3 and models"
+      },
+      "order": {
+        "group_sha256": "6a1af07b41bf9185acee8d409b39ca07566e546a9de61f71f3c395dc8e3880da",
+        "pairs": 16,
+        "query_horizon_comparisons": 48,
+        "scope": "pixel/query/label checks only; forward dynamics and visual solvability require S3 and models"
+      }
+    },
+    "scientific_gate_pass": false,
+    "scope": "progressive full-selection train/dev capture; no assessment or H3 acceptance"
+  },
+  "reused_groups": 47,
+  "schema_version": "bullet-time.background-guard-integration.v1",
+  "scientific_gate_pass": false,
+  "scope": "revised prospective selection and admitted eight-group prefix; full dataset not yet rendered",
+  "selection": {
+    "data_seed": 20261028,
+    "groups_per_task": {
+      "collision": {
+        "dev": 100,
+        "train": 300
+      },
+      "order": {
+        "dev": 100,
+        "train": 300
+      },
+      "tracking": {
+        "dev": 200,
+        "train": 600
+      }
+    },
+    "inventory": {
+      "private/requests.jsonl": "5b1b6de19fad4fc231024e85cd3a95e8e7030bca91fadc86e00157825f2834c3"
+    },
+    "runtime": {
+      "numpy": "2.3.5",
+      "platform": "macOS-14.6.1-arm64-arm-64bit",
+      "python": "3.11.15"
+    },
+    "schema_version": "bullet-time.measurement-selection.v1",
+    "scope": "prospective train/dev selection only; no rendering, assessment or learning",
+    "seconds": 36.17707987502217,
+    "selection": {
+      "collision/dev": {
+        "accepted": 100,
+        "background_proximity_excluded_indices": [],
+        "background_proximity_rejections": 0,
+        "candidates_considered": 35036,
+        "selection": "content pools, unique prototypes and prospective background-proximity exclusion; no model outcomes"
+      },
+      "collision/train": {
+        "accepted": 300,
+        "background_proximity_excluded_indices": [],
+        "background_proximity_rejections": 0,
+        "candidates_considered": 14025,
+        "selection": "content pools, unique prototypes and prospective background-proximity exclusion; no model outcomes"
+      },
+      "order/dev": {
+        "accepted": 100,
+        "background_proximity_excluded_indices": [],
+        "background_proximity_rejections": 0,
+        "candidates_considered": 25384,
+        "selection": "content pools, unique prototypes and prospective background-proximity exclusion; no model outcomes"
+      },
+      "order/train": {
+        "accepted": 300,
+        "background_proximity_excluded_indices": [],
+        "background_proximity_rejections": 0,
+        "candidates_considered": 11611,
+        "selection": "content pools, unique prototypes and prospective background-proximity exclusion; no model outcomes"
+      },
+      "tracking/dev": {
+        "accepted": 200,
+        "background_proximity_excluded_indices": [
+          2324,
+          6757,
+          9349,
+          11842,
+          13283,
+          17203,
+          17569,
+          26049,
+          37129,
+          38879,
+          41310,
+          41495,
+          41625,
+          42310,
+          42880,
+          46079,
+          58722,
+          59933,
+          65287,
+          75974,
+          78383,
+          80130,
+          80831,
+          83256
+        ],
+        "background_proximity_rejections": 24,
+        "candidates_considered": 86978,
+        "selection": "content pools, unique prototypes and prospective background-proximity exclusion; no model outcomes"
+      },
+      "tracking/train": {
+        "accepted": 600,
+        "background_proximity_excluded_indices": [],
+        "background_proximity_rejections": 0,
+        "candidates_considered": 28525,
+        "selection": "content pools, unique prototypes and prospective background-proximity exclusion; no model outcomes"
+      }
+    },
+    "source_commit": "8a6ad3f931393f8a5f3cda91aa4644b8e26e9cd5",
+    "source_sha256": {
+      "configs/pilot-plan.json": "b160a832f9799f2cf049a56d2ca1002e942688702e523a5dcf0a6cd8929f89f5",
+      "scripts/data/plan_evaluation.py": "b0183cf384f294552c5dbbb6c98db0503600ca2d15c518e4f905553f23db9c17",
+      "src/bullet_time/generation/arena.py": "65f8ca0dd2f51860aa232c6fca71fd261e435314e9df2c709340ed069fde4830",
+      "src/bullet_time/generation/bundle.py": "dbeb9f3ef371e15d963dc9c2ec050622f1e3136e154af58fc0fd2df884b537a5",
+      "src/bullet_time/generation/evaluation_motion.py": "1327acf5d57c3bb8b89641712f00db22e02d6fad933bec1a8b7edc0c6f1cfb6e",
+      "src/bullet_time/generation/evaluation_selection.py": "3e98a8d41eeaab683b098b6f564f390d31febef77f61ce7e7e53b2ec58983a8e",
+      "src/bullet_time/provenance.py": "e19fc805f18d15e62387ad2992c3fff6b825c94986d3dd6cb7761963197e6642"
+    },
+    "summary": {
+      "background_guard": "tracking camera bin modulo 16; cross-split palette L1 distance must exceed 4; pixel admission still required",
+      "episodes": 2400,
+      "groups": 1600,
+      "joint_pretraining_lineage": "not admitted",
+      "near_duplicate_check": "not run: requires actual pixels",
+      "prospective_rgb_images": 41200,
+      "rendered": false,
+      "scientific_gate_pass": false,
+      "unique_prototypes": {
+        "asset": 1600,
+        "configuration": 1600,
+        "trajectory": 1600
+      }
+    }
+  },
+  "selection_sha256": "5f9d43bf7ef28c3be9510623ea6f7853044cb5041e009f69152f2ce7684f74ee",
+  "selection_verify_log_sha256": "bfa0b75f14d11903e9cd70b4733cc41c548bf2158f48b81deda97f388f4435ba",
+  "source_commit": "8a6ad3f931393f8a5f3cda91aa4644b8e26e9cd5"
+}

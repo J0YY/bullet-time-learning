@@ -136,9 +136,14 @@ Progressive capture and reuse are implemented; review clean in round 2 after a
 serialized-catalog fix. The eight-group prefix also passed: 48 groups / 80 episodes /
 1,200 RGBs. A targeted native probe then found a cross-split empty-background near
 duplicate elsewhere in the full selection. Do not render that full selection.
-Joy is adding a prospective background-proximity exclusion and exact-request raw
-capture reuse across revised selections; preserve all old artifacts. Pixel
-thresholds, accepted count targets and scientific/resource gates stay unchanged.
+The prospective background exclusion and exact-request reuse are now verified;
+[revised selection/prefix evidence](reports/data/background-guard-integration-20261031.json)
+records 24 excluded candidates and all 1,600 replacement-selected groups. The
+48-group v2 prefix passes with 47 reused groups and one new capture. Separate
+review is clean in round 1; a targeted collision-foreground probe also passes.
+Next: render the full v2 train/dev selection using the accepted prefix, then run
+combined pixel admission. Pixel thresholds, counts and scientific/resource gates
+stay unchanged. Full capture is data preparation, not a learning or assessment run.
 
 ## Update rules
 
