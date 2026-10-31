@@ -119,6 +119,9 @@ def test_real_fit_metadata_controls_pairing_and_recipe_claims():
         "readout_config": config,
         "fit_execution": fit["execution"],
         "prediction_identity": ids,
+        "inference_execution": {"source_sha256": "3" * 64},
+        "input_sha256": "8" * 64,
+        "image_manifest_sha256": "6" * 64,
     }
     slot = {
         "model_kind": "untrained",
@@ -138,6 +141,9 @@ def test_real_fit_metadata_controls_pairing_and_recipe_claims():
     assert result["readout_training"]["training_episode_ids"] == sorted(fit["training_episode_ids"])
     assert result["readout_training"]["label_sha256"] == fit["label_sha256"]
     assert result["pretraining_recipe"]["training"] == {}
+    assert result["readout_execution"]["fit"] == fit["execution"]
+    assert result["readout_execution"]["inference"] == meta["inference_execution"]
+    assert result["inference_inputs"]["input_sha256"] == meta["input_sha256"]
     for key, value, match in [
         ("pretraining_seed", 29, "paired seed"),
         ("label_budget", 100, "budget"),

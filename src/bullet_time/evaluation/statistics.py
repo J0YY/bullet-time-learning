@@ -171,6 +171,9 @@ def paired_reports(left, right, training_seeds, readout_seeds, margin):
             raise ValueError("unpaired fitted readout training inventories/bindings")
         if r.get("pretraining_recipe") != reference.get("pretraining_recipe"):
             raise ValueError("unpaired pretraining model/recipe/runtime bindings")
+        for key in ("readout_execution", "inference_inputs"):
+            if r.get(key) != reference.get(key):
+                raise ValueError(f"unpaired {key} bindings")
     for seed in training_seeds:
         initializations = {
             side[seed, readout].get("initialization_sha256")

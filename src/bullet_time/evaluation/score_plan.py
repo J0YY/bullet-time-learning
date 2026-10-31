@@ -180,6 +180,14 @@ def validate_fit(slot, expected, fit, metadata, fit_sha256):
             },
         },
         "initialization_sha256": binding.get("initialization_sha256"),
+        "readout_execution": {
+            "fit": fit["execution"],
+            "inference": metadata["inference_execution"],
+        },
+        "inference_inputs": {
+            "input_sha256": sha256(metadata["input_sha256"]),
+            "image_manifest_sha256": sha256(metadata["image_manifest_sha256"]),
+        },
         "backbone_identity": {
             "run_id": sha256(source["run_id"]),
             "checkpoint_id": sha256(source["checkpoint_sha256"]),

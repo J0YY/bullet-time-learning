@@ -131,6 +131,8 @@ def test_pairing_rejects_checkpoint_mix_and_different_fitted_examples(tmp_path):
     for key, value, match in [
         ("pretraining_recipe", {"training": {"mask_ratio": 0.5}}, "model/recipe"),
         ("initialization_sha256", "f" * 64, "initialization"),
+        ("readout_execution", {"fit": {"source_sha256": "f" * 64}}, "readout_execution"),
+        ("inference_inputs", {"input_sha256": "f" * 64}, "inference_inputs"),
     ]:
         bad = deepcopy(left)
         bad[17, 101][key] = value

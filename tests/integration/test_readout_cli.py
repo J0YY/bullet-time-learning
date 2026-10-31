@@ -118,6 +118,57 @@ def test_reference_fit_predict_cli_and_wrong_run_rejection(tmp_path, kind, mode)
         "dev",
     ]
     assert run(*common, "--output", tmp_path / "predictions")["complete"]
+    # Consume actual fit/inference receipts through the development scorer. This
+    # remains a synthetic-data integration, with no fitted recipe inferred by hand.
+    from bullet_time.evaluation.score_plan import run_plan
+    from bullet_time.provenance import atomic_json, digest, identity
+
+    dev_labels = tmp_path / "dev-labels.jsonl"
+    dev_labels.write_text("".join(json.dumps(r) + "\n" for r in labels if r["split"] == "dev"))
+    cfg = json.loads(config.read_text())
+
+    def bound(p):
+        return {"path": p.relative_to(tmp_path).as_posix(), "sha256": digest(p.read_bytes())}
+
+    slot = dict(
+        slot_id="actual-fit",
+        condition=mode if kind == "diagnostic" else "untrained",
+        objective="supervised" if kind == "diagnostic" else "untrained",
+        task_id="collision",
+        horizon="0.5",
+        label_budget=2,
+        checkpoint_pass=0,
+        model_kind="diagnostic" if kind == "diagnostic" else "untrained",
+        corpus_sha256="0" * 64,
+        readout_recipe_sha256=identity({k: v for k, v in cfg.items() if k != "seed"}),
+        pretraining_seed=17,
+        readout_seed=101,
+        expected=bound(inventory),
+        predictions="predictions",
+        fit=bound(tmp_path / "fit/fit.json"),
+    )
+    plan_path = tmp_path / "scoring-plan.json"
+    atomic_json(
+        plan_path,
+        dict(
+            schema_version="bullet-time.scoring-plan.v1",
+            scope="development",
+            split="dev",
+            families=["fixture"],
+            classes=174,
+            labels=bound(dev_labels),
+            groups=bound(group_path),
+            pretraining_seeds=[17, 29],
+            readout_seeds=[101, 102, 103],
+            slots=[slot],
+            contrasts=[],
+            bootstrap={"replicates": 100, "seed": 99},
+        ),
+    )
+    scored = run_plan(plan_path, tmp_path / "scored.json")
+    assert scored["complete"] and scored["slots"]["actual-fit"]["inference_inputs"][
+        "input_sha256"
+    ] == digest(dev.read_bytes())
     expected[0]["run_id"] = "incorrect-run"
     inventory.write_text(json.dumps(expected))
     assert "actual run/checkpoint" in run(*common, "--output", tmp_path / "wrong-run", ok=False)

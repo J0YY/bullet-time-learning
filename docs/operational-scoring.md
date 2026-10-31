@@ -56,6 +56,8 @@ Matching counts alone do not establish matching examples. Actual model, training
 and runtime bindings must agree except for condition, seed, permitted microbatch
 size and seed-specific initialization; initialization must match within each paired
 pretraining seed. Failures before a fit exists retain their receipt hash and reason.
+Pairing also checks the fit/inference source-runtime records and actual inference
+input/RGB-catalog hashes; shared episode IDs alone do not establish shared inputs.
 The configuration is trusted as the
 predeclared analysis inventory; it is not proof of a prospective final freeze.
 Full pilot gate admission and its required run matrix remain separate work.

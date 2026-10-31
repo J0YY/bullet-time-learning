@@ -507,3 +507,17 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   at `artifacts/scoring-foundation-v3` (18 complete slots). No empirical scores.
 - **Next:** cumulative review round 3. Untracked J7 motion/renderer files are active
   separate work and are excluded from this cohesive scoring commit.
+
+### 2026-10-30 22:55 EDT — Bind paired heads to actual inference and readout code
+
+- **Review fixes:** preserve/compare inference input and RGB-catalog hashes plus
+  fit/inference source-runtime bindings. Paired episode IDs alone cannot stand in
+  for matching windows/pixels or matching readout implementations.
+- **Checks:** 33 scoring/actual-CLI integration tests pass (22.70 s). Extended the
+  existing fit/predict integration to consume real metadata in a development scoring
+  plan for frozen and diagnostic heads, avoiding another redundant fitting harness.
+  Synthetic wire report regenerated at `artifacts/scoring-foundation-v4`; 18 slots.
+- **Next:** cumulative review round 4, then publish checked scoring. J7 debug
+  collision/order captures agree with Godot contacts; tracking mask visibility is
+  true at reference 16, false at 17–24 and true at 25–27. These are debug observations,
+  not yet an admitted dataset or visual-solvability result.
