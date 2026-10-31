@@ -911,3 +911,16 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   successful CI (41170788437 / 41171061052). No Sudarshan review or response claimed.
 - **Next:** commit/review explicit MPS support, then full-model native-data audit
   and resource measurement when the renderer is no longer sharing the GPU.
+
+### 2026-10-31 01:15 EDT — Review and publish explicit MPS integration
+
+- **Source/evidence:** `0643ad8`; `reports/data/mps-runtime-integration-20261031.json`
+  binds actual Apple M3/macOS 14.6.1/PyTorch 2.9.1 FP32 policy, tiny capability
+  probe, 14 targeted checks and two final host/RNG checks. Separate cumulative
+  review is clean in round 1; read-only reviewer could not execute write-dependent
+  runtime tests. Native checks were performed by Joy's agent, not Sudarshan.
+- **Limits:** no full-size native-data MPS audit or speed/memory estimate yet.
+  Synthetic timings overlapped native rendering and cannot support a resource
+  projection. New consumer hash is explicit; old fitted checkpoints stay pinned.
+- **Next:** continue full native measurement capture/admission and its independent
+  work queue; run the bounded full-model MPS audit once GPU contention ends.

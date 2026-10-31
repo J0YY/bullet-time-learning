@@ -154,10 +154,11 @@ The first [S4b audit snapshot](reports/data/audit-snapshots/diagnostic-dev-v1/RE
 is ready in Git with all 16 real dev predictions, labels/groups and fit identities.
 Sudarshan can verify it without model/RGB downloads or further Joy deliveries; his
 work remains unrecorded and nonblocking.
-Joy is testing explicit local MPS support in model/runtime RNG, runner and readout
-configuration, with targeted native resume/tail checks. A tiny deterministic probe
-passed; this is not a resource admission or pilot launch. Native capture sources
-remain unchanged while the full train/dev render runs.
+Explicit [local MPS support](reports/data/mps-runtime-integration-20261031.json)
+passes native small-model RNG/tail/resume and frozen-readout checks; separate review
+is clean in one round. Full-size native-data audit and resource measurement remain
+pending until the renderer releases the shared GPU. No pilot launch or resource
+admission follows from these synthetic checks; capture source hashes are unchanged.
 
 ## Update rules
 

@@ -1,0 +1,66 @@
+{
+  "capability_probe": {
+    "device_available": true,
+    "exact_repeat": true,
+    "losses": [
+      0.11464131623506546,
+      0.11464131623506546
+    ],
+    "maximum_weight_difference": 0.0,
+    "platform": "macOS-14.6.1-arm64-arm-64bit",
+    "resource_admitted": false,
+    "scientific_gate_pass": false,
+    "scope": "bounded synthetic MPS capability probe only; not native audit, throughput benchmark, learning or resource admission",
+    "script_sha256": "ec34222fc9dd6d571a8490576582921f18334c52d72bd3624f916cd814fe3a3d",
+    "seconds": 8.301188874989748,
+    "source_commit": "87edaa9b10d396d096eeab765c8aaf5c96c385ac",
+    "status": "complete",
+    "torch": "2.9.1"
+  },
+  "checks": {
+    "native_checks": "CPU/MPS RNG restore on exception; stochastic exact checkpoint resume; complete-grid tail; frozen collision/tracking heads and unchanged backbones",
+    "ongoing_capture_sources_unchanged": true,
+    "postfix_host_rng_cases": 2,
+    "postfix_seconds": 2.56,
+    "review_limits": "static review; read-only sandbox prevented temporary-file-based runtime tests",
+    "review_log_sha256": "5a942fd1d4d1abea332207f3bcd117ee95c81c9015db9ce54e8465c987126a65",
+    "review_rounds": 1,
+    "seconds": 33.03,
+    "separate_review_status": "clean",
+    "targeted_cases": 14,
+    "test_log_sha256": "e5b11f0430a11a160bf8db40c9d40c5cb50feff93ceb8e55cac25073778b154f"
+  },
+  "limits": [
+    "No full-size native-data MPS audit or useful-learning result",
+    "No resource speed/peak-memory estimate from small tests or concurrent-renderer timings",
+    "Runtime is Apple Silicon MPS only; Linux CI skips native MPS tests",
+    "New consumer source requires original pinned revision or explicit fresh fitting for old checkpoints"
+  ],
+  "resource_admitted": false,
+  "runtime_policy_snapshot": {
+    "deterministic_algorithms": true,
+    "device": "mps",
+    "device_name": "MPS: Apple M3",
+    "machine": "arm64",
+    "mps_runtime": {
+      "fallback": "0",
+      "fast_math": "0",
+      "macos": "14.6.1",
+      "prefer_metal": "0"
+    },
+    "numpy_version": "2.3.5",
+    "pillow_version": "12.0.0",
+    "precision": "float32",
+    "python_version": "3.11.15",
+    "source_sha256": "abc2dfe512129dcc8a35b64e9425674ba0ea30117a98c322cf302069f2289512",
+    "system": "Darwin",
+    "threads": 1,
+    "timm_version": "1.0.22",
+    "torch_version": "2.9.1"
+  },
+  "schema_version": "bullet-time.mps-runtime-integration.v1",
+  "scientific_gate_pass": false,
+  "scope": "small native synthetic model/runner/readout checks only; full-model native-data audit and resource admission pending",
+  "source_commit": "0643ad808d292d2322acd2f12336499b2272dd00",
+  "training_launched": false
+}
