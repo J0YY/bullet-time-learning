@@ -177,6 +177,10 @@ The [tail audit integration](reports/data/tail-audit-integration-20261031.json) 
 actual small-model updates and exact stochastic checkpoint replay, plus fault
 injection and CLI checks. Separate code review is clean in round 1; eight focused
 cases pass. The native pilot layout and all scientific gates remain unclaimed.
+A [concrete assessment release proposal](docs/assessment-release-proposal.md)
+resolves the current one-inspection versus H3-before/H4-after timing conflict.
+Joy has been asked to choose two prelocked stages on the existing pool or separate
+pools. This is pending, not a protocol amendment; assessment scoring stays disabled.
 
 ## Update rules
 

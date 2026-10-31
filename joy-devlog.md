@@ -996,3 +996,18 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   pending; fixtures do not satisfy scientific or resource admission.
 - **Next:** continue full native measurement admission; then bounded full-model MPS
   measurement when the renderer is no longer sharing the GPU.
+
+### 2026-10-31 01:51 EDT — Prepare assessment timing decision and inspect native tracking RGB
+
+- **Proposal:** `docs/assessment-release-proposal.md` specifies complete version
+  locking and one H3 plus one H4 release, with failure/fresh-pool rules. Existing
+  counts imply 243 final game head slots + 36 early heads + 81 final SSv2 heads =
+  360 fits. Alternative separate pools add 1,200 assessment episodes. Asked Joy
+  which policy to implement; no reply, amendment, freeze or release assumed.
+- **Visual check:** actual train group `tracking-482909460757766b`, frames 12/20/25/27,
+  shows matching objects before occlusion, hidden at 20 and reappearing at 25/27.
+  Input hashes/limited observation recorded in
+  `artifacts/full-development-v3.visual-spot-check.json`. This is a spot-check,
+  not trained H3 sensitivity or complete data admission.
+- **Next:** full native train/dev capture and admission continue independently of
+  the assessment-policy choice. No collaborator action is required.
