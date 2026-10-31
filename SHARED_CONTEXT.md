@@ -121,10 +121,13 @@ No Sudarshan action is inferred or made a new implementation gate.
 Assessment label v2 and a verified local job boundary are implemented; see
 [access foundation](docs/assessment-isolation.md). Real assessment release remains
 disabled; no protocol freeze, scoring authorization or human blinding is inferred.
-Next: global group selection for full J7 train/dev sets. A pre-render
-[preflight](reports/data/fullset-selection-preflight-20261030.json) found 58 repeated
-appearance prototypes across task selections. Joy owns the generation/config/test
-changes to reserve prototypes globally before rendering; no collaborator input needed.
+Global full J7 train/dev selection is implemented and reconstructed: 1,600 unique
+prototype groups / 2,400 prospective episodes / 41,200 planned RGBs, using pilot seed
+20261028; see [selection evidence](reports/data/full-development-selection-20261030.json).
+This fixes cross-task appearance reuse found by the earlier development-seed stress
+check. Nothing in this full set is rendered or admitted yet.
+Next: progressive chunk capture and combined pixel/joint-pretraining admission. Joy
+owns the generation/config/test changes; no collaborator input is required.
 
 ## Update rules
 

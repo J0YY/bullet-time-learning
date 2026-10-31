@@ -1,5 +1,6 @@
 {
   "admitted": false,
+  "data_seed": 20261030,
   "duplicate_prototype_counts": {
     "asset": 58,
     "configuration": 0,

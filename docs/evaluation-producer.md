@@ -139,3 +139,8 @@ prevents that conflict without outcome-based selection. The existing tiny render
 remains bounded to its checked-in 16/8 group plan; it does not yet consume the
 full-count selection. Chunked rendering and final cross-split admission are the
 next implementation step. No expensive full render is launched by planning.
+
+The [October 30 selection report](../reports/data/full-development-selection-20261030.json)
+binds the actual 1,600-group inventory and its successful reconstruction. Separate
+review reproduced the complete selection and found no actionable regressions. It
+remains prospective; the public report contains no rendered-data acceptance claim.

@@ -695,3 +695,22 @@ the bottom. Record only Joy's work and observations; preserve failures and limit
   joint-pretraining admission remain next. Existing small artifacts retain their
   original source revisions. Current native rate extrapolates roughly 96 minutes
   for the full train/dev capture set; planning spends no such rendering resources.
+
+### 2026-10-30 23:54 EDT — Verify and publish full-count prospective selection
+
+- **Actual result:** committed source `271a15e` selected 1,600 groups / 2,400
+  episodes / 41,200 planned RGBs with pilot seed 20261028 in 40.44 s. All 1,600
+  appearance, trajectory and configuration prototypes are unique; no cross-split
+  duplicate exact geometric-layout signature in the additional nonpixel check.
+- **Artifacts:** `artifacts/full-development-selection-v1` contains 24,671,671
+  bytes of private request JSONL and its immutable selection receipt. Full verifier
+  reconstructed the selection successfully. Public report:
+  `reports/data/full-development-selection-20261030.json`. This is not rendered
+  data, visual sensitivity or acceptance of joint pretraining/evaluation splits.
+- **Checks:** separate cumulative code review clean in round 1; reviewer reproduced
+  full selection and nine pure tests. File-writing tests could not run in its
+  read-only sandbox; own 17 producer/selection tests plus four final planner tests
+  pass. No redundant model suite or native rerender was needed for pure selection.
+- **Next:** progressive full-selection capture, combined pixel duplicate checks,
+  joint pretraining lineage and locked assessment workflow. Research CUDA/storage
+  and licensed SSv2 access remain unselected, not assigned to Sudarshan.

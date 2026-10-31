@@ -1,0 +1,110 @@
+{
+  "checks": {
+    "final_planner_cases": 4,
+    "final_seconds": 2.51,
+    "producer_selection_cases": 17,
+    "review_limits": "reviewer reproduced full selection and nine pure tests; file-writing tests ran only in Joy agent environment",
+    "review_log_sha256": "e350c5b0f876c284dc0919d7b6f1ba54d8d8ed05fb6fc92225044d3e3e05a9e5",
+    "review_rounds": 1,
+    "review_status": "clean",
+    "seconds": 5.73
+  },
+  "geometry_check": {
+    "cross_split_exact_geometry_groups": [],
+    "distinct_geometry_groups": 1600,
+    "scope": "additional prospective geometric-layout check; no pixels or scientific gate",
+    "total_groups": 1600
+  },
+  "rendered": false,
+  "request_bytes": 24671671,
+  "schema_version": "bullet-time.selection-integration.v1",
+  "scientific_gate_pass": false,
+  "scope": "prospective train/dev selection only; no rendering, assessment or learning",
+  "selection": {
+    "data_seed": 20261028,
+    "groups_per_task": {
+      "collision": {
+        "dev": 100,
+        "train": 300
+      },
+      "order": {
+        "dev": 100,
+        "train": 300
+      },
+      "tracking": {
+        "dev": 200,
+        "train": 600
+      }
+    },
+    "inventory": {
+      "private/requests.jsonl": "dd762e001dc0632c072ba75658a4fd68217e22394cd8ec5416e8d39f182d036a"
+    },
+    "runtime": {
+      "numpy": "2.3.5",
+      "platform": "macOS-14.6.1-arm64-arm-64bit",
+      "python": "3.11.15"
+    },
+    "schema_version": "bullet-time.measurement-selection.v1",
+    "scope": "prospective train/dev selection only; no rendering, assessment or learning",
+    "seconds": 40.44348037499003,
+    "selection": {
+      "collision/dev": {
+        "accepted": 100,
+        "candidates_considered": 35036,
+        "selection": "content pool and duplicate prototype checks only; no model outcomes"
+      },
+      "collision/train": {
+        "accepted": 300,
+        "candidates_considered": 14025,
+        "selection": "content pool and duplicate prototype checks only; no model outcomes"
+      },
+      "order/dev": {
+        "accepted": 100,
+        "candidates_considered": 25384,
+        "selection": "content pool and duplicate prototype checks only; no model outcomes"
+      },
+      "order/train": {
+        "accepted": 300,
+        "candidates_considered": 11611,
+        "selection": "content pool and duplicate prototype checks only; no model outcomes"
+      },
+      "tracking/dev": {
+        "accepted": 200,
+        "candidates_considered": 75975,
+        "selection": "content pool and duplicate prototype checks only; no model outcomes"
+      },
+      "tracking/train": {
+        "accepted": 600,
+        "candidates_considered": 28525,
+        "selection": "content pool and duplicate prototype checks only; no model outcomes"
+      }
+    },
+    "source_commit": "271a15e10ffc6dd4871175e74237ca5040d21165",
+    "source_sha256": {
+      "configs/pilot-plan.json": "b160a832f9799f2cf049a56d2ca1002e942688702e523a5dcf0a6cd8929f89f5",
+      "scripts/data/plan_evaluation.py": "b0183cf384f294552c5dbbb6c98db0503600ca2d15c518e4f905553f23db9c17",
+      "src/bullet_time/generation/arena.py": "65f8ca0dd2f51860aa232c6fca71fd261e435314e9df2c709340ed069fde4830",
+      "src/bullet_time/generation/bundle.py": "dbeb9f3ef371e15d963dc9c2ec050622f1e3136e154af58fc0fd2df884b537a5",
+      "src/bullet_time/generation/evaluation_motion.py": "a071c053820da8c76421359451ab0a3ef545f8e60ecb05dbdd895dbbbe957d6a",
+      "src/bullet_time/generation/evaluation_selection.py": "306731bc37656de204e5a4e2c59464def55ae03f296c72504790a6577e1d32eb",
+      "src/bullet_time/provenance.py": "e19fc805f18d15e62387ad2992c3fff6b825c94986d3dd6cb7761963197e6642"
+    },
+    "summary": {
+      "episodes": 2400,
+      "groups": 1600,
+      "joint_pretraining_lineage": "not admitted",
+      "near_duplicate_check": "not run: requires actual pixels",
+      "prospective_rgb_images": 41200,
+      "rendered": false,
+      "scientific_gate_pass": false,
+      "unique_prototypes": {
+        "asset": 1600,
+        "configuration": 1600,
+        "trajectory": 1600
+      }
+    }
+  },
+  "selection_sha256": "5e4a060cb910599f69432e394940ffceb10bc75a53af8ff25f59c206316b70b4",
+  "source_commit": "271a15e10ffc6dd4871175e74237ca5040d21165",
+  "verification_log_sha256": "f8e375f8d3fb660439963eaca56a8cc8f099d5bcbbc87736150ae1fb34fdec14"
+}
